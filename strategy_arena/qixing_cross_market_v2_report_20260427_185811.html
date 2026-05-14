@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>七星高照港美股衍生回测</title>
+<style>details summary::-webkit-details-marker{display:none}details summary{list-style:none}details summary::marker{display:none;content:""}</style></head>
+<body style="margin:0;padding:12px 8px;background-color:#060610;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;color:#e5e7eb">
+<div style="max-width:600px;margin:0 auto">
+  <div style="background:#0c0c14;border-radius:14px;padding:20px;margin-bottom:14px;border:1px solid rgba(249,115,22,0.18)">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <span style="font-size:22px">🌟</span>
+      <span style="font-size:20px;font-weight:800;color:#f97316">七星高照ETF轮动</span>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:#fb923c;margin-bottom:4px">港美股衍生回测 v2</div>
+    <div style="font-size:11px;color:#6b7280;line-height:1.6">
+      2026-04-27 18:58 · A股TOP1策略跨市场移植 · 向量化回测引擎<br>
+      核心：加权线性回归动量(年化×R²) + 急跌过滤 + 周频调仓 | V4评分
+    </div>
+  </div>
+  <div style="background:#0c0c14;border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid rgba(249,115,22,0.18)">
+    <div style="font-size:13px;font-weight:700;color:#f97316;margin-bottom:10px">🏅 三市场回测结果</div>
+    
+        <div style="background:#0c0c14;border-radius:12px;padding:18px;margin-bottom:10px;border-left:3px solid #6b7280;border:1px solid rgba(249,115,22,0.1)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:18px">🇨🇳</span>
+            <span style="font-size:16px;font-weight:800;color:#f97316">A股七星高照ETF轮动</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px">
+            <span style="font-size:28px;font-weight:800;color:#6b7280">16.9</span>
+            <span style="font-size:12px;color:#9ca3af">分</span>
+            <span style="display:inline-block;background:#6b7280;color:white;font-size:12px;font-weight:800;padding:2px 8px;border-radius:4px">D</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 16px;margin-bottom:10px">
+            <div><span style="font-size:10px;color:#9ca3af">年化收益</span><br><span style="font-size:15px;font-weight:700;color:#22c55e">5.4%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">夏普比率</span><br><span style="font-size:15px;font-weight:700;color:#3b82f6">0.27</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">最大回撤</span><br><span style="font-size:15px;font-weight:700;color:#ef4444">40.9%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">胜率</span><br><span style="font-size:15px;font-weight:700;color:#a855f7">43.8%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">盈亏比</span><br><span style="font-size:15px;font-weight:700;color:#f59e0b">1.06</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">年交易</span><br><span style="font-size:15px;font-weight:700;color:#6b7280">25.2次</span></div>
+          </div>
+          <div style="margin-top:6px">
+            <div style="font-size:10px;font-weight:600;color:#9ca3af;margin-bottom:4px">持仓分布 Top5</div>
+            <div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">黄金ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:14.1%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">14.1%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">创业板ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:10.8%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">10.8%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">纳指ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:8.1%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">8.1%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">军工ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:8.0%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">8.0%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">南方原油ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:7.2%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">7.2%</span></div>
+          </div>
+        </div>
+        <div style="background:#0c0c14;border-radius:12px;padding:18px;margin-bottom:10px;border-left:3px solid #374151;border:1px solid rgba(249,115,22,0.1)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:18px">🇺🇸</span>
+            <span style="font-size:16px;font-weight:800;color:#f97316">美股七星高照ETF轮动</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px">
+            <span style="font-size:28px;font-weight:800;color:#6b7280">7.9</span>
+            <span style="font-size:12px;color:#9ca3af">分</span>
+            <span style="display:inline-block;background:#374151;color:white;font-size:12px;font-weight:800;padding:2px 8px;border-radius:4px">F</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 16px;margin-bottom:10px">
+            <div><span style="font-size:10px;color:#9ca3af">年化收益</span><br><span style="font-size:15px;font-weight:700;color:#22c55e">-7.4%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">夏普比率</span><br><span style="font-size:15px;font-weight:700;color:#3b82f6">-0.45</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">最大回撤</span><br><span style="font-size:15px;font-weight:700;color:#ef4444">54.8%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">胜率</span><br><span style="font-size:15px;font-weight:700;color:#a855f7">51.3%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">盈亏比</span><br><span style="font-size:15px;font-weight:700;color:#f59e0b">0.96</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">年交易</span><br><span style="font-size:15px;font-weight:700;color:#6b7280">26.5次</span></div>
+          </div>
+          <div style="margin-top:6px">
+            <div style="font-size:10px;font-weight:600;color:#9ca3af;margin-bottom:4px">持仓分布 Top5</div>
+            <div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">XLE</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:14.4%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">14.4%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">XLK</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:13.6%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">13.6%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">GLD</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:9.6%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">9.6%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">XLU</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:7.9%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">7.9%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">XLY</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:7.3%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">7.3%</span></div>
+          </div>
+        </div>
+        <div style="background:#0c0c14;border-radius:12px;padding:18px;margin-bottom:10px;border-left:3px solid #374151;border:1px solid rgba(249,115,22,0.1)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:18px">🇭🇰</span>
+            <span style="font-size:16px;font-weight:800;color:#f97316">港股七星高照ETF轮动</span>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:10px">
+            <span style="font-size:28px;font-weight:800;color:#6b7280">11.0</span>
+            <span style="font-size:12px;color:#9ca3af">分</span>
+            <span style="display:inline-block;background:#374151;color:white;font-size:12px;font-weight:800;padding:2px 8px;border-radius:4px">F</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 16px;margin-bottom:10px">
+            <div><span style="font-size:10px;color:#9ca3af">年化收益</span><br><span style="font-size:15px;font-weight:700;color:#22c55e">4.0%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">夏普比率</span><br><span style="font-size:15px;font-weight:700;color:#3b82f6">0.15</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">最大回撤</span><br><span style="font-size:15px;font-weight:700;color:#ef4444">45.3%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">胜率</span><br><span style="font-size:15px;font-weight:700;color:#a855f7">43.1%</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">盈亏比</span><br><span style="font-size:15px;font-weight:700;color:#f59e0b">1.06</span></div>
+            <div><span style="font-size:10px;color:#9ca3af">年交易</span><br><span style="font-size:15px;font-weight:700;color:#6b7280">20.0次</span></div>
+          </div>
+          <div style="margin-top:6px">
+            <div style="font-size:10px;font-weight:600;color:#9ca3af;margin-bottom:4px">持仓分布 Top5</div>
+            <div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">iShares富时A50ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:18.7%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">18.7%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">恒生高股息ETF(防御)</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:15.6%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">15.6%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">SPDR黄金ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:12.9%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">12.9%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">华夏沪深三百ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:11.7%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">11.7%</span></div><div style="display:flex;align-items:center;gap:6px;margin:2px 0">
+                <span style="font-size:10px;color:#9ca3af;min-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">iShares明晟中国ETF</span>
+                <div style="flex:1;background:rgba(249,115,22,0.1);border-radius:2px;height:12px"><div style="width:8.6%;background:linear-gradient(90deg,#f97316,#fb923c);height:100%;border-radius:2px"></div></div>
+                <span style="font-size:10px;color:#f97316;font-weight:600">8.6%</span></div>
+          </div>
+        </div>
+  </div>
+  <details style="background:#0c0c14;border-radius:12px;padding:14px;margin-bottom:14px;border:1px solid rgba(249,115,22,0.12)">
+    <summary style="font-size:13px;font-weight:700;color:#f97316;cursor:pointer;list-style:none;outline:none">🔬 参数变体回测</summary>
+    <div style="margin-top:12px">
+          <div style="font-size:13px;font-weight:700;color:#f97316;margin-bottom:6px">🇨🇳 A股参数变体</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <tr style="border-bottom:1px solid rgba(249,115,22,0.2)">
+              <th style="padding:4px 6px;text-align:left;color:#f97316">变体</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">评分</th>
+              <th style="padding:4px 6px;text-align:center;color:#f97316">等级</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">年化%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">夏普</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">回撤%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">盈亏比</th>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">原版(25日短期+250日长期)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#6b7280">17.2</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#6b7280;font-weight:700">D</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">5.8</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.28</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">40.9</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.06</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">短周期(15日+120日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#6b7280">21.2</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#6b7280;font-weight:700">D</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">10.9</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.44</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">34.5</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.10</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">宽松急跌(-8%/日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#6b7280">16.9</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#6b7280;font-weight:700">D</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">6.5</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.30</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">46.1</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.07</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">超短周期(10日+60日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">4.8</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-1.6</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.01</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">55.4</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.01</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">长周期(40日+250日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">15.8</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">4.8</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.24</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">43.7</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.06</td>
+            </tr></table></div><div style="margin-top:12px">
+          <div style="font-size:13px;font-weight:700;color:#f97316;margin-bottom:6px">🇺🇸 美股参数变体</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <tr style="border-bottom:1px solid rgba(249,115,22,0.2)">
+              <th style="padding:4px 6px;text-align:left;color:#f97316">变体</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">评分</th>
+              <th style="padding:4px 6px;text-align:center;color:#f97316">等级</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">年化%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">夏普</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">回撤%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">盈亏比</th>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">原版(25日短期+250日长期)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">7.9</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-7.2</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.44</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">54.8</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">0.96</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">短周期(15日+120日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">7.3</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-7.3</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.44</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">57.4</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">0.96</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">宽松急跌(-8%/日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">8.0</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-7.0</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.42</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">53.8</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">0.96</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">超短周期(10日+60日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">6.2</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-10.1</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.70</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">69.6</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">0.92</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">长周期(40日+250日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">10.2</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">-7.0</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">-0.38</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">68.9</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">0.97</td>
+            </tr></table></div><div style="margin-top:12px">
+          <div style="font-size:13px;font-weight:700;color:#f97316;margin-bottom:6px">🇭🇰 港股参数变体</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px">
+            <tr style="border-bottom:1px solid rgba(249,115,22,0.2)">
+              <th style="padding:4px 6px;text-align:left;color:#f97316">变体</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">评分</th>
+              <th style="padding:4px 6px;text-align:center;color:#f97316">等级</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">年化%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">夏普</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">回撤%</th>
+              <th style="padding:4px 6px;text-align:right;color:#f97316">盈亏比</th>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">原版(25日短期+250日长期)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">11.1</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">3.9</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.15</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">45.3</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.06</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">短周期(15日+120日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">14.5</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">5.5</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.21</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">54.0</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.07</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">宽松急跌(-8%/日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">13.0</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">5.6</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.21</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">42.1</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.07</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">超短周期(10日+60日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">14.8</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">4.8</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.18</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">40.9</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.07</td>
+            </tr><tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:4px 6px;color:#e5e7eb">长周期(40日+250日)</td>
+              <td style="padding:4px 6px;text-align:right;font-weight:700;color:#374151">12.9</td>
+              <td style="padding:4px 6px;text-align:center"><span style="color:#374151;font-weight:700">F</span></td>
+              <td style="padding:4px 6px;text-align:right;color:#22c55e">5.0</td>
+              <td style="padding:4px 6px;text-align:right;color:#3b82f6">0.20</td>
+              <td style="padding:4px 6px;text-align:right;color:#ef4444">61.3</td>
+              <td style="padding:4px 6px;text-align:right;color:#f59e0b">1.09</td>
+            </tr></table></div>
+  </details>
+  <div style="margin-top:12px"><div style="font-size:13px;font-weight:700;color:#f97316;margin-bottom:8px">📋 策略可移植性分析</div><div style="background:rgba(249,115,22,0.05);border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid rgba(249,115,22,0.1)">
+          <div style="font-size:12px;font-weight:600;color:#3b82f6;margin-bottom:4px">🇺🇸 美股 vs 🇨🇳 A股</div>
+          <div style="font-size:11px;color:#9ca3af;line-height:1.6">
+            年化: <span style="color:#22c55e">-7.4%</span> vs <span style="color:#22c55e">5.4%</span> |
+            夏普: <span style="color:#3b82f6">-0.45</span> vs <span style="color:#3b82f6">0.27</span> |
+            回撤: <span style="color:#ef4444">54.8%</span> vs <span style="color:#ef4444">40.9%</span> |
+            评分: <span style="color:#f97316">7.9(F)</span> vs <span style="color:#f97316">16.9(D)</span>
+          </div></div><div style="background:rgba(249,115,22,0.05);border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid rgba(249,115,22,0.1)">
+          <div style="font-size:12px;font-weight:600;color:#a855f7;margin-bottom:4px">🇭🇰 港股 vs 🇨🇳 A股</div>
+          <div style="font-size:11px;color:#9ca3af;line-height:1.6">
+            年化: <span style="color:#22c55e">4.0%</span> vs <span style="color:#22c55e">5.4%</span> |
+            夏普: <span style="color:#3b82f6">0.15</span> vs <span style="color:#3b82f6">0.27</span> |
+            回撤: <span style="color:#ef4444">45.3%</span> vs <span style="color:#ef4444">40.9%</span> |
+            评分: <span style="color:#f97316">11.0(F)</span> vs <span style="color:#f97316">16.9(D)</span>
+          </div></div><div style="background:rgba(249,115,22,0.05);border-radius:8px;padding:10px;border:1px solid rgba(249,115,22,0.1)">
+      <div style="font-size:12px;font-weight:600;color:#f59e0b;margin-bottom:4px">🔑 港美股表现差异根因</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.8">
+        <b style="color:#ef4444">1. ETF池差异</b>: A股38只ETF中含商品(黄金/豆粕)+跨境(纳指/恒生科技)，
+        提供了更多低相关标的→轮动空间大；美股行业ETF高度相关(同涨同跌)→轮动价值低<br>
+        <b style="color:#ef4444">2. 市场效率差异</b>: A股散户多→动量效应显著→趋势策略有效；
+        美股机构多→动量衰减快→追涨容易被套<br>
+        <b style="color:#f59e0b">3. 涨跌停制度</b>: A股10%涨跌停→趋势延续性强→动量策略天然适配；
+        美股无涨跌停→跳空缺口多→短期动量信号失真<br>
+        <b style="color:#22c55e">4. 防御资产差异</b>: A股银华日利(511880)几乎零波动→防御清晰；
+        美股SHY/AGG也有波动→防御不够"安全"
+      </div></div></div>
+</div></body></html>

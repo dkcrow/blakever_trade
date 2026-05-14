@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 每日港股操作建议指南</title>
+<style>
+body { font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif; background: #0a0e17; color: #e0e0e0; margin: 0; padding: 20px; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; }
+.header { background: linear-gradient(135deg, #1a1f35 0%, #2d1b4e 100%); border-radius: 12px; padding: 30px; margin-bottom: 20px; border: 1px solid #3a2d5c; }
+.header h1 { color: #7eb8ff; margin: 0 0 10px 0; font-size: 24px; }
+.header .subtitle { color: #a0a0c0; font-size: 14px; }
+.header .date { color: #ff9f43; font-weight: bold; }
+.section { background: #131829; border-radius: 10px; padding: 20px; margin-bottom: 16px; border: 1px solid #1e2640; }
+.section h2 { color: #5dade2; margin: 0 0 15px 0; font-size: 18px; border-bottom: 1px solid #1e3a5f; padding-bottom: 8px; }
+.section h3 { color: #7eb8ff; margin: 15px 0 10px 0; font-size: 15px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+th { background: #1a2340; color: #5dade2; padding: 8px 10px; text-align: left; border-bottom: 2px solid #2a3a5f; }
+td { padding: 7px 10px; border-bottom: 1px solid #1a2340; }
+tr:hover { background: #1a2340; }
+.red { color: #ff6b6b; }
+.green { color: #51cf66; }
+.yellow { color: #ffd43b; }
+.orange { color: #ff9f43; }
+.blue { color: #5dade2; }
+.alert-box { background: #2d1b1b; border: 1px solid #ff4444; border-radius: 8px; padding: 15px; margin: 10px 0; }
+.alert-box h3 { color: #ff4444; margin: 0 0 8px 0; }
+.warning-box { background: #2d2b1b; border: 1px solid #ffaa00; border-radius: 8px; padding: 15px; margin: 10px 0; }
+.warning-box h3 { color: #ffaa00; margin: 0 0 8px 0; }
+.info-box { background: #1b2d2d; border: 1px solid #00bcd4; border-radius: 8px; padding: 15px; margin: 10px 0; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+.badge-red { background: #ff4444; color: white; }
+.badge-green { background: #51cf66; color: #0a0e17; }
+.badge-yellow { background: #ffd43b; color: #0a0e17; }
+.badge-blue { background: #5dade2; color: #0a0e17; }
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 10px 0; }
+.metric-card { background: #1a2340; border-radius: 8px; padding: 12px; text-align: center; }
+.metric-card .label { color: #a0a0c0; font-size: 11px; }
+.metric-card .value { font-size: 20px; font-weight: bold; margin: 5px 0; }
+.metric-card .sub { color: #a0a0c0; font-size: 11px; }
+.discount-chain { font-size: 13px; line-height: 2; }
+.discount-chain .step { color: #a0a0c0; }
+.discount-chain .factor { color: #ffd43b; font-weight: bold; }
+.discount-chain .result { color: #51cf66; font-weight: bold; }
+.footer { text-align: center; color: #555; font-size: 11px; margin-top: 30px; padding: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- 头部 -->
+<div class="header">
+<h1>📊 Blakever 每日港股操作建议指南</h1>
+<div class="subtitle">Blakever 多智能体投资决策系统 | 会话标识: blakever-hk</div>
+<div class="date">📅 数据日期: 2026-04-17 (周四) | 报告生成: 2026-04-19 (周日)</div>
+<div style="margin-top:8px;"><span class="badge badge-yellow">震荡市</span> <span class="badge badge-blue">置信度72%</span> <span class="badge badge-red">⚠ 地缘高风险</span></div>
+</div>
+
+<!-- 红线预警 -->
+<div class="alert-box">
+<h3>🚨 全局红线预警</h3>
+<ul style="margin:5px 0; padding-left:20px;">
+<li><strong>霍尔木兹海峡4/18再度关闭</strong>：伊朗革命卫队宣布海峡关闭直至美方解除封锁，周一开盘油价可能暴涨，能源股承压</li>
+<li><strong>4/22临时停火截止日</strong>：美伊谈判首轮无果，4/22后局势可能急剧变化</li>
+<li><strong>总敞口严格控制≤30%</strong>：地缘风险事件前置减仓，4/22前不加仓</li>
+</ul>
+</div>
+
+<!-- 大盘仪表盘 -->
+<div class="section">
+<h2>📈 大盘仪表盘</h2>
+<div class="metric-grid">
+<div class="metric-card">
+<div class="label">行情定性</div>
+<div class="value yellow">震荡市</div>
+<div class="sub">置信度72%</div>
+</div>
+<div class="metric-card">
+<div class="label">情绪因子</div>
+<div class="value orange">-0.6</div>
+<div class="sub">偏恐惧</div>
+</div>
+<div class="metric-card">
+<div class="label">VHSI</div>
+<div class="value blue">20.89</div>
+<div class="sub">正常偏高</div>
+</div>
+<div class="metric-card">
+<div class="label">HSI ADX</div>
+<div class="value red">18.92</div>
+<div class="sub">&lt;20弱势</div>
+</div>
+<div class="metric-card">
+<div class="label">HSI 收盘</div>
+<div class="value">26,160</div>
+<div class="sub">-0.89%</div>
+</div>
+<div class="metric-card">
+<div class="label">HSTECH 收盘</div>
+<div class="value">5,043</div>
+<div class="sub">-0.97%</div>
+</div>
+</div>
+<h3>关键技术指标</h3>
+<table>
+<tr><th>指数</th><th>EMA12</th><th>EMA26</th><th>排列</th><th>ADX</th><th>MACD柱</th><th>RSI6</th></tr>
+<tr><td>恒生指数</td><td>25,784</td><td>25,712</td><td class="green">微弱多头</td><td class="red">18.92</td><td class="green">314.7</td><td>62.9</td></tr>
+<tr><td>恒生科技</td><td>4,905</td><td>4,933</td><td class="red">空头</td><td class="yellow">21.44</td><td class="green">97.2</td><td>65.7</td></tr>
+</table>
+</div>
+
+<!-- 宏观叙事 -->
+<div class="section">
+<h2>🌍 宏观叙事分析 (Agent 2)</h2>
+<table>
+<tr><th>#</th><th>叙事</th><th>影响</th><th>方向</th></tr>
+<tr><td>1</td><td>霍尔木兹海峡4/18再度关闭，伊朗革命卫队宣布直至美方解除封锁</td><td>油价暴涨→再通胀→压制估值</td><td class="red">🔴 利空</td></tr>
+<tr><td>2</td><td>美伊谈判4/22临时停火截止，首轮谈判无果，边打边谈为大概率情景</td><td>不确定性延续，风险偏好受压</td><td class="red">🔴 利空</td></tr>
+<tr><td>3</td><td>全球流动性宽松预期：美债信用侵蚀+美联储降息+人民币国际化加速</td><td>中长期利好港股估值</td><td class="green">🟢 利好</td></tr>
+<tr><td>4</td><td>中国Q1进出口11.84万亿同比+15%，基本面韧性</td><td>支撑港股盈利预期</td><td class="green">🟢 利好</td></tr>
+<tr><td>5</td><td>油价剧烈波动：海峡关闭→油价飙升→再通胀→美联储偏鹰</td><td>压制成长股估值</td><td class="yellow">🟡 中性</td></tr>
+</table>
+<div style="margin-top:10px;">
+<span class="badge badge-yellow">情绪因子: -0.6 (偏恐惧)</span>
+<span class="badge badge-blue">情绪系数: ×0.8</span>
+<span class="badge badge-green">流动性预警: 未触发</span>
+</div>
+</div>
+
+<!-- CRO风控摘要 -->
+<div class="section">
+<h2>🛡️ CRO 风控摘要 (Agent 0)</h2>
+<div class="metric-grid">
+<div class="metric-card">
+<div class="label">账户净值</div>
+<div class="value">1亿港元</div>
+<div class="sub">初始资金</div>
+</div>
+<div class="metric-card">
+<div class="label">现有持仓</div>
+<div class="value">~3.0%</div>
+<div class="sub">港股5只+美股2只</div>
+</div>
+<div class="metric-card">
+<div class="label">新增敞口</div>
+<div class="value green">14.0%</div>
+<div class="sub">5只新标的</div>
+</div>
+<div class="metric-card">
+<div class="label">总敞口</div>
+<div class="value yellow">≈30.0%</div>
+<div class="sub">&lt;60%上限 ✓</div>
+</div>
+<div class="metric-card">
+<div class="label">VHSI仓位上限</div>
+<div class="value">30-35%</div>
+<div class="sub">VHSI=20.89</div>
+</div>
+<div class="metric-card">
+<div class="label">情绪系数</div>
+<div class="value orange">×0.8</div>
+<div class="sub">偏恐惧</div>
+</div>
+</div>
+</div>
+
+<!-- 今日指令表 -->
+<div class="section">
+<h2>📋 今日指令表</h2>
+
+<div class="warning-box">
+<h3>⚠️ 宏观逻辑分裂预警</h3>
+<p>本次Top5包含两条逻辑线：<strong>成长逻辑</strong>(舜宇光学/京东) vs <strong>防御逻辑</strong>(汇丰/中国移动/港交所)。海峡关闭→油价暴涨利空成长但利好能源/银行；若局势缓和则反向。杠铃策略天然对冲，但VHSI>30时可能出现双杀。</p>
+</div>
+
+<table>
+<tr><th>#</th><th>标的</th><th>条件</th><th>仓位</th><th>占净值</th><th>止损(EMA26)</th><th>ADX</th><th>RSI6</th><th>置信度</th></tr>
+<tr>
+<td>1</td>
+<td><strong>舜宇光学 02382</strong></td>
+<td><span class="badge badge-green">3/3全满</span></td>
+<td>280万</td>
+<td>2.80%</td>
+<td class="red">59.11</td>
+<td class="green">53.25</td>
+<td class="yellow">77.4</td>
+<td>64.4</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>京东 09618</strong></td>
+<td><span class="badge badge-green">3/3全满</span></td>
+<td>160万</td>
+<td>1.60%</td>
+<td class="red">111.14</td>
+<td class="green">39.07</td>
+<td class="red">82.7</td>
+<td>57.2</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>汇丰 00005</strong></td>
+<td><span class="badge badge-green">3/3全满</span></td>
+<td>280万</td>
+<td>2.80%</td>
+<td class="red">133.40</td>
+<td class="green">52.45</td>
+<td class="yellow">76.1</td>
+<td>63.8</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>港交所 00388</strong></td>
+<td><span class="badge badge-green">3/3全满</span></td>
+<td>360万</td>
+<td>3.60%</td>
+<td class="red">403.65</td>
+<td class="green">21.43</td>
+<td class="green">55.7</td>
+<td>65.6</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>中国移动 00941</strong></td>
+<td><span class="badge badge-green">3/3全满</span></td>
+<td>320万</td>
+<td>3.20%</td>
+<td class="red">80.03</td>
+<td class="green">46.67</td>
+<td class="yellow">72.6</td>
+<td>64.0</td>
+</tr>
+</table>
+
+<h3>仓位折扣链明细</h3>
+<div class="discount-chain">
+<p><strong>舜宇光学：</strong>CRO基础600万 <span class="step">→</span> <span class="factor">×RSI 0.9</span>(77.4>70) <span class="step">→</span> <span class="factor">×Bias 0.80</span>(高位) <span class="step">→</span> <span class="factor">×情绪 0.8</span> <span class="step">→</span> <span class="factor">×地缘缩减 0.80</span> <span class="step">→</span> = <span class="result">276.5万→280万</span></p>
+<p><strong>京东：</strong>CRO基础600万 <span class="step">→</span> <span class="factor">×RSI 0.7</span>(82.7>80) <span class="step">→</span> <span class="factor">×Bias 0.60</span>(高位4.95%) <span class="step">→</span> <span class="factor">×情绪 0.8</span> <span class="step">→</span> <span class="factor">×地缘缩减 0.80</span> <span class="step">→</span> = <span class="result">161.3万→160万</span></p>
+<p><strong>汇丰：</strong>CRO基础600万 <span class="step">→</span> <span class="factor">×RSI 0.9</span>(76.1>70) <span class="step">→</span> <span class="factor">×Bias 0.80</span>(高位) <span class="step">→</span> <span class="factor">×情绪 0.8</span> <span class="step">→</span> <span class="factor">×地缘缩减 0.80</span> <span class="step">→</span> = <span class="result">276.5万→280万</span></p>
+<p><strong>港交所：</strong>CRO基础600万 <span class="step">→</span> <span class="factor">×RSI 1.0</span>(55.7<70) <span class="step">→</span> <span class="factor">×Bias 1.0</span>(正常) <span class="step">→</span> <span class="factor">×情绪 0.8</span> <span class="step">→</span> <span class="factor">×地缘缩减 0.80</span> <span class="step">→</span> = <span class="result">384万→360万</span></p>
+<p><strong>中国移动：</strong>CRO基础600万 <span class="step">→</span> <span class="factor">×RSI 0.9</span>(72.6>70) <span class="step">→</span> <span class="factor">×Bias 1.0</span>(正常) <span class="step">→</span> <span class="factor">×情绪 0.8</span> <span class="step">→</span> <span class="factor">×地缘缩减 0.80</span> <span class="step">→</span> = <span class="result">345.6万→320万</span></p>
+</div>
+</div>
+
+<!-- 反向辩论庭 -->
+<div class="section">
+<h2>⚖️ 反向测试辩论庭</h2>
+<table>
+<tr><th>标的</th><th>多方论点</th><th>空方论点</th><th>错误概率</th><th>最终置信度</th></tr>
+<tr>
+<td>舜宇光学</td>
+<td class="green">ADX=53强趋势 + MACD柱1.73 + AI光学龙头</td>
+<td class="red">RSI=77超买 + 海峡关闭冲击供应链 + BIAS高位</td>
+<td class="yellow">30%</td>
+<td>64.4</td>
+</tr>
+<tr>
+<td>京东</td>
+<td class="green">3/3条件 + 南向连续5日加仓 + 消费复苏</td>
+<td class="red">RSI=83极度超买 + BIAS=4.95极高位 + 消费数据弱</td>
+<td class="red">35%</td>
+<td>57.2</td>
+</tr>
+<tr>
+<td>汇丰</td>
+<td class="green">利率受益 + 高分红5.2% + 强趋势ADX=52</td>
+<td class="red">RSI=76超买 + 油价冲击银行坏账</td>
+<td class="green">25%</td>
+<td>63.8</td>
+</tr>
+<tr>
+<td>港交所</td>
+<td class="green">直接受益港股活跃 + 估值低位 + RSI中性</td>
+<td class="red">成交额低迷 + 海峡关闭冲击外资流入</td>
+<td class="green">20%</td>
+<td>65.6</td>
+</tr>
+<tr>
+<td>中国移动</td>
+<td class="green">防御属性 + 高分红6.8% + 地缘避险</td>
+<td class="red">RSI=73略超买 + 增长有限 + 电信资费管制</td>
+<td class="green">20%</td>
+<td>64.0</td>
+</tr>
+</table>
+<p><strong>辩论庭结论：</strong>5只平均置信度63.0，均>50阈值，可以执行。京东错误概率最高(35%)，仓位已大幅缩减至160万(1.60%)。</p>
+</div>
+
+<!-- 左侧捡漏 -->
+<div class="section">
+<h2>🪣 左侧捡漏权限</h2>
+<div class="info-box">
+<h3>评估结果：未触发</h3>
+<p>VHSI=20.89 &lt; 35（条件1不满足），不触发左侧捡漏权限。</p>
+<p>⚠️ 若周一VHSI飙升>35且出现长上影线，可在4/22盘中评估是否启动左侧试探。</p>
+</div>
+</div>
+
+<!-- 现有持仓管理 -->
+<div class="section">
+<h2>📦 现有持仓管理</h2>
+<h3>港股持仓</h3>
+<table>
+<tr><th>标的</th><th>入场价</th><th>现价</th><th>数量</th><th>市值</th><th>盈亏</th><th>止损位</th><th>操作建议</th></tr>
+<tr><td>HK09618 京东</td><td>122.72</td><td>122.60</td><td>831</td><td>10.2万</td><td class="red">-101.88</td><td>107.7</td><td>维持，止损不变</td></tr>
+<tr><td>HK02382 舜宇光学</td><td>64.16</td><td>64.10</td><td>1489</td><td>9.6万</td><td class="red">-95.44</td><td>54.6</td><td>维持，止损不变</td></tr>
+<tr><td>HK02333 长城汽车</td><td>13.18</td><td>13.17</td><td>7228</td><td>9.5万</td><td class="red">-95.41</td><td>10.7</td><td>维持，止损不变</td></tr>
+<tr><td>HK00700 腾讯</td><td>511.01</td><td>510.50</td><td>190</td><td>9.7万</td><td class="red">-97.00</td><td>430</td><td>维持，EMA空头需警惕</td></tr>
+<tr><td>HK00941 中国移动</td><td>81.53</td><td>81.45</td><td>1184</td><td>9.7万</td><td class="red">-96.38</td><td>70</td><td>维持，止损不变</td></tr>
+</table>
+<h3>美股持仓</h3>
+<table>
+<tr><th>标的</th><th>入场价</th><th>现价(估)</th><th>数量</th><th>市值</th><th>盈亏</th><th>操作建议</th></tr>
+<tr><td>AAPL</td><td>176.57</td><td>~190</td><td>5663</td><td>~107.6万</td><td class="green">+7.6%</td><td>阶梯止盈: 利润回吐50%→减仓50%</td></tr>
+<tr><td>MSFT</td><td>422.52</td><td>~421</td><td>2366</td><td>~99.6万</td><td class="red">-0.36%</td><td>维持，止损380</td></tr>
+</table>
+</div>
+
+<!-- 关键事件 -->
+<div class="section">
+<h2>📅 关键事件日历</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影响</th><th>风险等级</th></tr>
+<tr><td class="red">4/21(周一)</td><td>霍尔木兹海峡关闭后首个交易日</td><td>油价暴涨→能源股涨/科技股跌</td><td><span class="badge badge-red">极高</span></td></tr>
+<tr><td class="red">4/22(周二)</td><td>美伊临时停火截止日</td><td>若谈判破裂→全面升级</td><td><span class="badge badge-red">极高</span></td></tr>
+<tr><td>4/28(周一)</td><td>301调查听证会</td><td>中美关税风险</td><td><span class="badge badge-yellow">中</span></td></tr>
+<tr><td>4/28-29</td><td>FOMC会议</td><td>利率决议+前瞻指引</td><td><span class="badge badge-yellow">中</span></td></tr>
+<tr><td>5月初</td><td>中国4月PMI数据</td><td>经济动能验证</td><td><span class="badge badge-blue">低</span></td></tr>
+</table>
+</div>
+
+<!-- 知识效期预警 -->
+<div class="warning-box">
+<h3>⏰ 知识效期预警</h3>
+<ul style="margin:5px 0; padding-left:20px;">
+<li>本报告数据截止2026-04-17收盘，4/18-19为周末休市</li>
+<li>4/18伊朗宣布再次关闭霍尔木兹海峡，周一开盘前需更新VHSI和油价数据</li>
+<li>4/22停火截止日前，所有仓位可能需要快速调整，建议设好止损后减少盘中操作</li>
+<li>科技板块(腾讯/阿里/百度/小米)EMA仍为空头排列，不宜追涨</li>
+</ul>
+</div>
+
+<!-- 净值简报 -->
+<div class="section">
+<h2>💰 净值简报</h2>
+<div class="metric-grid">
+<div class="metric-card">
+<div class="label">初始净值</div>
+<div class="value">1亿港元</div>
+</div>
+<div class="metric-card">
+<div class="label">现金</div>
+<div class="value green">9,751万</div>
+</div>
+<div class="metric-card">
+<div class="label">持仓市值</div>
+<div class="value">~249万</div>
+<div class="sub">港股48.7万+美股200万</div>
+</div>
+<div class="metric-card">
+<div class="label">总敞口</div>
+<div class="value yellow">≈30.0%</div>
+<div class="sub">新增后(含现有持仓)</div>
+</div>
+<div class="metric-card">
+<div class="label">港股新增</div>
+<div class="value">1,400万</div>
+<div class="sub">5只标的</div>
+</div>
+<div class="metric-card">
+<div class="label">现金占比</div>
+<div class="value green">≈70%</div>
+<div class="sub">防御性高</div>
+</div>
+</div>
+</div>
+
+<!-- 操作规则 -->
+<div class="section">
+<h2>📜 执行规则</h2>
+<ol>
+<li><strong>止损规则：</strong>所有标的以EMA26为止损位，触及即平仓，不设宽限期</li>
+<li><strong>4/21-22特殊规则：</strong>若VHSI突破30，立即将总敞口压缩至20%以下</li>
+<li><strong>4/21开盘监控：</strong>若HSI低开>2%，暂停新买入，等待VHSI数据</li>
+<li><strong>左侧试探：</strong>暂不触发，等待VHSI>35确认</li>
+<li><strong>阶梯止盈：</strong>AAPL浮盈7.6%，若利润回吐50%(回到+3.8%)减仓50%</li>
+<li><strong>宏观逻辑分裂：</strong>成长线(舜宇/京东)与防御线(汇丰/移动/港交所)同步持有，但需分别设止损</li>
+</ol>
+</div>
+
+<div class="footer">
+<p>Blakever 多智能体投资决策系统 | 本报告仅供参考，不构成投资建议</p>
+<p>数据来源: westock-data (腾讯自选股) | 生成时间: 2026-04-19 17:54 CST</p>
+</div>
+
+</div>
+</body>
+</html>
