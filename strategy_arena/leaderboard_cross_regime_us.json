@@ -1,0 +1,737 @@
+[
+  {
+    "strategy_name": "London_Breakout_Backtest_波动率调节20日",
+    "strategy_params": {
+      "vol_lookback": 20,
+      "type": "volatility_regime"
+    },
+    "strategy_description": "从multi:github_topic提取: London Breakout Backtest → 20日波动率调节仓位",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:github_topic",
+    "source_link": "https://github.com/je-suis-tm/quant-trading",
+    "annual_return": 12.68,
+    "sharpe": 0.67,
+    "max_drawdown": 20.79,
+    "calmar": 0.61,
+    "win_rate": 54.8,
+    "profit_factor": 1.22,
+    "avg_trades_per_year": 6.6,
+    "holding_distribution": {
+      "SPY": 81.0,
+      "AGG": 9.6,
+      "SHY": 9.4
+    },
+    "stress_test": {
+      "annual_return": 9.0,
+      "max_drawdown": 15.13
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US"
+    ],
+    "fingerprint": "ce9a250a842d3ac387b0e3b6a12cb5a593e8f69b4ae931ba04c04ae9f93fdf55",
+    "total_score": 39.79,
+    "timestamp": "2026-04-28 09:10:46",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "TV转译:_Debug_Signals_波动率调节60日",
+    "strategy_params": {
+      "vol_lookback": 60,
+      "type": "volatility_regime"
+    },
+    "strategy_description": "从multi:tradingview_indirect提取: TV转译: Debug Signals → 60日波动率调节仓位",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:tradingview_indirect",
+    "source_link": "https://github.com/loponly/pinescript-to-python",
+    "annual_return": 11.91,
+    "sharpe": 0.58,
+    "max_drawdown": 26.23,
+    "calmar": 0.45,
+    "win_rate": 55.0,
+    "profit_factor": 1.19,
+    "avg_trades_per_year": 2.6,
+    "holding_distribution": {
+      "SPY": 84.0,
+      "SHY": 10.3,
+      "AGG": 5.7
+    },
+    "stress_test": {
+      "annual_return": 4.96,
+      "max_drawdown": 19.47
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "HK",
+      "CN"
+    ],
+    "fingerprint": "877b9843ec309cdcbfbbd2961fc6c2d5a2df47805e3b4d3ca0c6edcbdc359be8",
+    "total_score": 34.78,
+    "timestamp": "2026-04-30 09:08:58",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0,
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效"
+  },
+  {
+    "strategy_name": "GEM4资产_6M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 5,
+      "assets": "SPY/VEA/AGG/SHY"
+    },
+    "strategy_description": "标准GEM四资产，6M回看",
+    "strategy_type": "趋势跟踪",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 9.55,
+    "sharpe": 0.43,
+    "max_drawdown": 24.74,
+    "calmar": 0.39,
+    "win_rate": 55.3,
+    "profit_factor": 1.16,
+    "avg_trades_per_year": 7.5,
+    "holding_distribution": {
+      "SPY": 58.8,
+      "VEA": 24.3,
+      "SHY": 9.2,
+      "AGG": 7.8
+    },
+    "stress_test": {
+      "annual_return": 1.41,
+      "max_drawdown": 20.74
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "01bc75fbf6336d6013a3c2200da52120da2244082e21e336833df6194228797a",
+    "total_score": 33.36,
+    "timestamp": "2026-04-27 21:09:53",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "双市场自适应_9M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 5,
+      "mode": "trend+range_adaptive",
+      "risk_assets": "QQQ/SPY/VEA",
+      "safe_assets": "AGG/SHY"
+    },
+    "strategy_description": "双市场自适应趋势+震荡切换(纳指/大盘/国际+短债)",
+    "strategy_type": "趋势跟踪",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 9.42,
+    "sharpe": 0.41,
+    "max_drawdown": 24.28,
+    "calmar": 0.39,
+    "win_rate": 55.1,
+    "profit_factor": 1.15,
+    "avg_trades_per_year": 7.0,
+    "holding_distribution": {
+      "SPY": 59.6,
+      "VEA": 25.2,
+      "SHY": 10.2,
+      "AGG": 5.0
+    },
+    "stress_test": {
+      "annual_return": 2.71,
+      "max_drawdown": 16.39
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "82eefc020ae9cf560766fef7646171f07b82bd89bf43995d5a19539fbb1add54",
+    "total_score": 33.2,
+    "timestamp": "2026-04-28 05:08:49",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "聚宽-多因子选股策略_月度多ETF动量轮动9M",
+    "strategy_params": {
+      "lookback_months": 9,
+      "type": "monthly_momentum_rotation",
+      "freq": "monthly",
+      "etf_type": "多ETF"
+    },
+    "strategy_description": "从multi:joinquant_template提取: 聚宽-多因子选股策略 → 月频多ETF动量赢家通吃(回看9月,月末信号下月执行)",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:joinquant_template",
+    "source_link": "https://github.com/gaaiyun/joinquant-skill",
+    "annual_return": 11.51,
+    "sharpe": 0.48,
+    "max_drawdown": 26.98,
+    "calmar": 0.43,
+    "win_rate": 54.3,
+    "profit_factor": 1.15,
+    "avg_trades_per_year": 2.7,
+    "holding_distribution": {
+      "SPY": 40.3,
+      "GLD": 32.1,
+      "TLT": 12.1,
+      "VEA": 10.6,
+      "AGG": 4.1,
+      "SHY": 0.8
+    },
+    "stress_test": {
+      "annual_return": 0.76,
+      "max_drawdown": 28.37
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US"
+    ],
+    "fingerprint": "a7740f028de281f1f1d83a9be62dae53e99b641f0ec638eb68470cb106658cf1",
+    "total_score": 33.19,
+    "timestamp": "2026-04-28 01:09:09",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "03_Signal_Generation_月度轮动动量轮动9M",
+    "strategy_params": {
+      "lookback_months": 9,
+      "type": "monthly_momentum_rotation",
+      "freq": "monthly",
+      "etf_type": "轮动"
+    },
+    "strategy_description": "从multi:google_github提取: 03 Signal Generation → 月频轮动动量赢家通吃(回看9月,月末信号下月执行)",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:google_github",
+    "source_link": "https://github.com/Fisjo/momentum-strategy-backtest",
+    "annual_return": 11.51,
+    "sharpe": 0.48,
+    "max_drawdown": 26.98,
+    "calmar": 0.43,
+    "win_rate": 54.3,
+    "profit_factor": 1.15,
+    "avg_trades_per_year": 2.7,
+    "holding_distribution": {
+      "SPY": 40.3,
+      "GLD": 32.1,
+      "TLT": 12.1,
+      "VEA": 10.6,
+      "AGG": 4.1,
+      "SHY": 0.8
+    },
+    "stress_test": {
+      "annual_return": 0.76,
+      "max_drawdown": 28.37
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "HK",
+      "CN"
+    ],
+    "fingerprint": "83b013f74a4adb9abc8bcc1cabf32528a3101c6a67e59183dbf3702f1df4b525",
+    "total_score": 33.19,
+    "timestamp": "2026-04-30 07:08:17",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "双重动量_9M_阈值0%+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "abs_momentum_threshold": 0
+    },
+    "strategy_description": "双重动量(相对+绝对>0%)",
+    "strategy_type": "趋势跟踪",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 8.93,
+    "sharpe": 0.37,
+    "max_drawdown": 24.45,
+    "calmar": 0.37,
+    "win_rate": 54.9,
+    "profit_factor": 1.14,
+    "avg_trades_per_year": 8.4,
+    "holding_distribution": {
+      "SPY": 60.0,
+      "VEA": 25.3,
+      "SHY": 10.0,
+      "AGG": 4.7
+    },
+    "stress_test": {
+      "annual_return": 0.43,
+      "max_drawdown": 21.94
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "e08e110322f768ee04017609d18a3746cccb4f1f4b77772fd26c0fa336348ca1",
+    "total_score": 32.51,
+    "timestamp": "2026-04-28 03:06:39",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "全天候_6M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 3,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 10.46,
+    "sharpe": 0.41,
+    "max_drawdown": 26.99,
+    "calmar": 0.39,
+    "win_rate": 53.9,
+    "profit_factor": 1.13,
+    "avg_trades_per_year": 10.8,
+    "holding_distribution": {
+      "SPY": 50.1,
+      "GLD": 38.4,
+      "TLT": 11.5
+    },
+    "stress_test": {
+      "annual_return": 0.41,
+      "max_drawdown": 17.3
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "41f74d1ea100e68f82b0b486a29cc6d2c61c18451c20b4f985219d171da738c1",
+    "total_score": 32.05,
+    "timestamp": "2026-04-29 03:07:48",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 2.97,
+        "benchmark_return": 2.97,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 2.15,
+        "benchmark_return": 2.15,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.31,
+        "benchmark_return": 1.31,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 1.99,
+        "benchmark_return": 1.99,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "London_Breakout_Backtest_RSI14_30/70",
+    "strategy_params": {
+      "rsi_period": 14,
+      "oversold": 30,
+      "overbought": 70,
+      "type": "rsi_reversion"
+    },
+    "strategy_description": "从multi:github_topic提取: London Breakout Backtest → RSI14超卖30/超买70",
+    "strategy_type": "均值回归",
+    "source": "multi:github_topic",
+    "source_link": "https://github.com/je-suis-tm/quant-trading",
+    "annual_return": 3.48,
+    "sharpe": -0.09,
+    "max_drawdown": 12.85,
+    "calmar": 0.27,
+    "win_rate": 52.2,
+    "profit_factor": 1.25,
+    "avg_trades_per_year": 10.5,
+    "holding_distribution": {
+      "SHY": 95.1,
+      "SPY": 4.9
+    },
+    "stress_test": {
+      "annual_return": 1.26,
+      "max_drawdown": 7.54
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "market_scope": [
+      "US"
+    ],
+    "fingerprint": "76db33fbd48fc01537c566a85d4532bc28343724e7cb6721cc2a1dda4ebcee38",
+    "total_score": 31.91,
+    "timestamp": "2026-04-28 01:09:09",
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 0.09,
+        "benchmark_return": 2.97,
+        "excess": -2.88,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 0.04,
+        "benchmark_return": 2.15,
+        "excess": -2.11,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": -0.04,
+        "benchmark_return": 1.31,
+        "excess": -1.34,
+        "absolute_negative": true
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": -0.04,
+        "benchmark_return": 1.99,
+        "excess": -2.03,
+        "absolute_negative": true
+      }
+    ],
+    "validation_status": "⚠️ 疑似失效",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "Blakever V6.5 利率维度修正(SPY/SHY)(US)",
+    "strategy_params": {
+      "lookback_months": 6
+    },
+    "strategy_description": "本地回测策略: blakever_v65_backtest.py",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 9.32,
+    "sharpe": 0.42,
+    "max_drawdown": 24.74,
+    "calmar": 0.38,
+    "win_rate": 54.7,
+    "profit_factor": 1.16,
+    "avg_trades_per_year": 5.2,
+    "holding_distribution": {
+      "local_backtest": 100.0
+    },
+    "stress_test": null,
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 8,
+    "source": "local_backtest",
+    "source_script": "blakever_v65_backtest.py",
+    "market": "US",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "c99519408afdae421753219bd64253e80d03badaa2c278e0e97e2b88380bd034",
+    "total_score": 25.05,
+    "timestamp": "2026-04-30 13:09:36",
+    "_overfit_risk_signals": [
+      "跨周期未通过"
+    ],
+    "_overfit_risk": 0.1,
+    "validation_history": [
+      {
+        "date": "2026-05-11",
+        "strategy_return": 0.0,
+        "benchmark_return": 2.97,
+        "excess": -2.97,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 0.0,
+        "benchmark_return": 2.15,
+        "excess": -2.15,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 0.0,
+        "benchmark_return": 1.31,
+        "excess": -1.31,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-05-12",
+        "strategy_return": 0.0,
+        "benchmark_return": 1.99,
+        "excess": -1.99,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "✅ 有效"
+  }
+]

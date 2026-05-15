@@ -1,0 +1,150 @@
+{
+  "strategy_name": "Keltner通道突破策略",
+  "strategy_type": "趋势跟踪",
+  "strategy_params": {
+    "ema_period": 20,
+    "atr_period": 20,
+    "atr_multiplier": 1.0
+  },
+  "strategy_file": "/data/workspace/strategy_arena/strategies/Keltner突破_低倍率1_0x_.py",
+  "risk_free_rate": 0.045,
+  "backtest_time": "2026-04-22 22:03:28",
+  "survivorship_bias_flag": true,
+  "main_period": {
+    "market": "us",
+    "period": "2019-01-01 ~ 2024-12-31",
+    "n_stocks": 457,
+    "mean_annual_return": 1.02,
+    "median_annual_return": -0.45,
+    "mean_sharpe": 0.11,
+    "mean_max_drawdown": 32.76,
+    "mean_win_rate": 37.5,
+    "mean_profit_factor": 1.39,
+    "mean_avg_trades_per_year": 4.3,
+    "beat_bh_pct": 26.7,
+    "risk_free_rate": 0.045,
+    "individual_results": [
+      {
+        "annual_return": 7.79,
+        "max_drawdown": 23.52,
+        "sharpe": 0.62,
+        "win_rate": 37.5,
+        "profit_factor": 1.61,
+        "total_trades": 17,
+        "avg_trades_per_year": 4.3,
+        "max_consec_loss": 2,
+        "position_pct": 0.0,
+        "symbol": "AAPL"
+      },
+      {
+        "annual_return": 2.87,
+        "max_drawdown": 33.74,
+        "sharpe": 0.29,
+        "win_rate": 42.9,
+        "profit_factor": 1.22,
+        "total_trades": 14,
+        "avg_trades_per_year": 3.5,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "ABNB"
+      },
+      {
+        "annual_return": 1.73,
+        "max_drawdown": 34.81,
+        "sharpe": 0.23,
+        "win_rate": 43.8,
+        "profit_factor": 1.09,
+        "total_trades": 16,
+        "avg_trades_per_year": 4.0,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "ADBE"
+      },
+      {
+        "annual_return": -10.12,
+        "max_drawdown": 41.12,
+        "sharpe": -0.48,
+        "win_rate": 28.6,
+        "profit_factor": 0.41,
+        "total_trades": 21,
+        "avg_trades_per_year": 5.3,
+        "max_consec_loss": 5,
+        "position_pct": 0.0,
+        "symbol": "ADI"
+      },
+      {
+        "annual_return": 13.22,
+        "max_drawdown": 19.25,
+        "sharpe": 1.05,
+        "win_rate": 58.8,
+        "profit_factor": 2.63,
+        "total_trades": 17,
+        "avg_trades_per_year": 4.3,
+        "max_consec_loss": 3,
+        "position_pct": 0.0,
+        "symbol": "ADP"
+      },
+      {
+        "annual_return": -8.66,
+        "max_drawdown": 49.49,
+        "sharpe": -0.36,
+        "win_rate": 38.9,
+        "profit_factor": 0.44,
+        "total_trades": 18,
+        "avg_trades_per_year": 4.5,
+        "max_consec_loss": 6,
+        "position_pct": 0.0,
+        "symbol": "ADSK"
+      },
+      {
+        "annual_return": 0.74,
+        "max_drawdown": 31.64,
+        "sharpe": 0.15,
+        "win_rate": 56.2,
+        "profit_factor": 1.07,
+        "total_trades": 16,
+        "avg_trades_per_year": 4.0,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "AEP"
+      },
+      {
+        "annual_return": 11.93,
+        "max_drawdown": 41.44,
+        "sharpe": 0.55,
+        "win_rate": 35.7,
+        "profit_factor": 1.75,
+        "total_trades": 14,
+        "avg_trades_per_year": 3.5,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "ALNY"
+      },
+      {
+        "annual_return": -9.17,
+        "max_drawdown": 56.56,
+        "sharpe": -0.18,
+        "win_rate": 40.0,
+        "profit_factor": 0.6,
+        "total_trades": 20,
+        "avg_trades_per_year": 5.0,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "AMAT"
+      },
+      {
+        "annual_return": 3.92,
+        "max_drawdown": 54.73,
+        "sharpe": 0.34,
+        "win_rate": 33.3,
+        "profit_factor": 1.12,
+        "total_trades": 18,
+        "avg_trades_per_year": 4.5,
+        "max_consec_loss": 6,
+        "position_pct": 0.0,
+        "symbol": "AMD"
+      }
+    ]
+  },
+  "stress_period": null
+}

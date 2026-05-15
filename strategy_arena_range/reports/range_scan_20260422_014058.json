@@ -1,0 +1,59 @@
+{
+  "scan_time": "2026-04-22 01:40:58",
+  "strategies": [
+    {
+      "name": "布林带均值回归策略",
+      "source_url": "generated:range_bollinger",
+      "fingerprint": "e45702d9",
+      "type": "均值回归",
+      "score": 51.31,
+      "annual_return": 0.0165,
+      "sharpe": 0.23,
+      "max_drawdown": 0.0998,
+      "win_rate": 0.6,
+      "profit_loss_ratio": 35.73,
+      "avg_trades_per_stock": 1.0,
+      "cross_cycle_robust": true,
+      "survivorship_bias": true,
+      "has_stop_loss": true,
+      "pine_transpile_failed": false,
+      "slippage_mode": "default"
+    },
+    {
+      "name": "Keltner通道挤压突破策略",
+      "source_url": "generated:range_keltner",
+      "fingerprint": "0f52f396",
+      "type": "趋势跟踪",
+      "score": 15.0,
+      "annual_return": -0.0148,
+      "sharpe": -0.23,
+      "max_drawdown": 0.0775,
+      "win_rate": 0.0,
+      "profit_loss_ratio": 0,
+      "avg_trades_per_stock": 0.2,
+      "cross_cycle_robust": false,
+      "survivorship_bias": true,
+      "has_stop_loss": true,
+      "pine_transpile_failed": false,
+      "slippage_mode": "default"
+    },
+    {
+      "name": "双均线乖离回归策略",
+      "source_url": "generated:range_bias",
+      "fingerprint": "e424ab16",
+      "type": "趋势跟踪",
+      "score": 18.64,
+      "annual_return": -0.0122,
+      "sharpe": -0.23,
+      "max_drawdown": 0.0351,
+      "win_rate": 0.056,
+      "profit_loss_ratio": 0.23,
+      "avg_trades_per_stock": 0.7,
+      "cross_cycle_robust": false,
+      "survivorship_bias": true,
+      "has_stop_loss": true,
+      "pine_transpile_failed": false,
+      "slippage_mode": "default"
+    }
+  ]
+}

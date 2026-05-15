@@ -1,0 +1,560 @@
+{
+  "created": "2026-04-26T12:45:26.551510",
+  "etfs": {
+    "hk02800": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:26.847564"
+    },
+    "hk03110": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:27.437763"
+    },
+    "hk02840": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:28.025828"
+    },
+    "hk02819": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:28.743907"
+    },
+    "hk02878": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:29.329205"
+    },
+    "hk03067": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:31.019718"
+    },
+    "hk02845": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:31.608671"
+    },
+    "hk02846": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:32.218544"
+    },
+    "hk03040": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:32.861357"
+    },
+    "hk03096": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:33.450774"
+    },
+    "hk03032": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:34.931489"
+    },
+    "hk02827": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:35.719918"
+    },
+    "hk02837": {
+      "last_date": "2026-04-24",
+      "rows": 754,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:47.561539"
+    },
+    "hk03039": {
+      "last_date": "2026-04-24",
+      "rows": 871,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:45:48.161612"
+    },
+    "hk02833": {
+      "last_date": "2022-09-09",
+      "rows": 4429,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T13:30:18.257444"
+    },
+    "hk02849": {
+      "last_date": "2024-09-24",
+      "rows": 687,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T13:30:19.004046"
+    },
+    "hk03042": {
+      "last_date": "2026-04-24",
+      "rows": 487,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:46:00"
+    },
+    "hk03049": {
+      "last_date": "2021-12-07",
+      "rows": 2689,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T13:30:19.731494"
+    },
+    "hk03088": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:47:00"
+    },
+    "hk03033": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:47:00"
+    },
+    "hk03005": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T12:47:00"
+    },
+    "hk02828": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T13:00:00"
+    },
+    "hk02836": {
+      "last_date": "2026-04-24",
+      "rows": 1306,
+      "status": "ok",
+      "source": "tencent",
+      "updated": "2026-04-26T13:00:00"
+    }
+  },
+  "runs": [
+    {
+      "start": "2026-04-26T12:45:26.606799",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02800",
+          "name": "盈富基金(恒指ETF)",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03110",
+          "name": "恒生高股息率ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02840",
+          "name": "SPDR黄金ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02819",
+          "name": "iShares安硕恒生指数ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02878",
+          "name": "南方恒生科技指数ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:29.829585"
+    },
+    {
+      "start": "2026-04-26T12:45:30.742688",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "03067",
+          "name": "iShares安硕恒生科技ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02845",
+          "name": "iShares安硕明晟中国ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02846",
+          "name": "iShares安硕中国大型股ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03040",
+          "name": "华夏沪深三百指数ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03096",
+          "name": "华夏上证五十ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:33.951264"
+    },
+    {
+      "start": "2026-04-26T12:45:34.819483",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "03032",
+          "name": "易方达中证一百ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02827",
+          "name": "嘉实明晟中国A股ETF",
+          "status": "ok",
+          "rows": 1306,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02837",
+          "name": "南方A50ETF",
+          "status": "ok",
+          "rows": 754,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03039",
+          "name": "华夏恒生ESG指数ETF",
+          "status": "ok",
+          "rows": 871,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03060",
+          "name": "华夏恒生中国企业ETF",
+          "status": "ok",
+          "rows": 660,
+          "latest": "2024-12-31",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:38.004431"
+    },
+    {
+      "start": "2026-04-26T12:45:38.912447",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02837",
+          "name": "南方A50ETF",
+          "status": "ok",
+          "rows": 754,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03039",
+          "name": "华夏恒生ESG指数ETF",
+          "status": "ok",
+          "rows": 871,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03060",
+          "name": "华夏恒生中国企业ETF",
+          "status": "ok",
+          "rows": 660,
+          "latest": "2024-12-31",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 417,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:42.125110"
+    },
+    {
+      "start": "2026-04-26T12:45:43.031145",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02837",
+          "name": "南方A50ETF",
+          "status": "ok",
+          "rows": 754,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03039",
+          "name": "华夏恒生ESG指数ETF",
+          "status": "ok",
+          "rows": 871,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03060",
+          "name": "华夏恒生中国企业ETF",
+          "status": "ok",
+          "rows": 660,
+          "latest": "2024-12-31",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 417,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:46.534714"
+    },
+    {
+      "start": "2026-04-26T12:45:47.440390",
+      "success": 5,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02837",
+          "name": "南方A50ETF",
+          "status": "ok",
+          "rows": 754,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03039",
+          "name": "华夏恒生ESG指数ETF",
+          "status": "ok",
+          "rows": 871,
+          "latest": "2026-04-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03060",
+          "name": "华夏恒生中国企业ETF",
+          "status": "ok",
+          "rows": 660,
+          "latest": "2024-12-31",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 417,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T12:45:50.557489"
+    },
+    {
+      "start": "2026-04-26T13:00:27.214726",
+      "success": 4,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "03060",
+          "name": "华夏恒生中国企业ETF",
+          "status": "ok",
+          "rows": 660,
+          "latest": "2024-12-31",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 417,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03049",
+          "name": "FXI(中国大盘ETF)",
+          "status": "ok",
+          "rows": 230,
+          "latest": "2021-12-07",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T13:00:29.597595"
+    },
+    {
+      "start": "2026-04-26T13:30:06.349405",
+      "success": 3,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 4429,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03049",
+          "name": "FXI(中国大盘ETF)",
+          "status": "ok",
+          "rows": 2689,
+          "latest": "2021-12-07",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T13:30:08.513665"
+    },
+    {
+      "start": "2026-04-26T13:30:18.106073",
+      "success": 3,
+      "failed": 0,
+      "details": [
+        {
+          "symbol": "02833",
+          "name": "iShares安硕富时A50中国指数ETF",
+          "status": "ok",
+          "rows": 4429,
+          "latest": "2022-09-09",
+          "source": "tencent"
+        },
+        {
+          "symbol": "02849",
+          "name": "XDB中国ETF",
+          "status": "ok",
+          "rows": 687,
+          "latest": "2024-09-24",
+          "source": "tencent"
+        },
+        {
+          "symbol": "03049",
+          "name": "FXI(中国大盘ETF)",
+          "status": "ok",
+          "rows": 2689,
+          "latest": "2021-12-07",
+          "source": "tencent"
+        }
+      ],
+      "end": "2026-04-26T13:30:20.232317"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "architecture": "v6_layered_fixed",
+  "total_variants": 162,
+  "l1_passed": 0,
+  "l1_eliminated": 162,
+  "l2_passed": 0,
+  "l2_eliminated": 0,
+  "l3_count": 0,
+  "data_time": 19.6,
+  "l1_time": 12.1,
+  "l2_time": 0.0,
+  "l3_time": 0.0,
+  "total_time": 31.6,
+  "v5_est": 2798.9,
+  "v6_est": 211.6,
+  "speedup": 13.2
+}

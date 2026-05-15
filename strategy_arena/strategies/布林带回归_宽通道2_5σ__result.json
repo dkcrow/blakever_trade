@@ -1,0 +1,149 @@
+{
+  "strategy_name": "布林带均值回归策略",
+  "strategy_type": "均值回归",
+  "strategy_params": {
+    "bb_period": 20,
+    "bb_std": 2.5
+  },
+  "strategy_file": "/data/workspace/strategy_arena/strategies/布林带回归_宽通道2_5σ_.py",
+  "risk_free_rate": 0.045,
+  "backtest_time": "2026-04-22 22:02:06",
+  "survivorship_bias_flag": true,
+  "main_period": {
+    "market": "us",
+    "period": "2019-01-01 ~ 2024-12-31",
+    "n_stocks": 457,
+    "mean_annual_return": 2.74,
+    "median_annual_return": 2.51,
+    "mean_sharpe": 0.37,
+    "mean_max_drawdown": 16.93,
+    "mean_win_rate": 66.3,
+    "mean_profit_factor": 6.14,
+    "mean_avg_trades_per_year": 2.2,
+    "beat_bh_pct": 40.5,
+    "risk_free_rate": 0.045,
+    "individual_results": [
+      {
+        "annual_return": 5.08,
+        "max_drawdown": 8.14,
+        "sharpe": 0.82,
+        "win_rate": 100.0,
+        "profit_factor": 10.0,
+        "total_trades": 6,
+        "avg_trades_per_year": 1.5,
+        "max_consec_loss": 0,
+        "position_pct": 0.0,
+        "symbol": "AAPL"
+      },
+      {
+        "annual_return": 6.01,
+        "max_drawdown": 20.99,
+        "sharpe": 0.48,
+        "win_rate": 70.0,
+        "profit_factor": 2.06,
+        "total_trades": 10,
+        "avg_trades_per_year": 2.5,
+        "max_consec_loss": 2,
+        "position_pct": 0.0,
+        "symbol": "ABNB"
+      },
+      {
+        "annual_return": -3.36,
+        "max_drawdown": 43.32,
+        "sharpe": -0.08,
+        "win_rate": 50.0,
+        "profit_factor": 0.74,
+        "total_trades": 12,
+        "avg_trades_per_year": 3.0,
+        "max_consec_loss": 4,
+        "position_pct": 0.0,
+        "symbol": "ADBE"
+      },
+      {
+        "annual_return": 6.07,
+        "max_drawdown": 7.16,
+        "sharpe": 0.82,
+        "win_rate": 83.3,
+        "profit_factor": 180.4,
+        "total_trades": 6,
+        "avg_trades_per_year": 1.5,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "ADI"
+      },
+      {
+        "annual_return": 5.62,
+        "max_drawdown": 7.04,
+        "sharpe": 0.99,
+        "win_rate": 85.7,
+        "profit_factor": 31.54,
+        "total_trades": 8,
+        "avg_trades_per_year": 2.0,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "ADP"
+      },
+      {
+        "annual_return": 6.29,
+        "max_drawdown": 11.67,
+        "sharpe": 0.89,
+        "win_rate": 85.7,
+        "profit_factor": 4.82,
+        "total_trades": 7,
+        "avg_trades_per_year": 1.8,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "ADSK"
+      },
+      {
+        "annual_return": 7.53,
+        "max_drawdown": 12.81,
+        "sharpe": 1.05,
+        "win_rate": 76.9,
+        "profit_factor": 3.77,
+        "total_trades": 13,
+        "avg_trades_per_year": 3.3,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "AEP"
+      },
+      {
+        "annual_return": 5.05,
+        "max_drawdown": 16.04,
+        "sharpe": 0.5,
+        "win_rate": 62.5,
+        "profit_factor": 2.34,
+        "total_trades": 9,
+        "avg_trades_per_year": 2.3,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "ALNY"
+      },
+      {
+        "annual_return": 10.0,
+        "max_drawdown": 20.12,
+        "sharpe": 0.78,
+        "win_rate": 77.8,
+        "profit_factor": 7.35,
+        "total_trades": 9,
+        "avg_trades_per_year": 2.3,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "AMAT"
+      },
+      {
+        "annual_return": -1.9,
+        "max_drawdown": 8.97,
+        "sharpe": -0.62,
+        "win_rate": 0.0,
+        "profit_factor": 0.0,
+        "total_trades": 1,
+        "avg_trades_per_year": 0.3,
+        "max_consec_loss": 1,
+        "position_pct": 0.0,
+        "symbol": "AMD"
+      }
+    ]
+  },
+  "stress_period": null
+}

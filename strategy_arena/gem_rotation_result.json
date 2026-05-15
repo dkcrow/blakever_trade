@@ -1,0 +1,333 @@
+{
+  "strategy_name": "GEM双动量轮动策略",
+  "strategy_type": "多资产轮动",
+  "backtest_time": "2026-04-22 01:05:45",
+  "risk_free_rate": 0.045,
+  "fees": 0.001,
+  "slippage": 0.001,
+  "t_plus_1": true,
+  "standard_gem": {
+    "universe": [
+      "SPY",
+      "VEA",
+      "AGG",
+      "SHY"
+    ],
+    "risk_assets": [
+      "SPY",
+      "VEA"
+    ],
+    "safe_assets": [
+      "AGG",
+      "SHY"
+    ],
+    "main_period": {
+      "annual_return": 8.57,
+      "total_return": 63.67,
+      "max_drawdown": 15.43,
+      "sharpe": 0.79,
+      "adj_sharpe": 0.39,
+      "win_rate": 54.2,
+      "profit_factor": 1.18,
+      "total_trades": 38,
+      "avg_trades_per_year": 6.3,
+      "max_consec_loss_months": 3,
+      "holding_distribution": {
+        "SHY": 47.7,
+        "SPY": 46.6,
+        "VEA": 4.3,
+        "AGG": 1.4
+      },
+      "final_value": 1636654.23,
+      "n_years": 5.99,
+      "init_cash": 1000000,
+      "start_date": "2019-01-01",
+      "end_date": "2024-12-31"
+    },
+    "stress_period": {
+      "annual_return": 8.7,
+      "total_return": 18.2,
+      "max_drawdown": 13.93,
+      "sharpe": 0.75,
+      "adj_sharpe": 0.38,
+      "win_rate": 58.1,
+      "profit_factor": 1.18,
+      "total_trades": 14,
+      "avg_trades_per_year": 7.0,
+      "max_consec_loss_months": 3,
+      "holding_distribution": {
+        "SPY": 51.5,
+        "SHY": 44.4,
+        "AGG": 4.2
+      },
+      "final_value": 1182012.47,
+      "n_years": 2.0,
+      "init_cash": 1000000,
+      "start_date": "2019-01-01",
+      "end_date": "2020-12-31"
+    },
+    "bull_period": {
+      "annual_return": 20.58,
+      "total_return": 45.19,
+      "max_drawdown": 8.23,
+      "sharpe": 2.08,
+      "adj_sharpe": 1.59,
+      "win_rate": 56.7,
+      "profit_factor": 1.51,
+      "total_trades": 15,
+      "avg_trades_per_year": 7.5,
+      "max_consec_loss_months": 2,
+      "holding_distribution": {
+        "SHY": 44.6,
+        "SPY": 42.4,
+        "VEA": 12.9
+      },
+      "final_value": 1451858.82,
+      "n_years": 1.99,
+      "init_cash": 1000000,
+      "start_date": "2023-01-01",
+      "end_date": "2024-12-31"
+    }
+  },
+  "extended_gem": {
+    "universe": [
+      "SPY",
+      "VEA",
+      "VWO",
+      "GLD",
+      "AGG",
+      "TLT",
+      "IEF",
+      "SHY"
+    ],
+    "risk_assets": [
+      "SPY",
+      "VEA",
+      "VWO",
+      "GLD"
+    ],
+    "safe_assets": [
+      "AGG",
+      "TLT",
+      "IEF",
+      "SHY"
+    ],
+    "main_period": {
+      "annual_return": 4.75,
+      "total_return": 32.04,
+      "max_drawdown": 29.16,
+      "sharpe": 0.46,
+      "adj_sharpe": 0.07,
+      "win_rate": 52.9,
+      "profit_factor": 1.1,
+      "total_trades": 45,
+      "avg_trades_per_year": 7.5,
+      "max_consec_loss_months": 5,
+      "holding_distribution": {
+        "SHY": 43.7,
+        "GLD": 25.6,
+        "SPY": 25.0,
+        "VEA": 2.9,
+        "VWO": 2.8
+      },
+      "final_value": 1320418.91,
+      "n_years": 5.99,
+      "init_cash": 1000000,
+      "start_date": "2019-01-01",
+      "end_date": "2024-12-31"
+    },
+    "stress_period": {
+      "annual_return": 10.25,
+      "total_return": 21.59,
+      "max_drawdown": 14.5,
+      "sharpe": 0.85,
+      "adj_sharpe": 0.48,
+      "win_rate": 57.1,
+      "profit_factor": 1.2,
+      "total_trades": 13,
+      "avg_trades_per_year": 6.5,
+      "max_consec_loss_months": 4,
+      "holding_distribution": {
+        "SHY": 44.4,
+        "GLD": 43.4,
+        "SPY": 12.3
+      },
+      "final_value": 1215916.7,
+      "n_years": 2.0,
+      "init_cash": 1000000,
+      "start_date": "2019-01-01",
+      "end_date": "2020-12-31"
+    }
+  },
+  "simple_gem": {
+    "universe": [
+      "SPY",
+      "AGG",
+      "SHY"
+    ],
+    "risk_assets": [
+      "SPY"
+    ],
+    "safe_assets": [
+      "AGG",
+      "SHY"
+    ],
+    "main_period": {
+      "annual_return": 8.98,
+      "total_return": 67.41,
+      "max_drawdown": 15.43,
+      "sharpe": 0.83,
+      "adj_sharpe": 0.43,
+      "win_rate": 54.7,
+      "profit_factor": 1.19,
+      "total_trades": 36,
+      "avg_trades_per_year": 6.0,
+      "max_consec_loss_months": 3,
+      "holding_distribution": {
+        "SPY": 50.9,
+        "SHY": 47.7,
+        "AGG": 1.4
+      },
+      "final_value": 1674107.01,
+      "n_years": 5.99,
+      "init_cash": 1000000,
+      "start_date": "2019-01-01",
+      "end_date": "2024-12-31"
+    }
+  },
+  "buy_hold_baselines": {
+    "SPY": {
+      "symbol": "SPY",
+      "annual_return": 17.1,
+      "max_drawdown": 33.72,
+      "sharpe": 0.9
+    },
+    "VEA": {
+      "symbol": "VEA",
+      "annual_return": 7.57,
+      "max_drawdown": 35.26,
+      "sharpe": 0.48
+    },
+    "AGG": {
+      "symbol": "AGG",
+      "annual_return": 1.06,
+      "max_drawdown": 18.46,
+      "sharpe": 0.2
+    },
+    "SHY": {
+      "symbol": "SHY",
+      "annual_return": 1.6,
+      "max_drawdown": 5.73,
+      "sharpe": 0.88
+    },
+    "GLD": {
+      "symbol": "GLD",
+      "annual_return": 12.22,
+      "max_drawdown": 22.0,
+      "sharpe": 0.85
+    },
+    "TLT": {
+      "symbol": "TLT",
+      "annual_return": -3.03,
+      "max_drawdown": 48.34,
+      "sharpe": -0.09
+    },
+    "60/40": {
+      "annual_return": 10.94,
+      "max_drawdown": 21.72,
+      "sharpe": 0.89
+    }
+  },
+  "comparison_table": [
+    {
+      "策略": "标准GEM(SPY/VEA/AGG/SHY)",
+      "年化收益": "8.57%",
+      "最大回撤": "15.43%",
+      "夏普": 0.79,
+      "调整夏普": 0.39,
+      "盈亏比": 1.18,
+      "年调仓": 6.3
+    },
+    {
+      "策略": "扩展GEM(7资产)",
+      "年化收益": "4.75%",
+      "最大回撤": "29.16%",
+      "夏普": 0.46,
+      "调整夏普": 0.07,
+      "盈亏比": 1.1,
+      "年调仓": 7.5
+    },
+    {
+      "策略": "简化GEM(SPY/AGG/SHY)",
+      "年化收益": "8.98%",
+      "最大回撤": "15.43%",
+      "夏普": 0.83,
+      "调整夏普": 0.43,
+      "盈亏比": 1.19,
+      "年调仓": 6.0
+    },
+    {
+      "策略": "SPY B&H",
+      "年化收益": "17.1%",
+      "最大回撤": "33.72%",
+      "夏普": 0.9,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "VEA B&H",
+      "年化收益": "7.57%",
+      "最大回撤": "35.26%",
+      "夏普": 0.48,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "AGG B&H",
+      "年化收益": "1.06%",
+      "最大回撤": "18.46%",
+      "夏普": 0.2,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "SHY B&H",
+      "年化收益": "1.6%",
+      "最大回撤": "5.73%",
+      "夏普": 0.88,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "GLD B&H",
+      "年化收益": "12.22%",
+      "最大回撤": "22.0%",
+      "夏普": 0.85,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "TLT B&H",
+      "年化收益": "-3.03%",
+      "最大回撤": "48.34%",
+      "夏普": -0.09,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    },
+    {
+      "策略": "60/40 B&H",
+      "年化收益": "10.94%",
+      "最大回撤": "21.72%",
+      "夏普": 0.89,
+      "调整夏普": "-",
+      "盈亏比": "-",
+      "年调仓": "-"
+    }
+  ]
+}
