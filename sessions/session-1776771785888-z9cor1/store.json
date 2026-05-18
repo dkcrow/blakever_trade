@@ -1,0 +1,25 @@
+{
+  "id": "session-1776771785888-z9cor1",
+  "name": "Notion迁移IMA",
+  "status": "active",
+  "createdAt": "2026-04-21T11:49:24.149Z",
+  "updatedAt": "2026-04-21T12:56:16.283Z",
+  "agents": [
+    {
+      "id": "agent_mu21vor7",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-21T11:49:24.149Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_lbe4ki5h",
+    "title": "Notion迁移IMA",
+    "createdAt": "2026-04-21T11:49:24.149Z",
+    "file": "summary_lbe4ki5h.md"
+  },
+  "lastMessageCount": 208
+}

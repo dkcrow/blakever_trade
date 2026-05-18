@@ -1,0 +1,25 @@
+{
+  "id": "f1cc1306-13d5-4c14-a4fb-0f3a3104cf7a",
+  "name": "统一调度器执行异常",
+  "status": "active",
+  "createdAt": "2026-04-30T12:28:44.833Z",
+  "updatedAt": "2026-04-30T14:07:39.037Z",
+  "agents": [
+    {
+      "id": "agent_al6liu1w",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-30T12:28:44.833Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_y0e80067",
+    "title": "统一调度器执行异常",
+    "createdAt": "2026-04-30T12:28:44.833Z",
+    "file": "summary_y0e80067.md"
+  },
+  "lastMessageCount": 26
+}

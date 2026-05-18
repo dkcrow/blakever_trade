@@ -1,0 +1,25 @@
+{
+  "id": "marcus-monthly-report",
+  "name": "Marcus月报生成",
+  "status": "active",
+  "createdAt": "2026-04-28T00:08:55.095Z",
+  "updatedAt": "2026-04-30T00:11:29.969Z",
+  "agents": [
+    {
+      "id": "agent_bev2kq7u",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-28T00:08:55.095Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_qmacu9pn",
+    "title": "Marcus月报生成",
+    "createdAt": "2026-04-28T00:08:55.095Z",
+    "file": "summary_qmacu9pn.md"
+  },
+  "lastMessageCount": 60
+}

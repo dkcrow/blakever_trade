@@ -1,0 +1,25 @@
+{
+  "id": "session-1777440427721-1xkn5o",
+  "name": "Notion连接测试",
+  "status": "active",
+  "createdAt": "2026-04-29T05:29:17.728Z",
+  "updatedAt": "2026-04-29T05:29:17.728Z",
+  "agents": [
+    {
+      "id": "agent_hhtv7uh6",
+      "name": "xh7pfs1ox03emvvd",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-29T05:29:17.728Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_5n1nsofq",
+    "title": "Notion连接测试",
+    "createdAt": "2026-04-29T05:29:17.728Z",
+    "file": "summary_5n1nsofq.md"
+  },
+  "lastMessageCount": 24
+}

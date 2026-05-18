@@ -1,0 +1,28 @@
+{
+  "strategy": "五福闹新春v3.5",
+  "source": "聚宽",
+  "source_url": "https://www.joinquant.com/post/69702",
+  "market": "CN",
+  "total_return": 19.0,
+  "annual_return": 3.55,
+  "sharpe": 0.19,
+  "max_drawdown": 38.64,
+  "profit_factor": 1.07,
+  "win_rate": 36.58,
+  "annual_trades": 117.3,
+  "monthly_positive_rate": 60.0,
+  "total_trades": 586,
+  "start_date": "2021-04-26",
+  "end_date": "2026-04-24",
+  "final_value": 1189807.24,
+  "initial_value": 1000000,
+  "scores": {
+    "total": 17.0,
+    "annual_score": 0.02,
+    "sharpe_score": 2.59,
+    "pf_score": 0.81,
+    "wr_score": 4.59,
+    "dd_bonus": 0,
+    "monthly_score": 9.0
+  }
+}

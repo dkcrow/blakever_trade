@@ -1,0 +1,188 @@
+Traceback (most recent call last):
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 305, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+                             " response")
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\util\retry.py", line 490, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\util\util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\http\client.py", line 305, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+                             " response")
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\blakehao\.qclaw\workspace\fetch_qqq_ak.py", line 14, in <module>
+    df = ak.fund_etf_hist_em(
+        symbol='QQQ',
+    ...<2 lines>...
+        end_date='20260410'
+    )
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\akshare\fund\fund_etf_em.py", line 277, in fund_etf_hist_em
+    r = requests.get(url, timeout=15, params=params)
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\blakehao\AppData\Local\Programs\Python\Python313\Lib\site-packages\requests\adapters.py", line 659, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Fetching QQQ data via akshare...
+Python: 3.13.12 (tags/v3.13.12:1cbe481, Feb  3 2026, 18:22:25) [MSC v.1944 64 bit (AMD64)]
+ERROR: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Fetching QQQ via akshare (retry until success)...
+Will retry every 5 min for up to 2 hours...
+
+[Attempt 1] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 2] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 3] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 4] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 5] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 6] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 7] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 8] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 9] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 10] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 11] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 12] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 13] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 14] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 15] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 16] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 17] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 18] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 19] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 20] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 21] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 22] Trying akshare fund_etf_hist_em...
+  Error: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+  Waiting 5 min before retry...
+
+[Attempt 23] Trying akshare fund_etf_hist_em...
+  SUCCESS: 1167 rows!
+  Columns: ['日期', '开盘', '收盘', '最高', '最低', '成交量', '成交额', '振幅', '涨跌幅', '涨跌额', '换手率']
+  Final: 1167 rows, 2021-06-17 00:00:00 to 2026-04-10 00:00:00
+        Date    Open    High     Low   Close  Volume
+0 2021-06-17  107.20  109.89  104.30  104.49  844442
+1 2021-06-18  104.51  104.85  103.75  104.30  129274
+SAVED: C:/Users/blakehao/.qclaw/workspace/backtest_data/QQQ.csv
+Email sent!
+DONE!

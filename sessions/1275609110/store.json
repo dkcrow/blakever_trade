@@ -1,0 +1,25 @@
+{
+  "id": "1275609110",
+  "name": "会话摘要",
+  "status": "active",
+  "createdAt": "2026-04-30T14:38:25.283Z",
+  "updatedAt": "2026-05-08T09:58:06.640Z",
+  "agents": [
+    {
+      "id": "agent_dfwukf15",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-30T14:38:25.283Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_m6pvqy7b",
+    "title": "会话摘要",
+    "createdAt": "2026-04-30T14:38:25.283Z",
+    "file": "summary_m6pvqy7b.md"
+  },
+  "lastMessageCount": 39
+}

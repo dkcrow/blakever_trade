@@ -1,0 +1,25 @@
+{
+  "id": "b026c52e-47a9-4e86-bcb7-28fdac94a41b",
+  "name": "A股每日模拟盘",
+  "status": "active",
+  "createdAt": "2026-04-30T23:05:15.603Z",
+  "updatedAt": "2026-05-01T23:03:09.991Z",
+  "agents": [
+    {
+      "id": "agent_qdrvqvnn",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-30T23:05:15.603Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_8d1vximy",
+    "title": "A股每日模拟盘",
+    "createdAt": "2026-04-30T23:05:15.603Z",
+    "file": "summary_8d1vximy.md"
+  },
+  "lastMessageCount": 14
+}

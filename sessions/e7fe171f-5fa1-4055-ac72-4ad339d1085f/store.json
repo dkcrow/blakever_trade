@@ -1,0 +1,25 @@
+{
+  "id": "e7fe171f-5fa1-4055-ac72-4ad339d1085f",
+  "name": "穿越牛熊调度",
+  "status": "active",
+  "createdAt": "2026-04-30T09:49:38.913Z",
+  "updatedAt": "2026-05-08T10:07:19.544Z",
+  "agents": [
+    {
+      "id": "agent_hwd6ljbr",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-30T09:49:38.913Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_ygw8jw66",
+    "title": "穿越牛熊调度",
+    "createdAt": "2026-04-30T09:49:38.913Z",
+    "file": "summary_ygw8jw66.md"
+  },
+  "lastMessageCount": 22
+}

@@ -1,0 +1,25 @@
+{
+  "id": "208bcf6f-83d6-4551-9a57-8ce90266bec9",
+  "name": "Marcus周报生成",
+  "status": "active",
+  "createdAt": "2026-04-17T00:06:30.720Z",
+  "updatedAt": "2026-04-24T00:09:11.666Z",
+  "agents": [
+    {
+      "id": "agent_od2v8n43",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-17T00:06:30.720Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_obgsgcag",
+    "title": "Marcus周报生成",
+    "createdAt": "2026-04-17T00:06:30.720Z",
+    "file": "summary_obgsgcag.md"
+  },
+  "lastMessageCount": 25
+}

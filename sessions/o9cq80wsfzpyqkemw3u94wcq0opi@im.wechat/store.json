@@ -1,0 +1,25 @@
+{
+  "id": "o9cq80wsfzpyqkemw3u94wcq0opi@im.wechat",
+  "name": "GitHub推送",
+  "status": "active",
+  "createdAt": "2026-04-29T11:09:52.521Z",
+  "updatedAt": "2026-05-18T14:01:48.541Z",
+  "agents": [
+    {
+      "id": "agent_ojeh3zjs",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-29T11:09:52.521Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_c1c63n99",
+    "title": "GitHub推送",
+    "createdAt": "2026-04-29T11:09:52.521Z",
+    "file": "summary_c1c63n99.md"
+  },
+  "lastMessageCount": 59
+}

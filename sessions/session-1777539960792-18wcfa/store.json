@@ -1,0 +1,25 @@
+{
+  "id": "session-1777539960792-18wcfa",
+  "name": "量化工程分析",
+  "status": "active",
+  "createdAt": "2026-04-30T09:09:46.637Z",
+  "updatedAt": "2026-04-30T09:09:46.638Z",
+  "agents": [
+    {
+      "id": "agent_wubk3wkt",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-04-30T09:09:46.637Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_jxokpc8d",
+    "title": "量化工程分析",
+    "createdAt": "2026-04-30T09:09:46.638Z",
+    "file": "summary_jxokpc8d.md"
+  },
+  "lastMessageCount": 40
+}
