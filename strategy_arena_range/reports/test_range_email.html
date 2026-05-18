@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<style>
+  body { margin:0; padding:0; background:#f0f2f5; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; -webkit-text-size-adjust:100%; }
+  .container { max-width:600px; margin:0 auto; padding:12px; }
+  .header { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); padding:28px 24px; border-radius:12px 12px 0 0; text-align:center; }
+  .header h1 { color:#fff; margin:0; font-size:20px; letter-spacing:1px; }
+  .header p { color:rgba(255,255,255,0.8); margin:8px 0 0; font-size:12px; }
+  .stats { background:#fff; padding:16px 20px; border-bottom:1px solid #eee; }
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .stat-item { padding:8px 10px; background:#f8f9fa; border-radius:8px; }
+  .stat-label { font-size:11px; color:#999; display:block; }
+  .stat-value { font-size:16px; font-weight:700; color:#2c3e50; }
+  .stat-value.red { color:#e74c3c; }
+  .stat-value.green { color:#27ae60; }
+  .section-title { font-size:16px; font-weight:700; color:#2c3e50; margin:20px 0 12px; padding-left:4px; border-left:4px solid #764ba2; }
+  .card { background:#fff; border-radius:10px; margin:10px 0; box-shadow:0 1px 4px rgba(0,0,0,0.08); overflow:hidden; }
+  .card-header { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; }
+  .card-header .rank { font-size:24px; font-weight:800; min-width:36px; }
+  .card-header .rank.r1 { color:#FFD700; }
+  .card-header .rank.r2 { color:#C0C0C0; }
+  .card-header .rank.r3 { color:#CD7F32; }
+  .card-header .rank.r4,.card-header .rank.r5 { color:#7f8c8d; }
+  .card-header .name { font-size:15px; font-weight:600; color:#2c3e50; flex:1; margin-left:10px; }
+  .card-header .market { font-size:11px; padding:2px 8px; border-radius:10px; background:#e8f4fd; color:#2980b9; font-weight:600; }
+  .card-header .market.hk { background:#fef3e2; color:#e67e22; }
+  .card-header .score { font-size:20px; font-weight:800; color:#764ba2; }
+  .card-body { padding:0 16px 14px; }
+  .metric-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+  .metric { text-align:center; padding:6px 4px; background:#f8f9fa; border-radius:6px; }
+  .metric .label { font-size:10px; color:#999; display:block; }
+  .metric .value { font-size:13px; font-weight:700; color:#2c3e50; }
+  .metric .value.good { color:#27ae60; }
+  .metric .value.bad { color:#e74c3c; }
+  .tag { display:inline-block; font-size:10px; padding:2px 6px; border-radius:8px; margin:1px 2px; }
+  .tag.compat { background:#d4edda; color:#155724; }
+  .tag.risk { background:#f8d7da; color:#721c24; }
+  .tag.type { background:#e2e3f1; color:#4a4a8a; }
+  .tag.stop { background:#fff3cd; color:#856404; }
+  .rejected-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .rejected-table th { background:#34495e; color:#fff; padding:8px 6px; text-align:left; font-size:11px; }
+  .rejected-table td { padding:6px; border-bottom:1px solid #eee; color:#555; }
+  .rejected-table tr:nth-child(even) { background:#f8f9fa; }
+  .all-table { width:100%; border-collapse:collapse; font-size:11px; }
+  .all-table th { background:#2c3e50; color:#fff; padding:6px 4px; text-align:left; font-size:10px; }
+  .all-table td { padding:5px 4px; border-bottom:1px solid #eee; color:#555; font-size:11px; }
+  .all-table tr:nth-child(even) { background:#f9fafb; }
+  .footer { text-align:center; padding:16px; color:#aaa; font-size:10px; }
+</style></head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📊 震荡市策略回测定时扫描报告</h1>
+    <p>Strategy Arena Range · Oscillating Market Backtest</p>
+  </div>
+  <div class="stats">
+  <div style="font-size:12px;color:#999;margin-bottom:8px;">🕐 2026-04-22 08:00:00</div>
+  <div class="stat-grid"><div class="stat-item"><span class="stat-label">发现策略</span><span class="stat-value">10</span></div><div class="stat-item"><span class="stat-label">Pine否决</span><span class="stat-value red">0</span></div><div class="stat-item"><span class="stat-label">去重新策略</span><span class="stat-value green">10</span></div><div class="stat-item"><span class="stat-label">回测通过</span><span class="stat-value green">10</span></div><div class="stat-item"><span class="stat-label">废弃累计</span><span class="stat-value red">10</span></div><div class="stat-item"><span class="stat-label">耗时</span><span class="stat-value">200秒</span></div></div>
+</div>
+  <div class="section-title">🏆 历史前五排行榜</div>
+  
+  <div class="section-title">📊 全部策略回测数据</div>
+  
+  <div class="section-title">🗑️ 废弃策略库（最近10个）</div>
+  <div class="card" style="overflow-x:auto;">
+<table class="rejected-table">
+<thead><tr><th>#</th><th>策略</th><th>市场</th><th>得分</th><th>回撤</th><th>废弃原因</th></tr></thead>
+<tbody><tr>
+  <td>1</td>
+  <td>布林带均值回归策略</td>
+  <td>US</td>
+  <td>51.31</td>
+  <td>10.0%</td>
+  <td>年化1.65%<10%; 得分51.31<75</td>
+</tr><tr>
+  <td>2</td>
+  <td>RSI区间交易策略</td>
+  <td>US</td>
+  <td>48.65</td>
+  <td>20.3%</td>
+  <td>最大回撤20.3%≥15%</td>
+</tr><tr>
+  <td>3</td>
+  <td>Keltner通道挤压突破策略</td>
+  <td>US</td>
+  <td>15.0</td>
+  <td>7.8%</td>
+  <td>年化-1.48%<10%; 得分15.0<75</td>
+</tr><tr>
+  <td>4</td>
+  <td>网格交易策略(简化版)</td>
+  <td>US</td>
+  <td>13.88</td>
+  <td>33.3%</td>
+  <td>最大回撤33.3%≥15%</td>
+</tr><tr>
+  <td>5</td>
+  <td>配对交易均值回归策略</td>
+  <td>US</td>
+  <td>28.16</td>
+  <td>25.1%</td>
+  <td>最大回撤25.1%≥15%</td>
+</tr><tr>
+  <td>6</td>
+  <td>支撑阻力区间交易策略</td>
+  <td>US</td>
+  <td>20.96</td>
+  <td>20.4%</td>
+  <td>最大回撤20.4%≥15%</td>
+</tr><tr>
+  <td>7</td>
+  <td>MACD柱状图反转策略</td>
+  <td>US</td>
+  <td>33.32</td>
+  <td>34.7%</td>
+  <td>最大回撤34.7%≥15%</td>
+</tr><tr>
+  <td>8</td>
+  <td>Donchian通道回归策略</td>
+  <td>US</td>
+  <td>35.94</td>
+  <td>20.4%</td>
+  <td>最大回撤20.4%≥15%</td>
+</tr><tr>
+  <td>9</td>
+  <td>波动率收缩-扩张轮动策略</td>
+  <td>US</td>
+  <td>30.36</td>
+  <td>26.9%</td>
+  <td>最大回撤26.9%≥15%</td>
+</tr><tr>
+  <td>10</td>
+  <td>双均线乖离回归策略</td>
+  <td>US</td>
+  <td>18.64</td>
+  <td>3.5%</td>
+  <td>年化-1.22%<10%; 得分18.64<75</td>
+</tr></tbody>
+</table></div>
+  <div class="footer">Blakever Quant System · Auto-generated Report</div>
+</div>
+</body></html>

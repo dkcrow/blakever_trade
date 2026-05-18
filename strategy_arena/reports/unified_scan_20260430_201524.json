@@ -1,0 +1,54 @@
+{
+  "scan_time": "2026-04-30 20:15:24",
+  "duration_seconds": 610.63116,
+  "results": {
+    "bull": {
+      "us": {
+        "success": false,
+        "total_found": 38,
+        "new_after_dedup": 38,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      },
+      "hk": {
+        "success": false,
+        "total_found": 36,
+        "new_after_dedup": 36,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      }
+    },
+    "range": {
+      "us": {
+        "success": false,
+        "total_found": 0,
+        "new_after_dedup": 0,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      },
+      "hk": {
+        "success": false,
+        "total_found": 0,
+        "new_after_dedup": 0,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      }
+    },
+    "bear": {
+      "us": {
+        "success": false,
+        "total_found": 26,
+        "new_after_dedup": 5,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      },
+      "hk": {
+        "success": false,
+        "total_found": 26,
+        "new_after_dedup": 5,
+        "backtest_passed": 0,
+        "total_rejected_in_db": 0
+      }
+    }
+  }
+}

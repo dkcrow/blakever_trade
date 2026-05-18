@@ -1,0 +1,1913 @@
+======================================================================
+批量下载选股池行情数据（近10年日线）
+======================================================================
+时间范围：2016-04-19 ~ 2026-04-19
+港股数量：103
+美股数量：481
+输出目录：/data/workspace/back_trader_stocks/hk/ 和 us/
+======================================================================
+
+### 第一步：下载港股数据 (103只) ###
+
+[1/103] hk00700
+  [SKIP] hk00700 exists (2075 rows)
+[2/100] hk01211
+  [SKIP] hk01211 exists (2075 rows)
+[3/100] hk00981
+  [SKIP] hk00981 exists (2075 rows)
+[4/100] hk00992
+  [SKIP] hk00992 exists (2075 rows)
+[5/99] hk01347
+  [SKIP] hk01347 exists (2075 rows)
+[6/98] hk02382
+  [SKIP] hk02382 exists (2075 rows)
+[7/98] hk03888
+  [SKIP] hk03888 exists (2075 rows)
+[8/86] hk00241
+  [SKIP] hk00241 exists (2075 rows)
+[9/86] hk00268
+  [SKIP] hk00268 exists (2075 rows)
+[10/86] hk00285
+  [SKIP] hk00285 exists (2075 rows)
+[11/83] hk00001
+  [SKIP] hk00001 exists (2075 rows)
+[12/83] hk00002
+  [SKIP] hk00002 exists (2075 rows)
+[13/83] hk00003
+  [SKIP] hk00003 exists (2075 rows)
+[14/83] hk00005
+  [SKIP] hk00005 exists (2075 rows)
+[15/83] hk00006
+  [SKIP] hk00006 exists (2075 rows)
+[16/83] hk00011
+  [SKIP] hk00011 exists (2074 rows)
+[17/83] hk00012
+  [SKIP] hk00012 exists (2075 rows)
+[18/83] hk00016
+  [SKIP] hk00016 exists (2075 rows)
+[19/83] hk00027
+  [SKIP] hk00027 exists (2075 rows)
+[20/83] hk00066
+  [SKIP] hk00066 exists (2075 rows)
+[21/83] hk00101
+  [SKIP] hk00101 exists (2075 rows)
+[22/83] hk00175
+  [SKIP] hk00175 exists (2075 rows)
+[23/83] hk00267
+  [SKIP] hk00267 exists (2075 rows)
+[24/83] hk00288
+  [SKIP] hk00288 exists (2075 rows)
+[25/83] hk00291
+  [SKIP] hk00291 exists (2075 rows)
+[26/83] hk00316
+  [SKIP] hk00316 exists (2075 rows)
+[27/83] hk00322
+  [SKIP] hk00322 exists (2075 rows)
+[28/83] hk00386
+  [SKIP] hk00386 exists (2075 rows)
+[29/83] hk00388
+  [SKIP] hk00388 exists (2075 rows)
+[30/83] hk00669
+  [SKIP] hk00669 exists (2075 rows)
+[31/83] hk00688
+  [SKIP] hk00688 exists (2075 rows)
+[32/83] hk00728
+  [SKIP] hk00728 exists (2075 rows)
+[33/83] hk00762
+  [SKIP] hk00762 exists (2075 rows)
+[34/83] hk00823
+  [OK] hk00823 batch1: 0 rows
+  [FAIL] hk00823 no data obtained
+[35/83] hk00836
+  [SKIP] hk00836 exists (2075 rows)
+[36/83] hk00857
+  [SKIP] hk00857 exists (2075 rows)
+[37/83] hk00868
+  [SKIP] hk00868 exists (2075 rows)
+[38/83] hk00881
+  [SKIP] hk00881 exists (2075 rows)
+[39/83] hk00883
+  [SKIP] hk00883 exists (2075 rows)
+[40/83] hk00939
+  [SKIP] hk00939 exists (2075 rows)
+[41/83] hk00941
+  [SKIP] hk00941 exists (2075 rows)
+[42/83] hk00960
+  [SKIP] hk00960 exists (2075 rows)
+[43/83] hk00968
+  [SKIP] hk00968 exists (2075 rows)
+[44/83] hk01038
+  [SKIP] hk01038 exists (2075 rows)
+[45/83] hk01044
+  [SKIP] hk01044 exists (2075 rows)
+[46/83] hk01088
+  [SKIP] hk01088 exists (2075 rows)
+[47/83] hk01093
+  [SKIP] hk01093 exists (2075 rows)
+[48/83] hk01099
+  [SKIP] hk01099 exists (2075 rows)
+[49/83] hk01109
+  [SKIP] hk01109 exists (2075 rows)
+[50/83] hk01113
+  [SKIP] hk01113 exists (2075 rows)
+[51/83] hk01177
+  [SKIP] hk01177 exists (2075 rows)
+[52/82] hk01299
+  [SKIP] hk01299 exists (2075 rows)
+[53/82] hk01378
+  [SKIP] hk01378 exists (2075 rows)
+[54/82] hk01398
+  [SKIP] hk01398 exists (2075 rows)
+[55/80] hk01928
+  [SKIP] hk01928 exists (2075 rows)
+[56/80] hk01929
+  [SKIP] hk01929 exists (2075 rows)
+[57/80] hk01997
+  [SKIP] hk01997 exists (2014 rows)
+[58/80] hk02020
+  [SKIP] hk02020 exists (2075 rows)
+[59/79] hk02269
+  [SKIP] hk02269 exists (2037 rows)
+[60/79] hk02313
+  [SKIP] hk02313 exists (2075 rows)
+[61/79] hk02318
+  [SKIP] hk02318 exists (2075 rows)
+[62/79] hk02319
+  [SKIP] hk02319 exists (2075 rows)
+[63/79] hk02331
+  [SKIP] hk02331 exists (2075 rows)
+[64/78] hk02382
+  [SKIP] hk02382 exists (2075 rows)
+[65/78] hk02388
+  [SKIP] hk02388 exists (2075 rows)
+[66/77] hk02628
+  [SKIP] hk02628 exists (2075 rows)
+[67/77] hk02688
+  [SKIP] hk02688 exists (2073 rows)
+[68/77] hk02899
+  [SKIP] hk02899 exists (2075 rows)
+[69/75] hk03968
+  [SKIP] hk03968 exists (2075 rows)
+[70/75] hk03988
+  [SKIP] hk03988 exists (2075 rows)
+[71/75] hk03993
+  [SKIP] hk03993 exists (2075 rows)
+
+港股结果：成功 70，跳过 32，失败 1
+失败标的：['hk00823']
+
+### 第二步：下载美股数据 (481只) ###
+
+[1/481] AAPL
+  [SKIP] AAPL exists (2514 rows)
+[2/480] ADBE
+  [SKIP] ADBE exists (2514 rows)
+[3/480] ADI
+  [SKIP] ADI exists (2514 rows)
+[4/480] ADP
+  [SKIP] ADP exists (2514 rows)
+[5/480] ADSK
+  [SKIP] ADSK exists (2514 rows)
+[6/480] AEP
+  [SKIP] AEP exists (2514 rows)
+[7/480] ALNY
+  [SKIP] ALNY exists (2514 rows)
+[8/480] AMAT
+  [SKIP] AMAT exists (2514 rows)
+[9/480] AMD
+  [SKIP] AMD exists (2514 rows)
+[10/480] AMGN
+  [SKIP] AMGN exists (2514 rows)
+[11/480] AMZN
+  [SKIP] AMZN exists (2514 rows)
+[12/478] ASML
+  [SKIP] ASML exists (2514 rows)
+[13/478] AVGO
+  [SKIP] AVGO exists (2514 rows)
+[14/478] AXON
+  [SKIP] AXON exists (2514 rows)
+[15/478] BKR
+  [SKIP] BKR exists (2514 rows)
+[16/478] BKNG
+  [SKIP] BKNG exists (2514 rows)
+[17/478] CCEP
+  [SKIP] CCEP exists (2514 rows)
+[18/478] CDNS
+  [SKIP] CDNS exists (2514 rows)
+[19/477] CHTR
+  [SKIP] CHTR exists (2514 rows)
+[20/477] CMCSA
+  [SKIP] CMCSA exists (2514 rows)
+[21/477] COST
+  [SKIP] COST exists (2514 rows)
+[22/477] CPRT
+  [SKIP] CPRT exists (2514 rows)
+[23/476] CSX
+  [SKIP] CSX exists (2514 rows)
+[24/476] CTAS
+  [SKIP] CTAS exists (2514 rows)
+[25/476] CTSH
+  [SKIP] CTSH exists (2514 rows)
+[26/474] DXCM
+  [SKIP] DXCM exists (2514 rows)
+[27/474] EA
+  [SKIP] EA exists (2514 rows)
+[28/474] EXC
+  [SKIP] EXC exists (2514 rows)
+[29/474] FAST
+  [SKIP] FAST exists (2514 rows)
+[30/474] FER
+  [SKIP] FER exists (2514 rows)
+[31/474] FTNT
+  [SKIP] FTNT exists (2514 rows)
+[32/474] FANG
+  [SKIP] FANG exists (2514 rows)
+[33/473] GILD
+  [SKIP] GILD exists (2514 rows)
+[34/473] HON
+  [SKIP] HON exists (2514 rows)
+[35/473] IDXX
+  [SKIP] IDXX exists (2514 rows)
+[36/473] INSM
+  [SKIP] INSM exists (2514 rows)
+[37/473] INTC
+  [SKIP] INTC exists (2514 rows)
+[38/473] INTU
+  [SKIP] INTU exists (2514 rows)
+[39/473] ISRG
+  [SKIP] ISRG exists (2514 rows)
+[40/473] KDP
+  [SKIP] KDP exists (2514 rows)
+[41/473] KHC
+  [SKIP] KHC exists (2514 rows)
+[42/473] KLAC
+  [SKIP] KLAC exists (2514 rows)
+[43/473] LIN
+  [SKIP] LIN exists (2514 rows)
+[44/473] LRCX
+  [SKIP] LRCX exists (2514 rows)
+[45/473] MAR
+  [SKIP] MAR exists (2514 rows)
+[46/473] MDLZ
+  [SKIP] MDLZ exists (2514 rows)
+[47/473] MCHP
+  [SKIP] MCHP exists (2514 rows)
+[48/473] MELI
+  [SKIP] MELI exists (2514 rows)
+[49/473] MNST
+  [SKIP] MNST exists (2514 rows)
+[50/473] MPWR
+  [SKIP] MPWR exists (2514 rows)
+[51/473] MRVL
+  [SKIP] MRVL exists (2514 rows)
+[52/473] MU
+  [SKIP] MU exists (2514 rows)
+[53/473] MSTR
+  [SKIP] MSTR exists (2514 rows)
+[54/473] NFLX
+  [SKIP] NFLX exists (2514 rows)
+[55/473] NXPI
+  [SKIP] NXPI exists (2514 rows)
+[56/473] ODFL
+  [SKIP] ODFL exists (2514 rows)
+[57/473] ORLY
+  [SKIP] ORLY exists (2514 rows)
+[58/473] PANW
+  [SKIP] PANW exists (2514 rows)
+[59/473] PAYX
+  [SKIP] PAYX exists (2514 rows)
+[60/473] PCAR
+  [SKIP] PCAR exists (2514 rows)
+[61/472] PEP
+  [SKIP] PEP exists (2084 rows)
+[62/471] PYPL
+  [SKIP] PYPL exists (2514 rows)
+[63/471] QCOM
+  [SKIP] QCOM exists (2514 rows)
+[64/471] REGN
+  [SKIP] REGN exists (2514 rows)
+[65/471] ROP
+  [SKIP] ROP exists (2514 rows)
+[66/471] ROST
+  [SKIP] ROST exists (2514 rows)
+[67/471] SBUX
+  [SKIP] SBUX exists (2514 rows)
+[68/471] SHOP
+  [SKIP] SHOP exists (2514 rows)
+[69/471] SNPS
+  [SKIP] SNPS exists (2514 rows)
+[70/471] STX
+  [SKIP] STX exists (2514 rows)
+[71/471] TEAM
+  [SKIP] TEAM exists (2514 rows)
+[72/471] TMUS
+  [SKIP] TMUS exists (2514 rows)
+[73/471] TTWO
+  [SKIP] TTWO exists (2514 rows)
+[74/471] TXN
+  [SKIP] TXN exists (2514 rows)
+[75/471] VRTX
+  [SKIP] VRTX exists (2514 rows)
+[76/471] VRSK
+  [SKIP] VRSK exists (2514 rows)
+[77/471] WDAY
+  [SKIP] WDAY exists (2514 rows)
+[78/471] WDC
+  [SKIP] WDC exists (2084 rows)
+[79/471] WBD
+  [SKIP] WBD exists (1013 rows)
+[80/471] XEL
+  [SKIP] XEL exists (2084 rows)
+[81/471] ZS
+  [SKIP] ZS exists (2007 rows)
+[82/471] A
+  [SKIP] A exists (2084 rows)
+[83/471] AAP
+  [SKIP] AAP exists (2084 rows)
+[84/471] ABBV
+  [SKIP] ABBV exists (2084 rows)
+[85/471] ABC
+  [OK] ABC westock-data: 0 rows
+  [FALLBACK] ABC trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] ABC yfinance also failed, using westock data (0 rows)
+  [FAIL] ABC no data obtained
+[86/471] ABT
+  [OK] ABT westock-data: 2000 rows
+  [OK] ABT weekly supplement: 84 rows
+  [SAVE] ABT -> /data/workspace/back_trader_stocks/us/ABT.csv (2084 rows total)
+[87/471] ACGL
+  [OK] ACGL westock-data: 2000 rows
+  [OK] ACGL weekly supplement: 84 rows
+  [SAVE] ACGL -> /data/workspace/back_trader_stocks/us/ACGL.csv (2084 rows total)
+[88/471] ACN
+  [OK] ACN westock-data: 2000 rows
+  [OK] ACN weekly supplement: 84 rows
+  [SAVE] ACN -> /data/workspace/back_trader_stocks/us/ACN.csv (2084 rows total)
+[89/471] ADM
+  [OK] ADM westock-data: 2000 rows
+  [OK] ADM weekly supplement: 84 rows
+  [SAVE] ADM -> /data/workspace/back_trader_stocks/us/ADM.csv (2084 rows total)
+[90/471] ADS
+  [OK] ADS westock-data: 0 rows
+  [FALLBACK] ADS trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] ADS yfinance also failed, using westock data (0 rows)
+  [FAIL] ADS no data obtained
+[91/471] AEE
+  [OK] AEE westock-data: 2000 rows
+  [OK] AEE weekly supplement: 84 rows
+  [SAVE] AEE -> /data/workspace/back_trader_stocks/us/AEE.csv (2084 rows total)
+[92/471] AFL
+  [OK] AFL westock-data: 2000 rows
+  [OK] AFL weekly supplement: 84 rows
+  [SAVE] AFL -> /data/workspace/back_trader_stocks/us/AFL.csv (2084 rows total)
+[93/471] AIG
+  [OK] AIG westock-data: 2000 rows
+  [OK] AIG weekly supplement: 84 rows
+  [SAVE] AIG -> /data/workspace/back_trader_stocks/us/AIG.csv (2084 rows total)
+[94/471] AJG
+  [OK] AJG westock-data: 2000 rows
+  [OK] AJG weekly supplement: 84 rows
+  [SAVE] AJG -> /data/workspace/back_trader_stocks/us/AJG.csv (2084 rows total)
+[95/471] AKAM
+  [OK] AKAM westock-data: 2000 rows
+  [OK] AKAM weekly supplement: 84 rows
+  [SAVE] AKAM -> /data/workspace/back_trader_stocks/us/AKAM.csv (2084 rows total)
+[96/471] ALB
+  [OK] ALB westock-data: 2000 rows
+  [OK] ALB weekly supplement: 84 rows
+  [SAVE] ALB -> /data/workspace/back_trader_stocks/us/ALB.csv (2084 rows total)
+[97/471] ALGN
+  [OK] ALGN westock-data: 2000 rows
+  [OK] ALGN weekly supplement: 84 rows
+  [SAVE] ALGN -> /data/workspace/back_trader_stocks/us/ALGN.csv (2084 rows total)
+[98/471] ALLE
+  [OK] ALLE westock-data: 2000 rows
+  [OK] ALLE weekly supplement: 84 rows
+  [SAVE] ALLE -> /data/workspace/back_trader_stocks/us/ALLE.csv (2084 rows total)
+[99/471] ALL
+  [OK] ALL westock-data: 2000 rows
+  [OK] ALL weekly supplement: 84 rows
+  [SAVE] ALL -> /data/workspace/back_trader_stocks/us/ALL.csv (2084 rows total)
+[100/471] AMCR
+  [OK] AMCR westock-data: 1723 rows
+  [SAVE] AMCR -> /data/workspace/back_trader_stocks/us/AMCR.csv (1723 rows total)
+[101/471] AME
+  [OK] AME westock-data: 2000 rows
+  [OK] AME weekly supplement: 84 rows
+  [SAVE] AME -> /data/workspace/back_trader_stocks/us/AME.csv (2084 rows total)
+[102/471] AMT
+  [OK] AMT westock-data: 2000 rows
+  [OK] AMT weekly supplement: 84 rows
+  [SAVE] AMT -> /data/workspace/back_trader_stocks/us/AMT.csv (2084 rows total)
+[103/471] AMP
+  [OK] AMP westock-data: 2000 rows
+  [OK] AMP weekly supplement: 84 rows
+  [SAVE] AMP -> /data/workspace/back_trader_stocks/us/AMP.csv (2084 rows total)
+[104/471] ANET
+  [OK] ANET westock-data: 2000 rows
+  [OK] ANET weekly supplement: 84 rows
+  [SAVE] ANET -> /data/workspace/back_trader_stocks/us/ANET.csv (2084 rows total)
+[105/471] ANSS
+  [OK] ANSS westock-data: 0 rows
+  [FALLBACK] ANSS trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] ANSS yfinance also failed, using westock data (0 rows)
+  [FAIL] ANSS no data obtained
+[106/471] AON
+  [OK] AON westock-data: 2000 rows
+  [OK] AON weekly supplement: 84 rows
+  [SAVE] AON -> /data/workspace/back_trader_stocks/us/AON.csv (2084 rows total)
+[107/471] AOS
+  [OK] AOS westock-data: 2000 rows
+  [OK] AOS weekly supplement: 84 rows
+  [SAVE] AOS -> /data/workspace/back_trader_stocks/us/AOS.csv (2084 rows total)
+[108/471] APO
+  [OK] APO westock-data: 2000 rows
+  [OK] APO weekly supplement: 84 rows
+  [SAVE] APO -> /data/workspace/back_trader_stocks/us/APO.csv (2084 rows total)
+[109/471] APA
+  [OK] APA westock-data: 2000 rows
+  [OK] APA weekly supplement: 84 rows
+  [SAVE] APA -> /data/workspace/back_trader_stocks/us/APA.csv (2084 rows total)
+[110/471] APD
+  [OK] APD westock-data: 2000 rows
+  [OK] APD weekly supplement: 84 rows
+  [SAVE] APD -> /data/workspace/back_trader_stocks/us/APD.csv (2084 rows total)
+[111/471] APH
+  [OK] APH westock-data: 2000 rows
+  [OK] APH weekly supplement: 84 rows
+  [SAVE] APH -> /data/workspace/back_trader_stocks/us/APH.csv (2084 rows total)
+[112/471] APT
+  [OK] APT westock-data: 2000 rows
+  [OK] APT weekly supplement: 84 rows
+  [SAVE] APT -> /data/workspace/back_trader_stocks/us/APT.csv (2084 rows total)
+[113/471] ARES
+  [OK] ARES westock-data: 2000 rows
+  [OK] ARES weekly supplement: 84 rows
+  [SAVE] ARES -> /data/workspace/back_trader_stocks/us/ARES.csv (2084 rows total)
+[114/471] ATO
+  [OK] ATO westock-data: 2000 rows
+  [OK] ATO weekly supplement: 84 rows
+  [SAVE] ATO -> /data/workspace/back_trader_stocks/us/ATO.csv (2084 rows total)
+[115/471] AVB
+  [OK] AVB westock-data: 2000 rows
+  [OK] AVB weekly supplement: 84 rows
+  [SAVE] AVB -> /data/workspace/back_trader_stocks/us/AVB.csv (2084 rows total)
+[116/471] AVY
+  [OK] AVY westock-data: 2000 rows
+  [OK] AVY weekly supplement: 84 rows
+  [SAVE] AVY -> /data/workspace/back_trader_stocks/us/AVY.csv (2084 rows total)
+[117/471] AWK
+  [OK] AWK westock-data: 2000 rows
+  [OK] AWK weekly supplement: 84 rows
+  [SAVE] AWK -> /data/workspace/back_trader_stocks/us/AWK.csv (2084 rows total)
+[118/471] AXP
+  [OK] AXP westock-data: 2000 rows
+  [OK] AXP weekly supplement: 84 rows
+  [SAVE] AXP -> /data/workspace/back_trader_stocks/us/AXP.csv (2084 rows total)
+[119/471] AZO
+  [OK] AZO westock-data: 2000 rows
+  [OK] AZO weekly supplement: 84 rows
+  [SAVE] AZO -> /data/workspace/back_trader_stocks/us/AZO.csv (2084 rows total)
+[120/471] BA
+  [OK] BA westock-data: 2000 rows
+  [OK] BA weekly supplement: 84 rows
+  [SAVE] BA -> /data/workspace/back_trader_stocks/us/BA.csv (2084 rows total)
+[121/471] BAC
+  [OK] BAC westock-data: 2000 rows
+  [OK] BAC weekly supplement: 84 rows
+  [SAVE] BAC -> /data/workspace/back_trader_stocks/us/BAC.csv (2084 rows total)
+[122/471] BALL
+  [OK] BALL westock-data: 2000 rows
+  [OK] BALL weekly supplement: 84 rows
+  [SAVE] BALL -> /data/workspace/back_trader_stocks/us/BALL.csv (2084 rows total)
+[123/471] BAX
+  [OK] BAX westock-data: 2000 rows
+  [OK] BAX weekly supplement: 84 rows
+  [SAVE] BAX -> /data/workspace/back_trader_stocks/us/BAX.csv (2084 rows total)
+[124/471] BBY
+  [OK] BBY westock-data: 2000 rows
+  [OK] BBY weekly supplement: 84 rows
+  [SAVE] BBY -> /data/workspace/back_trader_stocks/us/BBY.csv (2084 rows total)
+[125/471] BDX
+  [OK] BDX westock-data: 2000 rows
+  [OK] BDX weekly supplement: 84 rows
+  [SAVE] BDX -> /data/workspace/back_trader_stocks/us/BDX.csv (2084 rows total)
+[126/471] BEN
+  [OK] BEN westock-data: 2000 rows
+  [OK] BEN weekly supplement: 84 rows
+  [SAVE] BEN -> /data/workspace/back_trader_stocks/us/BEN.csv (2084 rows total)
+[127/471] BF.B
+  [OK] BF.B westock-data: 2000 rows
+  [OK] BF.B weekly supplement: 84 rows
+  [SAVE] BF.B -> /data/workspace/back_trader_stocks/us/BF.B.csv (2084 rows total)
+[128/471] BIIB
+  [OK] BIIB westock-data: 2000 rows
+  [OK] BIIB weekly supplement: 84 rows
+  [SAVE] BIIB -> /data/workspace/back_trader_stocks/us/BIIB.csv (2084 rows total)
+[129/471] BK
+  [OK] BK westock-data: 2000 rows
+  [OK] BK weekly supplement: 84 rows
+  [SAVE] BK -> /data/workspace/back_trader_stocks/us/BK.csv (2084 rows total)
+[130/471] BLK
+  [OK] BLK westock-data: 2000 rows
+  [OK] BLK weekly supplement: 84 rows
+  [SAVE] BLK -> /data/workspace/back_trader_stocks/us/BLK.csv (2084 rows total)
+[131/471] BLDR
+  [OK] BLDR westock-data: 1193 rows
+  [SAVE] BLDR -> /data/workspace/back_trader_stocks/us/BLDR.csv (1193 rows total)
+[132/471] BLL
+  [OK] BLL westock-data: 0 rows
+  [FALLBACK] BLL trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] BLL yfinance also failed, using westock data (0 rows)
+  [FAIL] BLL no data obtained
+[133/471] BMY
+  [OK] BMY westock-data: 2000 rows
+  [OK] BMY weekly supplement: 84 rows
+  [SAVE] BMY -> /data/workspace/back_trader_stocks/us/BMY.csv (2084 rows total)
+[134/471] BR
+  [OK] BR westock-data: 2000 rows
+  [OK] BR weekly supplement: 84 rows
+  [SAVE] BR -> /data/workspace/back_trader_stocks/us/BR.csv (2084 rows total)
+[135/471] BRK.B
+  [OK] BRK.B westock-data: 2000 rows
+  [OK] BRK.B weekly supplement: 84 rows
+  [SAVE] BRK.B -> /data/workspace/back_trader_stocks/us/BRK.B.csv (2084 rows total)
+[136/471] BRO
+  [OK] BRO westock-data: 2000 rows
+  [OK] BRO weekly supplement: 84 rows
+  [SAVE] BRO -> /data/workspace/back_trader_stocks/us/BRO.csv (2084 rows total)
+[137/471] BSX
+  [OK] BSX westock-data: 2000 rows
+  [OK] BSX weekly supplement: 84 rows
+  [SAVE] BSX -> /data/workspace/back_trader_stocks/us/BSX.csv (2084 rows total)
+[138/471] BX
+  [OK] BX westock-data: 2000 rows
+  [OK] BX weekly supplement: 84 rows
+  [SAVE] BX -> /data/workspace/back_trader_stocks/us/BX.csv (2084 rows total)
+[139/471] BXP
+  [OK] BXP westock-data: 2000 rows
+  [OK] BXP weekly supplement: 84 rows
+  [SAVE] BXP -> /data/workspace/back_trader_stocks/us/BXP.csv (2084 rows total)
+[140/471] C
+  [OK] C westock-data: 2000 rows
+  [OK] C weekly supplement: 84 rows
+  [SAVE] C -> /data/workspace/back_trader_stocks/us/C.csv (2084 rows total)
+[141/471] CARR
+  [OK] CARR westock-data: 1517 rows
+  [SAVE] CARR -> /data/workspace/back_trader_stocks/us/CARR.csv (1517 rows total)
+[142/471] CAT
+  [OK] CAT westock-data: 2000 rows
+  [OK] CAT weekly supplement: 84 rows
+  [SAVE] CAT -> /data/workspace/back_trader_stocks/us/CAT.csv (2084 rows total)
+[143/471] CB
+  [OK] CB westock-data: 2000 rows
+  [OK] CB weekly supplement: 84 rows
+  [SAVE] CB -> /data/workspace/back_trader_stocks/us/CB.csv (2084 rows total)
+[144/471] CBRE
+  [OK] CBRE westock-data: 2000 rows
+  [OK] CBRE weekly supplement: 6 rows
+  [SAVE] CBRE -> /data/workspace/back_trader_stocks/us/CBRE.csv (2006 rows total)
+[145/471] CBOE
+  [OK] CBOE westock-data: 2000 rows
+  [OK] CBOE weekly supplement: 84 rows
+  [SAVE] CBOE -> /data/workspace/back_trader_stocks/us/CBOE.csv (2084 rows total)
+[146/471] CCI
+  [OK] CCI westock-data: 2000 rows
+  [OK] CCI weekly supplement: 84 rows
+  [SAVE] CCI -> /data/workspace/back_trader_stocks/us/CCI.csv (2084 rows total)
+[147/471] CCL
+  [OK] CCL westock-data: 2000 rows
+  [OK] CCL weekly supplement: 84 rows
+  [SAVE] CCL -> /data/workspace/back_trader_stocks/us/CCL.csv (2084 rows total)
+[148/471] CDW
+  [OK] CDW westock-data: 2000 rows
+  [OK] CDW weekly supplement: 84 rows
+  [SAVE] CDW -> /data/workspace/back_trader_stocks/us/CDW.csv (2084 rows total)
+[149/471] CE
+  [OK] CE westock-data: 2000 rows
+  [OK] CE weekly supplement: 84 rows
+  [SAVE] CE -> /data/workspace/back_trader_stocks/us/CE.csv (2084 rows total)
+[150/471] CF
+  [OK] CF westock-data: 2000 rows
+  [OK] CF weekly supplement: 84 rows
+  [SAVE] CF -> /data/workspace/back_trader_stocks/us/CF.csv (2084 rows total)
+[151/471] CFG
+  [OK] CFG westock-data: 2000 rows
+  [OK] CFG weekly supplement: 84 rows
+  [SAVE] CFG -> /data/workspace/back_trader_stocks/us/CFG.csv (2084 rows total)
+[152/471] CHD
+  [OK] CHD westock-data: 2000 rows
+  [OK] CHD weekly supplement: 84 rows
+  [SAVE] CHD -> /data/workspace/back_trader_stocks/us/CHD.csv (2084 rows total)
+[153/471] CHRW
+  [OK] CHRW westock-data: 2000 rows
+  [OK] CHRW weekly supplement: 84 rows
+  [SAVE] CHRW -> /data/workspace/back_trader_stocks/us/CHRW.csv (2084 rows total)
+[154/471] CI
+  [OK] CI westock-data: 2000 rows
+  [OK] CI weekly supplement: 84 rows
+  [SAVE] CI -> /data/workspace/back_trader_stocks/us/CI.csv (2084 rows total)
+[155/471] CINF
+  [OK] CINF westock-data: 2000 rows
+  [OK] CINF weekly supplement: 84 rows
+  [SAVE] CINF -> /data/workspace/back_trader_stocks/us/CINF.csv (2084 rows total)
+[156/471] CIEN
+  [OK] CIEN westock-data: 2000 rows
+  [OK] CIEN weekly supplement: 84 rows
+  [SAVE] CIEN -> /data/workspace/back_trader_stocks/us/CIEN.csv (2084 rows total)
+[157/471] CL
+  [OK] CL westock-data: 2000 rows
+  [OK] CL weekly supplement: 84 rows
+  [SAVE] CL -> /data/workspace/back_trader_stocks/us/CL.csv (2084 rows total)
+[158/471] CLX
+  [OK] CLX westock-data: 2000 rows
+  [OK] CLX weekly supplement: 84 rows
+  [SAVE] CLX -> /data/workspace/back_trader_stocks/us/CLX.csv (2084 rows total)
+[159/471] CME
+  [OK] CME westock-data: 2000 rows
+  [OK] CME weekly supplement: 84 rows
+  [SAVE] CME -> /data/workspace/back_trader_stocks/us/CME.csv (2084 rows total)
+[160/471] CMG
+  [OK] CMG westock-data: 2000 rows
+  [OK] CMG weekly supplement: 84 rows
+  [SAVE] CMG -> /data/workspace/back_trader_stocks/us/CMG.csv (2084 rows total)
+[161/471] CMI
+  [OK] CMI westock-data: 2000 rows
+  [OK] CMI weekly supplement: 84 rows
+  [SAVE] CMI -> /data/workspace/back_trader_stocks/us/CMI.csv (2084 rows total)
+[162/471] CMS
+  [OK] CMS westock-data: 2000 rows
+  [OK] CMS weekly supplement: 84 rows
+  [SAVE] CMS -> /data/workspace/back_trader_stocks/us/CMS.csv (2084 rows total)
+[163/471] CNC
+  [OK] CNC westock-data: 2000 rows
+  [OK] CNC weekly supplement: 84 rows
+  [SAVE] CNC -> /data/workspace/back_trader_stocks/us/CNC.csv (2084 rows total)
+[164/471] CNP
+  [OK] CNP westock-data: 2000 rows
+  [OK] CNP weekly supplement: 84 rows
+  [SAVE] CNP -> /data/workspace/back_trader_stocks/us/CNP.csv (2084 rows total)
+[165/471] COF
+  [OK] COF westock-data: 2000 rows
+  [OK] COF weekly supplement: 84 rows
+  [SAVE] COF -> /data/workspace/back_trader_stocks/us/COF.csv (2084 rows total)
+[166/471] COIN
+  [OK] COIN westock-data: 1259 rows
+  [SAVE] COIN -> /data/workspace/back_trader_stocks/us/COIN.csv (1259 rows total)
+[167/471] COO
+  [OK] COO westock-data: 2000 rows
+  [OK] COO weekly supplement: 84 rows
+  [SAVE] COO -> /data/workspace/back_trader_stocks/us/COO.csv (2084 rows total)
+[168/471] COP
+  [OK] COP westock-data: 2000 rows
+  [OK] COP weekly supplement: 84 rows
+  [SAVE] COP -> /data/workspace/back_trader_stocks/us/COP.csv (2084 rows total)
+[169/471] COR
+  [OK] COR westock-data: 660 rows
+  [SAVE] COR -> /data/workspace/back_trader_stocks/us/COR.csv (660 rows total)
+[170/471] COTY
+  [OK] COTY westock-data: 2000 rows
+  [OK] COTY weekly supplement: 84 rows
+  [SAVE] COTY -> /data/workspace/back_trader_stocks/us/COTY.csv (2084 rows total)
+[171/471] CPAY
+  [OK] CPAY westock-data: 2000 rows
+  [OK] CPAY weekly supplement: 84 rows
+  [SAVE] CPAY -> /data/workspace/back_trader_stocks/us/CPAY.csv (2084 rows total)
+[172/471] CPB
+  [OK] CPB westock-data: 2000 rows
+  [OK] CPB weekly supplement: 84 rows
+  [SAVE] CPB -> /data/workspace/back_trader_stocks/us/CPB.csv (2084 rows total)
+[173/471] CRM
+  [OK] CRM westock-data: 2000 rows
+  [OK] CRM weekly supplement: 84 rows
+  [SAVE] CRM -> /data/workspace/back_trader_stocks/us/CRM.csv (2084 rows total)
+[174/471] CRH
+  [OK] CRH westock-data: 643 rows
+  [SAVE] CRH -> /data/workspace/back_trader_stocks/us/CRH.csv (643 rows total)
+[175/471] CROX
+  [OK] CROX westock-data: 2000 rows
+  [OK] CROX weekly supplement: 84 rows
+  [SAVE] CROX -> /data/workspace/back_trader_stocks/us/CROX.csv (2084 rows total)
+[176/471] CTVA
+  [OK] CTVA westock-data: 1729 rows
+  [SAVE] CTVA -> /data/workspace/back_trader_stocks/us/CTVA.csv (1729 rows total)
+[177/471] CTRA
+  [OK] CTRA westock-data: 1701 rows
+  [SAVE] CTRA -> /data/workspace/back_trader_stocks/us/CTRA.csv (1701 rows total)
+[178/471] CVS
+  [OK] CVS westock-data: 2000 rows
+  [OK] CVS weekly supplement: 84 rows
+  [SAVE] CVS -> /data/workspace/back_trader_stocks/us/CVS.csv (2084 rows total)
+[179/471] CVNA
+  [OK] CVNA westock-data: 2000 rows
+  [OK] CVNA weekly supplement: 53 rows
+  [SAVE] CVNA -> /data/workspace/back_trader_stocks/us/CVNA.csv (2053 rows total)
+[180/471] CVX
+  [OK] CVX westock-data: 2000 rows
+  [OK] CVX weekly supplement: 84 rows
+  [SAVE] CVX -> /data/workspace/back_trader_stocks/us/CVX.csv (2084 rows total)
+[181/471] CXO
+  [OK] CXO westock-data: 0 rows
+  [FALLBACK] CXO trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] CXO yfinance also failed, using westock data (0 rows)
+  [FAIL] CXO no data obtained
+[182/471] D
+  [OK] D westock-data: 2000 rows
+  [OK] D weekly supplement: 84 rows
+  [SAVE] D -> /data/workspace/back_trader_stocks/us/D.csv (2084 rows total)
+[183/471] DAL
+  [OK] DAL westock-data: 2000 rows
+  [OK] DAL weekly supplement: 84 rows
+  [SAVE] DAL -> /data/workspace/back_trader_stocks/us/DAL.csv (2084 rows total)
+[184/471] DAY
+  [OK] DAY westock-data: 1954 rows
+  [SAVE] DAY -> /data/workspace/back_trader_stocks/us/DAY.csv (1954 rows total)
+[185/471] DD
+  [OK] DD westock-data: 2000 rows
+  [OK] DD weekly supplement: 84 rows
+  [SAVE] DD -> /data/workspace/back_trader_stocks/us/DD.csv (2084 rows total)
+[186/471] DECK
+  [OK] DECK westock-data: 2000 rows
+  [OK] DECK weekly supplement: 84 rows
+  [SAVE] DECK -> /data/workspace/back_trader_stocks/us/DECK.csv (2084 rows total)
+[187/471] DELL
+  [OK] DELL westock-data: 1835 rows
+  [SAVE] DELL -> /data/workspace/back_trader_stocks/us/DELL.csv (1835 rows total)
+[188/471] DHI
+  [OK] DHI westock-data: 2000 rows
+  [OK] DHI weekly supplement: 84 rows
+  [SAVE] DHI -> /data/workspace/back_trader_stocks/us/DHI.csv (2084 rows total)
+[189/471] DHR
+  [OK] DHR westock-data: 2000 rows
+  [OK] DHR weekly supplement: 84 rows
+  [SAVE] DHR -> /data/workspace/back_trader_stocks/us/DHR.csv (2084 rows total)
+[190/471] DIS
+  [OK] DIS westock-data: 2000 rows
+  [OK] DIS weekly supplement: 84 rows
+  [SAVE] DIS -> /data/workspace/back_trader_stocks/us/DIS.csv (2084 rows total)
+[191/471] DLR
+  [OK] DLR westock-data: 2000 rows
+  [OK] DLR weekly supplement: 84 rows
+  [SAVE] DLR -> /data/workspace/back_trader_stocks/us/DLR.csv (2084 rows total)
+[192/471] DLTR
+  [OK] DLTR westock-data: 2000 rows
+  [OK] DLTR weekly supplement: 84 rows
+  [SAVE] DLTR -> /data/workspace/back_trader_stocks/us/DLTR.csv (2084 rows total)
+[193/471] DOV
+  [OK] DOV westock-data: 2000 rows
+  [OK] DOV weekly supplement: 84 rows
+  [SAVE] DOV -> /data/workspace/back_trader_stocks/us/DOV.csv (2084 rows total)
+[194/471] DRI
+  [OK] DRI westock-data: 2000 rows
+  [OK] DRI weekly supplement: 84 rows
+  [SAVE] DRI -> /data/workspace/back_trader_stocks/us/DRI.csv (2084 rows total)
+[195/471] DTE
+  [OK] DTE westock-data: 2000 rows
+  [OK] DTE weekly supplement: 84 rows
+  [SAVE] DTE -> /data/workspace/back_trader_stocks/us/DTE.csv (2084 rows total)
+[196/471] DUK
+  [OK] DUK westock-data: 2000 rows
+  [OK] DUK weekly supplement: 84 rows
+  [SAVE] DUK -> /data/workspace/back_trader_stocks/us/DUK.csv (2084 rows total)
+[197/471] DVA
+  [OK] DVA westock-data: 2000 rows
+  [OK] DVA weekly supplement: 84 rows
+  [SAVE] DVA -> /data/workspace/back_trader_stocks/us/DVA.csv (2084 rows total)
+[198/471] DVN
+  [OK] DVN westock-data: 2000 rows
+  [OK] DVN weekly supplement: 84 rows
+  [SAVE] DVN -> /data/workspace/back_trader_stocks/us/DVN.csv (2084 rows total)
+[199/471] ECL
+  [OK] ECL westock-data: 2000 rows
+  [OK] ECL weekly supplement: 84 rows
+  [SAVE] ECL -> /data/workspace/back_trader_stocks/us/ECL.csv (2084 rows total)
+[200/471] ED
+  [OK] ED westock-data: 2000 rows
+  [OK] ED weekly supplement: 84 rows
+  [SAVE] ED -> /data/workspace/back_trader_stocks/us/ED.csv (2084 rows total)
+[201/471] EFX
+  [OK] EFX westock-data: 2000 rows
+  [OK] EFX weekly supplement: 84 rows
+  [SAVE] EFX -> /data/workspace/back_trader_stocks/us/EFX.csv (2084 rows total)
+[202/471] EG
+  [OK] EG westock-data: 2000 rows
+  [OK] EG weekly supplement: 84 rows
+  [SAVE] EG -> /data/workspace/back_trader_stocks/us/EG.csv (2084 rows total)
+[203/471] EIX
+  [OK] EIX westock-data: 2000 rows
+  [OK] EIX weekly supplement: 84 rows
+  [SAVE] EIX -> /data/workspace/back_trader_stocks/us/EIX.csv (2084 rows total)
+[204/471] EL
+  [OK] EL westock-data: 2000 rows
+  [OK] EL weekly supplement: 84 rows
+  [SAVE] EL -> /data/workspace/back_trader_stocks/us/EL.csv (2084 rows total)
+[205/471] ELV
+  [OK] ELV westock-data: 2000 rows
+  [OK] ELV weekly supplement: 84 rows
+  [SAVE] ELV -> /data/workspace/back_trader_stocks/us/ELV.csv (2084 rows total)
+[206/471] EME
+  [OK] EME westock-data: 2000 rows
+  [OK] EME weekly supplement: 84 rows
+  [SAVE] EME -> /data/workspace/back_trader_stocks/us/EME.csv (2084 rows total)
+[207/471] EMN
+  [OK] EMN westock-data: 2000 rows
+  [OK] EMN weekly supplement: 84 rows
+  [SAVE] EMN -> /data/workspace/back_trader_stocks/us/EMN.csv (2084 rows total)
+[208/471] EMR
+  [OK] EMR westock-data: 2000 rows
+  [OK] EMR weekly supplement: 84 rows
+  [SAVE] EMR -> /data/workspace/back_trader_stocks/us/EMR.csv (2084 rows total)
+[209/471] ENPH
+  [OK] ENPH westock-data: 2000 rows
+  [OK] ENPH weekly supplement: 84 rows
+  [SAVE] ENPH -> /data/workspace/back_trader_stocks/us/ENPH.csv (2084 rows total)
+[210/471] EOG
+  [OK] EOG westock-data: 2000 rows
+  [OK] EOG weekly supplement: 84 rows
+  [SAVE] EOG -> /data/workspace/back_trader_stocks/us/EOG.csv (2084 rows total)
+[211/471] EPAM
+  [OK] EPAM westock-data: 2000 rows
+  [OK] EPAM weekly supplement: 84 rows
+  [SAVE] EPAM -> /data/workspace/back_trader_stocks/us/EPAM.csv (2084 rows total)
+[212/471] EQIX
+  [OK] EQIX westock-data: 2000 rows
+  [OK] EQIX weekly supplement: 84 rows
+  [SAVE] EQIX -> /data/workspace/back_trader_stocks/us/EQIX.csv (2084 rows total)
+[213/471] EQR
+  [OK] EQR westock-data: 2000 rows
+  [OK] EQR weekly supplement: 84 rows
+  [SAVE] EQR -> /data/workspace/back_trader_stocks/us/EQR.csv (2084 rows total)
+[214/471] EQT
+  [OK] EQT westock-data: 2000 rows
+  [OK] EQT weekly supplement: 84 rows
+  [SAVE] EQT -> /data/workspace/back_trader_stocks/us/EQT.csv (2084 rows total)
+[215/471] ERIC
+  [OK] ERIC westock-data: 2000 rows
+  [OK] ERIC weekly supplement: 84 rows
+  [SAVE] ERIC -> /data/workspace/back_trader_stocks/us/ERIC.csv (2084 rows total)
+[216/471] ES
+  [OK] ES westock-data: 2000 rows
+  [OK] ES weekly supplement: 84 rows
+  [SAVE] ES -> /data/workspace/back_trader_stocks/us/ES.csv (2084 rows total)
+[217/471] ESS
+  [OK] ESS westock-data: 2000 rows
+  [OK] ESS weekly supplement: 84 rows
+  [SAVE] ESS -> /data/workspace/back_trader_stocks/us/ESS.csv (2084 rows total)
+[218/471] ETN
+  [OK] ETN westock-data: 2000 rows
+  [OK] ETN weekly supplement: 84 rows
+  [SAVE] ETN -> /data/workspace/back_trader_stocks/us/ETN.csv (2084 rows total)
+[219/471] ETR
+  [OK] ETR westock-data: 2000 rows
+  [OK] ETR weekly supplement: 84 rows
+  [SAVE] ETR -> /data/workspace/back_trader_stocks/us/ETR.csv (2084 rows total)
+[220/471] ETSY
+  [OK] ETSY westock-data: 2000 rows
+  [OK] ETSY weekly supplement: 84 rows
+  [SAVE] ETSY -> /data/workspace/back_trader_stocks/us/ETSY.csv (2084 rows total)
+[221/471] EVRG
+  [OK] EVRG westock-data: 1978 rows
+  [SAVE] EVRG -> /data/workspace/back_trader_stocks/us/EVRG.csv (1978 rows total)
+[222/471] EW
+  [OK] EW westock-data: 2000 rows
+  [OK] EW weekly supplement: 84 rows
+  [SAVE] EW -> /data/workspace/back_trader_stocks/us/EW.csv (2084 rows total)
+[223/471] EXPD
+  [OK] EXPD westock-data: 2000 rows
+  [OK] EXPD weekly supplement: 84 rows
+  [SAVE] EXPD -> /data/workspace/back_trader_stocks/us/EXPD.csv (2084 rows total)
+[224/471] EXR
+  [OK] EXR westock-data: 2000 rows
+  [OK] EXR weekly supplement: 84 rows
+  [SAVE] EXR -> /data/workspace/back_trader_stocks/us/EXR.csv (2084 rows total)
+[225/471] F
+  [OK] F westock-data: 2000 rows
+  [OK] F weekly supplement: 84 rows
+  [SAVE] F -> /data/workspace/back_trader_stocks/us/F.csv (2084 rows total)
+[226/471] FDX
+  [OK] FDX westock-data: 2000 rows
+  [OK] FDX weekly supplement: 84 rows
+  [SAVE] FDX -> /data/workspace/back_trader_stocks/us/FDX.csv (2084 rows total)
+[227/471] FE
+  [OK] FE westock-data: 2000 rows
+  [OK] FE weekly supplement: 84 rows
+  [SAVE] FE -> /data/workspace/back_trader_stocks/us/FE.csv (2084 rows total)
+[228/471] FFIV
+  [OK] FFIV westock-data: 2000 rows
+  [OK] FFIV weekly supplement: 84 rows
+  [SAVE] FFIV -> /data/workspace/back_trader_stocks/us/FFIV.csv (2084 rows total)
+[229/471] FDS
+  [OK] FDS westock-data: 2000 rows
+  [OK] FDS weekly supplement: 84 rows
+  [SAVE] FDS -> /data/workspace/back_trader_stocks/us/FDS.csv (2084 rows total)
+[230/471] FICO
+  [OK] FICO westock-data: 2000 rows
+  [OK] FICO weekly supplement: 84 rows
+  [SAVE] FICO -> /data/workspace/back_trader_stocks/us/FICO.csv (2084 rows total)
+[231/471] FI
+  [OK] FI westock-data: 0 rows
+  [FALLBACK] FI trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] FI yfinance also failed, using westock data (0 rows)
+  [FAIL] FI no data obtained
+[232/471] FIS
+  [OK] FIS westock-data: 2000 rows
+  [OK] FIS weekly supplement: 84 rows
+  [SAVE] FIS -> /data/workspace/back_trader_stocks/us/FIS.csv (2084 rows total)
+[233/471] FISV
+  [OK] FISV westock-data: 718 rows
+  [SAVE] FISV -> /data/workspace/back_trader_stocks/us/FISV.csv (718 rows total)
+[234/471] FITB
+  [OK] FITB westock-data: 2000 rows
+  [OK] FITB weekly supplement: 84 rows
+  [SAVE] FITB -> /data/workspace/back_trader_stocks/us/FITB.csv (2084 rows total)
+[235/471] FIX
+  [OK] FIX westock-data: 2000 rows
+  [OK] FIX weekly supplement: 84 rows
+  [SAVE] FIX -> /data/workspace/back_trader_stocks/us/FIX.csv (2084 rows total)
+[236/471] FL
+  [OK] FL westock-data: 0 rows
+  [FALLBACK] FL trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] FL yfinance also failed, using westock data (0 rows)
+  [FAIL] FL no data obtained
+[237/471] FMX
+  [OK] FMX westock-data: 2000 rows
+  [OK] FMX weekly supplement: 84 rows
+  [SAVE] FMX -> /data/workspace/back_trader_stocks/us/FMX.csv (2084 rows total)
+[238/471] FMC
+  [OK] FMC westock-data: 2000 rows
+  [OK] FMC weekly supplement: 84 rows
+  [SAVE] FMC -> /data/workspace/back_trader_stocks/us/FMC.csv (2084 rows total)
+[239/471] FNV
+  [OK] FNV westock-data: 2000 rows
+  [OK] FNV weekly supplement: 84 rows
+  [SAVE] FNV -> /data/workspace/back_trader_stocks/us/FNV.csv (2084 rows total)
+[240/471] FOX
+  [OK] FOX westock-data: 1785 rows
+  [SAVE] FOX -> /data/workspace/back_trader_stocks/us/FOX.csv (1785 rows total)
+[241/471] FOXA
+  [OK] FOXA westock-data: 1785 rows
+  [SAVE] FOXA -> /data/workspace/back_trader_stocks/us/FOXA.csv (1785 rows total)
+[242/471] FRT
+  [OK] FRT westock-data: 2000 rows
+  [OK] FRT weekly supplement: 84 rows
+  [SAVE] FRT -> /data/workspace/back_trader_stocks/us/FRT.csv (2084 rows total)
+[243/471] FSLR
+  [OK] FSLR westock-data: 2000 rows
+  [OK] FSLR weekly supplement: 84 rows
+  [SAVE] FSLR -> /data/workspace/back_trader_stocks/us/FSLR.csv (2084 rows total)
+[244/471] FTV
+  [OK] FTV westock-data: 2000 rows
+  [OK] FTV weekly supplement: 84 rows
+  [SAVE] FTV -> /data/workspace/back_trader_stocks/us/FTV.csv (2084 rows total)
+[245/471] GD
+  [OK] GD westock-data: 2000 rows
+  [OK] GD weekly supplement: 84 rows
+  [SAVE] GD -> /data/workspace/back_trader_stocks/us/GD.csv (2084 rows total)
+[246/471] GDDY
+  [OK] GDDY westock-data: 2000 rows
+  [OK] GDDY weekly supplement: 84 rows
+  [SAVE] GDDY -> /data/workspace/back_trader_stocks/us/GDDY.csv (2084 rows total)
+[247/471] GE
+  [OK] GE westock-data: 2000 rows
+  [OK] GE weekly supplement: 84 rows
+  [SAVE] GE -> /data/workspace/back_trader_stocks/us/GE.csv (2084 rows total)
+[248/471] GEV
+  [OK] GEV westock-data: 513 rows
+  [SAVE] GEV -> /data/workspace/back_trader_stocks/us/GEV.csv (513 rows total)
+[249/471] GL
+  [OK] GL westock-data: 1681 rows
+  [SAVE] GL -> /data/workspace/back_trader_stocks/us/GL.csv (1681 rows total)
+[250/471] GLW
+  [OK] GLW westock-data: 2000 rows
+  [OK] GLW weekly supplement: 84 rows
+  [SAVE] GLW -> /data/workspace/back_trader_stocks/us/GLW.csv (2084 rows total)
+[251/471] GM
+  [OK] GM westock-data: 2000 rows
+  [OK] GM weekly supplement: 84 rows
+  [SAVE] GM -> /data/workspace/back_trader_stocks/us/GM.csv (2084 rows total)
+[252/471] GNRC
+  [OK] GNRC westock-data: 2000 rows
+  [OK] GNRC weekly supplement: 84 rows
+  [SAVE] GNRC -> /data/workspace/back_trader_stocks/us/GNRC.csv (2084 rows total)
+[253/471] GPC
+  [OK] GPC westock-data: 2000 rows
+  [OK] GPC weekly supplement: 84 rows
+  [SAVE] GPC -> /data/workspace/back_trader_stocks/us/GPC.csv (2084 rows total)
+[254/471] GPN
+  [OK] GPN westock-data: 2000 rows
+  [OK] GPN weekly supplement: 84 rows
+  [SAVE] GPN -> /data/workspace/back_trader_stocks/us/GPN.csv (2084 rows total)
+[255/471] GRMN
+  [OK] GRMN westock-data: 1094 rows
+  [SAVE] GRMN -> /data/workspace/back_trader_stocks/us/GRMN.csv (1094 rows total)
+[256/471] GS
+  [OK] GS westock-data: 2000 rows
+  [OK] GS weekly supplement: 84 rows
+  [SAVE] GS -> /data/workspace/back_trader_stocks/us/GS.csv (2084 rows total)
+[257/471] GWW
+  [OK] GWW westock-data: 2000 rows
+  [OK] GWW weekly supplement: 84 rows
+  [SAVE] GWW -> /data/workspace/back_trader_stocks/us/GWW.csv (2084 rows total)
+[258/471] HAL
+  [OK] HAL westock-data: 2000 rows
+  [OK] HAL weekly supplement: 84 rows
+  [SAVE] HAL -> /data/workspace/back_trader_stocks/us/HAL.csv (2084 rows total)
+[259/471] HAS
+  [OK] HAS westock-data: 2000 rows
+  [OK] HAS weekly supplement: 84 rows
+  [SAVE] HAS -> /data/workspace/back_trader_stocks/us/HAS.csv (2084 rows total)
+[260/471] HCA
+  [OK] HCA westock-data: 2000 rows
+  [OK] HCA weekly supplement: 84 rows
+  [SAVE] HCA -> /data/workspace/back_trader_stocks/us/HCA.csv (2084 rows total)
+[261/471] HD
+  [OK] HD westock-data: 2000 rows
+  [OK] HD weekly supplement: 84 rows
+  [SAVE] HD -> /data/workspace/back_trader_stocks/us/HD.csv (2084 rows total)
+[262/471] HES
+  [OK] HES westock-data: 0 rows
+  [FALLBACK] HES trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] HES yfinance also failed, using westock data (0 rows)
+  [FAIL] HES no data obtained
+[263/471] HIG
+  [OK] HIG westock-data: 2000 rows
+  [OK] HIG weekly supplement: 84 rows
+  [SAVE] HIG -> /data/workspace/back_trader_stocks/us/HIG.csv (2084 rows total)
+[264/471] HLT
+  [OK] HLT westock-data: 2000 rows
+  [OK] HLT weekly supplement: 84 rows
+  [SAVE] HLT -> /data/workspace/back_trader_stocks/us/HLT.csv (2084 rows total)
+[265/471] HOLX
+  [OK] HOLX westock-data: 2000 rows
+  [OK] HOLX weekly supplement: 84 rows
+  [SAVE] HOLX -> /data/workspace/back_trader_stocks/us/HOLX.csv (2084 rows total)
+[266/471] HON
+  [SKIP] HON exists (2514 rows)
+[267/471] HPQ
+  [OK] HPQ westock-data: 2000 rows
+  [OK] HPQ weekly supplement: 84 rows
+  [SAVE] HPQ -> /data/workspace/back_trader_stocks/us/HPQ.csv (2084 rows total)
+[268/471] HPE
+  [OK] HPE westock-data: 2000 rows
+  [OK] HPE weekly supplement: 84 rows
+  [SAVE] HPE -> /data/workspace/back_trader_stocks/us/HPE.csv (2084 rows total)
+[269/471] HRL
+  [OK] HRL westock-data: 2000 rows
+  [OK] HRL weekly supplement: 84 rows
+  [SAVE] HRL -> /data/workspace/back_trader_stocks/us/HRL.csv (2084 rows total)
+[270/471] HSIC
+  [OK] HSIC westock-data: 2000 rows
+  [OK] HSIC weekly supplement: 84 rows
+  [SAVE] HSIC -> /data/workspace/back_trader_stocks/us/HSIC.csv (2084 rows total)
+[271/471] HSY
+  [OK] HSY westock-data: 2000 rows
+  [OK] HSY weekly supplement: 84 rows
+  [SAVE] HSY -> /data/workspace/back_trader_stocks/us/HSY.csv (2084 rows total)
+[272/471] HUBB
+  [OK] HUBB westock-data: 2000 rows
+  [OK] HUBB weekly supplement: 84 rows
+  [SAVE] HUBB -> /data/workspace/back_trader_stocks/us/HUBB.csv (2084 rows total)
+[273/471] HUM
+  [OK] HUM westock-data: 2000 rows
+  [OK] HUM weekly supplement: 84 rows
+  [SAVE] HUM -> /data/workspace/back_trader_stocks/us/HUM.csv (2084 rows total)
+[274/471] HWM
+  [OK] HWM westock-data: 1519 rows
+  [SAVE] HWM -> /data/workspace/back_trader_stocks/us/HWM.csv (1519 rows total)
+[275/471] IBM
+  [OK] IBM westock-data: 2000 rows
+  [OK] IBM weekly supplement: 84 rows
+  [SAVE] IBM -> /data/workspace/back_trader_stocks/us/IBM.csv (2084 rows total)
+[276/471] ICE
+  [OK] ICE westock-data: 2000 rows
+  [OK] ICE weekly supplement: 84 rows
+  [SAVE] ICE -> /data/workspace/back_trader_stocks/us/ICE.csv (2084 rows total)
+[277/471] IEX
+  [OK] IEX westock-data: 2000 rows
+  [OK] IEX weekly supplement: 84 rows
+  [SAVE] IEX -> /data/workspace/back_trader_stocks/us/IEX.csv (2084 rows total)
+[278/471] IFF
+  [OK] IFF westock-data: 2000 rows
+  [OK] IFF weekly supplement: 84 rows
+  [SAVE] IFF -> /data/workspace/back_trader_stocks/us/IFF.csv (2084 rows total)
+[279/471] INCY
+  [OK] INCY westock-data: 2000 rows
+  [OK] INCY weekly supplement: 84 rows
+  [SAVE] INCY -> /data/workspace/back_trader_stocks/us/INCY.csv (2084 rows total)
+[280/471] INFY
+  [OK] INFY westock-data: 2000 rows
+  [OK] INFY weekly supplement: 84 rows
+  [SAVE] INFY -> /data/workspace/back_trader_stocks/us/INFY.csv (2084 rows total)
+[281/471] INGR
+  [OK] INGR westock-data: 2000 rows
+  [OK] INGR weekly supplement: 84 rows
+  [SAVE] INGR -> /data/workspace/back_trader_stocks/us/INGR.csv (2084 rows total)
+[282/471] IP
+  [OK] IP westock-data: 2000 rows
+  [OK] IP weekly supplement: 84 rows
+  [SAVE] IP -> /data/workspace/back_trader_stocks/us/IP.csv (2084 rows total)
+[283/471] IPG
+  [OK] IPG westock-data: 0 rows
+  [FALLBACK] IPG trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] IPG yfinance also failed, using westock data (0 rows)
+  [FAIL] IPG no data obtained
+[284/471] IQV
+  [OK] IQV westock-data: 2000 rows
+  [OK] IQV weekly supplement: 24 rows
+  [SAVE] IQV -> /data/workspace/back_trader_stocks/us/IQV.csv (2024 rows total)
+[285/471] IR
+  [OK] IR westock-data: 2000 rows
+  [OK] IR weekly supplement: 84 rows
+  [SAVE] IR -> /data/workspace/back_trader_stocks/us/IR.csv (2084 rows total)
+[286/471] IRM
+  [OK] IRM westock-data: 2000 rows
+  [OK] IRM weekly supplement: 84 rows
+  [SAVE] IRM -> /data/workspace/back_trader_stocks/us/IRM.csv (2084 rows total)
+[287/471] IT
+  [OK] IT westock-data: 2000 rows
+  [OK] IT weekly supplement: 84 rows
+  [SAVE] IT -> /data/workspace/back_trader_stocks/us/IT.csv (2084 rows total)
+[288/471] ITW
+  [OK] ITW westock-data: 2000 rows
+  [OK] ITW weekly supplement: 84 rows
+  [SAVE] ITW -> /data/workspace/back_trader_stocks/us/ITW.csv (2084 rows total)
+[289/471] IVZ
+  [OK] IVZ westock-data: 2000 rows
+  [OK] IVZ weekly supplement: 84 rows
+  [SAVE] IVZ -> /data/workspace/back_trader_stocks/us/IVZ.csv (2084 rows total)
+[290/471] J
+  [OK] J westock-data: 1596 rows
+  [SAVE] J -> /data/workspace/back_trader_stocks/us/J.csv (1596 rows total)
+[291/471] JBHT
+  [OK] JBHT westock-data: 2000 rows
+  [OK] JBHT weekly supplement: 84 rows
+  [SAVE] JBHT -> /data/workspace/back_trader_stocks/us/JBHT.csv (2084 rows total)
+[292/471] JBL
+  [OK] JBL westock-data: 2000 rows
+  [OK] JBL weekly supplement: 84 rows
+  [SAVE] JBL -> /data/workspace/back_trader_stocks/us/JBL.csv (2084 rows total)
+[293/471] JCI
+  [OK] JCI westock-data: 2000 rows
+  [OK] JCI weekly supplement: 84 rows
+  [SAVE] JCI -> /data/workspace/back_trader_stocks/us/JCI.csv (2084 rows total)
+[294/471] JKHY
+  [OK] JKHY westock-data: 2000 rows
+  [OK] JKHY weekly supplement: 84 rows
+  [SAVE] JKHY -> /data/workspace/back_trader_stocks/us/JKHY.csv (2084 rows total)
+[295/471] JNJ
+  [OK] JNJ westock-data: 2000 rows
+  [OK] JNJ weekly supplement: 84 rows
+  [SAVE] JNJ -> /data/workspace/back_trader_stocks/us/JNJ.csv (2084 rows total)
+[296/471] JPM
+  [OK] JPM westock-data: 2000 rows
+  [OK] JPM weekly supplement: 84 rows
+  [SAVE] JPM -> /data/workspace/back_trader_stocks/us/JPM.csv (2084 rows total)
+[297/471] K
+  [OK] K westock-data: 2000 rows
+  [OK] K weekly supplement: 84 rows
+  [SAVE] K -> /data/workspace/back_trader_stocks/us/K.csv (2084 rows total)
+[298/471] KEY
+  [OK] KEY westock-data: 2000 rows
+  [OK] KEY weekly supplement: 84 rows
+  [SAVE] KEY -> /data/workspace/back_trader_stocks/us/KEY.csv (2084 rows total)
+[299/471] KEYS
+  [OK] KEYS westock-data: 2000 rows
+  [OK] KEYS weekly supplement: 84 rows
+  [SAVE] KEYS -> /data/workspace/back_trader_stocks/us/KEYS.csv (2084 rows total)
+[300/471] KIM
+  [OK] KIM westock-data: 2000 rows
+  [OK] KIM weekly supplement: 84 rows
+  [SAVE] KIM -> /data/workspace/back_trader_stocks/us/KIM.csv (2084 rows total)
+[301/471] KMB
+  [OK] KMB westock-data: 2000 rows
+  [OK] KMB weekly supplement: 84 rows
+  [SAVE] KMB -> /data/workspace/back_trader_stocks/us/KMB.csv (2084 rows total)
+[302/471] KMI
+  [OK] KMI westock-data: 2000 rows
+  [OK] KMI weekly supplement: 84 rows
+  [SAVE] KMI -> /data/workspace/back_trader_stocks/us/KMI.csv (2084 rows total)
+[303/471] KMX
+  [OK] KMX westock-data: 2000 rows
+  [OK] KMX weekly supplement: 84 rows
+  [SAVE] KMX -> /data/workspace/back_trader_stocks/us/KMX.csv (2084 rows total)
+[304/471] KO
+  [OK] KO westock-data: 2000 rows
+  [OK] KO weekly supplement: 84 rows
+  [SAVE] KO -> /data/workspace/back_trader_stocks/us/KO.csv (2084 rows total)
+[305/471] KR
+  [OK] KR westock-data: 2000 rows
+  [OK] KR weekly supplement: 84 rows
+  [SAVE] KR -> /data/workspace/back_trader_stocks/us/KR.csv (2084 rows total)
+[306/471] KVUE
+  [OK] KVUE westock-data: 741 rows
+  [SAVE] KVUE -> /data/workspace/back_trader_stocks/us/KVUE.csv (741 rows total)
+[307/471] L
+  [OK] L westock-data: 2000 rows
+  [OK] L weekly supplement: 84 rows
+  [SAVE] L -> /data/workspace/back_trader_stocks/us/L.csv (2084 rows total)
+[308/471] LHX
+  [OK] LHX westock-data: 1709 rows
+  [SAVE] LHX -> /data/workspace/back_trader_stocks/us/LHX.csv (1709 rows total)
+[309/471] LII
+  [OK] LII westock-data: 2000 rows
+  [OK] LII weekly supplement: 84 rows
+  [SAVE] LII -> /data/workspace/back_trader_stocks/us/LII.csv (2084 rows total)
+[310/471] LLY
+  [OK] LLY westock-data: 2000 rows
+  [OK] LLY weekly supplement: 84 rows
+  [SAVE] LLY -> /data/workspace/back_trader_stocks/us/LLY.csv (2084 rows total)
+[311/471] LMT
+  [OK] LMT westock-data: 2000 rows
+  [OK] LMT weekly supplement: 84 rows
+  [SAVE] LMT -> /data/workspace/back_trader_stocks/us/LMT.csv (2084 rows total)
+[312/471] LNT
+  [OK] LNT westock-data: 2000 rows
+  [OK] LNT weekly supplement: 84 rows
+  [SAVE] LNT -> /data/workspace/back_trader_stocks/us/LNT.csv (2084 rows total)
+[313/471] LOW
+  [OK] LOW westock-data: 2000 rows
+  [OK] LOW weekly supplement: 84 rows
+  [SAVE] LOW -> /data/workspace/back_trader_stocks/us/LOW.csv (2084 rows total)
+[314/471] LULU
+  [OK] LULU westock-data: 2000 rows
+  [OK] LULU weekly supplement: 84 rows
+  [SAVE] LULU -> /data/workspace/back_trader_stocks/us/LULU.csv (2084 rows total)
+[315/471] LUV
+  [OK] LUV westock-data: 2000 rows
+  [OK] LUV weekly supplement: 84 rows
+  [SAVE] LUV -> /data/workspace/back_trader_stocks/us/LUV.csv (2084 rows total)
+[316/471] LVS
+  [OK] LVS westock-data: 2000 rows
+  [OK] LVS weekly supplement: 84 rows
+  [SAVE] LVS -> /data/workspace/back_trader_stocks/us/LVS.csv (2084 rows total)
+[317/471] LYB
+  [OK] LYB westock-data: 2000 rows
+  [OK] LYB weekly supplement: 84 rows
+  [SAVE] LYB -> /data/workspace/back_trader_stocks/us/LYB.csv (2084 rows total)
+[318/471] LYV
+  [OK] LYV westock-data: 2000 rows
+  [OK] LYV weekly supplement: 84 rows
+  [SAVE] LYV -> /data/workspace/back_trader_stocks/us/LYV.csv (2084 rows total)
+[319/471] MAA
+  [OK] MAA westock-data: 2000 rows
+  [OK] MAA weekly supplement: 84 rows
+  [SAVE] MAA -> /data/workspace/back_trader_stocks/us/MAA.csv (2084 rows total)
+[320/471] MAS
+  [OK] MAS westock-data: 2000 rows
+  [OK] MAS weekly supplement: 84 rows
+  [SAVE] MAS -> /data/workspace/back_trader_stocks/us/MAS.csv (2084 rows total)
+[321/471] MCD
+  [OK] MCD westock-data: 2000 rows
+  [OK] MCD weekly supplement: 84 rows
+  [SAVE] MCD -> /data/workspace/back_trader_stocks/us/MCD.csv (2084 rows total)
+[322/471] MCK
+  [OK] MCK westock-data: 2000 rows
+  [OK] MCK weekly supplement: 84 rows
+  [SAVE] MCK -> /data/workspace/back_trader_stocks/us/MCK.csv (2084 rows total)
+[323/471] MDT
+  [OK] MDT westock-data: 2000 rows
+  [OK] MDT weekly supplement: 84 rows
+  [SAVE] MDT -> /data/workspace/back_trader_stocks/us/MDT.csv (2084 rows total)
+[324/471] MET
+  [OK] MET westock-data: 2000 rows
+  [OK] MET weekly supplement: 84 rows
+  [SAVE] MET -> /data/workspace/back_trader_stocks/us/MET.csv (2084 rows total)
+[325/471] MGM
+  [OK] MGM westock-data: 2000 rows
+  [OK] MGM weekly supplement: 84 rows
+  [SAVE] MGM -> /data/workspace/back_trader_stocks/us/MGM.csv (2084 rows total)
+[326/471] MHK
+  [OK] MHK westock-data: 2000 rows
+  [OK] MHK weekly supplement: 84 rows
+  [SAVE] MHK -> /data/workspace/back_trader_stocks/us/MHK.csv (2084 rows total)
+[327/471] MKC
+  [OK] MKC westock-data: 2000 rows
+  [OK] MKC weekly supplement: 84 rows
+  [SAVE] MKC -> /data/workspace/back_trader_stocks/us/MKC.csv (2084 rows total)
+[328/471] MLM
+  [OK] MLM westock-data: 2000 rows
+  [OK] MLM weekly supplement: 84 rows
+  [SAVE] MLM -> /data/workspace/back_trader_stocks/us/MLM.csv (2084 rows total)
+[329/471] MMC
+  [OK] MMC westock-data: 2000 rows
+  [OK] MMC weekly supplement: 84 rows
+  [SAVE] MMC -> /data/workspace/back_trader_stocks/us/MMC.csv (2084 rows total)
+[330/471] MMM
+  [OK] MMM westock-data: 2000 rows
+  [OK] MMM weekly supplement: 84 rows
+  [SAVE] MMM -> /data/workspace/back_trader_stocks/us/MMM.csv (2084 rows total)
+[331/471] MO
+  [OK] MO westock-data: 0 rows
+  [FALLBACK] MO trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] MO yfinance also failed, using westock data (0 rows)
+  [FAIL] MO no data obtained
+[332/471] MOS
+  [OK] MOS westock-data: 2000 rows
+  [OK] MOS weekly supplement: 84 rows
+  [SAVE] MOS -> /data/workspace/back_trader_stocks/us/MOS.csv (2084 rows total)
+[333/471] MPC
+  [OK] MPC westock-data: 2000 rows
+  [OK] MPC weekly supplement: 84 rows
+  [SAVE] MPC -> /data/workspace/back_trader_stocks/us/MPC.csv (2084 rows total)
+[334/471] MRK
+  [OK] MRK westock-data: 2000 rows
+  [OK] MRK weekly supplement: 84 rows
+  [SAVE] MRK -> /data/workspace/back_trader_stocks/us/MRK.csv (2084 rows total)
+[335/471] MRO
+  [OK] MRO westock-data: 0 rows
+  [FALLBACK] MRO trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] MRO yfinance also failed, using westock data (0 rows)
+  [FAIL] MRO no data obtained
+[336/471] MRNA
+  [OK] MRNA westock-data: 1849 rows
+  [SAVE] MRNA -> /data/workspace/back_trader_stocks/us/MRNA.csv (1849 rows total)
+[337/471] MS
+  [OK] MS westock-data: 2000 rows
+  [OK] MS weekly supplement: 84 rows
+  [SAVE] MS -> /data/workspace/back_trader_stocks/us/MS.csv (2084 rows total)
+[338/471] MSCI
+  [OK] MSCI westock-data: 2000 rows
+  [OK] MSCI weekly supplement: 84 rows
+  [SAVE] MSCI -> /data/workspace/back_trader_stocks/us/MSCI.csv (2084 rows total)
+[339/471] MSI
+  [OK] MSI westock-data: 2000 rows
+  [OK] MSI weekly supplement: 84 rows
+  [SAVE] MSI -> /data/workspace/back_trader_stocks/us/MSI.csv (2084 rows total)
+[340/471] NAVA
+  [OK] NAVA westock-data: 0 rows
+  [FALLBACK] NAVA trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+$NAVA: possibly delisted; no timezone found
+  [WARN] NAVA yfinance also failed, using westock data (0 rows)
+  [FAIL] NAVA no data obtained
+[341/471] NDAQ
+  [OK] NDAQ westock-data: 2000 rows
+  [OK] NDAQ weekly supplement: 84 rows
+  [SAVE] NDAQ -> /data/workspace/back_trader_stocks/us/NDAQ.csv (2084 rows total)
+[342/471] NDSN
+  [OK] NDSN westock-data: 2000 rows
+  [OK] NDSN weekly supplement: 84 rows
+  [SAVE] NDSN -> /data/workspace/back_trader_stocks/us/NDSN.csv (2084 rows total)
+[343/471] NEE
+  [OK] NEE westock-data: 2000 rows
+  [OK] NEE weekly supplement: 84 rows
+  [SAVE] NEE -> /data/workspace/back_trader_stocks/us/NEE.csv (2084 rows total)
+[344/471] NEM
+  [OK] NEM westock-data: 2000 rows
+  [OK] NEM weekly supplement: 84 rows
+  [SAVE] NEM -> /data/workspace/back_trader_stocks/us/NEM.csv (2084 rows total)
+[345/471] NI
+  [OK] NI westock-data: 2000 rows
+  [OK] NI weekly supplement: 84 rows
+  [SAVE] NI -> /data/workspace/back_trader_stocks/us/NI.csv (2084 rows total)
+[346/471] NKE
+  [OK] NKE westock-data: 2000 rows
+  [OK] NKE weekly supplement: 84 rows
+  [SAVE] NKE -> /data/workspace/back_trader_stocks/us/NKE.csv (2084 rows total)
+[347/471] NOC
+  [OK] NOC westock-data: 2000 rows
+  [OK] NOC weekly supplement: 84 rows
+  [SAVE] NOC -> /data/workspace/back_trader_stocks/us/NOC.csv (2084 rows total)
+[348/471] NOV
+  [OK] NOV westock-data: 2000 rows
+  [OK] NOV weekly supplement: 84 rows
+  [SAVE] NOV -> /data/workspace/back_trader_stocks/us/NOV.csv (2084 rows total)
+[349/471] NTRS
+  [OK] NTRS westock-data: 2000 rows
+  [OK] NTRS weekly supplement: 84 rows
+  [SAVE] NTRS -> /data/workspace/back_trader_stocks/us/NTRS.csv (2084 rows total)
+[350/471] NUE
+  [OK] NUE westock-data: 2000 rows
+  [OK] NUE weekly supplement: 84 rows
+  [SAVE] NUE -> /data/workspace/back_trader_stocks/us/NUE.csv (2084 rows total)
+[351/471] NVR
+  [OK] NVR westock-data: 2000 rows
+  [OK] NVR weekly supplement: 84 rows
+  [SAVE] NVR -> /data/workspace/back_trader_stocks/us/NVR.csv (2084 rows total)
+[352/471] O
+  [OK] O westock-data: 2000 rows
+  [OK] O weekly supplement: 84 rows
+  [SAVE] O -> /data/workspace/back_trader_stocks/us/O.csv (2084 rows total)
+[353/471] OKE
+  [OK] OKE westock-data: 2000 rows
+  [OK] OKE weekly supplement: 84 rows
+  [SAVE] OKE -> /data/workspace/back_trader_stocks/us/OKE.csv (2084 rows total)
+[354/471] OMC
+  [OK] OMC westock-data: 2000 rows
+  [OK] OMC weekly supplement: 84 rows
+  [SAVE] OMC -> /data/workspace/back_trader_stocks/us/OMC.csv (2084 rows total)
+[355/471] ON
+  [OK] ON westock-data: 2000 rows
+  [OK] ON weekly supplement: 84 rows
+  [SAVE] ON -> /data/workspace/back_trader_stocks/us/ON.csv (2084 rows total)
+[356/471] ORCL
+  [OK] ORCL westock-data: 2000 rows
+  [OK] ORCL weekly supplement: 84 rows
+  [SAVE] ORCL -> /data/workspace/back_trader_stocks/us/ORCL.csv (2084 rows total)
+[357/471] OXY
+  [OK] OXY westock-data: 2000 rows
+  [OK] OXY weekly supplement: 84 rows
+  [SAVE] OXY -> /data/workspace/back_trader_stocks/us/OXY.csv (2084 rows total)
+[358/471] PARA
+  [OK] PARA westock-data: 0 rows
+  [FALLBACK] PARA trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] PARA yfinance also failed, using westock data (0 rows)
+  [FAIL] PARA no data obtained
+[359/471] PAYC
+  [OK] PAYC westock-data: 2000 rows
+  [OK] PAYC weekly supplement: 84 rows
+  [SAVE] PAYC -> /data/workspace/back_trader_stocks/us/PAYC.csv (2084 rows total)
+[360/471] PCG
+  [OK] PCG westock-data: 2000 rows
+  [OK] PCG weekly supplement: 84 rows
+  [SAVE] PCG -> /data/workspace/back_trader_stocks/us/PCG.csv (2084 rows total)
+[361/471] PEG
+  [OK] PEG westock-data: 2000 rows
+  [OK] PEG weekly supplement: 84 rows
+  [SAVE] PEG -> /data/workspace/back_trader_stocks/us/PEG.csv (2084 rows total)
+[362/471] PFE
+  [OK] PFE westock-data: 2000 rows
+  [OK] PFE weekly supplement: 84 rows
+  [SAVE] PFE -> /data/workspace/back_trader_stocks/us/PFE.csv (2084 rows total)
+[363/471] PFG
+  [OK] PFG westock-data: 2000 rows
+  [OK] PFG weekly supplement: 84 rows
+  [SAVE] PFG -> /data/workspace/back_trader_stocks/us/PFG.csv (2084 rows total)
+[364/471] PG
+  [OK] PG westock-data: 2000 rows
+  [OK] PG weekly supplement: 84 rows
+  [SAVE] PG -> /data/workspace/back_trader_stocks/us/PG.csv (2084 rows total)
+[365/471] PGR
+  [OK] PGR westock-data: 2000 rows
+  [OK] PGR weekly supplement: 84 rows
+  [SAVE] PGR -> /data/workspace/back_trader_stocks/us/PGR.csv (2084 rows total)
+[366/471] PH
+  [OK] PH westock-data: 2000 rows
+  [OK] PH weekly supplement: 84 rows
+  [SAVE] PH -> /data/workspace/back_trader_stocks/us/PH.csv (2084 rows total)
+[367/471] PHM
+  [OK] PHM westock-data: 2000 rows
+  [OK] PHM weekly supplement: 84 rows
+  [SAVE] PHM -> /data/workspace/back_trader_stocks/us/PHM.csv (2084 rows total)
+[368/471] PKI
+  [OK] PKI westock-data: 0 rows
+  [FALLBACK] PKI trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] PKI yfinance also failed, using westock data (0 rows)
+  [FAIL] PKI no data obtained
+[369/471] PLD
+  [OK] PLD westock-data: 2000 rows
+  [OK] PLD weekly supplement: 84 rows
+  [SAVE] PLD -> /data/workspace/back_trader_stocks/us/PLD.csv (2084 rows total)
+[370/471] PM
+  [OK] PM westock-data: 2000 rows
+  [OK] PM weekly supplement: 84 rows
+  [SAVE] PM -> /data/workspace/back_trader_stocks/us/PM.csv (2084 rows total)
+[371/471] PNC
+  [OK] PNC westock-data: 2000 rows
+  [OK] PNC weekly supplement: 84 rows
+  [SAVE] PNC -> /data/workspace/back_trader_stocks/us/PNC.csv (2084 rows total)
+[372/471] PNR
+  [OK] PNR westock-data: 2000 rows
+  [OK] PNR weekly supplement: 84 rows
+  [SAVE] PNR -> /data/workspace/back_trader_stocks/us/PNR.csv (2084 rows total)
+[373/471] PNW
+  [OK] PNW westock-data: 2000 rows
+  [OK] PNW weekly supplement: 84 rows
+  [SAVE] PNW -> /data/workspace/back_trader_stocks/us/PNW.csv (2084 rows total)
+[374/471] POOL
+  [OK] POOL westock-data: 2000 rows
+  [OK] POOL weekly supplement: 84 rows
+  [SAVE] POOL -> /data/workspace/back_trader_stocks/us/POOL.csv (2084 rows total)
+[375/471] PPG
+  [OK] PPG westock-data: 2000 rows
+  [OK] PPG weekly supplement: 84 rows
+  [SAVE] PPG -> /data/workspace/back_trader_stocks/us/PPG.csv (2084 rows total)
+[376/471] PPL
+  [OK] PPL westock-data: 2000 rows
+  [OK] PPL weekly supplement: 84 rows
+  [SAVE] PPL -> /data/workspace/back_trader_stocks/us/PPL.csv (2084 rows total)
+[377/471] PRU
+  [OK] PRU westock-data: 2000 rows
+  [OK] PRU weekly supplement: 84 rows
+  [SAVE] PRU -> /data/workspace/back_trader_stocks/us/PRU.csv (2084 rows total)
+[378/471] PSA
+  [OK] PSA westock-data: 2000 rows
+  [OK] PSA weekly supplement: 84 rows
+  [SAVE] PSA -> /data/workspace/back_trader_stocks/us/PSA.csv (2084 rows total)
+[379/471] PSX
+  [OK] PSX westock-data: 2000 rows
+  [OK] PSX weekly supplement: 84 rows
+  [SAVE] PSX -> /data/workspace/back_trader_stocks/us/PSX.csv (2084 rows total)
+[380/471] PTON
+  [OK] PTON westock-data: 1648 rows
+  [SAVE] PTON -> /data/workspace/back_trader_stocks/us/PTON.csv (1648 rows total)
+[381/471] PWR
+  [OK] PWR westock-data: 2000 rows
+  [OK] PWR weekly supplement: 84 rows
+  [SAVE] PWR -> /data/workspace/back_trader_stocks/us/PWR.csv (2084 rows total)
+[382/471] PXD
+  [OK] PXD westock-data: 0 rows
+  [FALLBACK] PXD trying yfinance...
+$PXD: possibly delisted; no timezone found
+  [WARN] PXD yfinance also failed, using westock data (0 rows)
+  [FAIL] PXD no data obtained
+[383/471] QRVO
+  [OK] QRVO westock-data: 2000 rows
+  [OK] QRVO weekly supplement: 84 rows
+  [SAVE] QRVO -> /data/workspace/back_trader_stocks/us/QRVO.csv (2084 rows total)
+[384/471] RCL
+  [OK] RCL westock-data: 2000 rows
+  [OK] RCL weekly supplement: 84 rows
+  [SAVE] RCL -> /data/workspace/back_trader_stocks/us/RCL.csv (2084 rows total)
+[385/471] RE
+  [OK] RE westock-data: 0 rows
+  [FALLBACK] RE trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] RE yfinance also failed, using westock data (0 rows)
+  [FAIL] RE no data obtained
+[386/471] RF
+  [OK] RF westock-data: 2000 rows
+  [OK] RF weekly supplement: 84 rows
+  [SAVE] RF -> /data/workspace/back_trader_stocks/us/RF.csv (2084 rows total)
+[387/471] RHI
+  [OK] RHI westock-data: 2000 rows
+  [OK] RHI weekly supplement: 84 rows
+  [SAVE] RHI -> /data/workspace/back_trader_stocks/us/RHI.csv (2084 rows total)
+[388/471] RL
+  [OK] RL westock-data: 2000 rows
+  [OK] RL weekly supplement: 84 rows
+  [SAVE] RL -> /data/workspace/back_trader_stocks/us/RL.csv (2084 rows total)
+[389/471] RMD
+  [OK] RMD westock-data: 2000 rows
+  [OK] RMD weekly supplement: 84 rows
+  [SAVE] RMD -> /data/workspace/back_trader_stocks/us/RMD.csv (2084 rows total)
+[390/471] ROK
+  [OK] ROK westock-data: 2000 rows
+  [OK] ROK weekly supplement: 84 rows
+  [SAVE] ROK -> /data/workspace/back_trader_stocks/us/ROK.csv (2084 rows total)
+[391/471] ROL
+  [OK] ROL westock-data: 2000 rows
+  [OK] ROL weekly supplement: 84 rows
+  [SAVE] ROL -> /data/workspace/back_trader_stocks/us/ROL.csv (2084 rows total)
+[392/471] RSG
+  [OK] RSG westock-data: 2000 rows
+  [OK] RSG weekly supplement: 84 rows
+  [SAVE] RSG -> /data/workspace/back_trader_stocks/us/RSG.csv (2084 rows total)
+[393/471] RVTY
+  [OK] RVTY westock-data: 2000 rows
+  [OK] RVTY weekly supplement: 84 rows
+  [SAVE] RVTY -> /data/workspace/back_trader_stocks/us/RVTY.csv (2084 rows total)
+[394/471] RTX
+  [OK] RTX westock-data: 1517 rows
+  [SAVE] RTX -> /data/workspace/back_trader_stocks/us/RTX.csv (1517 rows total)
+[395/471] SBAC
+  [OK] SBAC westock-data: 2000 rows
+  [OK] SBAC weekly supplement: 84 rows
+  [SAVE] SBAC -> /data/workspace/back_trader_stocks/us/SBAC.csv (2084 rows total)
+[396/471] SCHW
+  [OK] SCHW westock-data: 2000 rows
+  [OK] SCHW weekly supplement: 84 rows
+  [SAVE] SCHW -> /data/workspace/back_trader_stocks/us/SCHW.csv (2084 rows total)
+[397/471] SHW
+  [OK] SHW westock-data: 2000 rows
+  [OK] SHW weekly supplement: 84 rows
+  [SAVE] SHW -> /data/workspace/back_trader_stocks/us/SHW.csv (2084 rows total)
+[398/471] SIRI
+  [OK] SIRI westock-data: 2000 rows
+  [OK] SIRI weekly supplement: 84 rows
+  [SAVE] SIRI -> /data/workspace/back_trader_stocks/us/SIRI.csv (2084 rows total)
+[399/471] SLB
+  [OK] SLB westock-data: 2000 rows
+  [OK] SLB weekly supplement: 84 rows
+  [SAVE] SLB -> /data/workspace/back_trader_stocks/us/SLB.csv (2084 rows total)
+[400/471] SNA
+  [OK] SNA westock-data: 2000 rows
+  [OK] SNA weekly supplement: 84 rows
+  [SAVE] SNA -> /data/workspace/back_trader_stocks/us/SNA.csv (2084 rows total)
+[401/471] SO
+  [OK] SO westock-data: 2000 rows
+  [OK] SO weekly supplement: 84 rows
+  [SAVE] SO -> /data/workspace/back_trader_stocks/us/SO.csv (2084 rows total)
+[402/471] SOLV
+  [OK] SOLV westock-data: 514 rows
+  [SAVE] SOLV -> /data/workspace/back_trader_stocks/us/SOLV.csv (514 rows total)
+[403/471] SPG
+  [OK] SPG westock-data: 2000 rows
+  [OK] SPG weekly supplement: 84 rows
+  [SAVE] SPG -> /data/workspace/back_trader_stocks/us/SPG.csv (2084 rows total)
+[404/471] SPGI
+  [OK] SPGI westock-data: 2000 rows
+  [OK] SPGI weekly supplement: 84 rows
+  [SAVE] SPGI -> /data/workspace/back_trader_stocks/us/SPGI.csv (2084 rows total)
+[405/471] SRE
+  [OK] SRE westock-data: 2000 rows
+  [OK] SRE weekly supplement: 84 rows
+  [SAVE] SRE -> /data/workspace/back_trader_stocks/us/SRE.csv (2084 rows total)
+[406/471] STE
+  [OK] STE westock-data: 2000 rows
+  [OK] STE weekly supplement: 84 rows
+  [SAVE] STE -> /data/workspace/back_trader_stocks/us/STE.csv (2084 rows total)
+[407/471] STLD
+  [OK] STLD westock-data: 2000 rows
+  [OK] STLD weekly supplement: 84 rows
+  [SAVE] STLD -> /data/workspace/back_trader_stocks/us/STLD.csv (2084 rows total)
+[408/471] STZ
+  [OK] STZ westock-data: 2000 rows
+  [OK] STZ weekly supplement: 84 rows
+  [SAVE] STZ -> /data/workspace/back_trader_stocks/us/STZ.csv (2084 rows total)
+[409/471] SW
+  [OK] SW westock-data: 2000 rows
+  [OK] SW weekly supplement: 84 rows
+  [SAVE] SW -> /data/workspace/back_trader_stocks/us/SW.csv (2084 rows total)
+[410/471] SWK
+  [OK] SWK westock-data: 2000 rows
+  [OK] SWK weekly supplement: 84 rows
+  [SAVE] SWK -> /data/workspace/back_trader_stocks/us/SWK.csv (2084 rows total)
+[411/471] SWKS
+  [OK] SWKS westock-data: 2000 rows
+  [OK] SWKS weekly supplement: 84 rows
+  [SAVE] SWKS -> /data/workspace/back_trader_stocks/us/SWKS.csv (2084 rows total)
+[412/471] SYF
+  [OK] SYF westock-data: 2000 rows
+  [OK] SYF weekly supplement: 84 rows
+  [SAVE] SYF -> /data/workspace/back_trader_stocks/us/SYF.csv (2084 rows total)
+[413/471] SYK
+  [OK] SYK westock-data: 2000 rows
+  [OK] SYK weekly supplement: 84 rows
+  [SAVE] SYK -> /data/workspace/back_trader_stocks/us/SYK.csv (2084 rows total)
+[414/471] SYY
+  [OK] SYY westock-data: 2000 rows
+  [OK] SYY weekly supplement: 84 rows
+  [SAVE] SYY -> /data/workspace/back_trader_stocks/us/SYY.csv (2084 rows total)
+[415/471] T
+  [OK] T westock-data: 2000 rows
+  [OK] T weekly supplement: 84 rows
+  [SAVE] T -> /data/workspace/back_trader_stocks/us/T.csv (2084 rows total)
+[416/471] TAP
+  [OK] TAP westock-data: 2000 rows
+  [OK] TAP weekly supplement: 84 rows
+  [SAVE] TAP -> /data/workspace/back_trader_stocks/us/TAP.csv (2084 rows total)
+[417/471] TDG
+  [OK] TDG westock-data: 2000 rows
+  [OK] TDG weekly supplement: 84 rows
+  [SAVE] TDG -> /data/workspace/back_trader_stocks/us/TDG.csv (2084 rows total)
+[418/471] TDY
+  [OK] TDY westock-data: 2000 rows
+  [OK] TDY weekly supplement: 84 rows
+  [SAVE] TDY -> /data/workspace/back_trader_stocks/us/TDY.csv (2084 rows total)
+[419/471] TEL
+  [OK] TEL westock-data: 2000 rows
+  [OK] TEL weekly supplement: 84 rows
+  [SAVE] TEL -> /data/workspace/back_trader_stocks/us/TEL.csv (2084 rows total)
+[420/471] TER
+  [OK] TER westock-data: 2000 rows
+  [OK] TER weekly supplement: 84 rows
+  [SAVE] TER -> /data/workspace/back_trader_stocks/us/TER.csv (2084 rows total)
+[421/471] TFC
+  [OK] TFC westock-data: 1597 rows
+  [SAVE] TFC -> /data/workspace/back_trader_stocks/us/TFC.csv (1597 rows total)
+[422/471] TGT
+  [OK] TGT westock-data: 2000 rows
+  [OK] TGT weekly supplement: 84 rows
+  [SAVE] TGT -> /data/workspace/back_trader_stocks/us/TGT.csv (2084 rows total)
+[423/471] TMO
+  [OK] TMO westock-data: 2000 rows
+  [OK] TMO weekly supplement: 84 rows
+  [SAVE] TMO -> /data/workspace/back_trader_stocks/us/TMO.csv (2084 rows total)
+[424/471] TPL
+  [OK] TPL westock-data: 2000 rows
+  [OK] TPL weekly supplement: 84 rows
+  [SAVE] TPL -> /data/workspace/back_trader_stocks/us/TPL.csv (2084 rows total)
+[425/471] TPR
+  [OK] TPR westock-data: 2000 rows
+  [OK] TPR weekly supplement: 26 rows
+  [SAVE] TPR -> /data/workspace/back_trader_stocks/us/TPR.csv (2026 rows total)
+[426/471] TRGP
+  [OK] TRGP westock-data: 2000 rows
+  [OK] TRGP weekly supplement: 84 rows
+  [SAVE] TRGP -> /data/workspace/back_trader_stocks/us/TRGP.csv (2084 rows total)
+[427/471] TRI
+  [OK] TRI westock-data: 2000 rows
+  [OK] TRI weekly supplement: 84 rows
+  [SAVE] TRI -> /data/workspace/back_trader_stocks/us/TRI.csv (2084 rows total)
+[428/471] TRMB
+  [OK] TRMB westock-data: 2000 rows
+  [OK] TRMB weekly supplement: 84 rows
+  [SAVE] TRMB -> /data/workspace/back_trader_stocks/us/TRMB.csv (2084 rows total)
+[429/471] TROW
+  [OK] TROW westock-data: 2000 rows
+  [OK] TROW weekly supplement: 84 rows
+  [SAVE] TROW -> /data/workspace/back_trader_stocks/us/TROW.csv (2084 rows total)
+[430/471] TRV
+  [OK] TRV westock-data: 2000 rows
+  [OK] TRV weekly supplement: 84 rows
+  [SAVE] TRV -> /data/workspace/back_trader_stocks/us/TRV.csv (2084 rows total)
+[431/471] TSCO
+  [OK] TSCO westock-data: 2000 rows
+  [OK] TSCO weekly supplement: 84 rows
+  [SAVE] TSCO -> /data/workspace/back_trader_stocks/us/TSCO.csv (2084 rows total)
+[432/471] TSLA
+  [OK] TSLA westock-data: 2000 rows
+  [OK] TSLA weekly supplement: 84 rows
+  [SAVE] TSLA -> /data/workspace/back_trader_stocks/us/TSLA.csv (2084 rows total)
+[433/471] TSN
+  [OK] TSN westock-data: 2000 rows
+  [OK] TSN weekly supplement: 84 rows
+  [SAVE] TSN -> /data/workspace/back_trader_stocks/us/TSN.csv (2084 rows total)
+[434/471] TTD
+  [OK] TTD westock-data: 2000 rows
+  [OK] TTD weekly supplement: 84 rows
+  [SAVE] TTD -> /data/workspace/back_trader_stocks/us/TTD.csv (2084 rows total)
+[435/471] TWL
+  [OK] TWL westock-data: 0 rows
+  [FALLBACK] TWL trying yfinance...
+    [RATE-LIMIT] yfinance rate limited, retry 1/2
+    [RATE-LIMIT] yfinance rate limited, retry 2/2
+  [WARN] TWL yfinance also failed, using westock data (0 rows)
+  [FAIL] TWL no data obtained
+[436/471] TXT
+  [OK] TXT westock-data: 2000 rows
+  [OK] TXT weekly supplement: 84 rows
+  [SAVE] TXT -> /data/workspace/back_trader_stocks/us/TXT.csv (2084 rows total)
+[437/471] UDR
+  [OK] UDR westock-data: 2000 rows
+  [OK] UDR weekly supplement: 84 rows
+  [SAVE] UDR -> /data/workspace/back_trader_stocks/us/UDR.csv (2084 rows total)
+[438/471] UHS
+  [OK] UHS westock-data: 2000 rows
+  [OK] UHS weekly supplement: 84 rows
+  [SAVE] UHS -> /data/workspace/back_trader_stocks/us/UHS.csv (2084 rows total)
+[439/471] UNP
+  [OK] UNP westock-data: 2000 rows
+  [OK] UNP weekly supplement: 84 rows
+  [SAVE] UNP -> /data/workspace/back_trader_stocks/us/UNP.csv (2084 rows total)
+[440/471] UPS
+  [OK] UPS westock-data: 2000 rows
+  [OK] UPS weekly supplement: 84 rows
+  [SAVE] UPS -> /data/workspace/back_trader_stocks/us/UPS.csv (2084 rows total)
+[441/471] URI
+  [OK] URI westock-data: 2000 rows
+  [OK] URI weekly supplement: 84 rows
+  [SAVE] URI -> /data/workspace/back_trader_stocks/us/URI.csv (2084 rows total)
+[442/471] USB
+  [OK] USB westock-data: 2000 rows
+  [OK] USB weekly supplement: 84 rows
+  [SAVE] USB -> /data/workspace/back_trader_stocks/us/USB.csv (2084 rows total)
+[443/471] V
+  [OK] V westock-data: 2000 rows
+  [OK] V weekly supplement: 84 rows
+  [SAVE] V -> /data/workspace/back_trader_stocks/us/V.csv (2084 rows total)
+[444/471] VFC
+  [OK] VFC westock-data: 2000 rows
+  [OK] VFC weekly supplement: 84 rows
+  [SAVE] VFC -> /data/workspace/back_trader_stocks/us/VFC.csv (2084 rows total)
+[445/471] VICI
+  [OK] VICI westock-data: 2000 rows
+  [OK] VICI weekly supplement: 13 rows
+  [SAVE] VICI -> /data/workspace/back_trader_stocks/us/VICI.csv (2013 rows total)
+[446/471] VLO
+  [OK] VLO westock-data: 2000 rows
+  [OK] VLO weekly supplement: 84 rows
+  [SAVE] VLO -> /data/workspace/back_trader_stocks/us/VLO.csv (2084 rows total)
+[447/471] VRSN
+  [OK] VRSN westock-data: 2000 rows
+  [OK] VRSN weekly supplement: 84 rows
+  [SAVE] VRSN -> /data/workspace/back_trader_stocks/us/VRSN.csv (2084 rows total)
+[448/471] VRT
+  [OK] VRT westock-data: 1555 rows
+  [SAVE] VRT -> /data/workspace/back_trader_stocks/us/VRT.csv (1555 rows total)
+[449/471] VST
+  [OK] VST westock-data: 2000 rows
+  [OK] VST weekly supplement: 51 rows
+  [SAVE] VST -> /data/workspace/back_trader_stocks/us/VST.csv (2051 rows total)
+[450/471] VTRS
+  [OK] VTRS westock-data: 1359 rows
+  [SAVE] VTRS -> /data/workspace/back_trader_stocks/us/VTRS.csv (1359 rows total)
+[451/471] VZ
+  [OK] VZ westock-data: 2000 rows
+  [OK] VZ weekly supplement: 84 rows
+  [SAVE] VZ -> /data/workspace/back_trader_stocks/us/VZ.csv (2084 rows total)
+[452/471] WAB
+  [OK] WAB westock-data: 2000 rows
+  [OK] WAB weekly supplement: 84 rows
+  [SAVE] WAB -> /data/workspace/back_trader_stocks/us/WAB.csv (2084 rows total)
+[453/471] WAL
+  [OK] WAL westock-data: 2000 rows
+  [OK] WAL weekly supplement: 84 rows
+  [SAVE] WAL -> /data/workspace/back_trader_stocks/us/WAL.csv (2084 rows total)
+[454/471] WAT
+  [OK] WAT westock-data: 2000 rows
+  [OK] WAT weekly supplement: 84 rows
+  [SAVE] WAT -> /data/workspace/back_trader_stocks/us/WAT.csv (2084 rows total)
+[455/471] WBA
+  [OK] WBA westock-data: 2000 rows
+  [OK] WBA weekly supplement: 84 rows
+  [SAVE] WBA -> /data/workspace/back_trader_stocks/us/WBA.csv (2084 rows total)
+[456/471] WEC
+  [OK] WEC westock-data: 2000 rows
+  [OK] WEC weekly supplement: 84 rows
+  [SAVE] WEC -> /data/workspace/back_trader_stocks/us/WEC.csv (2084 rows total)
+[457/471] WELL
+  [OK] WELL westock-data: 2000 rows
+  [OK] WELL weekly supplement: 9 rows
+  [SAVE] WELL -> /data/workspace/back_trader_stocks/us/WELL.csv (2009 rows total)
+[458/471] WFC
+  [OK] WFC westock-data: 2000 rows
+  [OK] WFC weekly supplement: 84 rows
+  [SAVE] WFC -> /data/workspace/back_trader_stocks/us/WFC.csv (2084 rows total)
+[459/471] WM
+  [OK] WM westock-data: 2000 rows
+  [OK] WM weekly supplement: 84 rows
+  [SAVE] WM -> /data/workspace/back_trader_stocks/us/WM.csv (2084 rows total)
+[460/471] WMB
+  [OK] WMB westock-data: 2000 rows
+  [OK] WMB weekly supplement: 84 rows
+  [SAVE] WMB -> /data/workspace/back_trader_stocks/us/WMB.csv (2084 rows total)
+[461/471] WMT
+  [OK] WMT westock-data: 2000 rows
+  [OK] WMT weekly supplement: 84 rows
+  [SAVE] WMT -> /data/workspace/back_trader_stocks/us/WMT.csv (2084 rows total)
+[462/471] WRB
+  [OK] WRB westock-data: 2000 rows
+  [OK] WRB weekly supplement: 84 rows
+  [SAVE] WRB -> /data/workspace/back_trader_stocks/us/WRB.csv (2084 rows total)
+[463/471] WSM
+  [OK] WSM westock-data: 2000 rows
+  [OK] WSM weekly supplement: 84 rows
+  [SAVE] WSM -> /data/workspace/back_trader_stocks/us/WSM.csv (2084 rows total)
+[464/471] WST
+  [OK] WST westock-data: 2000 rows
+  [OK] WST weekly supplement: 84 rows
+  [SAVE] WST -> /data/workspace/back_trader_stocks/us/WST.csv (2084 rows total)
+[465/471] WY
+  [OK] WY westock-data: 2000 rows
+  [OK] WY weekly supplement: 84 rows
+  [SAVE] WY -> /data/workspace/back_trader_stocks/us/WY.csv (2084 rows total)
+[466/471] WYNN
+  [OK] WYNN westock-data: 2000 rows
+  [OK] WYNN weekly supplement: 84 rows
+  [SAVE] WYNN -> /data/workspace/back_trader_stocks/us/WYNN.csv (2084 rows total)
+[467/471] XOM
+  [OK] XOM westock-data: 2000 rows
+  [OK] XOM weekly supplement: 84 rows
+  [SAVE] XOM -> /data/workspace/back_trader_stocks/us/XOM.csv (2084 rows total)
+[468/471] XYL
+  [OK] XYL westock-data: 2000 rows
+  [OK] XYL weekly supplement: 84 rows
+  [SAVE] XYL -> /data/workspace/back_trader_stocks/us/XYL.csv (2084 rows total)
+[469/471] YUM
+  [OK] YUM westock-data: 2000 rows
+  [OK] YUM weekly supplement: 84 rows
+  [SAVE] YUM -> /data/workspace/back_trader_stocks/us/YUM.csv (2084 rows total)
+[470/471] ZBH
+  [OK] ZBH westock-data: 2000 rows
+  [OK] ZBH weekly supplement: 84 rows
+  [SAVE] ZBH -> /data/workspace/back_trader_stocks/us/ZBH.csv (2084 rows total)
+[471/471] ZTS
+  [OK] ZTS westock-data: 2000 rows
+  [OK] ZTS weekly supplement: 84 rows
+  [SAVE] ZTS -> /data/workspace/back_trader_stocks/us/ZTS.csv (2084 rows total)
+
+美股结果：成功 454，跳过 10，失败 17
+失败标的（前30）：['ABC', 'ADS', 'ANSS', 'BLL', 'CXO', 'FI', 'FL', 'HES', 'IPG', 'MO', 'MRO', 'NAVA', 'PARA', 'PKI', 'PXD', 'RE', 'TWL']
+
+======================================================================
+下载汇总
+======================================================================
+港股：成功 70，跳过(已完成) 32，失败 1
+美股：成功 454，跳过(已完成) 10，失败 17
+
+数据保存位置：
+  港股：/data/workspace/back_trader_stocks/hk/
+  美股：/data/workspace/back_trader_stocks/us/
+
+进度文件：/data/workspace/back_trader_stocks/download_progress.json
+
+完成！

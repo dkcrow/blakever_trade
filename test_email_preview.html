@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <style>
+    body {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+           margin:0;padding:10px;background:#0d0d1a;color:#eee;-webkit-text-size-adjust:100%}
+    .container {max-width:600px;margin:0 auto}
+    * {box-sizing:border-box}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="background:#1a1a2e;color:#fff;
+                 padding:16px;border-radius:12px;margin-bottom:12px">
+      <h1 style="margin:0;font-size:17px">🔄 穿越牛熊策略回测报告</h1>
+      <p style="margin:6px 0 0;font-size:12px;opacity:0.9;line-height:1.5">
+        2026-04-24 00:33:59 · 耗时60s<br>
+        主2019-2024 / 压力2015-2018 · westock-data
+      </p>
+    </div>
+
+    
+    <div style="background:#1a1a2e;color:#fff;
+                 padding:14px;border-radius:12px;margin-bottom:12px">
+      <h2 style="margin:0 0 10px;font-size:15px">📊 扫描统计</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div style="background:rgba(255,255,255,0.12);padding:10px;border-radius:8px;text-align:center">
+          <div style="font-size:22px;font-weight:bold">15</div>
+          <div style="font-size:11px;opacity:0.9">策略变体</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.12);padding:10px;border-radius:8px;text-align:center">
+          <div style="font-size:22px;font-weight:bold;color:#2ecc71">10</div>
+          <div style="font-size:11px;opacity:0.9">通过回测</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.12);padding:10px;border-radius:8px;text-align:center">
+          <div style="font-size:22px;font-weight:bold;color:#e74c3c">5</div>
+          <div style="font-size:11px;opacity:0.9">废弃策略</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.12);padding:10px;border-radius:8px;text-align:center">
+          <div style="font-size:22px;font-weight:bold;color:#f39c12">0</div>
+          <div style="font-size:11px;opacity:0.9">Pine否决</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;font-size:11px;opacity:0.85;line-height:1.6">
+        搜索: variant · 
+        GitHub: 3个 · 
+        废弃库: 50个 · 耗时60s<br>
+        无风险利率: 4.00% · 
+        幸存者偏差: ⚠️ · 
+        数据源: westock
+      </div>
+      
+    </div>
+
+    <div style="background:#1a1a2e;border-radius:12px;padding:12px;margin-bottom:12px">
+      <h3 style="margin:0 0 10px;font-size:14px;color:#fff">🏆 排行榜（按最高分排序 · 7天保护期）</h3>
+      
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #2ecc71">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">🥇</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">均值回归</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🖥️本地</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">RSI(2)严格均值回归(QQQ)</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:8px">63.58<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+14.11%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.56</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">15.15%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">58.0次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">64.6%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.85</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: rsi_period=2, rsi_buy_threshold=10, rsi_sell_threshold=80, position_size=0.95</div>
+          
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #f39c12">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">🥈</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🖥️本地</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">双市场自适应策略(趋势+震荡)v5.0</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#f39c12;white-space:nowrap;margin-left:8px">50.05<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+14.06%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.67</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">25.39%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">48.1次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">42.7%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.66</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: regime_detector=DMI(14), trend_sub=momentum_top3, range_sub=RSI_mean_reversion, stop_loss=ATR+absolute</div>
+          
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #f39c12">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">🥉</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">均值回归</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🖥️本地</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">RSI(2)严格均值回归(SPY)</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#f39c12;white-space:nowrap;margin-left:8px">49.6<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+10.39%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.41</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">20.45%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">52.0次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">64.4%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.80</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: rsi_period=2, rsi_buy_threshold=10, rsi_sell_threshold=80, position_size=0.95</div>
+          
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #f39c12">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">4️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">GEM4资产_9M+5d缓冲</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#f39c12;white-space:nowrap;margin-left:8px">45.49<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+10.43%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.46</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">24.28%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">5.3次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">55.4%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.16</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: lookback_months=9, buffer_days=5, assets=SPY/VEA/AGG/SHY</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">+2.89%</span> / 回撤<span style="color:#eee">0.37%</span></div>
+          <div style="margin-top:4px;font-size:11px">✅鲁棒 ⚠️偏差 ✅ 有效</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #f39c12">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">5️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">GEM4资产_9M+3d缓冲</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#f39c12;white-space:nowrap;margin-left:8px">42.86<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+9.25%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.38</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">24.45%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">6.2次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">55.2%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.14</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: lookback_months=9, buffer_days=3, assets=SPY/VEA/AGG/SHY</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">+2.89%</span> / 回撤<span style="color:#eee">0.37%</span></div>
+          <div style="margin-top:4px;font-size:11px">✅鲁棒 ⚠️偏差 ✅ 有效</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #f39c12">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">6️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">双市场自适应_9M+0d缓冲</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#f39c12;white-space:nowrap;margin-left:8px">40.16<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+9.39%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.39</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">29.26%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">8.3次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">55.5%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.14</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: lookback_months=9, buffer_days=0, mode=trend+range_adaptive, risk_assets=QQQ/SPY/VEA</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">+2.89%</span> / 回撤<span style="color:#eee">0.37%</span></div>
+          <div style="margin-top:4px;font-size:11px">✅鲁棒 ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #e74c3c">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">7️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">均值回归</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">RSI14_25/75轮动</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:8px">36.38<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+10.13%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.41</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">29.44%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">6.2次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">53.5%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.20</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: rsi_period=14, rsi_oversold=25, rsi_overbought=75</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">-8.29%</span> / 回撤<span style="color:#eee">14.77%</span></div>
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #e74c3c">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">8️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">GEM4资产_6M+5d缓冲</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:8px">35.6<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+8.10%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.32</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">24.74%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">6.0次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">55.1%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.13</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: lookback_months=6, buffer_days=5, assets=SPY/VEA/AGG/SHY</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">-4.83%</span> / 回撤<span style="color:#eee">6.19%</span></div>
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 ✅ 有效</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #e74c3c">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">9️⃣</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">均值回归</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">RSI14_25/70轮动</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:8px">34.93<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+9.35%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.37</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">29.44%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">6.3次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">53.6%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.20</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: rsi_period=14, rsi_oversold=25, rsi_overbought=70</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">-8.29%</span> / 回撤<span style="color:#eee">14.77%</span></div>
+          <div style="margin-top:4px;font-size:11px"> ⚠️偏差 </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:10px;padding:12px;margin-bottom:10px;
+                     box-shadow:0 1px 4px rgba(0,0,0,0.06);border-left:4px solid #e74c3c">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:16px">🔟</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;margin-left:4px;white-space:nowrap;color:#ccc">趋势跟踪</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.18);padding:2px 6px;border-radius:4px;margin-left:2px;white-space:nowrap;color:#ccc">🌐搜索</span>
+              <strong style="font-size:13px;margin-left:4px;display:inline-block;vertical-align:middle;word-break:break-all;color:#fff">QQQ/VEA/GLD轮动_6M</strong>
+            </div>
+            <div style="font-size:20px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:8px">32.61<span style="font-size:10px">分</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:12px;color:#ddd">
+            <div>📈 年化 <span style="font-weight:bold;color:#2ecc71">+4.75%</span></div>
+            <div>📊 夏普 <span style="font-weight:bold;color:#fff">0.08</span></div>
+            <div>📉 回撤 <span style="font-weight:bold;color:#fff">23.76%</span></div>
+            <div>🔄 年交易 <span style="font-weight:bold;color:#fff">8.3次</span></div>
+            <div>🎯 胜率 <span style="font-weight:bold;color:#fff">53.7%</span></div>
+            <div>📊 盈亏比 <span style="font-weight:bold;color:#fff">1.07</span></div>
+          </div>
+          <div style="margin-top:6px;font-size:10px;color:#999">参数: lookback_months=6, buffer_days=0, assets=QQQ/VEA/GLD/SHY</div>
+          <div style="margin-top:6px;font-size:11px;color:#999">🧪 压力: 年化<span style="color:#eee">+3.26%</span> / 回撤<span style="color:#eee">0.37%</span></div>
+          <div style="margin-top:4px;font-size:11px">✅鲁棒 ⚠️偏差 ⚠️ 疑似失效</div>
+        </div>
+    </div>
+
+    <div style="background:#1a1a2e;border-radius:12px;padding:12px;margin-bottom:12px">
+      <h3 style="margin:0 0 8px;font-size:14px;color:#fff">📋 全部回测 TOP15</h3>
+      
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#1</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">🖥️RSI(2)严格均值回归(QQQ)</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">63.58分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+14.11%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">15.15%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.56</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">64.6%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.85</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#2</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">🖥️双市场自适应策略(趋势+震荡)v5.0</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">50.05分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+14.06%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">25.39%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.67</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">42.7%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.66</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#3</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">🖥️RSI(2)严格均值回归(SPY)</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">49.6分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+10.39%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">20.45%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.41</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">64.4%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.80</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#4</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">GEM4资产_9M+5d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">45.49分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+10.43%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">24.28%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.46</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">55.4%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.16</span></div>
+            <div>✅ ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#5</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">GEM4资产_9M+3d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">42.86分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+9.25%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">24.45%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.38</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">55.2%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.14</span></div>
+            <div>✅ ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#6</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">双市场自适应_9M+0d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">40.16分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+9.39%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">29.26%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.39</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">55.5%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.14</span></div>
+            <div>✅ ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#7</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">RSI14_25/75轮动</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">36.38分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+10.13%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">29.44%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.41</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">53.5%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.20</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#8</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">GEM4资产_6M+5d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">35.6分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+8.10%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">24.74%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.32</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">55.1%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.13</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#9</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">RSI14_25/70轮动</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">34.93分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+9.35%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">29.44%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.37</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">53.6%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.20</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#10</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">QQQ/VEA/GLD轮动_6M</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#2ecc71;white-space:nowrap;margin-left:6px">32.61分 ✅ 通过</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+4.75%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">23.76%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.08</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">53.7%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.07</span></div>
+            <div>✅ ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#11</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">事件驱动</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">宏观轮动_9M+5d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:6px">0分 ❌ 废弃</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+1.09%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">40.06%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">-0.14</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">52.6%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.03</span></div>
+            <div>✅ ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#12</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">趋势跟踪</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">MACD12/21轮动+3d缓冲</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:6px">0分 ❌ 废弃</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#2ecc71;font-weight:bold">+5.85%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">30.30%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">0.16</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">52.4%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.11</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#13</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">RSI7_25/70轮动</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:6px">0分 ❌ 废弃</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#e74c3c;font-weight:bold">-1.08%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">32.51%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">-0.28</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">52.4%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.00</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#14</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">RSI7_25/75轮动</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:6px">0分 ❌ 废弃</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#e74c3c;font-weight:bold">-0.42%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">32.51%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">-0.24</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">52.6%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">1.01</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+        <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:0">
+              <span style="font-size:12px;font-weight:bold;color:#aaa">#15</span>
+              <span style="font-size:10px;background:rgba(255,255,255,0.12);padding:1px 5px;border-radius:3px;margin-left:4px;color:#ccc">均值回归</span>
+              <span style="font-size:12px;margin-left:4px;white-space:nowrap;color:#eee">RSI7_30/70轮动</span>
+            </div>
+            <span style="font-size:13px;font-weight:bold;color:#e74c3c;white-space:nowrap;margin-left:6px">0分 ❌ 废弃</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px 10px;font-size:11px;margin-top:4px;color:#bbb">
+            <div>年化 <span style="color:#e74c3c;font-weight:bold">-2.69%</span></div>
+            <div>回撤 <span style="font-weight:bold;color:#ddd">36.21%</span></div>
+            <div>夏普 <span style="font-weight:bold;color:#ddd">-0.36</span></div>
+            <div>胜率 <span style="font-weight:bold;color:#ddd">51.8%</span></div>
+            <div>盈亏比 <span style="font-weight:bold;color:#ddd">0.98</span></div>
+            <div> ⚠️</div>
+          </div>
+        </div>
+    </div>
+
+    <div style="background:#1a1a2e;border-radius:12px;padding:12px">
+      <h3 style="margin:0 0 8px;font-size:14px;color:#fff">🗑️ 废弃策略（最近10个）</h3>
+      
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">聚宽RSRS-GEM9M+ATR2.5x</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">外部策略</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">全天候_6M+3d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">聚宽RSRS-GEM6M+ATR2x</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">外部策略</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">MACD12/21轮动+0d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">MACD12/26轮动+3d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">MACD12/26轮动+0d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">全天候_6M+7d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+        <div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.15)">
+          <div style="font-size:12px;font-weight:bold;color:#eee">双市场自适应_3M+3d缓冲</div>
+          <div style="font-size:11px;color:#e74c3c;margin-top:2px">原因: 被更高分策略替换</div>
+          <div style="font-size:10px;color:#999;margin-top:1px">2026-04-23</div>
+        </div>
+    </div>
+
+    <div style="text-align:center;color:#aaa;font-size:10px;margin-top:10px;padding:8px;line-height:1.6">
+      穿越牛熊策略回测系统 v3 · 每6h自动扫描 · westock-data<br>
+      回撤≤30% · 按最高分排序保留前十 · 7天保护期<br>
+      评分: 年化25%/夏普25%/回撤20%/盈亏比15%/胜率15%+鲁棒5-偏差10<br>
+      7大搜索源 · Pine否决 · SHA256指纹去重 · 滚动验证
+    </div>
+  </div>
+</body>
+</html>

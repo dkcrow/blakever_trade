@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>港股每日操作建议指南 2026-04-20</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
+.container { max-width: 680px; margin: 0 auto; padding: 12px; }
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px 12px 0 0; text-align: center; }
+.header h1 { font-size: 20px; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; opacity: 0.9; }
+.card { background: white; border-radius: 8px; padding: 14px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.card-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #667eea; display: flex; align-items: center; }
+.card-title .icon { margin-right: 6px; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.badge-green { background: #e6f7e6; color: #52c41a; }
+.badge-orange { background: #fff7e6; color: #fa8c16; }
+.badge-red { background: #fff1f0; color: #f5222d; }
+.badge-blue { background: #e6f7ff; color: #1890ff; }
+.badge-purple { background: #f9f0ff; color: #722ed1; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.summary-item { text-align: center; padding: 6px 2px; background: #fafafa; border-radius: 6px; }
+.summary-item .label { font-size: 11px; color: #888; margin-bottom: 2px; }
+.summary-item .value { font-size: 14px; font-weight: 600; color: #333; }
+.summary-item .value.up { color: #f5222d; }
+.summary-item .value.down { color: #52c41a; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th, td { padding: 6px 4px; text-align: center; border-bottom: 1px solid #f0f0f0; white-space: nowrap; }
+th { background: #fafafa; font-weight: 600; color: #555; font-size: 11px; }
+td { font-size: 12px; }
+.new-tag { background: #f5222d; color: white; font-size: 9px; padding: 1px 4px; border-radius: 3px; margin-left: 2px; }
+.status-tag { font-size: 10px; }
+.warning-box { background: #fffbe6; border: 1px solid #ffe58f; border-radius: 6px; padding: 10px; margin-bottom: 10px; font-size: 12px; }
+.info-box { background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 6px; padding: 10px; margin-bottom: 10px; font-size: 12px; }
+.footer { text-align: center; color: #999; font-size: 11px; padding: 12px; }
+.discount-chain { font-size: 11px; color: #666; }
+.discount-chain span { display: inline-block; background: #f5f5f5; padding: 1px 6px; border-radius: 3px; margin: 1px 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+<h1>📊 港股每日操作建议指南</h1>
+<div class="subtitle">2026年4月20日 周一 | Blakever V2策略</div>
+</div>
+
+<!-- 大盘仪表盘 -->
+<div class="card">
+<div class="card-title"><span class="icon">🌡️</span>大盘仪表盘</div>
+<div class="summary-grid">
+<div class="summary-item">
+<div class="label">恒生指数</div>
+<div class="value down">26015</div>
+</div>
+<div class="summary-item">
+<div class="label">恒生科技</div>
+<div class="value down">5001</div>
+</div>
+<div class="summary-item">
+<div class="label">VHSI</div>
+<div class="value">20.9</div>
+</div>
+<div class="summary-item">
+<div class="label">行情定性</div>
+<div class="value"><span class="badge badge-orange">震荡市</span></div>
+</div>
+</div>
+<div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+<span class="badge badge-blue">置信度73%</span>
+<span class="badge badge-green">情绪因子+0.1</span>
+<span class="badge badge-green">流动性正常</span>
+<span class="badge badge-purple">VIX=17.5</span>
+</div>
+</div>
+
+<!-- CRO风控摘要 -->
+<div class="card">
+<div class="card-title"><span class="icon">🛡️</span>CRO风控摘要</div>
+<div class="summary-grid">
+<div class="summary-item">
+<div class="label">账户净值</div>
+<div class="value">1亿</div>
+</div>
+<div class="summary-item">
+<div class="label">持仓市值</div>
+<div class="value">1175万</div>
+</div>
+<div class="summary-item">
+<div class="label">持仓数</div>
+<div class="value">15只</div>
+</div>
+<div class="summary-item">
+<div class="label">总敞口</div>
+<div class="value">11.7%</div>
+</div>
+</div>
+<div style="margin-top:8px; font-size:12px; color:#666;">
+VHSI仓位规则：20.9→维持42%上限 | 当前11.7%→安全空间充裕
+</div>
+</div>
+
+<!-- 今日新开仓指令 -->
+<div class="card">
+<div class="card-title"><span class="icon">🆕</span>今日新开仓指令（震荡市杠铃策略）</div>
+<table>
+<tr><th>标的</th><th>方向</th><th>金额</th><th>止损</th><th>止盈</th><th>仓位折扣链</th></tr>
+<tr>
+<td><strong>HK03690</strong><span class="new-tag">NEW</span><br><small>美团-W</small></td>
+<td>做多</td>
+<td>90万</td>
+<td>78.50</td>
+<td>102.00</td>
+<td class="discount-chain">
+<span>CRO 100万</span>→<span>情绪×1.0</span>→<span>踏空×0.9</span>=<span>90万</span>
+</td>
+</tr>
+<tr>
+<td><strong>HK09961</strong><span class="new-tag">NEW</span><br><small>携程集团-S</small></td>
+<td>做多</td>
+<td>90万</td>
+<td>390.00</td>
+<td>480.00</td>
+<td class="discount-chain">
+<span>CRO 100万</span>→<span>情绪×1.0</span>→<span>踏空×0.9</span>=<span>90万</span>
+</td>
+</tr>
+<tr>
+<td><strong>HK00001</strong><span class="new-tag">NEW</span><br><small>长和</small></td>
+<td>做多</td>
+<td>80万</td>
+<td>60.00</td>
+<td>72.00</td>
+<td class="discount-chain">
+<span>CRO 100万</span>→<span>情绪×1.0</span>→<span>踏空×0.8</span>=<span>80万</span>
+</td>
+</tr>
+</table>
+</div>
+
+<!-- 选股逻辑 -->
+<div class="card">
+<div class="card-title"><span class="icon">🧠</span>选股逻辑（V2震荡市策略）</div>
+<table>
+<tr><th>标的</th><th>EMA12 vs EMA26</th><th>MACD柱</th><th>RSI6</th><th>信号强度</th><th>杠铃端</th></tr>
+<tr>
+<td>HK03690美团</td>
+<td style="color:#52c41a">多头</td>
+<td>+0.57 ✅</td>
+<td>46.5 ✅</td>
+<td>DIF>0>DEA</td>
+<td>成长端</td>
+</tr>
+<tr>
+<td>HK09961携程</td>
+<td style="color:#fa8c16">接近翻多</td>
+<td>+10.94 ✅</td>
+<td>67.2 ✅</td>
+<td>MACD柱极强</td>
+<td>成长端</td>
+</tr>
+<tr>
+<td>HK00001长和</td>
+<td style="color:#52c41a">多头</td>
+<td>+0.71 ✅</td>
+<td>59.3 ✅</td>
+<td>价>MA60</td>
+<td>防御端</td>
+</tr>
+</table>
+</div>
+
+<!-- 持仓管理表 -->
+<div class="card">
+<div class="card-title"><span class="icon">📋</span>港股持仓管理表</div>
+<table>
+<tr><th>标的</th><th>建仓价</th><th>现价</th><th>盈亏%</th><th>止损</th><th>状态</th></tr>
+<tr>
+<td>HK01211 比亚迪</td>
+<td>111.51</td>
+<td>111.20</td>
+<td style="color:#52c41a">-0.3%</td>
+<td>105.02</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK00388 港交所</td>
+<td>409.01</td>
+<td>409.80</td>
+<td style="color:#f5222d">+0.2%</td>
+<td>403.65</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK02382 舜宇光学</td>
+<td>64.16</td>
+<td>66.40</td>
+<td style="color:#f5222d">+3.5%</td>
+<td>59.11</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK00005 汇丰</td>
+<td>141.64</td>
+<td>142.00</td>
+<td style="color:#f5222d">+0.3%</td>
+<td>133.40</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK09618 京东</td>
+<td>122.72</td>
+<td>121.80</td>
+<td style="color:#52c41a">-0.8%</td>
+<td>111.14</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK03750 宁德时代</td>
+<td>692.69</td>
+<td>694.00</td>
+<td style="color:#f5222d">+0.2%</td>
+<td>629.31</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK03692 翰森制药</td>
+<td>39.80</td>
+<td>40.00</td>
+<td style="color:#f5222d">+0.5%</td>
+<td>36.48</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>HK03690 美团<span class="new-tag">NEW</span></td>
+<td>85.19</td>
+<td>85.05</td>
+<td style="color:#52c41a">-0.2%</td>
+<td>78.50</td>
+<td><span class="badge badge-blue">🔵新建仓</span></td>
+</tr>
+<tr>
+<td>HK09961 携程<span class="new-tag">NEW</span></td>
+<td>423.62</td>
+<td>423.00</td>
+<td style="color:#52c41a">-0.1%</td>
+<td>390.00</td>
+<td><span class="badge badge-blue">🔵新建仓</span></td>
+</tr>
+<tr>
+<td>HK00001 长和<span class="new-tag">NEW</span></td>
+<td>63.61</td>
+<td>63.55</td>
+<td style="color:#52c41a">-0.1%</td>
+<td>60.00</td>
+<td><span class="badge badge-blue">🔵新建仓</span></td>
+</tr>
+</table>
+</div>
+
+<!-- 美股持仓 -->
+<div class="card">
+<div class="card-title"><span class="icon">🇺🇸</span>美股持仓（5只）</div>
+<table>
+<tr><th>标的</th><th>建仓价</th><th>方向</th><th>市值</th><th>止损</th><th>状态</th></tr>
+<tr>
+<td>NVDA 英伟达</td>
+<td>201.88</td>
+<td>做多</td>
+<td>100万</td>
+<td>-</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>MSFT 微软</td>
+<td>423.21</td>
+<td>做多</td>
+<td>100万</td>
+<td>-</td>
+<td><span class="badge badge-orange">🟡4/30财报</span></td>
+</tr>
+<tr>
+<td>AVGO 博通</td>
+<td>406.95</td>
+<td>做多</td>
+<td>5万</td>
+<td>-</td>
+<td><span class="badge badge-green">🟢信号健康</span></td>
+</tr>
+<tr>
+<td>META Meta</td>
+<td>689.24</td>
+<td>做多</td>
+<td>8.6万</td>
+<td>-</td>
+<td><span class="badge badge-orange">🟡4/30财报</span></td>
+</tr>
+<tr>
+<td>GOOGL 谷歌</td>
+<td>342.02</td>
+<td>做多</td>
+<td>10.7万</td>
+<td>-</td>
+<td><span class="badge badge-orange">🟡4/29财报</span></td>
+</tr>
+</table>
+</div>
+
+<!-- 反向辩论庭 -->
+<div class="card">
+<div class="card-title"><span class="icon">⚖️</span>反向测试辩论庭</div>
+<table>
+<tr><th>标的</th><th>反方论点</th><th>正方反驳</th><th>错误概率</th></tr>
+<tr>
+<td>HK03690美团</td>
+<td style="font-size:11px;">价格<MA60，空头排列中反弹</td>
+<td style="font-size:11px;">DIF>0且>DEA已翻多，RSI46适中</td>
+<td><span class="badge badge-orange">30%</span></td>
+</tr>
+<tr>
+<td>HK09961携程</td>
+<td style="font-size:11px;">HSTECH空头排列，科技股弱势</td>
+<td style="font-size:11px;">MACD柱10.94极强，旅游独立逻辑</td>
+<td><span class="badge badge-orange">25%</span></td>
+</tr>
+<tr>
+<td>HK00001长和</td>
+<td style="font-size:11px;">综合企业估值低有原因，地产拖累</td>
+<td style="font-size:11px;">PE=20.6合理，价>MA60，股息3.5%</td>
+<td><span class="badge badge-green">20%</span></td>
+</tr>
+</table>
+</div>
+
+<!-- 宏观叙事 -->
+<div class="card">
+<div class="card-title"><span class="icon">🌍</span>宏观叙事摘要</div>
+<div style="font-size:12px; color:#555; line-height:1.8;">
+<div>🇺🇸 <strong>美伊和谈进展</strong>：伊朗宣布霍尔木兹海峡完全开放，原油暴跌-11%，全球风险资产获提振</div>
+<div>🇺🇸 <strong>VIX=17.48</strong>：极低位，市场乐观但需警惕complacency风险</div>
+<div>🇺🇸 <strong>美债10Y=4.25%</strong>：收益率稳定下行，流动性环境宽松</div>
+<div>🇭🇰 <strong>恒指26000上方盘整</strong>：机构判断大概率延续震荡分化</div>
+<div>📊 <strong>情绪因子+0.1</strong>：微弱正面，中东缓和提振但科技股仍承压</div>
+</div>
+</div>
+
+<!-- 经验终审对照 -->
+<div class="card">
+<div class="card-title"><span class="icon">📚</span>经验终审对照</div>
+<table>
+<tr><th>候选标的</th><th>历史教训</th><th>终审结论</th></tr>
+<tr>
+<td>HK03690美团</td>
+<td style="font-size:11px;">科技龙头EMA空头排列(4/17)</td>
+<td style="font-size:11px;">美团DIF>0已翻多例外✅</td>
+</tr>
+<tr>
+<td>HK09961携程</td>
+<td style="font-size:11px;">港股ADX不可用→用MACD柱替代</td>
+<td style="font-size:11px;">MACD柱10.94极强✅</td>
+</tr>
+<tr>
+<td>HK00001长和</td>
+<td style="font-size:11px;">震荡市允许杠铃策略共存</td>
+<td style="font-size:11px;">防御端+成长端共存✅</td>
+</tr>
+</table>
+</div>
+
+<!-- 特殊执行规则 -->
+<div class="card">
+<div class="card-title"><span class="icon">⚠️</span>风控触发器</div>
+<div class="info-box">
+<strong>VHSI仓位规则</strong>：<20→42-50% | 20-25→维持42% | 25-30→30-35% | >30→20-25% | >35→≤15%<br>
+当前VHSI=20.9 → 维持42%上限，当前敞口11.7%，安全空间充裕
+</div>
+<div class="warning-box">
+<strong>财报前减仓提醒</strong>：GOOGL 4/29财报→4/27减仓 | MSFT/META 4/30财报→4/28减仓
+</div>
+</div>
+
+<!-- 净值简报 -->
+<div class="card">
+<div class="card-title"><span class="icon">💰</span>净值简报</div>
+<div class="summary-grid">
+<div class="summary-item">
+<div class="label">账户净值</div>
+<div class="value">1亿</div>
+</div>
+<div class="summary-item">
+<div class="label">现金</div>
+<div class="value">8825万</div>
+</div>
+<div class="summary-item">
+<div class="label">持仓市值</div>
+<div class="value">1175万</div>
+</div>
+<div class="summary-item">
+<div class="label">总敞口</div>
+<div class="value">11.7%</div>
+</div>
+<div class="summary-item">
+<div class="label">港股持仓</div>
+<div class="value">10只</div>
+</div>
+<div class="summary-item">
+<div class="label">美股持仓</div>
+<div class="value">5只</div>
+</div>
+<div class="summary-item">
+<div class="label">今日新增</div>
+<div class="value">3只</div>
+</div>
+<div class="summary-item">
+<div class="label">待建仓</div>
+<div class="value">0只</div>
+</div>
+</div>
+</div>
+
+<div class="footer">
+Blakever 多智能体投资决策系统 | 数据来源：东方财富 | 本报告仅供参考，不构成投资建议
+</div>
+
+</div>
+</body>
+</html>

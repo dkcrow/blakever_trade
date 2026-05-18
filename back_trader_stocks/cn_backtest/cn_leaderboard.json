@@ -1,0 +1,37 @@
+{
+  "market": "CN",
+  "updated": "2026-04-28T08:05:44.830009",
+  "top10": [
+    {
+      "rank": 1,
+      "strategy": "五福闹新春v3.5",
+      "source": "聚宽",
+      "source_url": "https://www.joinquant.com/post/69702",
+      "market": "CN",
+      "total_return": 124.69,
+      "annual_return": 85.87,
+      "sharpe": 1.74,
+      "max_drawdown": 26.37,
+      "profit_factor": 1.48,
+      "win_rate": 46.67,
+      "annual_trades": 127.1,
+      "monthly_positive_rate": 66.67,
+      "scores": {
+        "total": 43.06,
+        "annual_score": 12.59,
+        "sharpe_score": 12.0,
+        "pf_score": 3.19,
+        "wr_score": 8.4,
+        "dd_bonus": 8.88,
+        "monthly_score": 3.0,
+        "grade": "B",
+        "base_score": 45.06,
+        "survivorship_penalty": -5.0,
+        "cross_period_bonus": 0.0
+      },
+      "backtest_period": "2025-01-02~2026-04-24",
+      "entered_at": "2026-04-28T08:05:44.829944",
+      "replaced": "五福闹新春v3.5"
+    }
+  ]
+}

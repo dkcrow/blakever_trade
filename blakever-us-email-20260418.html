@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 每日美股操作建议指南 | 2026-04-18</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e17; color: #e1e5ee; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px; }
+  .header { background: linear-gradient(135deg, #1a1f35 0%, #0d1225 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid rgba(99, 179, 237, 0.15); }
+  .header h1 { font-size: 24px; color: #63b3ed; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; color: #a0aec0; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 4px 4px 4px 0; }
+  .badge-green { background: rgba(72, 187, 120, 0.15); color: #48bb78; border: 1px solid rgba(72, 187, 120, 0.3); }
+  .badge-yellow { background: rgba(237, 137, 54, 0.15); color: #ed8936; border: 1px solid rgba(237, 137, 54, 0.3); }
+  .badge-red { background: rgba(245, 101, 101, 0.15); color: #f56565; border: 1px solid rgba(245, 101, 101, 0.3); }
+  .badge-blue { background: rgba(99, 179, 237, 0.15); color: #63b3ed; border: 1px solid rgba(99, 179, 237, 0.3); }
+  .section { background: #131829; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(99, 179, 237, 0.08); }
+  .section h2 { font-size: 18px; color: #63b3ed; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(99, 179, 237, 0.15); }
+  .section h3 { font-size: 15px; color: #a0aec0; margin: 16px 0 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: rgba(99, 179, 237, 0.08); color: #63b3ed; padding: 10px 8px; text-align: left; font-weight: 600; border-bottom: 1px solid rgba(99, 179, 237, 0.15); }
+  td { padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  tr:hover td { background: rgba(99, 179, 237, 0.03); }
+  .positive { color: #48bb78; }
+  .negative { color: #f56565; }
+  .neutral { color: #ed8936; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+  .kpi-card { background: rgba(99, 179, 237, 0.05); border-radius: 10px; padding: 16px; text-align: center; border: 1px solid rgba(99, 179, 237, 0.1); }
+  .kpi-value { font-size: 28px; font-weight: 700; margin: 4px 0; }
+  .kpi-label { font-size: 12px; color: #a0aec0; }
+  .alert-box { background: rgba(245, 101, 101, 0.08); border: 1px solid rgba(245, 101, 101, 0.2); border-radius: 8px; padding: 14px; margin: 12px 0; }
+  .alert-box.warning { background: rgba(237, 137, 54, 0.08); border-color: rgba(237, 137, 54, 0.2); }
+  .alert-box.info { background: rgba(99, 179, 237, 0.08); border-color: rgba(99, 179, 237, 0.2); }
+  .alert-title { font-weight: 700; margin-bottom: 6px; font-size: 14px; }
+  .stock-pick { display: flex; align-items: center; padding: 14px; background: rgba(99, 179, 237, 0.03); border-radius: 10px; margin: 8px 0; border-left: 3px solid; }
+  .stock-pick.rank1 { border-left-color: #ecc94b; }
+  .stock-pick.rank2 { border-left-color: #a0aec0; }
+  .stock-pick.rank3 { border-left-color: #dd6b20; }
+  .stock-pick.rank4 { border-left-color: #63b3ed; }
+  .stock-pick.rank5 { border-left-color: #9f7aea; }
+  .stock-symbol { font-size: 20px; font-weight: 700; min-width: 70px; }
+  .stock-detail { flex: 1; margin-left: 12px; }
+  .stock-name { font-size: 13px; color: #a0aec0; }
+  .stock-logic { font-size: 12px; color: #e1e5ee; margin-top: 4px; }
+  .stock-metrics { text-align: right; font-size: 12px; }
+  .debate-card { background: rgba(255,255,255,0.02); border-radius: 8px; padding: 14px; margin: 10px 0; }
+  .debate-bull { color: #48bb78; }
+  .debate-bear { color: #f56565; }
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: rgba(99, 179, 237, 0.2); }
+  .timeline-item { position: relative; margin-bottom: 16px; }
+  .timeline-item::before { content: ''; position: absolute; left: -20px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #63b3ed; border: 2px solid #131829; }
+  .timeline-date { font-size: 12px; color: #63b3ed; font-weight: 600; }
+  .timeline-text { font-size: 13px; margin-top: 4px; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: #4a5568; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px; }
+  @media (max-width: 480px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .stock-pick { flex-direction: column; text-align: left; } .stock-metrics { text-align: left; margin-top: 8px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>📊 Blakever 每日美股操作建议指南</h1>
+  <div class="subtitle">2026年4月18日（周六·非交易日） | 会话：blakever-us | 框架 v2.0</div>
+  <div style="margin-top: 12px;">
+    <span class="badge badge-green">🟢 趋势牛市</span>
+    <span class="badge badge-blue">置信度 75%</span>
+    <span class="badge badge-green">情绪因子 +23</span>
+    <span class="badge badge-green">流动性 🟢</span>
+    <span class="badge badge-yellow">⚠️ RSI超买</span>
+  </div>
+</div>
+
+<!-- KPI Dashboard -->
+<div class="section">
+  <h2>🎯 大盘仪表盘</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">SPY</div>
+      <div class="kpi-value positive">710.14</div>
+      <div class="kpi-label">ATH 712.39</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">QQQ</div>
+      <div class="kpi-value positive">648.85</div>
+      <div class="kpi-label">ATH 650</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">VIX</div>
+      <div class="kpi-value positive">17.56</div>
+      <div class="kpi-label">恐慌消退</div>
+    </div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">10Y美债</div>
+      <div class="kpi-value">4.24%</div>
+      <div class="kpi-label">-7bp</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">DXY</div>
+      <div class="kpi-value">98.37</div>
+      <div class="kpi-label">走弱</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Q1盈利增长</div>
+      <div class="kpi-value positive">+13.2%</div>
+      <div class="kpi-label">连续6季双位数</div>
+    </div>
+  </div>
+</div>
+
+<!-- Macro Narrative -->
+<div class="section">
+  <h2>🌍 宏观叙事核心</h2>
+  <div class="alert-box info">
+    <div class="alert-title">📌 一句话总结</div>
+    伊朗停战前景驱动油价暴跌与美股创历史新高，市场恐慌快速消退，综合情绪温和偏乐观（+23），但美联储鹰派倾向与4月底密集政策事件构成潜在逆风。
+  </div>
+  <table>
+    <tr><th>维度</th><th>评分</th><th>判定</th></tr>
+    <tr><td>美联储政策</td><td class="negative">-15</td><td>偏鹰风险</td></tr>
+    <tr><td>美债收益率</td><td class="positive">+25</td><td>长端回落利好</td></tr>
+    <tr><td>VIX恐慌</td><td class="positive">+35</td><td>恐慌消退</td></tr>
+    <tr><td>中美关系</td><td class="positive">+10</td><td>微偏多</td></tr>
+    <tr><td>地缘政治</td><td class="positive">+55</td><td>最强正催化</td></tr>
+    <tr><td>全球流动性</td><td class="positive">+25</td><td>美元走弱</td></tr>
+  </table>
+</div>
+
+<!-- CRO Summary -->
+<div class="section">
+  <h2>🛡️ CRO 风控摘要</h2>
+  <table>
+    <tr><th>约束项</th><th>限制</th><th>实际</th><th>状态</th></tr>
+    <tr><td>组合总仓位</td><td>≤60%</td><td>45%</td><td>✅</td></tr>
+    <tr><td>单标的仓位</td><td>≤10%</td><td>最大8%</td><td>✅</td></tr>
+    <tr><td>GICS行业集中度</td><td>≤30%</td><td>科技28%</td><td>✅</td></tr>
+    <tr><td>单日组合VaR</td><td>≤3%</td><td>~1.8%</td><td>✅</td></tr>
+  </table>
+  <div class="alert-box warning">
+    <div class="alert-title">⚠️ RSI超买干预</div>
+    SPY RSI6=91.28, QQQ RSI6=91.92，极度超买。CRO建议：首笔建仓仅用计划仓位的50%，等回调至MA5附近再补仓。总仓位控制在45%而非60%上限。
+  </div>
+</div>
+
+<!-- Stock Picks -->
+<div class="section">
+  <h2>📋 今日指令表</h2>
+  
+  <div class="stock-pick rank1">
+    <div class="stock-symbol">NVDA</div>
+    <div class="stock-detail">
+      <div class="stock-name">英伟达 · 优先级 🥇</div>
+      <div class="stock-logic">AI基建需求爆发，Q1盈利增长主力，距52周高仅5%</div>
+    </div>
+    <div class="stock-metrics">
+      <div>仓位: <strong>8%</strong> ($8,000)</div>
+      <div>入场: $196-202</div>
+      <div class="negative">止损: $188</div>
+      <div class="positive">目标: $220</div>
+    </div>
+  </div>
+
+  <div class="stock-pick rank2">
+    <div class="stock-symbol">META</div>
+    <div class="stock-detail">
+      <div class="stock-name">Meta · 优先级 🥈</div>
+      <div class="stock-logic">AI广告变现+Llama生态，动量强劲</div>
+    </div>
+    <div class="stock-metrics">
+      <div>仓位: <strong>8%</strong> ($8,000)</div>
+      <div>入场: $670-688</div>
+      <div class="negative">止损: $650</div>
+      <div class="positive">目标: $750</div>
+    </div>
+  </div>
+
+  <div class="stock-pick rank3">
+    <div class="stock-symbol">GOOGL</div>
+    <div class="stock-detail">
+      <div class="stock-name">谷歌 · 优先级 🥉</div>
+      <div class="stock-logic">AI搜索+云增长，距52周高仅2%</div>
+    </div>
+    <div class="stock-metrics">
+      <div>仓位: <strong>8%</strong> ($8,000)</div>
+      <div>入场: $332-342</div>
+      <div class="negative">止损: $322</div>
+      <div class="positive">目标: $370</div>
+    </div>
+  </div>
+
+  <div class="stock-pick rank4">
+    <div class="stock-symbol">AMZN</div>
+    <div class="stock-detail">
+      <div class="stock-name">亚马逊 · 优先级 4</div>
+      <div class="stock-logic">AWS+电商双轮驱动，估值合理</div>
+    </div>
+    <div class="stock-metrics">
+      <div>仓位: <strong>7%</strong> ($7,000)</div>
+      <div>入场: $245-251</div>
+      <div class="negative">止损: $238</div>
+      <div class="positive">目标: $275</div>
+    </div>
+  </div>
+
+  <div class="stock-pick rank5">
+    <div class="stock-symbol">MSFT</div>
+    <div class="stock-detail">
+      <div class="stock-name">微软 · 优先级 5</div>
+      <div class="stock-logic">Azure+Copilot，估值回撤后具吸引力</div>
+    </div>
+    <div class="stock-metrics">
+      <div>仓位: <strong>7%</strong> ($7,000)</div>
+      <div>入场: $410-423</div>
+      <div class="negative">止损: $398</div>
+      <div class="positive">目标: $465</div>
+    </div>
+  </div>
+
+  <div class="alert-box info">
+    <div class="alert-title">💡 分批建仓策略</div>
+    因RSI极度超买，首笔仅建50%仓位（19%），等SPY回调至MA5（698）附近补仓至38%。
+  </div>
+</div>
+
+<!-- Debate Court -->
+<div class="section">
+  <h2>⚖️ 反向测试辩论庭</h2>
+  
+  <div class="debate-card">
+    <h3>NVDA · 最终置信度 <span class="positive">56%</span></h3>
+    <p class="debate-bull">🟢 多方：AI CapEx周期延续至2027；Blackwell量产爬坡；通胀缓解利好成长股</p>
+    <p class="debate-bear">🔴 空方：RSI6=91极度超买；PE 41x高于5年均值；4/28 FOMC偏鹰风险</p>
+    <p>错误概率：30% → 80% × (1-30%) = <strong>56%</strong></p>
+  </div>
+
+  <div class="debate-card">
+    <h3>META · 最终置信度 <span class="positive">55%</span></h3>
+    <p class="debate-bull">🟢 多方：AI广告ROI提升；Llama生态护城河；PE 29x合理</p>
+    <p class="debate-bear">🔴 空方：10日涨20%短线过热；监管风险；元宇宙烧钱</p>
+    <p>错误概率：30% → 78% × (1-30%) = <strong>55%</strong></p>
+  </div>
+
+  <div class="debate-card">
+    <h3>GOOGL · 最终置信度 <span class="positive">53%</span></h3>
+    <p class="debate-bull">🟢 多方：AI+Cloud增速30%+；即将突破52周高；反垄断最坏已定价</p>
+    <p class="debate-bear">🔴 空方：距52周高仅2%盈亏比差；AI搜索蚕食传统广告</p>
+    <p>错误概率：30% → 76% × (1-30%) = <strong>53%</strong></p>
+  </div>
+</div>
+
+<!-- Left-side Scavenging -->
+<div class="section">
+  <h2>🔍 左侧捡漏权限</h2>
+  <table>
+    <tr><th>条件</th><th>要求</th><th>当前</th><th>状态</th></tr>
+    <tr><td>VIX > 35</td><td>>35</td><td>17.56</td><td class="negative">❌</td></tr>
+    <tr><td>VIX收盘<开盘</td><td>长上影线</td><td>-2.12%</td><td class="positive">✅</td></tr>
+    <tr><td>成交量≥2倍均量</td><td>≥2.0x</td><td>最大1.47x</td><td class="negative">❌</td></tr>
+  </table>
+  <div class="alert-box info">
+    <div class="alert-title">❌ 左侧捡漏未触发</div>
+    VIX处于低位，市场不满足恐慌条件。当前为趋势牛市右侧追涨策略。
+  </div>
+</div>
+
+<!-- Red Lines -->
+<div class="section">
+  <h2>🚨 全局红线提醒</h2>
+  <table>
+    <tr><th>红线项</th><th>状态</th></tr>
+    <tr><td>强制空仓线（VIX>35）</td><td class="positive">✅ 未触发</td></tr>
+    <tr><td>流动性拒绝</td><td class="positive">✅ 未触发（🟢绿色）</td></tr>
+    <tr><td>数据缺失</td><td class="positive">✅ 无缺失</td></tr>
+    <tr><td>⚠️ RSI超买预警</td><td class="neutral">⏳ 已触发→分批建仓</td></tr>
+    <tr><td>⚠️ 政策事件预警</td><td class="neutral">⏳ 4/28 FOMC+301→提前评估</td></tr>
+  </table>
+</div>
+
+<!-- Timeline -->
+<div class="section">
+  <h2>📅 操作时间表</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">4/20 周一</div>
+      <div class="timeline-text">观望为主；若SPY高开冲高不追，等回踩698-700</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">4/21-22</div>
+      <div class="timeline-text">若回调至MA5，建首仓19%</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">4/23-24</div>
+      <div class="timeline-text">若站稳则补仓至38%</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">4/25 周五</div>
+      <div class="timeline-text">⚠️ FOMC前最后交易日，评估减仓至25%</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">4/28-29</div>
+      <div class="timeline-text">🏛️ FOMC会议+301听证会，根据结果决定方向</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Blakever 多智能体投资决策系统 · 首席交易员终审签发</p>
+  <p>报告生成时间：2026-04-18T20:02 CST</p>
+  <p style="margin-top: 8px; color: #718096;">⚠️ 免责声明：本报告基于公开市场数据和Blakever框架分析生成，不构成投资建议。投资有风险，入市需谨慎。</p>
+</div>
+
+</div>
+</body>
+</html>

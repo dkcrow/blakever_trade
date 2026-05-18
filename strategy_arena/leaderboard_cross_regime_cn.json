@@ -1,0 +1,457 @@
+[
+  {
+    "strategy_name": "七星高照ETF轮动V1.7.2-大池完整版",
+    "strategy_params": {
+      "lookback_days": 25,
+      "holdings_num": 1,
+      "etf_pool": "大池38只",
+      "filters": "盈利保护+成交量+短期动量+近3日跌幅",
+      "profit_protection": "1日回看/5%回撤",
+      "volume_filter": "5日均量/2倍",
+      "short_momentum": "10日/0%阈值",
+      "source": "聚宽(tina25/旭日东升量化) GLM5修复版"
+    },
+    "strategy_description": "加权线性回归动量得分(年化×R²)+多重过滤，38只ETF轮动，持仓1只，防御ETF为货币基金511880",
+    "strategy_type": "趋势跟踪",
+    "source": "🖥️本地回测",
+    "annual_return": 164.11,
+    "sharpe": 3.67,
+    "max_drawdown": 11.71,
+    "calmar": 14.014517506404783,
+    "win_rate": 63.2,
+    "profit_factor": 3.61,
+    "avg_trades_per_year": 98.5,
+    "holding_distribution": {
+      "518880(黄金)": 42.3,
+      "159985(豆粕)": 18.5,
+      "513100(纳指)": 12.1,
+      "159915(创业板)": 8.7,
+      "511880(银华日利)": 10.2,
+      "其他ETF": 8.2
+    },
+    "stress_test": {
+      "annual_return": 168.9,
+      "max_drawdown": 9.2
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "fingerprint": "a193edbcdb956d3a259bd6560080d021850f3e72076ab4e4034aed263c5e220b",
+    "total_score": 93.57,
+    "score_detail": {},
+    "timestamp": "2026-04-27 11:49:08",
+    "grade": "S+",
+    "base_score": 93.57,
+    "cross_period_bonus": 5.0,
+    "survivorship_penalty": -5.0,
+    "monthly_stability_bonus": 0.0,
+    "rescored_at": "2026-04-27 v3.1"
+  },
+  {
+    "strategy_name": "七星高照ETF轮动V1.7.2-无成交量过滤",
+    "strategy_params": {
+      "lookback_days": 25,
+      "holdings_num": 1,
+      "etf_pool": "大池38只",
+      "filters": "盈利保护+短期动量+近3日跌幅(无成交量过滤)",
+      "profit_protection": "1日回看/5%回撤",
+      "volume_filter": "关闭",
+      "short_momentum": "10日/0%阈值",
+      "source": "聚宽(tina25/旭日东升量化) GLM5修复版-优化版"
+    },
+    "strategy_description": "去掉成交量过滤器的优化版，加权线性回归动量得分(年化×R²)+三重过滤，年化提升48.4%",
+    "strategy_type": "趋势跟踪",
+    "source": "🖥️本地回测",
+    "annual_return": 212.51,
+    "sharpe": 4.09,
+    "max_drawdown": 11.95,
+    "calmar": 17.78326359832636,
+    "win_rate": 62.9,
+    "profit_factor": 3.96,
+    "avg_trades_per_year": 98.5,
+    "holding_distribution": {
+      "518880(黄金)": 38.1,
+      "159985(豆粕)": 22.3,
+      "513100(纳指)": 14.5,
+      "159915(创业板)": 9.8,
+      "511880(银华日利)": 7.1,
+      "其他ETF": 8.2
+    },
+    "stress_test": {
+      "annual_return": 221.3,
+      "max_drawdown": 10.1
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "fingerprint": "9d5fa6c220185924c84fd5b1efa28e6753b830150b103222da978aec78f7dc64",
+    "total_score": 93.44,
+    "score_detail": {},
+    "timestamp": "2026-04-27 11:49:08",
+    "grade": "S+",
+    "base_score": 93.44,
+    "cross_period_bonus": 5.0,
+    "survivorship_penalty": -5.0,
+    "monthly_stability_bonus": 0.0,
+    "rescored_at": "2026-04-27 v3.1"
+  },
+  {
+    "strategy_name": "三马105七星17-原版组合(50%小市值+50%ETF轮动)",
+    "strategy_params": {
+      "small_cap": "Top5+20日调仓+一致性风控",
+      "etf_rotation": "七星高照V1.7.2+25日动量",
+      "allocation": "50%/50%",
+      "source": "聚宽(rbq2025/晨曦量化) 本地原版复现"
+    },
+    "strategy_description": "三马105七星17-大池子原版策略组合：50%小市值+一致性风控 + 50%ETF轮动七星高照V1.7.2，本地使用501只个股+38只ETF数据复现",
+    "strategy_type": "混合策略",
+    "source": "🖥️本地回测",
+    "annual_return": 70.06,
+    "sharpe": 2.27,
+    "max_drawdown": 7.53,
+    "win_rate": 55.4,
+    "profit_factor": 1.86,
+    "avg_trades_per_year": 0,
+    "total_score": 65.75,
+    "grade": "S",
+    "score_detail": {
+      "annual_return_score": 11.54,
+      "sharpe_score": 13.7,
+      "max_drawdown_score": 19.66,
+      "profit_factor_score": 4.8,
+      "win_rate_score": 11.05,
+      "base_score": 60.75,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 5.0,
+      "monthly_positive_rate": 0.846,
+      "survivorship_penalty": -5.0,
+      "total_score": 65.75,
+      "grade": "S",
+      "max_drawdown_hard_fail": false,
+      "drawdown_penalty_tag": false
+    },
+    "stress_test": {
+      "annual_return": 92.7,
+      "max_drawdown": 7.53
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 7,
+    "market": "CN",
+    "fingerprint": "sanma105_original_combo_v1",
+    "timestamp": "2026-04-29 20:10:23",
+    "monthly_positive_rate": 0.846,
+    "total_return": 23746.65,
+    "final_value": 238466471.12,
+    "_overfit_risk_signals": [
+      "年化70%>60%",
+      "Calmar9.3>5.0"
+    ],
+    "_overfit_risk": 0.5
+  },
+  {
+    "strategy_name": "缠论底背驰选股策略",
+    "strategy_params": {
+      "fenxing_confirm_period": 3,
+      "bi_min_bars": 5,
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "macd_signal": 9,
+      "ma_period": 5,
+      "divergence_area_ratio": 0.8,
+      "min_bars_between_bi": 5
+    },
+    "strategy_description": "缠论底背驰: 检测底分型+向下笔的MACD面积背驰信号，价格创新低但MACD绿柱面积缩小",
+    "strategy_type": "均值回归",
+    "annual_return": 4.23,
+    "sharpe": 0.64,
+    "max_drawdown": 4.62,
+    "calmar": 0.92,
+    "win_rate": 57.7,
+    "profit_factor": 1.37,
+    "avg_trades_per_year": 0.4,
+    "holding_distribution": {
+      "TLT": 99.9,
+      "SPY": 0.1
+    },
+    "stress_test": {
+      "annual_return": 2.91,
+      "max_drawdown": 3.57
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "fingerprint": "07ae6cc8398cc1f563aee10259967e5799169115db9259cad559d8a9af7e9764",
+    "total_score": 47.81,
+    "timestamp": "2026-04-30 08:36:58",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "London_Breakout_Backtest_Donchian55日突破",
+    "strategy_params": {
+      "donchian_period": 55,
+      "type": "donchian_breakout"
+    },
+    "strategy_description": "从multi:github_topic提取: London Breakout Backtest → Donchian55日通道突破",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:github_topic",
+    "source_link": "https://github.com/je-suis-tm/quant-trading",
+    "annual_return": 3.57,
+    "sharpe": 0.18,
+    "max_drawdown": 16.94,
+    "calmar": 0.21,
+    "win_rate": 73.6,
+    "profit_factor": 1.32,
+    "avg_trades_per_year": 20.5,
+    "holding_distribution": {
+      "SHY": 91.4,
+      "SPY": 8.6
+    },
+    "stress_test": {
+      "annual_return": 4.98,
+      "max_drawdown": 16.94
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "HK",
+      "CN"
+    ],
+    "fingerprint": "7e1d3d5d5675217b8bd7c7606c26543641379b0fac854a8712a8e6dc3b0719e5",
+    "total_score": 39.11,
+    "timestamp": "2026-04-30 01:06:53",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "03_Signal_Generation_月度轮动动量轮动6M",
+    "strategy_params": {
+      "lookback_months": 6,
+      "type": "monthly_momentum_rotation",
+      "freq": "monthly",
+      "etf_type": "轮动"
+    },
+    "strategy_description": "从multi:google_github提取: 03 Signal Generation → 月频轮动动量赢家通吃(回看6月,月末信号下月执行)",
+    "strategy_type": "趋势跟踪",
+    "source": "multi:google_github",
+    "source_link": "https://github.com/Fisjo/momentum-strategy-backtest",
+    "annual_return": 10.28,
+    "sharpe": 0.5,
+    "max_drawdown": 17.51,
+    "calmar": 0.59,
+    "win_rate": 56.0,
+    "profit_factor": 1.14,
+    "avg_trades_per_year": 2.5,
+    "holding_distribution": {
+      "GLD": 43.9,
+      "SPY": 29.1,
+      "VEA": 14.9,
+      "SHY": 8.2,
+      "TLT": 2.5,
+      "AGG": 1.3
+    },
+    "stress_test": {
+      "annual_return": 11.12,
+      "max_drawdown": 17.46
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "HK",
+      "CN"
+    ],
+    "fingerprint": "2e28e9aa05db2527d9962515abd0053c6f2c0088241c492e18a27360d1d65915",
+    "total_score": 37.19,
+    "timestamp": "2026-04-30 07:08:16",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "全天候_9M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 5,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 13.71,
+    "sharpe": 0.64,
+    "max_drawdown": 24.89,
+    "calmar": 0.55,
+    "win_rate": 54.6,
+    "profit_factor": 1.18,
+    "avg_trades_per_year": 5.3,
+    "holding_distribution": {
+      "GLD": 56.4,
+      "SPY": 30.3,
+      "TLT": 13.3
+    },
+    "stress_test": {
+      "annual_return": 11.17,
+      "max_drawdown": 17.46
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "93ec72e538523a59830636f5784b122534c4b7f7a38364b211e562cf65ef0cc3",
+    "total_score": 35.93,
+    "timestamp": "2026-04-29 21:10:26",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "高股息轮动_9M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 13.06,
+    "sharpe": 0.64,
+    "max_drawdown": 23.68,
+    "calmar": 0.55,
+    "win_rate": 53.6,
+    "profit_factor": 1.16,
+    "avg_trades_per_year": 7.1,
+    "holding_distribution": {
+      "SPY": 39.8,
+      "VEA": 26.1,
+      "GLD": 23.5,
+      "TLT": 6.5,
+      "AGG": 4.1
+    },
+    "stress_test": {
+      "annual_return": 7.1,
+      "max_drawdown": 21.47
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "2a58fd2a6c33317b09da3111d0413986ba62e1dee0c35a25162a8f1662c78be1",
+    "total_score": 35.8,
+    "timestamp": "2026-04-29 21:10:26",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "SPY/GLD/SHY轮动_9M",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 0,
+      "assets": "SPY/GLD/SHY"
+    },
+    "strategy_description": "三资产精简轮动(股/金/短债)",
+    "strategy_type": "趋势跟踪",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 12.29,
+    "sharpe": 0.59,
+    "max_drawdown": 25.18,
+    "calmar": 0.49,
+    "win_rate": 55.7,
+    "profit_factor": 1.17,
+    "avg_trades_per_year": 8.1,
+    "holding_distribution": {
+      "SPY": 59.0,
+      "GLD": 29.0,
+      "SHY": 12.0
+    },
+    "stress_test": {
+      "annual_return": 7.18,
+      "max_drawdown": 21.4
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "b58f2f09c3ee47850bddc6968ee52c6812c4079b2d018c82255dcbd970810ef1",
+    "total_score": 35.37,
+    "timestamp": "2026-04-29 21:10:26",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  },
+  {
+    "strategy_name": "GEM5资产_9M",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 0,
+      "assets": "SPY/VEA/GLD/AGG/SHY"
+    },
+    "strategy_description": "五资产GEM(含黄金)",
+    "strategy_type": "趋势跟踪",
+    "source": "builtin",
+    "source_link": "",
+    "annual_return": 12.02,
+    "sharpe": 0.58,
+    "max_drawdown": 25.35,
+    "calmar": 0.47,
+    "win_rate": 55.3,
+    "profit_factor": 1.16,
+    "avg_trades_per_year": 9.6,
+    "holding_distribution": {
+      "GLD": 52.2,
+      "SPY": 28.6,
+      "VEA": 12.9,
+      "SHY": 6.2,
+      "AGG": 0.1
+    },
+    "stress_test": {
+      "annual_return": 7.33,
+      "max_drawdown": 20.42
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "CN",
+    "market_scope": [
+      "US",
+      "CN"
+    ],
+    "fingerprint": "8b7dc935a072d7224625a54cac8a61ac9eac505119a94f842e0b99c78c4b7ca5",
+    "total_score": 34.99,
+    "timestamp": "2026-04-29 21:10:26",
+    "_overfit_risk_signals": [],
+    "_overfit_risk": 0.0
+  }
+]
