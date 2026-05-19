@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "qclaw-text-file": {
+      "name": "Qclaw Text File",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=qclaw-text-file",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}

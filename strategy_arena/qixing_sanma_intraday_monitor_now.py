@@ -1,18 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-七星三马ETF轮动策略 - 盘中实时监控（每30分钟）
-================================================
-交易时间 9:30-11:30 / 13:00-15:00 每30分钟执行一次：
-  1. 获取25只ETF实时行情 + K线数据
-  2. 计算动量综合得分（短期25日×100% + 长期250日×50%）
-  3. 生成排名列表（综合得分、短期、长期、实时价格）
-  4. 止损检测（硬止损8% + 盈利保护5%）
-  5. 与上次排名对比，标注名次变动
-  6. 发送HTML邮件报告
-
-数据源：腾讯行情API（tencent_api.mjs）
-状态文件：qixing_sanma_intraday_state.json
+三马七星ETF盘中监控 - 立即执行版本（跳过交易时间检查）
 """
 
 import os, sys, math, json, subprocess, time, smtplib
@@ -24,9 +13,9 @@ sys.stdout.reconfigure(encoding='utf-8')
 # ================================================================
 # 配置
 # ================================================================
-TENCENT_API = r'C:\Users\blakehao\.qclaw\workspace\westock-data\scripts\tencent_api.mjs'
-STATE_FILE = r'C:\Users\blakehao\.qclaw\workspace\strategy_arena\qixing_sanma_intraday_state.json'
-LOG_DIR = r'C:\Users\blakehao\.qclaw\workspace\strategy_arena\qixing_sanma_intraday_logs'
+TENCENT_API = 'C:\\Users\\blakehao\\.qclaw\\workspace\\westock-data\\scripts\\tencent_api.mjs'
+STATE_FILE = 'C:\\Users\\blakehao\\.qclaw\\workspace\\strategy_arena\\qixing_sanma_intraday_state.json'
+LOG_DIR = 'C:\\Users\\blakehao\\.qclaw\\workspace\\strategy_arena\\qixing_sanma_intraday_logs'
 
 EMAIL_TO = '848786642@qq.com'
 EMAIL_AUTH = 'ljbtvacrctjobfed'
@@ -35,9 +24,9 @@ SMTP_PORT = 465
 
 SHORT_LOOKBACK = 25
 LONG_LOOKBACK = 250
-STOP_LOSS_PCT = 0.08        # 硬止损：从参考价跌8%触发
-PROFIT_PROTECT_PCT = 0.05   # 盈利保护：从近20日高点回撤5%触发
-HIGH20_LOOKBACK = 20        # 近20日高点窗口
+STOP_LOSS_PCT = 0.08
+PROFIT_PROTECT_PCT = 0.05
+HIGH20_LOOKBACK = 20
 
 # 三马七星ETF池（25只）
 ETF_MAP = {
@@ -69,37 +58,14 @@ ETF_MAP = {
     'sh511880': ('511880_XSHG', '银华日利ETF'),
 }
 
-# ================================================================
-# 交易时间判断
-# ================================================================
-def is_trading_time():
-    """判断当前是否在A股交易时间（9:30-11:30, 13:00-15:00）"""
-    now = datetime.now()
-    if now.weekday() >= 5:
-        return False, '周末休市'
-    t = now.strftime('%H:%M')
-    if '09:30' <= t <= '11:30':
-        return True, '上午盘'
-    if '13:00' <= t <= '15:00':
-        return True, '下午盘'
-    if t < '09:30':
-        return False, '盘前'
-    if '11:30' < t < '13:00':
-        return False, '午休'
-    return False, '盘后'
-
-# ================================================================
-# 数据获取
-# ================================================================
 def get_kline(tcode, limit=260):
     """通过腾讯API获取K线数据"""
     result = subprocess.run(
         ['node', TENCENT_API, 'kline', tcode, 'day', str(limit), 'qfq'],
-        capture_output=True, timeout=20
+        capture_output=True, text=True, timeout=20, encoding='utf-8', errors='ignore'
     )
     try:
-        stdout = result.stdout.decode('utf-8')
-        j = json.loads(stdout)
+        j = json.loads(result.stdout)
         if j['success']:
             return j['data']['nodes']
         return []
@@ -110,22 +76,18 @@ def get_quote(tcode):
     """获取实时行情"""
     result = subprocess.run(
         ['node', TENCENT_API, 'quote', tcode],
-        capture_output=True, timeout=15
+        capture_output=True, text=True, timeout=15, encoding='utf-8', errors='ignore'
     )
     try:
-        stdout = result.stdout.decode('utf-8')
-        j = json.loads(stdout)
+        j = json.loads(result.stdout)
         if j['success']:
             return j['data'].get(tcode, {})
         return {}
     except:
         return {}
 
-# ================================================================
-# 评分计算（与 qixing_daily_email.py 完全一致）
-# ================================================================
 def weighted_reg(prices_list):
-    """纯Python加权线性回归：返回(年化收益率, R², 动量得分)"""
+    """纯Python加权线性回归"""
     n = len(prices_list)
     if n < 5:
         return 0, 0, 0
@@ -146,14 +108,13 @@ def weighted_reg(prices_list):
     return ann_return, r2, ann_return * r2
 
 def score_etf(prices_list, short_n=25, long_n=250):
-    """计算ETF动量得分（三马权重：短期×1 + 长期×0.5）"""
+    """计算ETF动量得分"""
     if len(prices_list) < 5:
         return None, None, None
     sp = prices_list[-short_n:]
     lp = prices_list[-long_n:]
     ann_s, r2_s, score_s = weighted_reg(sp)
     ann_l, r2_l, score_l = weighted_reg(lp)
-    # 近4日急跌过滤
     if len(sp) >= 4:
         for i in range(len(sp) - 1):
             if sp[i] > 0 and sp[i + 1] / sp[i] < 0.95:
@@ -161,35 +122,20 @@ def score_etf(prices_list, short_n=25, long_n=250):
                 break
     return score_s, score_l * 0.5, score_s + score_l * 0.5
 
-# ================================================================
-# 止损检测
-# ================================================================
 def check_stop_loss(price, prev_close, high20):
-    """
-    检测止损状态
-    硬止损：当前价相对参考价（前收）跌幅 >= 8%
-    盈利保护：当前价相对近20日高点回撤 >= 5%
-    返回: (stop_level: None|'HARD_STOP'|'PROFIT_PROTECT', drawdown_pct, ref_price)
-    """
-    # 硬止损：以昨日收盘为代理买入价
+    """检测止损状态"""
     if prev_close > 0:
         dd_hard = (price / prev_close - 1) * 100
         if dd_hard <= -STOP_LOSS_PCT * 100:
             return 'HARD_STOP', dd_hard, prev_close
-
-    # 盈利保护：以近20日高点为参考
     if high20 and high20 > 0:
         dd_pp = (price / high20 - 1) * 100
         if dd_pp <= -PROFIT_PROTECT_PCT * 100:
             return 'PROFIT_PROTECT', dd_pp, high20
-
     return None, 0, 0
 
-# ================================================================
-# 状态管理（排名变动追踪 + 20日高点）
-# ================================================================
 def load_state():
-    """加载上一次状态（含20日高点）"""
+    """加载上一次状态"""
     if os.path.exists(STATE_FILE):
         try:
             with open(STATE_FILE, 'r', encoding='utf-8') as f:
@@ -198,15 +144,14 @@ def load_state():
             pass
     return None
 
-def save_state(rankings, check_time, high20_data, stop_warnings=None):
-    """保存当前排名状态（含20日高点和止损警示）"""
+def save_state(rankings, check_time, high20_data):
+    """保存当前排名状态"""
     state = {
         'check_time': check_time,
         'date': check_time[:10],
         'rankings': {r['code']: r['rank'] for r in rankings},
         'scores': {r['code']: r['total_score'] for r in rankings},
-        'high20': high20_data,  # {code: high20_price}
-        'stop_warnings': [r['code'] for r in (stop_warnings or [])],  # 记录当前止损警示的成分股
+        'high20': high20_data,
     }
     with open(STATE_FILE, 'w', encoding='utf-8') as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
@@ -221,7 +166,7 @@ def compute_rank_changes(current_rankings, prev_state):
     prev_date = prev_state.get('date', '')
     cur_date = datetime.now().strftime('%Y-%m-%d')
     if prev_date != cur_date:
-        return {}  # 跨天不对比
+        return {}
     for r in current_rankings:
         code = r['code']
         cur_rank = r['rank']
@@ -231,14 +176,10 @@ def compute_rank_changes(current_rankings, prev_state):
             changes[code] = diff
     return changes
 
-# ================================================================
-# HTML邮件生成
-# ================================================================
 def generate_html(results, rank_changes, stop_warnings, check_time_str, session_label):
     """生成盘中监控HTML邮件"""
     now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-    # 排名变动摘要
+    
     change_lines = []
     if rank_changes:
         sorted_changes = sorted(rank_changes.items(), key=lambda x: -x[1])
@@ -249,8 +190,7 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
             else:
                 change_lines.append(f'<span style="color:#ef4444">🔻 {name} 下降 {abs(diff)} 位</span>')
     change_html = '<br>\n'.join(change_lines) if change_lines else '<span style="color:#6b7280">无变动</span>'
-
-    # 止损警示区块
+    
     stop_html = ''
     if stop_warnings:
         warn_rows = ''
@@ -283,8 +223,7 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
   </table>
 </div>
 '''
-
-    # 表格行
+    
     rows_html = ''
     for r in results:
         code = r['code']
@@ -296,12 +235,11 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
         chg = r.get('changePct', 0)
         dd = r.get('drawdown_pct', 0)
         stop_level = r.get('stop_level')
-
+        
         score_color = '#10b981' if ts > 0.1 else ('#f59e0b' if ts > 0 else '#ef4444')
         chg_color = '#10b981' if chg >= 0 else '#ef4444'
         chg_str = f'{chg:+.2f}%'
-
-        # 排名变动
+        
         diff = rank_changes.get(code, 0)
         if diff > 0:
             rank_change_html = f'<span style="color:#10b981;font-size:11px">🔺+{diff}</span>'
@@ -309,8 +247,7 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
             rank_change_html = f'<span style="color:#ef4444;font-size:11px">🔻{diff}</span>'
         else:
             rank_change_html = '<span style="color:#475569;font-size:11px">—</span>'
-
-        # 回撤/止损列
+        
         if stop_level == 'HARD_STOP':
             dd_html = f'<span style="color:#ef4444;font-weight:700;font-size:11px">🔴{dd:+.1f}%</span>'
         elif stop_level == 'PROFIT_PROTECT':
@@ -319,7 +256,7 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
             dd_html = f'<span style="color:#fb923c;font-size:11px">⚠️{dd:+.1f}%</span>'
         else:
             dd_html = f'<span style="color:#475569;font-size:11px">{dd:+.1f}%</span>'
-
+        
         rows_html += f'''    <tr>
       <td style="color:#94a3b8;font-weight:600;width:28px">{r['rank']}</td>
       <td style="text-align:left"><span style="color:#93c5fd;font-weight:600;font-family:monospace;font-size:11px">{r['tcode']}</span> <span style="color:#f1f5f9">{name}</span></td>
@@ -331,13 +268,13 @@ def generate_html(results, rank_changes, stop_warnings, check_time_str, session_
       <td>{rank_change_html}</td>
     </tr>
 '''
-
+    
     top3 = results[:3]
     top_summary = ' | '.join([
         f'🥇{r["name"]}' if i==0 else (f'🥈{r["name"]}' if i==1 else f'🥉{r["name"]}')
         for i, r in enumerate(top3)
     ])
-
+    
     html = f'''<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -398,9 +335,6 @@ td {{ padding:6px 5px; text-align:center; border-bottom:1px solid #1e293b; }}
 </div></body></html>'''
     return html
 
-# ================================================================
-# 邮件发送
-# ================================================================
 def send_email(html_content, subject):
     """发送HTML邮件"""
     msg = MIMEMultipart('alternative')
@@ -419,66 +353,50 @@ def send_email(html_content, subject):
         print(f'❌ 邮件发送失败: {e}')
         return False
 
-# ================================================================
-# 主流程
-# ================================================================
 def main():
     now = datetime.now()
     check_time_str = now.strftime('%Y-%m-%d %H:%M:%S')
-
-    # 1. 检查交易时间
-    trading, session_label = is_trading_time()
-    if not trading:
-        print(f'⏰ 非交易时间（{session_label}），跳过')
-        return
-
+    session_label = "立即执行"
+    
     print('=' * 60)
     print(f'七星三马ETF盘中监控 | {check_time_str} | {session_label}')
     print('=' * 60)
-
-    # 2. 加载上次状态
+    
     prev_state = load_state()
     prev_high20 = prev_state.get('high20', {}) if prev_state else {}
-
-    # 3. 拉取数据、计算得分、止损检测
+    
     results = []
     high20_data = {}
     stop_warnings = []
     success_count = 0
     print(f'\n拉取 {len(ETF_MAP)} 只ETF数据...')
-
+    
     for tcode, (code, name) in ETF_MAP.items():
-        # K线数据
         klines = get_kline(tcode, 260)
         if not klines:
             print(f'  ❌ {name}({tcode}) K线获取失败')
             continue
-
+        
         closes = [k['close'] for k in klines]
         ss, ls, total = score_etf(closes)
         if total is None:
             continue
-
-        # 实时行情
+        
         quote = get_quote(tcode)
         realtime_price = quote.get('price', closes[-1])
         chg_pct = quote.get('changePct', 0)
-
-        # 前一交易日收盘（用作硬止损代理参考价）
+        
         prev_close = closes[-2] if len(closes) >= 2 else closes[-1]
-
-        # 近20日高点（结合上次状态，取max）
+        
         n20 = HIGH20_LOOKBACK
         high20_prices = closes[-n20:]
         high20 = max(high20_prices) if high20_prices else realtime_price
-        # 若当前价更高，则更新高点
         if realtime_price > high20:
             high20 = realtime_price
         high20_data[code] = high20
-
-        # 止损检测
+        
         stop_level, dd, ref_price = check_stop_loss(realtime_price, prev_close, high20)
-
+        
         r = {
             'code': code, 'name': name, 'tcode': tcode,
             'short_score': ss, 'long_score': ls, 'total_score': total,
@@ -492,22 +410,20 @@ def main():
             stop_warnings.append(r)
         success_count += 1
         time.sleep(0.2)
-
+    
     if not results:
         print('❌ 无可用数据')
         return
-
-    # 4. 排序
+    
     results.sort(key=lambda x: x['total_score'], reverse=True)
     for i, r in enumerate(results):
         r['rank'] = i + 1
-
+    
     print(f'\n数据获取: {success_count}/{len(ETF_MAP)} 只')
     print('\n--- 当前排名 ---')
     for r in results[:10]:
         print(f'  {r["rank"]:>2}. {r["name"]:<8} 综合:{r["total_score"]:>7.4f}  短期:{r["short_score"]:>7.4f}  长期:{r["long_score"]:>7.4f}  价格:{r["realtime_price"]:.3f}')
-
-    # 5. 排名变动
+    
     rank_changes = compute_rank_changes(results, prev_state)
     if rank_changes:
         print(f'\n--- 排名变动 ({len(rank_changes)}只) ---')
@@ -517,8 +433,7 @@ def main():
             print(f'  {arrow} {name}: {"上升" if diff > 0 else "下降"} {abs(diff)} 位')
     else:
         print('\n--- 排名变动：无（首次或跨天） ---')
-
-    # 6. 止损汇总
+    
     if stop_warnings:
         print(f'\n--- 止损警示 ({len(stop_warnings)}只) ---')
         for r in stop_warnings:
@@ -526,12 +441,10 @@ def main():
             print(f'  {label} {r["name"]}: {r["drawdown_pct"]:+.2f}%（参考价:{r["stop_ref_price"]:.3f} → 现价:{r["realtime_price"]:.3f}）')
     else:
         print('\n--- 止损状态：正常 ---')
-
-    # 7. 保存状态（包含止损警示信息）
-    save_state(results, check_time_str, high20_data, stop_warnings)
-    print('✅ 状态已保存（含20日高点和止损警示）')
-
-    # 8. 保存日志
+    
+    save_state(results, check_time_str, high20_data)
+    print('✅ 状态已保存（含20日高点）')
+    
     os.makedirs(LOG_DIR, exist_ok=True)
     log_path = os.path.join(LOG_DIR, f'monitor_{now.strftime("%Y%m%d")}.jsonl')
     log_entry = {
@@ -544,53 +457,22 @@ def main():
     }
     with open(log_path, 'a', encoding='utf-8') as f:
         f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
-
-    # 9. 判断是否需要发送邮件
-    # 条件1：Top5成分股排名发生变化
-    # 条件2：有新的成分股进入止损警示
-    top5_codes = {r['code'] for r in results[:5]}
-    prev_top5_codes = set()
-    if prev_state and prev_state.get('rankings'):
-        prev_ranks = prev_state['rankings']
-        prev_top5_codes = {code for code, rank in prev_ranks.items() if rank <= 5}
     
-    # 检查Top5排名是否变化
-    top5_rank_changed = False
-    for r in results[:5]:
-        code = r['code']
-        prev_rank = prev_state['rankings'].get(code) if prev_state and prev_state.get('rankings') else None
-        if prev_rank is not None and prev_rank != r['rank']:
-            top5_rank_changed = True
-            break
-    
-    # 检查是否有新的止损警示（与上次不同的成分股）
-    prev_stop_codes = set()
-    if prev_state and prev_state.get('stop_warnings'):
-        prev_stop_codes = set(prev_state['stop_warnings'])
-    current_stop_codes = {r['code'] for r in stop_warnings}
-    new_stop_warnings = current_stop_codes - prev_stop_codes
-    has_new_stop = len(new_stop_warnings) > 0
-    
-    should_send_email = top5_rank_changed or has_new_stop
-    
-    if should_send_email:
-        html = generate_html(results, rank_changes, stop_warnings, check_time_str, session_label)
-        top1_name = results[0]['name'] if results else '?'
-        stop_count = len(stop_warnings)
-        change_count = len(rank_changes)
-        if stop_count > 0:
-            subject = f'【七星三马盘中】{now.strftime("%H:%M")} {top1_name}领跑 | ⚠️{stop_count}只止损 | {change_count}只变动'
-        else:
-            subject = f'【七星三马盘中】{now.strftime("%H:%M")} {top1_name}领跑 | {change_count}只变动'
-
-        success = send_email(html, subject)
-        if success:
-            print(f'\n📧 邮件已发送 | 主题: {subject}')
-        else:
-            print(f'\n⚠️ 邮件发送失败')
+    html = generate_html(results, rank_changes, stop_warnings, check_time_str, session_label)
+    top1_name = results[0]['name'] if results else '?'
+    stop_count = len(stop_warnings)
+    change_count = len(rank_changes)
+    if stop_count > 0:
+        subject = f'【七星三马盘中】{now.strftime("%H:%M")} {top1_name}领跑 | ⚠️{stop_count}只止损 | {change_count}只变动'
     else:
-        print(f'\n📧 跳过邮件发送（Top5排名未变且无新止损警示）')
-
+        subject = f'【七星三马盘中】{now.strftime("%H:%M")} {top1_name}领跑 | {change_count}只变动'
+    
+    success = send_email(html, subject)
+    if success:
+        print(f'\n📧 邮件已发送 | 主题: {subject}')
+    else:
+        print(f'\n⚠️ 邮件发送失败')
+    
     print(f'\n✅ 盘中监控完成！')
 
 if __name__ == '__main__':

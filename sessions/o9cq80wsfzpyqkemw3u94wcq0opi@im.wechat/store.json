@@ -1,9 +1,9 @@
 {
   "id": "o9cq80wsfzpyqkemw3u94wcq0opi@im.wechat",
-  "name": "GitHub推送",
+  "name": "三马七星策略优化",
   "status": "active",
   "createdAt": "2026-04-29T11:09:52.521Z",
-  "updatedAt": "2026-05-18T14:01:48.541Z",
+  "updatedAt": "2026-05-19T13:50:17.584Z",
   "agents": [
     {
       "id": "agent_ojeh3zjs",
@@ -17,9 +17,9 @@
   ],
   "summary": {
     "id": "summary_c1c63n99",
-    "title": "GitHub推送",
+    "title": "三马七星策略优化",
     "createdAt": "2026-04-29T11:09:52.521Z",
     "file": "summary_c1c63n99.md"
   },
-  "lastMessageCount": 59
+  "lastMessageCount": 66
 }

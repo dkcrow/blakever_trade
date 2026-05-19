@@ -1,0 +1,25 @@
+{
+  "id": "qixing-sanma-intraday-monitor",
+  "name": "三马七星监控",
+  "status": "active",
+  "createdAt": "2026-05-19T01:35:03.206Z",
+  "updatedAt": "2026-05-19T07:31:41.057Z",
+  "agents": [
+    {
+      "id": "agent_tgn01yct",
+      "name": "Main Agent",
+      "role": "assistant",
+      "status": "idle",
+      "createdAt": "2026-05-19T01:35:03.206Z",
+      "model": "unknown",
+      "systemPrompt": ""
+    }
+  ],
+  "summary": {
+    "id": "summary_01c9b0bc",
+    "title": "三马七星监控",
+    "createdAt": "2026-05-19T01:35:03.206Z",
+    "file": "summary_01c9b0bc.md"
+  },
+  "lastMessageCount": 12
+}
