@@ -41,7 +41,6 @@ def run_cn_backtest(label, start, end, **kwargs):
         print("  ❌ 无数据")
         return None
     
-    'sh516080': ('516080_XSHG', '创新药ETF'),
     # 防御ETF: 511880(银华日利)
     safe = '511880_XSHG'
     if safe not in cn_data:

@@ -41,8 +41,8 @@ CN_ETF_NAMES = {
     '513100_XSHG': '纳指ETF',
     '159985_XSHE': '豆粕ETF',
     '518880_XSHG': '黄金ETF',
-    '501018_XSHG': '南方原油LOF',
-'161226_XSHE': '国投白银LOF',
+    '501018_XSHG': '南方原油ETF',
+'161226_XSHE': '白银LOF',
     '511220_XSHG': '城投ETF',
 }
 

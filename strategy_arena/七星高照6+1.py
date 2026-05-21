@@ -51,7 +51,7 @@ from pathlib import Path
 from collections import OrderedDict
 
 warnings.filterwarnings('ignore')
-sys.path.insert(0, '/data/workspace/strategy_arena')
+sys.path.insert(0, r'C:\Users\blakehao\.qclaw\workspace\strategy_arena')
 from strategy_ranker import compute_total_score, get_grade
 
 # ================================================================
@@ -84,8 +84,8 @@ CN_ETF_NAMES = {
     '513100_XSHG': '纳指ETF',
     '159985_XSHE': '豆粕ETF',
     '518880_XSHG': '黄金ETF',
-    '501018_XSHG': '南方原油LOF',
-'161226_XSHE': '国投白银LOF',
+    '501018_XSHG': '南方原油ETF',
+'161226_XSHE': '白银LOF',
     '511220_XSHG': '城投ETF',
 }
 
@@ -107,9 +107,9 @@ INIT_CAPITAL = 1_000_000  # 100万
 # ================================================================
 # 数据与状态路径
 # ================================================================
-DATA_DIR = '/data/workspace/back_trader_stocks/a'
-ACCOUNT_STATE_FILE = '/data/workspace/strategy_arena/cn_daily_sim_account_61.json'
-DAILY_OPS_DIR = '/data/workspace/strategy_arena/cn_daily_ops_61'
+DATA_DIR = r'C:\Users\blakehao\.qclaw\workspace\back_trader_stocks\a'
+ACCOUNT_STATE_FILE = r'C:\Users\blakehao\.qclaw\workspace\strategy_arena\cn_daily_sim_account_61.json'
+DAILY_OPS_DIR = r'C:\Users\blakehao\.qclaw\workspace\strategy_arena\cn_daily_ops_61'
 
 
 # ================================================================
@@ -148,8 +148,8 @@ _WESTOCK_CODE_MAP = {
     'sh513100': ('513100_XSHG', '纳指ETF'),
     'sz159985': ('159985_XSHE', '豆粕ETF'),
     'sh518880': ('518880_XSHG', '黄金ETF'),
-    'sh501018': ('501018_XSHG', '南方原油LOF'),
-    'sz161226': ('161226_XSHE', '国投白银LOF'),
+    'sh501018': ('501018_XSHG', '南方原油ETF'),
+    'sz161226': ('161226_XSHE', '白银LOF'),
     'sh511220': ('511220_XSHG', '城投ETF'),
 }
 
