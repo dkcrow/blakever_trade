@@ -2,6 +2,13 @@
 
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
+## 任务完成规则
+
+- **任何任务完成后，结果直接发送到邮箱**：`848786642@qq.com`
+- 微信推送有限制，不通过微信发送长结果
+- 邮件主题格式：`[OpenClaw] 任务完成 - <任务名称>`
+- 邮件内容：任务结果摘要 + 关键文件路径
+
 ## What Goes Here
 
 Things like:

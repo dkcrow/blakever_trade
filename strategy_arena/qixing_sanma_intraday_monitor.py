@@ -84,7 +84,7 @@ def is_trading_time():
         return True, '下午盘'
     if t < '09:30':
         return False, '盘前'
-    if '11:30' < t < '13:00':
+    if '11:30' <= t <= '13:00':
         return False, '午休'
     return False, '盘后'
 

@@ -1,1 +1,93 @@
-.agent
+# OpenClaw agent runtime
+.agent/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.txt
+debug_*.txt
+v*_output.txt
+v*_utf8.txt
+*_debug.txt
+*_scores.txt
+*_rankings.txt
+*_fontsize.txt
+*_emoji.txt
+check_*.txt
+fixed_*.txt
+
+# JSON state files (runtime state)
+laplace_state.json
+laplace_trades.json
+current_positions.json
+qixing_sanma_intraday_state.json
+notion_diary.json
+notion_search_result.json
+
+# Session and memory db
+sessions/
+memory/lcm.db
+*.db-journal
+
+# Skills installed locally
+skills/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Test/debug scripts (not needed in repo)
+check_*.py
+debug_*.py
+test_*.py
+extract_*.py
+fetch_*.py
+download_*.py
+fix_*.py
+send_*.py
+run_*.bat
+update_*.py
+
+# Cron task temp files
+cron-task-*.md
+qixing_sanma_monitor_*.md
+backtest_summary.txt
+etf_*_kline.json
+*_data_check_*.md
+*_download.txt
+*_kline_fetch_*.md
+*_test.txt
+*_result.txt
+
+# Large data files
+backtest_data/
+notion_export_v2/
+workspace_full_20260430/
+reports/
+sessions/
+back_trader_stocks/**/*.csv
+!back_trader_stocks/**/.gitkeep
+
+# Build/package
+*.egg-info/
+dist/
+build/
