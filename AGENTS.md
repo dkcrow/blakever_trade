@@ -209,6 +209,34 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## Agent 工作规范
+
+详细文件创建、目录使用、命名规范请查看：
+- **`docs/AGENT_PROMPT.md`**（从 main 分支合并）
+- 核心原则：**所有功能文件必须放在对应模块目录下，禁止在根目录下堆叠文件！**
+
+### 快速参考
+
+| 文件类型 | 存放目录 |
+|---------|----------|
+| 配置文件 | `config/` |
+| 策略脚本 | `strategies/` 或 `strategies/etf/` |
+| 回测引擎 | `backtest/engines/` |
+| 报告脚本 | `reporting/` |
+| 测试脚本 | `tests/` |
+| 文档文件 | `docs/` |
+| 归档文件 | `archive/` |
+
+### 禁止事项
+
+1. ❌ 禁止在根目录下创建功能文件
+2. ❌ 禁止在根目录下堆叠测试脚本
+3. ❌ 禁止创建无意义的版本备份文件（用 Git 或 `archive/old_versions/`）
+4. ✅ 必须使用绝对导入（`from config.settings import PATHS`）
+5. ✅ 必须使用 `config/settings.py` 中的 `PATHS` 配置
+
+---
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
