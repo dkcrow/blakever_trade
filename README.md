@@ -30,36 +30,41 @@ blakever_trade/
 ├── data/                           # 数据层
 │   ├── fetchers/                  # 数据获取
 │   ├── processors/                # 数据处理
-│   └── storage/                   # 数据存储
-│       ├── stock_data/            # 股票数据
-│       └── market_data/          # 市场数据
+│   ├── storage/                   # 数据存储
+│   │   ├── stock_data/            # 股票数据
+│   │   └── market_data/          # 市场数据
+│   └── __init__.py
 │
 ├── factors/                        # 因子层
 │   └── __init__.py
 │
 ├── strategies/                     # 策略层
-│   ├── alpha/                    # Alpha因子策略
-│   ├── technical/                # 技术指标策略
-│   ├── regime/                   # 市场状态策略
-│   └── multi_factor/             # 多因子策略
+│   ├── etf/                      # ETF策略
+│   └── __init__.py
 │
 ├── backtest/                      # 回测层
 │   ├── engines/                  # 回测引擎
 │   ├── metrics/                  # 绩效指标
 │   ├── analyzers/                # 回测分析
-│   └── results/                  # 回测结果
+│   ├── results/                  # 回测结果
+│   └── __init__.py
 │
 ├── optimization/                   # 优化层
 │   ├── correlation/              # 相关性分析
 │   ├── weight/                   # 权重优化
-│   └── parameter/                # 参数优化
+│   ├── parameter/                # 参数优化
+│   └── __init__.py
 │
 ├── portfolio/                      # 组合层
 │   └── __init__.py
 │
 ├── reporting/                      # 报告层
 │   ├── results/                  # 报告结果
-│   └── __init__.py
+│   ├── template/                 # 报告模板
+│   ├── __init__.py
+│   ├── blakever_send_email.py    # 邮件发送
+│   ├── risk_alert.py            # 风险预警
+│   └── send_*.py                # 各类报告发送脚本
 │
 ├── utils/                         # 工具层
 │   └── __init__.py
@@ -72,11 +77,15 @@ blakever_trade/
 │
 ├── docs/                          # 文档
 │   ├── skills/                   # Skills文档
-│   └── AGENT_PROMPT.md          # Agent工作规范
+│   ├── __init__.py
+│   ├── AGENT_PROMPT.md          # Agent工作规范
+│   ├── REFACTOR_SUMMARY.md      # 重构总结
+│   └── USAGE_EXAMPLES.py        # 使用示例
 │
 ├── archive/                       # 归档
 │   ├── old_versions/            # 旧版本
-│   └── deprecated_scripts/       # 废弃脚本
+│   ├── deprecated_scripts/       # 废弃脚本
+│   └── __init__.py
 │
 ├── logs/                          # 日志
 │
@@ -163,13 +172,13 @@ fetcher = JQDataFetcher()
 data = fetcher.fetch_stock_data('sh600519', start_date='2020-01-01')
 ```
 
-### 策略回测
+### ETF策略回测
 
 ```python
-from strategies.alpha import AlphaFactorStrategy
+from strategies.etf import AlphaFactorBacktest
 from backtest.engines import VectorBTEngine
 
-strategy = AlphaFactorStrategy()
+strategy = AlphaFactorBacktest()
 engine = VectorBTEngine(strategy)
 results = engine.run_backtest(data)
 ```
@@ -210,10 +219,7 @@ weights = fof.optimize_weights(returns, method='risk_parity')
 
 ### strategies/ - 策略层
 
-- **alpha/**：Alpha因子策略
-- **technical/**：技术指标策略（EMA、MACD、RSI、布林带、SuperTrend）
-- **regime/**：市场状态策略（牛市、熊市、状态切换）
-- **multi_factor/**：多因子策略
+- **etf/**：ETF策略（多策略FOF、七星拉普拉斯、七星三马等）
 
 ### backtest/ - 回测层
 

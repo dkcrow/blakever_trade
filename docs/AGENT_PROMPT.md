@@ -16,12 +16,14 @@
 | 数据获取脚本 | `data/fetchers/` | `data/fetchers/jqdata_fetcher.py` |
 | 数据处理脚本 | `data/processors/` | `data/processors/data_cleaner.py` |
 | 因子计算脚本 | `factors/` | `factors/value_factors.py` |
-| 策略脚本 | `strategies/<类型>/` | `strategies/alpha/alpha_factor_backtest.py` |
+| ETF策略脚本 | `strategies/etf/` | `strategies/etf/alpha_factor_backtest.py` |
+| 策略脚本 | `strategies/` | `strategies/etf/blakever_v65_backtest.py` |
 | 回测引擎 | `backtest/engines/` | `backtest/engines/vectorbt_engine.py` |
 | 回测分析 | `backtest/analyzers/` | `backtest/analyzers/performance_analyzer.py` |
 | 优化脚本 | `optimization/<类型>/` | `optimization/parameter/step_optimizer.py` |
 | 组合脚本 | `portfolio/` | `portfolio/fof_constructor.py` |
-| 报告脚本 | `reporting/` | `reporting/html_reporter.py` |
+| 报告脚本 | `reporting/` | `reporting/blakever_send_email.py` |
+| 报告模板 | `reporting/template/` | `reporting/template/report_template.html` |
 | 工具脚本 | `utils/` | `utils/logger.py` |
 | 入口脚本 | `scripts/` | `scripts/run_backtest.py` |
 | 测试脚本 | `tests/` | `tests/test_factors.py` |
@@ -196,10 +198,10 @@ touch blakever_trade/rsi_strategy.py
 **正确做法**：
 ```bash
 # ✅ 在对应模块目录下创建文件
-touch blakever_trade/strategies/technical/rsi_strategy.py
+touch blakever_trade/strategies/etf/rsi_strategy.py
 
 # 编辑文件，使用绝对导入
-# strategies/technical/rsi_strategy.py
+# strategies/etf/rsi_strategy.py
 from config.settings import PATHS
 from data.fetchers import JQDataFetcher
 
@@ -210,13 +212,13 @@ class RSIStrategy:
 
 ### 示例2：运行回测并生成报告
 
-**任务**：运行 Alpha 因子回测，生成 HTML 报告
+**任务**：运行 ETF 策略回测，生成 HTML 报告
 
 **错误做法**：
 ```bash
 # ❌ 在根目录下运行，结果也放在根目录
 cd blakever_trade
-python strategies/alpha/alpha_factor_backtest.py
+python strategies/etf/alpha_factor_backtest.py
 # 结果生成在根目录：blakever_trade/alpha_factor_report.html
 ```
 
@@ -224,7 +226,7 @@ python strategies/alpha/alpha_factor_backtest.py
 ```bash
 # ✅ 在对应模块目录下运行，结果放在 results 目录
 cd blakever_trade
-python strategies/alpha/alpha_factor_backtest.py
+python strategies/etf/alpha_factor_backtest.py
 # 结果生成在：blakever_trade/backtest/results/alpha_factor_report.html
 ```
 
@@ -250,6 +252,29 @@ import pandas as pd
 data_dir = PATHS['stock_data_dir']
 df = pd.read_csv(os.path.join(data_dir, 'sh600519.csv'))  # 从 data/storage/stock_data 读取
 df.to_csv(os.path.join(data_dir, 'sh600519.csv'))  # 保存到 data/storage/stock_data
+```
+
+### 示例4：创建报告模板
+
+**任务**：创建新的报告模板
+
+**错误做法**：
+```bash
+# ❌ 在根目录下创建模板文件
+touch blakever_trade/report_template.html
+```
+
+**正确做法**：
+```bash
+# ✅ 在 reporting/template/ 目录下创建模板文件
+touch blakever_trade/reporting/template/report_template.html
+
+# 编辑文件，使用绝对导入
+# reporting/template/report_template.html
+from config.settings import PATHS
+import os
+
+template_dir = os.path.join(PATHS['report_dir'], 'template')
 ```
 
 ---
