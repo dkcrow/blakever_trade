@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "westock-data": {
+      "command": "node C:\\Users\\blakehao\\.qclaw\\workspace\\skills\\westock-data\\westock-data\\scripts\\index.js"
+    }
+  }
+}

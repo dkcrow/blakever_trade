@@ -69,6 +69,7 @@ update_*.py
 
 # Cron task temp files
 cron-task-*.md
+task-summary*.md
 qixing_sanma_monitor_*.md
 backtest_summary.txt
 etf_*_kline.json
@@ -86,6 +87,9 @@ reports/
 sessions/
 back_trader_stocks/**/*.csv
 !back_trader_stocks/**/.gitkeep
+
+# HTML files
+*.html
 
 # Build/package
 *.egg-info/

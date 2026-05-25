@@ -1,7 +1,0 @@
-﻿{
-  "success": false,
-  "error": {
-    "code": "MCP_ERROR",
-    "message": "查询K线数据失败：SSE 连接失败: 404 Not Found"
-  }
-}
