@@ -1,0 +1,201 @@
+{
+  "date": "2026-04-19",
+  "market": "US",
+  "regime": "Bull",
+  "confidence": 78,
+  "vix": 17.48,
+  "tnx": 4.24,
+  "spy_close": 710.14,
+  "qqq_close": 648.85,
+  "sentiment_factor": 1.5,
+  "strategy_version": "V2 (EMA10/20 + ADX>20)",
+  "data_source": "westock-data实时验证 (2026-04-17收盘)",
+  "recommendations": [
+    {
+      "symbol": "MSFT",
+      "name": "微软",
+      "direction": "Long",
+      "entry": 422.79,
+      "stop_loss": 401.65,
+      "take_profit": 465.07,
+      "approved_amount": 1650000.0,
+      "position_pct": 1.65,
+      "adx": 36.82,
+      "rsi12": 75.4,
+      "kdj_k": 84.29,
+      "conditions_met": 3,
+      "v2_signal": "🟢持仓",
+      "reason": "云/AI软件龙头，V2三条件全满(3/3)，ADX=37趋势极强，5日暴涨14%",
+      "intervention": "风控干预：原建议 5000000，调整后 1650000（OK）",
+      "adjusted_confidence": 46.8,
+      "error_prob": 40,
+      "score": 101.9,
+      "pe": 26.5
+    },
+    {
+      "symbol": "AVGO",
+      "name": "博通",
+      "direction": "Long",
+      "entry": 406.54,
+      "stop_loss": 386.21,
+      "take_profit": 447.19,
+      "approved_amount": 1650000.0,
+      "position_pct": 1.65,
+      "adx": 47.16,
+      "rsi12": 81.85,
+      "kdj_k": 96.95,
+      "conditions_met": 3,
+      "v2_signal": "🟢持仓",
+      "reason": "AI网络芯片爆发，V2三条件全满(3/3)，ADX=47趋势极强，20日涨27%",
+      "intervention": "风控干预：原建议 5000000，调整后 1650000（OK）",
+      "adjusted_confidence": 44.5,
+      "error_prob": 43,
+      "score": 92.0,
+      "pe": 79.2
+    },
+    {
+      "symbol": "META",
+      "name": "Meta",
+      "direction": "Long",
+      "entry": 688.55,
+      "stop_loss": 654.12,
+      "take_profit": 757.4,
+      "approved_amount": 1650000.0,
+      "position_pct": 1.65,
+      "adx": 34.54,
+      "rsi12": 72.84,
+      "kdj_k": 93.11,
+      "conditions_met": 3,
+      "v2_signal": "🟢持仓",
+      "reason": "AI广告+Llama生态，V2三条件全满(3/3)，ADX=35趋势强，MACD柱线暴增",
+      "intervention": "风控干预：原建议 5000000，调整后 1650000（OK）",
+      "adjusted_confidence": 62.4,
+      "error_prob": 20,
+      "score": 88.5,
+      "pe": 31.3
+    },
+    {
+      "symbol": "GOOGL",
+      "name": "谷歌",
+      "direction": "Long",
+      "entry": 341.68,
+      "stop_loss": 324.6,
+      "take_profit": 375.85,
+      "approved_amount": 1650000.0,
+      "position_pct": 1.65,
+      "adx": 46.54,
+      "rsi12": 76.02,
+      "kdj_k": 96.48,
+      "conditions_met": 3,
+      "v2_signal": "🟢持仓",
+      "reason": "AI搜索+云双引擎，V2三条件全满(3/3)，ADX=47趋势极强，MACD金叉",
+      "intervention": "风控干预：原建议 5000000，调整后 1650000（OK）",
+      "adjusted_confidence": 54.6,
+      "error_prob": 30,
+      "score": 78.8,
+      "pe": 48.8
+    },
+    {
+      "symbol": "NVDA",
+      "name": "英伟达",
+      "direction": "Long",
+      "entry": 201.68,
+      "stop_loss": 191.6,
+      "take_profit": 221.85,
+      "approved_amount": 1650000.0,
+      "position_pct": 1.65,
+      "adx": 32.47,
+      "rsi12": 75.0,
+      "kdj_k": 95.58,
+      "conditions_met": 3,
+      "v2_signal": "🟢持仓",
+      "reason": "AI算力龙头，V2三条件全满(3/3)，ADX=32趋势强，MACD金叉确认",
+      "intervention": "风控干预：原建议 5000000，调整后 1650000（OK）",
+      "adjusted_confidence": 54.6,
+      "error_prob": 30,
+      "score": 77.6,
+      "pe": 41.2
+    }
+  ],
+  "excluded": [
+    {
+      "symbol": "AAPL",
+      "name": "苹果",
+      "price": 270.23,
+      "reason": "ADX=9.77无趋势，V2宽松模式边缘(2/3)"
+    },
+    {
+      "symbol": "TSLA",
+      "name": "特斯拉",
+      "price": 400.62,
+      "reason": "EMA12<EMA26+ADX=16，超跌反弹非趋势(1/3)"
+    }
+  ],
+  "cro_summary": {
+    "force_close": false,
+    "vix_risk_level": "低",
+    "total_exposure_pct": 10.25,
+    "hidden_correlation_warnings": [
+      "[隐性相关性预警] 美股科技巨头：拟新增 ['MSFT', 'GOOGL', 'NVDA', 'META']，现有持仓已含 ['AAPL', 'MSFT']，极端行情下可能同向大幅波动",
+      "[隐性相关性预警] 美股金融：拟新增 ['MSFT', 'NVDA', 'AVGO']，现有持仓已含 ['MSFT']，极端行情下可能同向大幅波动"
+    ]
+  },
+  "existing_positions": [
+    {
+      "symbol": "AAPL",
+      "entry": 176.041,
+      "current": 270.23,
+      "pnl_pct": 53.5
+    },
+    {
+      "symbol": "MSFT",
+      "entry": 421.26,
+      "current": 422.79,
+      "pnl_pct": 0.36
+    }
+  ],
+  "news_highlights": [
+    "🕊️ 美伊停火重大进展：伊朗宣布霍尔木兹海峡\"完全开放\"，油价暴跌11%",
+    "📈 纳指13连阳创1992年来最长纪录，标普首破7100",
+    "💰 Q1财报季开门红：JPM/GS/BAC盈利超预期",
+    "🏦 美联储4月维持不变99.5%，12月降息概率升至60%",
+    "💵 CTA史诗级回补：单周860亿美元扫货，未来一周再加700亿",
+    "⚠️ 停火仅10天，若破裂可能快速回撤"
+  ],
+  "risk_warnings": [
+    "多只标的KDJ>95极度超买(NVDA/AVGO/GOOGL)，短期回调风险高",
+    "美伊停火仅10天，4/21截止，若破裂可能快速回撤",
+    "AVGO 20日涨27%，Bias12=13.04，偏离均线过大",
+    "MSFT 5日暴涨14%，短期获利回吐压力",
+    "半导体板块NVDA+AVGO同向波动风险"
+  ],
+  "v2_validation": {
+    "all_stocks_checked": [
+      "NVDA",
+      "MSFT",
+      "AVGO",
+      "GOOGL",
+      "META",
+      "AMZN",
+      "AAPL",
+      "TSLA"
+    ],
+    "passed_strict_3of3": [
+      "NVDA",
+      "MSFT",
+      "AVGO",
+      "GOOGL",
+      "META",
+      "AMZN"
+    ],
+    "passed_relaxed_2of3": [
+      "NVDA",
+      "MSFT",
+      "AVGO",
+      "GOOGL",
+      "META",
+      "AMZN",
+      "AAPL"
+    ]
+  }
+}

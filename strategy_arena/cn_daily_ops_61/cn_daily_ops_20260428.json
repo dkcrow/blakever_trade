@@ -1,0 +1,42 @@
+{
+  "date": "2026-04-28",
+  "weekday": "周二",
+  "current_holding": "159915_XSHE",
+  "current_holding_name": "创业板ETF",
+  "previous_holding": "513100_XSHG",
+  "previous_holding_name": "纳指ETF",
+  "need_rebalance": true,
+  "operation": "换仓",
+  "operation_detail": "卖出纳指ETF → 买入创业板ETF",
+  "current_price": 3.674,
+  "positions": {
+    "159915_XSHE": {
+      "etf": "159915_XSHE",
+      "name": "创业板ETF",
+      "shares": 272100,
+      "buy_price": 3.674,
+      "current_price": 3.674,
+      "market_value": 999695.4,
+      "pnl": 0.0,
+      "pnl_pct": 0.0
+    }
+  },
+  "cash": 4.69,
+  "net_value": 999700.09,
+  "total_pnl": -299.91,
+  "total_pnl_pct": -0.03,
+  "cumulative_pnl": 0.0,
+  "fees_estimate": 300.0,
+  "trade_log": [
+    {
+      "date": "2026-04-28",
+      "action": "买入",
+      "etf": "159915_XSHE",
+      "name": "创业板ETF",
+      "price": 3.674,
+      "shares": 272100,
+      "amount": 999695.4,
+      "fee": 299.91
+    }
+  ]
+}

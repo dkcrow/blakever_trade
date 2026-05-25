@@ -1,0 +1,2297 @@
+[
+  {
+    "strategy_name": "布林带回归_10日2.5σ_6M",
+    "strategy_params": {
+      "bb_period": 10,
+      "bb_std": 2.5,
+      "lookback_months": 6
+    },
+    "strategy_description": "布林带10日2.5σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 8.16,
+    "sharpe": 0.27,
+    "max_drawdown": 35.27,
+    "calmar": 0.23,
+    "win_rate": 54.0,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 0.8,
+    "holding_distribution": {
+      "VEA": 68.6,
+      "SPY": 31.3,
+      "SHY": 0.1
+    },
+    "stress_test": {
+      "annual_return": 6.06,
+      "max_drawdown": 19.35
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 128,
+    "batch_profitable_ratio": 73.4,
+    "batch_us_avg_annual": 7.32,
+    "batch_hk_avg_annual": -4.77,
+    "batch_median_annual": 4.29,
+    "fingerprint": "a70c3d8900f434f9457e36d2e00718fb7048786a721eb4fabbd5c91943e4367a",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:50:20",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "布林带回归_10日2.5σ_9M",
+    "strategy_params": {
+      "bb_period": 10,
+      "bb_std": 2.5,
+      "lookback_months": 9
+    },
+    "strategy_description": "布林带10日2.5σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 8.16,
+    "sharpe": 0.27,
+    "max_drawdown": 35.27,
+    "calmar": 0.23,
+    "win_rate": 54.0,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 0.8,
+    "holding_distribution": {
+      "VEA": 68.6,
+      "SPY": 31.3,
+      "SHY": 0.1
+    },
+    "stress_test": {
+      "annual_return": 6.06,
+      "max_drawdown": 19.35
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 128,
+    "batch_profitable_ratio": 73.4,
+    "batch_us_avg_annual": 7.32,
+    "batch_hk_avg_annual": -4.77,
+    "batch_median_annual": 4.29,
+    "fingerprint": "bdc3174411b50b3acfc69fec6c59d0d1ed77dbdd27c81d519b42b598d230e5ab",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:50:49",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "布林带回归_20日2.0σ_6M",
+    "strategy_params": {
+      "bb_period": 20,
+      "bb_std": 2.0,
+      "lookback_months": 6
+    },
+    "strategy_description": "布林带20日2.0σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 12.76,
+    "sharpe": 0.52,
+    "max_drawdown": 33.62,
+    "calmar": 0.38,
+    "win_rate": 54.9,
+    "profit_factor": 1.18,
+    "avg_trades_per_year": 12.2,
+    "holding_distribution": {
+      "VEA": 42.6,
+      "AGG": 23.6,
+      "SPY": 22.3,
+      "SHY": 11.5
+    },
+    "stress_test": {
+      "annual_return": 2.67,
+      "max_drawdown": 19.06
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 70.8,
+    "batch_us_avg_annual": 8.91,
+    "batch_hk_avg_annual": -18.83,
+    "batch_median_annual": 6.83,
+    "fingerprint": "c0096b5eee81617b809f4747de8c9176b7af09e1908150806e34d49000233ea9",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:51:18",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "布林带回归_20日2.0σ_9M",
+    "strategy_params": {
+      "bb_period": 20,
+      "bb_std": 2.0,
+      "lookback_months": 9
+    },
+    "strategy_description": "布林带20日2.0σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 12.57,
+    "sharpe": 0.51,
+    "max_drawdown": 33.62,
+    "calmar": 0.37,
+    "win_rate": 54.6,
+    "profit_factor": 1.18,
+    "avg_trades_per_year": 12.2,
+    "holding_distribution": {
+      "VEA": 42.6,
+      "SPY": 22.3,
+      "AGG": 20.0,
+      "SHY": 15.1
+    },
+    "stress_test": {
+      "annual_return": 2.72,
+      "max_drawdown": 19.06
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 70.8,
+    "batch_us_avg_annual": 8.91,
+    "batch_hk_avg_annual": -18.83,
+    "batch_median_annual": 6.83,
+    "fingerprint": "cae7f61037944a843384137aacaff28555077b406af5208d819e202e7070a7a5",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:51:46",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "布林带回归_20日2.5σ_6M",
+    "strategy_params": {
+      "bb_period": 20,
+      "bb_std": 2.5,
+      "lookback_months": 6
+    },
+    "strategy_description": "布林带20日2.5σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 13.86,
+    "sharpe": 0.56,
+    "max_drawdown": 31.52,
+    "calmar": 0.44,
+    "win_rate": 56.1,
+    "profit_factor": 1.18,
+    "avg_trades_per_year": 3.7,
+    "holding_distribution": {
+      "VEA": 57.9,
+      "SPY": 27.3,
+      "SHY": 11.2,
+      "AGG": 3.6
+    },
+    "stress_test": {
+      "annual_return": 1.75,
+      "max_drawdown": 21.64
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 72.3,
+    "batch_us_avg_annual": 10.35,
+    "batch_hk_avg_annual": -9.47,
+    "batch_median_annual": 8.49,
+    "fingerprint": "c7aa707fe88d5f513968d6a593672fb6223b983fa74c6a3fb78c55f8fc35b502",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:52:15",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "布林带回归_20日2.5σ_9M",
+    "strategy_params": {
+      "bb_period": 20,
+      "bb_std": 2.5,
+      "lookback_months": 9
+    },
+    "strategy_description": "布林带20日2.5σ均值回归",
+    "strategy_type": "均值回归",
+    "annual_return": 13.42,
+    "sharpe": 0.54,
+    "max_drawdown": 31.52,
+    "calmar": 0.43,
+    "win_rate": 55.8,
+    "profit_factor": 1.17,
+    "avg_trades_per_year": 3.7,
+    "holding_distribution": {
+      "VEA": 57.9,
+      "SPY": 27.3,
+      "AGG": 8.9,
+      "SHY": 5.8
+    },
+    "stress_test": {
+      "annual_return": 1.75,
+      "max_drawdown": 21.64
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 72.3,
+    "batch_us_avg_annual": 10.35,
+    "batch_hk_avg_annual": -9.47,
+    "batch_median_annual": 8.49,
+    "fingerprint": "23c0239bef8d1b7af1ea60cfaead12164a0238a4b9812c3dbb56e8a6d6c76ee2",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:52:44",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_6M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 0,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 4.29,
+    "sharpe": 0.06,
+    "max_drawdown": 32.52,
+    "calmar": 0.13,
+    "win_rate": 54.7,
+    "profit_factor": 1.06,
+    "avg_trades_per_year": 10.0,
+    "holding_distribution": {
+      "SPY": 60.9,
+      "VEA": 16.7,
+      "GLD": 12.0,
+      "TLT": 5.9,
+      "AGG": 4.6
+    },
+    "stress_test": {
+      "annual_return": 3.23,
+      "max_drawdown": 14.1
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 5.77,
+    "batch_hk_avg_annual": 16.08,
+    "batch_median_annual": 6.3,
+    "fingerprint": "693a0402a2be15892c8dfc031ff2e9a37e28e024ce3d36f604608a6d14c16a2e",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:53:13",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_6M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 3,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 4.78,
+    "sharpe": 0.09,
+    "max_drawdown": 31.81,
+    "calmar": 0.15,
+    "win_rate": 54.6,
+    "profit_factor": 1.07,
+    "avg_trades_per_year": 7.3,
+    "holding_distribution": {
+      "SPY": 60.5,
+      "VEA": 16.7,
+      "GLD": 12.3,
+      "TLT": 5.9,
+      "AGG": 4.7
+    },
+    "stress_test": {
+      "annual_return": 2.61,
+      "max_drawdown": 16.86
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 6.01,
+    "batch_hk_avg_annual": 10.44,
+    "batch_median_annual": 5.48,
+    "fingerprint": "9fd9b85c94af152119d16e85c97d287feefcbc57beae2869689ff44ddeef67c9",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:53:41",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_6M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 5,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 5.71,
+    "sharpe": 0.15,
+    "max_drawdown": 31.81,
+    "calmar": 0.18,
+    "win_rate": 55.3,
+    "profit_factor": 1.08,
+    "avg_trades_per_year": 6.2,
+    "holding_distribution": {
+      "SPY": 59.7,
+      "VEA": 16.9,
+      "GLD": 13.0,
+      "TLT": 5.7,
+      "AGG": 4.7
+    },
+    "stress_test": {
+      "annual_return": 1.74,
+      "max_drawdown": 19.56
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 79.2,
+    "batch_us_avg_annual": 6.53,
+    "batch_hk_avg_annual": 7.49,
+    "batch_median_annual": 5.68,
+    "fingerprint": "b4649156aa7c078d9193a6eaf9d8eda54f8e3e0effbc8d42dd3e413dd752bc5a",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:54:08",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_9M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 0,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 7.36,
+    "sharpe": 0.24,
+    "max_drawdown": 36.04,
+    "calmar": 0.2,
+    "win_rate": 54.8,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 10.2,
+    "holding_distribution": {
+      "SPY": 68.1,
+      "VEA": 14.9,
+      "GLD": 11.7,
+      "TLT": 3.6,
+      "AGG": 1.7
+    },
+    "stress_test": {
+      "annual_return": -0.46,
+      "max_drawdown": 28.21
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 6.11,
+    "batch_hk_avg_annual": 15.3,
+    "batch_median_annual": 5.88,
+    "fingerprint": "19df2b633ad7803945983f02916f8f01b74ebb13c98ad859590a8e1ae5f30886",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:54:36",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_9M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 7.24,
+    "sharpe": 0.23,
+    "max_drawdown": 31.85,
+    "calmar": 0.23,
+    "win_rate": 54.8,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 7.3,
+    "holding_distribution": {
+      "SPY": 67.5,
+      "VEA": 14.6,
+      "GLD": 12.1,
+      "TLT": 4.2,
+      "AGG": 1.7
+    },
+    "stress_test": {
+      "annual_return": -0.46,
+      "max_drawdown": 26.13
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 78.5,
+    "batch_us_avg_annual": 6.59,
+    "batch_hk_avg_annual": 11.32,
+    "batch_median_annual": 6.68,
+    "fingerprint": "2a58fd2a6c33317b09da3111d0413986ba62e1dee0c35a25162a8f1662c78be1",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:55:03",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_9M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 5,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 9.12,
+    "sharpe": 0.34,
+    "max_drawdown": 31.85,
+    "calmar": 0.29,
+    "win_rate": 55.0,
+    "profit_factor": 1.12,
+    "avg_trades_per_year": 6.5,
+    "holding_distribution": {
+      "SPY": 67.2,
+      "VEA": 14.6,
+      "GLD": 12.2,
+      "TLT": 4.4,
+      "AGG": 1.7
+    },
+    "stress_test": {
+      "annual_return": 0.54,
+      "max_drawdown": 23.57
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 80.8,
+    "batch_us_avg_annual": 7.4,
+    "batch_hk_avg_annual": 9.89,
+    "batch_median_annual": 6.72,
+    "fingerprint": "8d87ff6b69af92ea0209d226b6433165c5718522a8e76789e350eb507f08fc28",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:55:30",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_12M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 12,
+      "buffer_days": 0,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 8.89,
+    "sharpe": 0.32,
+    "max_drawdown": 32.9,
+    "calmar": 0.27,
+    "win_rate": 55.0,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 8.2,
+    "holding_distribution": {
+      "SPY": 70.8,
+      "GLD": 15.0,
+      "VEA": 10.3,
+      "TLT": 2.5,
+      "AGG": 1.4
+    },
+    "stress_test": {
+      "annual_return": -2.39,
+      "max_drawdown": 31.72
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 82.3,
+    "batch_us_avg_annual": 5.52,
+    "batch_hk_avg_annual": 14.83,
+    "batch_median_annual": 4.97,
+    "fingerprint": "bb5afa016eff5482c20808e8102f9d5280d4c5ec0617c15810d136cf9da5be40",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:55:57",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_12M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 12,
+      "buffer_days": 3,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 8.64,
+    "sharpe": 0.3,
+    "max_drawdown": 32.9,
+    "calmar": 0.26,
+    "win_rate": 54.9,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 6.8,
+    "holding_distribution": {
+      "SPY": 71.5,
+      "GLD": 14.8,
+      "VEA": 9.9,
+      "TLT": 2.6,
+      "AGG": 1.2
+    },
+    "stress_test": {
+      "annual_return": -2.34,
+      "max_drawdown": 28.87
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 76.9,
+    "batch_us_avg_annual": 5.93,
+    "batch_hk_avg_annual": 10.95,
+    "batch_median_annual": 5.1,
+    "fingerprint": "46fb4d701662e0c4ac1c59e64d8f2fabf47acba9ffc98f992ab16e2bc5cb1f22",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:24",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "高股息轮动_12M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 12,
+      "buffer_days": 5,
+      "assets": "SPY/VEA/AGG/TLT/GLD"
+    },
+    "strategy_description": "高股息安全资产轮动(债券+黄金)",
+    "strategy_type": "高股息轮动",
+    "annual_return": 9.37,
+    "sharpe": 0.34,
+    "max_drawdown": 32.9,
+    "calmar": 0.28,
+    "win_rate": 55.0,
+    "profit_factor": 1.12,
+    "avg_trades_per_year": 5.5,
+    "holding_distribution": {
+      "SPY": 72.1,
+      "GLD": 14.4,
+      "VEA": 9.5,
+      "TLT": 2.5,
+      "AGG": 1.4
+    },
+    "stress_test": {
+      "annual_return": 1.3,
+      "max_drawdown": 23.77
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 81.5,
+    "batch_us_avg_annual": 6.28,
+    "batch_hk_avg_annual": 9.45,
+    "batch_median_annual": 4.62,
+    "fingerprint": "fd4dc9f8fd6f5ebc4bb3768f7699107c5d17b88465add9388de76e2ef2f30d57",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:51",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_3M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 3,
+      "buffer_days": 0,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": -2.58,
+    "sharpe": -0.36,
+    "max_drawdown": 39.48,
+    "calmar": -0.07,
+    "win_rate": 52.9,
+    "profit_factor": 0.99,
+    "avg_trades_per_year": 23.9,
+    "holding_distribution": {
+      "SPY": 45.1,
+      "GLD": 35.4,
+      "TLT": 16.2,
+      "AGG": 3.3
+    },
+    "stress_test": {
+      "annual_return": -3.18,
+      "max_drawdown": 24.67
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 0.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": -2.58,
+    "fingerprint": "37e47aa028b3d57007951b6e8156e5c305c8d135672fedb8d7d3fba6f0713e58",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:52",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_3M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 3,
+      "buffer_days": 3,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": -2.22,
+    "sharpe": -0.34,
+    "max_drawdown": 40.26,
+    "calmar": -0.06,
+    "win_rate": 53.1,
+    "profit_factor": 0.99,
+    "avg_trades_per_year": 17.2,
+    "holding_distribution": {
+      "SPY": 45.6,
+      "GLD": 34.6,
+      "TLT": 16.6,
+      "AGG": 3.2
+    },
+    "stress_test": {
+      "annual_return": -0.02,
+      "max_drawdown": 21.3
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 0.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": -2.22,
+    "fingerprint": "2ac3b54ebbf641949aa9bc642a4449caa22d5dcc7ba2b53e73b82f793c5cdaf5",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:53",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_3M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 3,
+      "buffer_days": 5,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 0.54,
+    "sharpe": -0.16,
+    "max_drawdown": 35.42,
+    "calmar": 0.02,
+    "win_rate": 53.1,
+    "profit_factor": 1.02,
+    "avg_trades_per_year": 13.7,
+    "holding_distribution": {
+      "SPY": 44.8,
+      "GLD": 35.0,
+      "TLT": 16.6,
+      "AGG": 3.6
+    },
+    "stress_test": {
+      "annual_return": 0.16,
+      "max_drawdown": 21.82
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 0.54,
+    "fingerprint": "6218c39b1da5fa3d2fe897a1243142bd0824074bc2aa0708e4426b5d852a51b6",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:54",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_6M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 0,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 4.0,
+    "sharpe": 0.05,
+    "max_drawdown": 35.53,
+    "calmar": 0.11,
+    "win_rate": 54.2,
+    "profit_factor": 1.06,
+    "avg_trades_per_year": 15.5,
+    "holding_distribution": {
+      "SPY": 50.7,
+      "GLD": 33.8,
+      "TLT": 12.6,
+      "AGG": 2.8
+    },
+    "stress_test": {
+      "annual_return": 0.4,
+      "max_drawdown": 16.27
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 4.0,
+    "fingerprint": "b513e040c11d1a8973cabe84776e75437c83cfba389cd510bca846f8bac4f917",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:55",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_9M+0d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 0,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 0.74,
+    "sharpe": -0.16,
+    "max_drawdown": 36.05,
+    "calmar": 0.02,
+    "win_rate": 52.2,
+    "profit_factor": 1.02,
+    "avg_trades_per_year": 18.0,
+    "holding_distribution": {
+      "SPY": 43.6,
+      "GLD": 39.3,
+      "TLT": 15.2,
+      "AGG": 1.9
+    },
+    "stress_test": {
+      "annual_return": -1.21,
+      "max_drawdown": 27.64
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 0.74,
+    "fingerprint": "3545696cba945c7b29000df0bf17ae61d86686d972805ca6197529a2e5cfa7c4",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:58",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_9M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": -2.17,
+    "sharpe": -0.35,
+    "max_drawdown": 41.02,
+    "calmar": -0.05,
+    "win_rate": 51.9,
+    "profit_factor": 0.99,
+    "avg_trades_per_year": 14.4,
+    "holding_distribution": {
+      "SPY": 44.2,
+      "GLD": 38.8,
+      "TLT": 14.9,
+      "AGG": 2.1
+    },
+    "stress_test": {
+      "annual_return": 1.27,
+      "max_drawdown": 23.77
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 0.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": -2.17,
+    "fingerprint": "2e55214b4c7352055198b3410faf9fea2929f08f1b0bbcad7500d6dd0f7a2ec9",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:59",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "宏观轮动_9M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 5,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 0.65,
+    "sharpe": -0.17,
+    "max_drawdown": 40.06,
+    "calmar": 0.02,
+    "win_rate": 52.4,
+    "profit_factor": 1.02,
+    "avg_trades_per_year": 12.2,
+    "holding_distribution": {
+      "SPY": 43.6,
+      "GLD": 39.1,
+      "TLT": 14.9,
+      "AGG": 2.5
+    },
+    "stress_test": {
+      "annual_return": 1.08,
+      "max_drawdown": 22.23
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 0.65,
+    "fingerprint": "53f348dceb76b385d4d93f03a0a5e87644e64a42e9098f5687dc9f7fd6d1bcd9",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:57:01",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "MACD12/21轮动+0d缓冲",
+    "strategy_params": {
+      "macd_fast": 12,
+      "macd_slow": 21,
+      "buffer_days": 0
+    },
+    "strategy_description": "MACD12/21金叉/死叉轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.83,
+    "sharpe": 0.16,
+    "max_drawdown": 28.94,
+    "calmar": 0.2,
+    "win_rate": 52.3,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 34.2,
+    "holding_distribution": {
+      "SPY": 45.4,
+      "AGG": 22.5,
+      "SHY": 17.3,
+      "VEA": 14.8
+    },
+    "stress_test": {
+      "annual_return": -3.81,
+      "max_drawdown": 24.31
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 83.8,
+    "batch_us_avg_annual": 6.32,
+    "batch_hk_avg_annual": 53.95,
+    "batch_median_annual": 7.88,
+    "fingerprint": "07403e5b5616930826720c045a581fc09abaf6f71d8d0bb59fbb5e5b86ed1ebc",
+    "total_score": 26.88,
+    "timestamp": "2026-04-25 02:57:23",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "MACD12/21轮动+3d缓冲",
+    "strategy_params": {
+      "macd_fast": 12,
+      "macd_slow": 21,
+      "buffer_days": 3
+    },
+    "strategy_description": "MACD12/21金叉/死叉轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.85,
+    "sharpe": 0.16,
+    "max_drawdown": 30.3,
+    "calmar": 0.19,
+    "win_rate": 52.4,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 30.9,
+    "holding_distribution": {
+      "SPY": 44.5,
+      "AGG": 21.9,
+      "VEA": 16.8,
+      "SHY": 16.8
+    },
+    "stress_test": {
+      "annual_return": -3.86,
+      "max_drawdown": 25.15
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 85.4,
+    "batch_us_avg_annual": 6.39,
+    "batch_hk_avg_annual": 41.81,
+    "batch_median_annual": 8.18,
+    "fingerprint": "9ca4dcbfc7d8641ae3ecf1986d6d81669d93be349f084020fac2838bdc32496b",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:57:44",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "MACD12/26轮动+0d缓冲",
+    "strategy_params": {
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "buffer_days": 0
+    },
+    "strategy_description": "MACD12/26金叉/死叉轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.38,
+    "sharpe": 0.12,
+    "max_drawdown": 25.43,
+    "calmar": 0.21,
+    "win_rate": 52.3,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 32.9,
+    "holding_distribution": {
+      "SPY": 46.4,
+      "AGG": 21.9,
+      "SHY": 16.8,
+      "VEA": 14.9
+    },
+    "stress_test": {
+      "annual_return": -4.58,
+      "max_drawdown": 27.14
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 86.9,
+    "batch_us_avg_annual": 6.46,
+    "batch_hk_avg_annual": 50.46,
+    "batch_median_annual": 7.24,
+    "fingerprint": "ab4b696e0b374581cb44c388a6878f2afc19eb47fbbb52a8ba7c1089e83247c1",
+    "total_score": 25.81,
+    "timestamp": "2026-04-25 02:58:06",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "MACD12/26轮动+3d缓冲",
+    "strategy_params": {
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "buffer_days": 3
+    },
+    "strategy_description": "MACD12/26金叉/死叉轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.49,
+    "sharpe": 0.13,
+    "max_drawdown": 28.31,
+    "calmar": 0.19,
+    "win_rate": 52.0,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 29.9,
+    "holding_distribution": {
+      "SPY": 45.5,
+      "AGG": 21.6,
+      "SHY": 16.5,
+      "VEA": 16.4
+    },
+    "stress_test": {
+      "annual_return": -5.83,
+      "max_drawdown": 30.55
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 86.2,
+    "batch_us_avg_annual": 6.42,
+    "batch_hk_avg_annual": 39.74,
+    "batch_median_annual": 7.33,
+    "fingerprint": "14b758d3b5ac409549c8c01f80c6809ace276e3b6f7a733bd0f1c0205c3ae928",
+    "total_score": 25.99,
+    "timestamp": "2026-04-25 02:58:27",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "RSI7_25/70轮动",
+    "strategy_params": {
+      "rsi_period": 7,
+      "rsi_oversold": 25,
+      "rsi_overbought": 70
+    },
+    "strategy_description": "RSI7超卖25/超买70轮动",
+    "strategy_type": "均值回归",
+    "annual_return": -1.08,
+    "sharpe": -0.28,
+    "max_drawdown": 32.51,
+    "calmar": -0.03,
+    "win_rate": 52.4,
+    "profit_factor": 1.0,
+    "avg_trades_per_year": 17.0,
+    "holding_distribution": {
+      "AGG": 36.0,
+      "VEA": 28.1,
+      "SHY": 23.2,
+      "SPY": 12.7
+    },
+    "stress_test": {
+      "annual_return": 4.14,
+      "max_drawdown": 17.4
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 55.4,
+    "batch_us_avg_annual": 3.16,
+    "batch_hk_avg_annual": -25.07,
+    "batch_median_annual": 1.12,
+    "fingerprint": "3010fe2dda970146d8d606a51c8bfec11f8210e2240cd762bc37b5c58759bd00",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:58:42",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "RSI7_25/75轮动",
+    "strategy_params": {
+      "rsi_period": 7,
+      "rsi_oversold": 25,
+      "rsi_overbought": 75
+    },
+    "strategy_description": "RSI7超卖25/超买75轮动",
+    "strategy_type": "均值回归",
+    "annual_return": -0.42,
+    "sharpe": -0.24,
+    "max_drawdown": 32.51,
+    "calmar": -0.01,
+    "win_rate": 52.6,
+    "profit_factor": 1.01,
+    "avg_trades_per_year": 16.4,
+    "holding_distribution": {
+      "AGG": 34.8,
+      "VEA": 30.2,
+      "SHY": 21.1,
+      "SPY": 13.9
+    },
+    "stress_test": {
+      "annual_return": 4.34,
+      "max_drawdown": 18.77
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 58.5,
+    "batch_us_avg_annual": 4.22,
+    "batch_hk_avg_annual": -22.89,
+    "batch_median_annual": 1.8,
+    "fingerprint": "cec51bb3a237ec52a31448f1dc48a0df88241b053dfcf2d97bb8fe3804ade1f8",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:58:56",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "RSI7_30/70轮动",
+    "strategy_params": {
+      "rsi_period": 7,
+      "rsi_oversold": 30,
+      "rsi_overbought": 70
+    },
+    "strategy_description": "RSI7超卖30/超买70轮动",
+    "strategy_type": "均值回归",
+    "annual_return": -2.69,
+    "sharpe": -0.36,
+    "max_drawdown": 36.21,
+    "calmar": -0.07,
+    "win_rate": 51.8,
+    "profit_factor": 0.98,
+    "avg_trades_per_year": 19.4,
+    "holding_distribution": {
+      "AGG": 34.0,
+      "VEA": 30.0,
+      "SHY": 20.2,
+      "SPY": 15.8
+    },
+    "stress_test": {
+      "annual_return": 3.42,
+      "max_drawdown": 19.53
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 55.4,
+    "batch_us_avg_annual": 3.63,
+    "batch_hk_avg_annual": -27.63,
+    "batch_median_annual": 1.06,
+    "fingerprint": "b63450b7e50e4953cb26751e3d6330714eafcb1f4290da2784ec9bc807d21dc7",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:11",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "RSI7_30/75轮动",
+    "strategy_params": {
+      "rsi_period": 7,
+      "rsi_oversold": 30,
+      "rsi_overbought": 75
+    },
+    "strategy_description": "RSI7超卖30/超买75轮动",
+    "strategy_type": "均值回归",
+    "annual_return": -1.12,
+    "sharpe": -0.26,
+    "max_drawdown": 33.21,
+    "calmar": -0.03,
+    "win_rate": 52.4,
+    "profit_factor": 1.0,
+    "avg_trades_per_year": 18.9,
+    "holding_distribution": {
+      "AGG": 32.5,
+      "VEA": 32.1,
+      "SHY": 18.5,
+      "SPY": 17.0
+    },
+    "stress_test": {
+      "annual_return": 4.2,
+      "max_drawdown": 17.05
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 58.5,
+    "batch_us_avg_annual": 4.72,
+    "batch_hk_avg_annual": -24.72,
+    "batch_median_annual": 2.26,
+    "fingerprint": "a8b1ea9a0a23f77d73a84a13f19f84b846a622e6a93c21342e119a57dd4cf4b1",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:25",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "全天候_6M+7d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 7,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": 3.69,
+    "sharpe": 0.03,
+    "max_drawdown": 29.81,
+    "calmar": 0.12,
+    "win_rate": 54.2,
+    "profit_factor": 1.06,
+    "avg_trades_per_year": 8.3,
+    "holding_distribution": {
+      "SPY": 50.5,
+      "GLD": 36.6,
+      "TLT": 12.9
+    },
+    "stress_test": {
+      "annual_return": -3.21,
+      "max_drawdown": 27.02
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 3.69,
+    "fingerprint": "c053f62151047f2f3b94404e851024e1a15463454e984dfd06c51eb1905a46f9",
+    "total_score": 22.72,
+    "timestamp": "2026-04-25 02:59:28",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "全天候_9M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": -0.74,
+    "sharpe": -0.25,
+    "max_drawdown": 36.2,
+    "calmar": -0.02,
+    "win_rate": 52.3,
+    "profit_factor": 1.01,
+    "avg_trades_per_year": 12.7,
+    "holding_distribution": {
+      "SPY": 44.3,
+      "GLD": 39.9,
+      "TLT": 15.8
+    },
+    "stress_test": {
+      "annual_return": 1.9,
+      "max_drawdown": 22.32
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 0.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": -0.74,
+    "fingerprint": "a3b88eec48fba6a37848f8786d4e01adb2ed1d74db92fda565697e1603a16c4c",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:29",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "全天候_9M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 5,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": 1.88,
+    "sharpe": -0.09,
+    "max_drawdown": 35.81,
+    "calmar": 0.05,
+    "win_rate": 52.8,
+    "profit_factor": 1.04,
+    "avg_trades_per_year": 11.0,
+    "holding_distribution": {
+      "SPY": 44.2,
+      "GLD": 40.3,
+      "TLT": 15.5
+    },
+    "stress_test": {
+      "annual_return": 1.79,
+      "max_drawdown": 19.29
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 1.88,
+    "fingerprint": "93ec72e538523a59830636f5784b122534c4b7f7a38364b211e562cf65ef0cc3",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:30",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "全天候_9M+7d缓冲",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 7,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": 0.95,
+    "sharpe": -0.15,
+    "max_drawdown": 35.65,
+    "calmar": 0.03,
+    "win_rate": 52.2,
+    "profit_factor": 1.02,
+    "avg_trades_per_year": 10.0,
+    "holding_distribution": {
+      "SPY": 43.7,
+      "GLD": 40.1,
+      "TLT": 16.2
+    },
+    "stress_test": {
+      "annual_return": 0.21,
+      "max_drawdown": 19.08
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 0.95,
+    "fingerprint": "5de6100edbb4c4cbfed850edb7cb14d3f984899c9ca02fc42baff5507bf53c69",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:31",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "聚宽-ETF轮动策略_动量轮动3M",
+    "strategy_params": {
+      "lookback_months": 3,
+      "type": "momentum_rotation"
+    },
+    "strategy_description": "从multi:joinquant_template提取: 聚宽-ETF轮动策略 → 3M动量排名轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.09,
+    "sharpe": 0.1,
+    "max_drawdown": 26.89,
+    "calmar": 0.19,
+    "win_rate": 54.1,
+    "profit_factor": 1.08,
+    "avg_trades_per_year": 17.4,
+    "holding_distribution": {
+      "SPY": 49.1,
+      "GLD": 40.4,
+      "SHY": 8.4,
+      "AGG": 2.1
+    },
+    "stress_test": {
+      "annual_return": -6.92,
+      "max_drawdown": 33.91
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 5.09,
+    "fingerprint": "580565b2aaf47a1b5e4b251687db62cfa520fe8f30e7a4cc1dc5dc68d0e58d0e",
+    "total_score": 25.47,
+    "timestamp": "2026-04-25 02:59:32",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "聚宽-ETF轮动策略_动量轮动6M",
+    "strategy_params": {
+      "lookback_months": 6,
+      "type": "momentum_rotation"
+    },
+    "strategy_description": "从multi:joinquant_template提取: 聚宽-ETF轮动策略 → 6M动量排名轮动",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.7,
+    "sharpe": 0.14,
+    "max_drawdown": 33.83,
+    "calmar": 0.17,
+    "win_rate": 54.0,
+    "profit_factor": 1.08,
+    "avg_trades_per_year": 13.2,
+    "holding_distribution": {
+      "SPY": 50.5,
+      "GLD": 41.1,
+      "SHY": 7.8,
+      "AGG": 0.6
+    },
+    "stress_test": {
+      "annual_return": 1.46,
+      "max_drawdown": 15.43
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 5.7,
+    "fingerprint": "48a63471b0c6dba632260a14e8097c0489507242ef604d5adcef1aae682a6d67",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:59:33",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "聚宽RSRS-GEM9M+ATR2.5x",
+    "strategy_params": {
+      "lookback_months": 9,
+      "buffer_days": 3,
+      "risk_assets": [
+        "SPY",
+        "VEA"
+      ],
+      "safe_assets": [
+        "AGG",
+        "SHY"
+      ],
+      "atr_stop_mult": 2.5
+    },
+    "strategy_description": "由multi:joinquant_template策略适配(变体映射): 聚宽-RSRS阻力支撑相对强度策略",
+    "strategy_type": "其他",
+    "annual_return": 5.08,
+    "sharpe": 0.1,
+    "max_drawdown": 25.49,
+    "calmar": 0.2,
+    "win_rate": 53.4,
+    "profit_factor": 1.09,
+    "avg_trades_per_year": 13.7,
+    "holding_distribution": {
+      "SPY": 63.9,
+      "SHY": 19.1,
+      "VEA": 13.6,
+      "AGG": 3.4
+    },
+    "stress_test": {
+      "annual_return": -1.48,
+      "max_drawdown": 15.67
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 5.87,
+    "batch_hk_avg_annual": 15.38,
+    "batch_median_annual": 6.19,
+    "fingerprint": "312cc6e902614fc195f3b4fe2026c2d5f0f533ef2d606a5e3729c7d716b129bc",
+    "total_score": 25.34,
+    "timestamp": "2026-04-25 03:02:01",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "聚宽ETF双持仓轮动1M",
+    "strategy_params": {
+      "lookback_months": 1,
+      "buffer_days": 0,
+      "top_n": 2
+    },
+    "strategy_description": "由multi:github策略适配(变体映射): Compare Dual Vs Multi Ak",
+    "strategy_type": "高股息轮动",
+    "annual_return": 3.48,
+    "sharpe": 0.01,
+    "max_drawdown": 36.56,
+    "calmar": 0.1,
+    "win_rate": 52.2,
+    "profit_factor": 1.06,
+    "avg_trades_per_year": 44.7,
+    "holding_distribution": {
+      "SPY": 31.7,
+      "GLD": 23.6,
+      "TLT": 18.5,
+      "VEA": 16.0,
+      "SHY": 10.2
+    },
+    "stress_test": {
+      "annual_return": -11.37,
+      "max_drawdown": 47.86
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 3.48,
+    "fingerprint": "e3271dae97883cedd8413b06268be22bf1e9eedd24086c5bf0d9edbab6839d39",
+    "total_score": 0,
+    "timestamp": "2026-04-25 03:02:03",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "聚宽ETF双持仓轮动3M",
+    "strategy_params": {
+      "lookback_months": 3,
+      "buffer_days": 0,
+      "top_n": 2
+    },
+    "strategy_description": "由multi:github策略适配(变体映射): Compare Dual Vs Multi Ak",
+    "strategy_type": "高股息轮动",
+    "annual_return": -2.53,
+    "sharpe": -0.37,
+    "max_drawdown": 36.24,
+    "calmar": -0.07,
+    "win_rate": 52.5,
+    "profit_factor": 0.98,
+    "avg_trades_per_year": 26.4,
+    "holding_distribution": {
+      "SPY": 34.0,
+      "GLD": 27.4,
+      "TLT": 15.8,
+      "VEA": 14.8,
+      "SHY": 7.3,
+      "AGG": 0.6
+    },
+    "stress_test": {
+      "annual_return": -7.86,
+      "max_drawdown": 36.44
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 0.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": -2.53,
+    "fingerprint": "93f353ba91ffee219ef205328e51aa87b6586b464990527dc69257e8b79f53ea",
+    "total_score": 0,
+    "timestamp": "2026-04-25 03:02:04",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "聚宽ETF三持仓轮动1M",
+    "strategy_params": {
+      "lookback_months": 1,
+      "buffer_days": 0,
+      "top_n": 3
+    },
+    "strategy_description": "由multi:github策略适配(变体映射): Compare Dual Vs Multi Ak",
+    "strategy_type": "高股息轮动",
+    "annual_return": 3.48,
+    "sharpe": 0.01,
+    "max_drawdown": 36.56,
+    "calmar": 0.1,
+    "win_rate": 52.2,
+    "profit_factor": 1.06,
+    "avg_trades_per_year": 44.7,
+    "holding_distribution": {
+      "SPY": 31.7,
+      "GLD": 23.6,
+      "TLT": 18.5,
+      "VEA": 16.0,
+      "SHY": 10.2
+    },
+    "stress_test": {
+      "annual_return": -11.37,
+      "max_drawdown": 47.86
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 3.48,
+    "fingerprint": "c998ee955a975b4f863be8bb2fdadcb27a6ba47a18ba4b71ff6abc0d392ca9f3",
+    "total_score": 0,
+    "timestamp": "2026-04-25 03:02:05",
+    "reject_reason": "最大回撤>30%"
+  },
+  {
+    "strategy_name": "Gunbot_Quant_波动率调节20日",
+    "strategy_params": {
+      "vol_lookback": 20,
+      "type": "volatility_regime"
+    },
+    "strategy_description": "从multi:awesome_quant提取: Gunbot Quant → 20日波动率调节仓位",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 9.4,
+    "sharpe": 0.39,
+    "max_drawdown": 29.26,
+    "calmar": 0.32,
+    "win_rate": 55.3,
+    "profit_factor": 1.14,
+    "avg_trades_per_year": 9.2,
+    "holding_distribution": {
+      "SPY": 68.1,
+      "VEA": 14.9,
+      "SHY": 13.6,
+      "AGG": 3.4
+    },
+    "stress_test": {
+      "annual_return": 0.17,
+      "max_drawdown": 25.18
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 6.11,
+    "batch_hk_avg_annual": 15.3,
+    "batch_median_annual": 5.88,
+    "fingerprint": "6df3eca34fbaaf8d14ab85edceab6b8014922911036a216c0971c82f1e780bf0",
+    "total_score": 40.18,
+    "timestamp": "2026-04-25 01:07:48",
+    "validation_history": [
+      {
+        "date": "2026-04-24",
+        "strategy_return": 0.48,
+        "benchmark_return": 0.48,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-04-24",
+        "strategy_return": 0.42,
+        "benchmark_return": 0.42,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "🔄 观察中",
+    "score_detail": {
+      "total_score": 40.18,
+      "base_score": 45.18,
+      "score_detail": {
+        "annual_return_score": 11.75,
+        "sharpe_score": 4.88,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.55,
+        "win_rate_score": 15
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:07:09",
+    "rerank_version": "v4_multi_symbol",
+    "reject_reason": "v4重评分后跌出TOP10",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "Gunbot_Quant_ATR2.0x+SMA50趋势",
+    "strategy_params": {
+      "atr_mult": 2.0,
+      "sma_period": 50,
+      "type": "atr_trend"
+    },
+    "strategy_description": "从multi:awesome_quant提取: Gunbot Quant → ATR2.0x止损+SMA50趋势",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 9.4,
+    "sharpe": 0.39,
+    "max_drawdown": 29.26,
+    "calmar": 0.32,
+    "win_rate": 55.3,
+    "profit_factor": 1.14,
+    "avg_trades_per_year": 9.2,
+    "holding_distribution": {
+      "SPY": 68.1,
+      "VEA": 14.9,
+      "SHY": 13.6,
+      "AGG": 3.4
+    },
+    "stress_test": {
+      "annual_return": 0.17,
+      "max_drawdown": 25.18
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 6.11,
+    "batch_hk_avg_annual": 15.3,
+    "batch_median_annual": 5.88,
+    "fingerprint": "be9ba33082b86a17d8b29bdc4d2fbdb2b29994edb3bfd5738a612d7a31f80620",
+    "total_score": 40.18,
+    "timestamp": "2026-04-25 03:02:06",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 40.18,
+      "base_score": 45.18,
+      "score_detail": {
+        "annual_return_score": 11.75,
+        "sharpe_score": 4.88,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.55,
+        "win_rate_score": 15
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:10:41",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "Gunbot_Quant_ATR3.0x+SMA50趋势",
+    "strategy_params": {
+      "atr_mult": 3.0,
+      "sma_period": 50,
+      "type": "atr_trend"
+    },
+    "strategy_description": "从multi:awesome_quant提取: Gunbot Quant → ATR3.0x止损+SMA50趋势",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 9.4,
+    "sharpe": 0.39,
+    "max_drawdown": 29.26,
+    "calmar": 0.32,
+    "win_rate": 55.3,
+    "profit_factor": 1.14,
+    "avg_trades_per_year": 9.2,
+    "holding_distribution": {
+      "SPY": 68.1,
+      "VEA": 14.9,
+      "SHY": 13.6,
+      "AGG": 3.4
+    },
+    "stress_test": {
+      "annual_return": 0.17,
+      "max_drawdown": 25.18
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 77.7,
+    "batch_us_avg_annual": 6.11,
+    "batch_hk_avg_annual": 15.3,
+    "batch_median_annual": 5.88,
+    "fingerprint": "7f26fb5e7a0c551963e4442a716f1ea7b99115dfc7471c46c5ca908b0a4ad364",
+    "total_score": 40.18,
+    "timestamp": "2026-04-25 03:02:07",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 40.18,
+      "base_score": 45.18,
+      "score_detail": {
+        "annual_return_score": 11.75,
+        "sharpe_score": 4.88,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.55,
+        "win_rate_score": 15
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:11:07",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "宏观轮动_6M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 5,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 8.09,
+    "sharpe": 0.29,
+    "max_drawdown": 26.54,
+    "calmar": 0.3,
+    "win_rate": 54.7,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 6.3,
+    "holding_distribution": {
+      "SPY": 53.6,
+      "GLD": 46.4
+    },
+    "stress_test": {
+      "annual_return": 0.06,
+      "max_drawdown": 21.36
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 8.09,
+    "fingerprint": "3c91824972e27940341fb63c3b5d62481ec9174a2f345683e4b43a12ad165224",
+    "total_score": 36.98,
+    "timestamp": "2026-04-25 02:56:57",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 36.98,
+      "base_score": 41.98,
+      "score_detail": {
+        "annual_return_score": 10.11,
+        "sharpe_score": 3.62,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.33,
+        "win_rate_score": 14.92
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:11:09",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "全天候_6M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 3,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": 6.63,
+    "sharpe": 0.2,
+    "max_drawdown": 26.99,
+    "calmar": 0.25,
+    "win_rate": 54.0,
+    "profit_factor": 1.09,
+    "avg_trades_per_year": 10.2,
+    "holding_distribution": {
+      "SPY": 51.3,
+      "GLD": 35.7,
+      "TLT": 13.0
+    },
+    "stress_test": {
+      "annual_return": 0.41,
+      "max_drawdown": 17.3
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 6.63,
+    "fingerprint": "41f74d1ea100e68f82b0b486a29cc6d2c61c18451c20b4f985219d171da738c1",
+    "total_score": 33.69,
+    "timestamp": "2026-04-25 02:59:26",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 33.69,
+      "base_score": 38.69,
+      "score_detail": {
+        "annual_return_score": 8.29,
+        "sharpe_score": 2.5,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.18,
+        "win_rate_score": 14.73
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:10:14",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "全天候_6M+5d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 5,
+      "assets": "SPY/TLT/GLD"
+    },
+    "strategy_description": "全天候组合(股/债/金轮动)",
+    "strategy_type": "其他",
+    "annual_return": 7.29,
+    "sharpe": 0.24,
+    "max_drawdown": 26.14,
+    "calmar": 0.28,
+    "win_rate": 55.0,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 9.0,
+    "holding_distribution": {
+      "SPY": 50.6,
+      "GLD": 36.8,
+      "TLT": 12.6
+    },
+    "stress_test": {
+      "annual_return": -0.66,
+      "max_drawdown": 19.53
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 7.29,
+    "fingerprint": "7676bb8f09f79c515e4a798a43fd3983a84f30bb3c7c546d94e61d8188047ab4",
+    "total_score": 30.36,
+    "timestamp": "2026-04-25 02:59:27",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 30.36,
+      "base_score": 40.36,
+      "score_detail": {
+        "annual_return_score": 9.11,
+        "sharpe_score": 3.0,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.25,
+        "win_rate_score": 15.0
+      },
+      "cross_period_bonus": 0.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": false
+    },
+    "rerank_timestamp": "2026-04-25 09:11:08",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "聚宽RSRS-GEM6M+ATR2x",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 0,
+      "risk_assets": [
+        "SPY",
+        "VEA"
+      ],
+      "safe_assets": [
+        "AGG",
+        "SHY"
+      ],
+      "atr_stop_mult": 2.0
+    },
+    "strategy_description": "由multi:joinquant_template策略适配(变体映射): 聚宽-RSRS阻力支撑相对强度策略",
+    "strategy_type": "其他",
+    "annual_return": 6.17,
+    "sharpe": 0.18,
+    "max_drawdown": 26.54,
+    "calmar": 0.23,
+    "win_rate": 54.0,
+    "profit_factor": 1.1,
+    "avg_trades_per_year": 15.2,
+    "holding_distribution": {
+      "SPY": 59.9,
+      "VEA": 16.3,
+      "SHY": 14.5,
+      "AGG": 9.3
+    },
+    "stress_test": {
+      "annual_return": -2.73,
+      "max_drawdown": 24.78
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 76.9,
+    "batch_us_avg_annual": 4.82,
+    "batch_hk_avg_annual": 26.49,
+    "batch_median_annual": 6.9,
+    "fingerprint": "7ded9a91632a518268a87b7ac0a0a6a3acd93ead7d35e696df3c4cedbe4dcbad",
+    "total_score": 27.94,
+    "timestamp": "2026-04-25 03:00:49",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 27.94,
+      "base_score": 37.94,
+      "score_detail": {
+        "annual_return_score": 7.71,
+        "sharpe_score": 2.25,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.25,
+        "win_rate_score": 14.73
+      },
+      "cross_period_bonus": 0.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": false
+    },
+    "rerank_timestamp": "2026-04-25 09:12:25",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "聚宽-Kdj&Macd组合_MACD12/26趋势",
+    "strategy_params": {
+      "macd_fast": 12,
+      "macd_slow": 26,
+      "type": "macd_trend"
+    },
+    "strategy_description": "从multi:joinquant_github提取: 聚宽-Kdj&Macd组合 → MACD12/26金叉死叉",
+    "strategy_type": "趋势跟踪",
+    "annual_return": 5.49,
+    "sharpe": 0.13,
+    "max_drawdown": 28.31,
+    "calmar": 0.19,
+    "win_rate": 52.0,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 29.9,
+    "holding_distribution": {
+      "SPY": 45.5,
+      "AGG": 21.6,
+      "SHY": 16.5,
+      "VEA": 16.4
+    },
+    "stress_test": {
+      "annual_return": -5.83,
+      "max_drawdown": 30.55
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 86.2,
+    "batch_us_avg_annual": 6.42,
+    "batch_hk_avg_annual": 39.74,
+    "batch_median_annual": 7.33,
+    "fingerprint": "cac789ec3dc996bd14863f1ea0a04f14d6062384fca2dc7f9f4dc8a92ca9447c",
+    "total_score": 25.99,
+    "timestamp": "2026-04-25 01:07:47",
+    "validation_history": [
+      {
+        "date": "2026-04-24",
+        "strategy_return": 0.48,
+        "benchmark_return": 0.48,
+        "excess": 0.0,
+        "absolute_negative": false
+      },
+      {
+        "date": "2026-04-24",
+        "strategy_return": 0.42,
+        "benchmark_return": 0.42,
+        "excess": 0.0,
+        "absolute_negative": false
+      }
+    ],
+    "validation_status": "🔄 观察中",
+    "score_detail": {
+      "total_score": 25.99,
+      "base_score": 35.99,
+      "score_detail": {
+        "annual_return_score": 6.86,
+        "sharpe_score": 1.62,
+        "max_drawdown_score": 5,
+        "profit_factor_score": 8.33,
+        "win_rate_score": 14.18
+      },
+      "cross_period_bonus": 0.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": false,
+      "fail_reason": "",
+      "cross_robust": false
+    },
+    "rerank_timestamp": "2026-04-25 09:08:20",
+    "rerank_version": "v4_multi_symbol",
+    "reject_reason": "v4重评分后跌出TOP10",
+    "pending_leaderboard": true
+  },
+  {
+    "strategy_name": "TradeSight_RSI14_30/70",
+    "strategy_params": {
+      "rsi_period": 14,
+      "oversold": 30,
+      "overbought": 70,
+      "type": "rsi_reversion"
+    },
+    "strategy_description": "从multi:awesome_quant提取: TradeSight → RSI14超卖30/超买70",
+    "strategy_type": "均值回归",
+    "annual_return": 5.54,
+    "sharpe": 0.14,
+    "max_drawdown": 34.74,
+    "calmar": 0.16,
+    "win_rate": 53.5,
+    "profit_factor": 1.11,
+    "avg_trades_per_year": 9.2,
+    "holding_distribution": {
+      "AGG": 41.1,
+      "VEA": 24.7,
+      "SHY": 21.4,
+      "SPY": 12.8
+    },
+    "stress_test": {
+      "annual_return": 2.48,
+      "max_drawdown": 19.03
+    },
+    "cross_robust": true,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 130,
+    "batch_profitable_ratio": 73.1,
+    "batch_us_avg_annual": 8.14,
+    "batch_hk_avg_annual": -12.95,
+    "batch_median_annual": 5.15,
+    "fingerprint": "0ec8885228f8fa48b7ff5075f4166d898402e78cfc08301e1fbf44595bc75c05",
+    "total_score": 0,
+    "timestamp": "2026-04-25 03:02:06",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 0,
+      "base_score": 31.59,
+      "score_detail": {
+        "annual_return_score": 6.93,
+        "sharpe_score": 1.75,
+        "max_drawdown_score": 0,
+        "profit_factor_score": 8.33,
+        "win_rate_score": 14.59
+      },
+      "cross_period_bonus": 5.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": true,
+      "fail_reason": "最大回撤>30%",
+      "cross_robust": true
+    },
+    "rerank_timestamp": "2026-04-25 09:10:13",
+    "rerank_version": "v4_multi_symbol"
+  },
+  {
+    "strategy_name": "宏观轮动_6M+3d缓冲",
+    "strategy_params": {
+      "lookback_months": 6,
+      "buffer_days": 3,
+      "assets": "SPY/QQQ/GLD/TLT/AGG"
+    },
+    "strategy_description": "宏观周期轮动(股/金/债)",
+    "strategy_type": "事件驱动",
+    "annual_return": 5.32,
+    "sharpe": 0.12,
+    "max_drawdown": 38.92,
+    "calmar": 0.14,
+    "win_rate": 54.1,
+    "profit_factor": 1.07,
+    "avg_trades_per_year": 7.0,
+    "holding_distribution": {
+      "SPY": 54.3,
+      "GLD": 45.7
+    },
+    "stress_test": {
+      "annual_return": -0.57,
+      "max_drawdown": 21.53
+    },
+    "cross_robust": false,
+    "survivorship_bias_flag": true,
+    "pine_script_rejected": false,
+    "portability_score": 10,
+    "market": "US",
+    "batch_symbol_count": 1,
+    "batch_profitable_ratio": 100.0,
+    "batch_us_avg_annual": 0,
+    "batch_hk_avg_annual": 0,
+    "batch_median_annual": 5.32,
+    "fingerprint": "e817171402f8b5043e0cf2404051fccea7bd3e65e3a562870ccb31e136fc3661",
+    "total_score": 0,
+    "timestamp": "2026-04-25 02:56:56",
+    "reject_reason": "等待保护期结束(末位43.8分在保护期)",
+    "pending_leaderboard": true,
+    "score_detail": {
+      "total_score": 0,
+      "base_score": 30.93,
+      "score_detail": {
+        "annual_return_score": 6.65,
+        "sharpe_score": 1.5,
+        "max_drawdown_score": 0,
+        "profit_factor_score": 8.02,
+        "win_rate_score": 14.75
+      },
+      "cross_period_bonus": 0.0,
+      "survivorship_penalty": -10.0,
+      "hard_fail": true,
+      "fail_reason": "最大回撤>30%",
+      "cross_robust": false
+    },
+    "rerank_timestamp": "2026-04-25 09:11:10",
+    "rerank_version": "v4_multi_symbol"
+  }
+]

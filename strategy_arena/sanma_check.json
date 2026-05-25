@@ -1,0 +1,122 @@
+[
+  {
+    "name": "七星高照ETF轮动V1.7.2-无成交量过滤",
+    "market": "CN",
+    "score": 93.44,
+    "ann": 212.51,
+    "dd": 11.95,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照ETF轮动V1.7.2-大池完整版",
+    "market": "CN",
+    "score": 93.57,
+    "ann": 164.11,
+    "dd": 11.71,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "三马105七星17-ETF轮动V1.7.2",
+    "market": "CN",
+    "score": 62.64,
+    "ann": 121.3,
+    "dd": 17.21,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "三马105七星17-原版组合(50%小市值+50%ETF轮动)",
+    "market": "CN",
+    "score": 65.75,
+    "ann": 70.06,
+    "dd": 7.53,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照6+1",
+    "market": "US",
+    "score": 40.16,
+    "ann": 0.0,
+    "dd": 0.0,
+    "source": "",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照6+1",
+    "market": "HK",
+    "score": 40.16,
+    "ann": 0.0,
+    "dd": 0.0,
+    "source": "",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照ETF轮动V1.7.2-无成交量过滤",
+    "market": "CN",
+    "score": 74.51,
+    "ann": 212.51,
+    "dd": 11.95,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照ETF轮动V1.7.2-大池完整版",
+    "market": "CN",
+    "score": 71.88,
+    "ann": 164.11,
+    "dd": 11.71,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "三马105七星17-ETF轮动V1.7.2",
+    "market": "CN",
+    "score": 62.64,
+    "ann": 121.3,
+    "dd": 17.21,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "三马105七星17-原版组合(50%小市值+50%ETF轮动)",
+    "market": "CN",
+    "score": 59.21,
+    "ann": 52.42,
+    "dd": 13.73,
+    "source": "🖥️本地回测",
+    "reject": "",
+    "pending": ""
+  },
+  {
+    "name": "七星高照6+1",
+    "market": "CN",
+    "score": 46.76,
+    "ann": 41.66,
+    "dd": 22.52,
+    "source": "🖥️本地回测",
+    "reject": "过拟合风险过高(0.85)",
+    "pending": ""
+  },
+  {
+    "name": "七星高照V1.7.2-短周期(15日)",
+    "market": "CN",
+    "score": "",
+    "ann": "",
+    "dd": "",
+    "source": "local",
+    "reject": "",
+    "pending": ""
+  }
+]

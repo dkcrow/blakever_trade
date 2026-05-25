@@ -1,0 +1,84 @@
+{
+  "date": "2026-05-09",
+  "weekday": "周六",
+  "current_holding": "159509_XSHE",
+  "current_holding_name": "中证500ETF联接",
+  "previous_holding": null,
+  "previous_holding_name": "",
+  "need_rebalance": true,
+  "operation": "换仓",
+  "operation_detail": "买入中证500ETF联接",
+  "current_price": 2.368,
+  "positions": {
+    "159509_XSHE": {
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "shares": 420400,
+      "buy_price": 2.368,
+      "current_price": 2.368,
+      "market_value": 995507.2,
+      "pnl": 0.0,
+      "pnl_pct": 0.0
+    }
+  },
+  "cash": 58.16,
+  "net_value": 995565.36,
+  "total_pnl": -4434.64,
+  "total_pnl_pct": -0.44,
+  "cumulative_pnl": -4790.01,
+  "fees_estimate": 1096.33,
+  "trade_log": [
+    {
+      "date": "2026-04-29",
+      "action": "买入",
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "price": 2.37,
+      "shares": 421300,
+      "amount": 998481.0,
+      "fee": 299.54
+    },
+    {
+      "date": "2026-05-08",
+      "action": "卖出",
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "price": 2.368,
+      "shares": 421300,
+      "amount": 997638.4,
+      "fee": 798.11,
+      "pnl": -798.11
+    },
+    {
+      "date": "2026-05-08",
+      "action": "买入",
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "price": 2.368,
+      "shares": 420800,
+      "amount": 996454.4,
+      "fee": 298.94
+    },
+    {
+      "date": "2026-05-09",
+      "action": "卖出",
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "price": 2.368,
+      "shares": 420800,
+      "amount": 996454.4,
+      "fee": 797.16,
+      "pnl": -797.16
+    },
+    {
+      "date": "2026-05-09",
+      "action": "买入",
+      "etf": "159509_XSHE",
+      "name": "中证500ETF联接",
+      "price": 2.368,
+      "shares": 420400,
+      "amount": 995507.2,
+      "fee": 298.65
+    }
+  ]
+}

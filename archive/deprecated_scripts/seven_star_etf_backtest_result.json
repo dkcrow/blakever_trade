@@ -1,0 +1,114 @@
+{
+  "strategy_name": "七星高照ETF轮动策略-V1.7.2",
+  "backtest_time": "2026-04-26 22:47:16",
+  "data_source": "akshare (A股ETF历史K线)",
+  "data_period": "2019-01-03 ~ 2025-12-31",
+  "total_return": 284.37,
+  "annual_return": 22.12,
+  "max_drawdown": -34.47,
+  "sharpe_ratio": 0.74,
+  "calmar_ratio": 0.64,
+  "win_rate": 52.4,
+  "profit_factor": 1.5,
+  "trade_win_rate": 48.9,
+  "max_dd_start": "2024-11-28",
+  "max_dd_end": "2025-05-22",
+  "total_trades": 795,
+  "buy_trades": 398,
+  "sell_trades": 397,
+  "avg_annual_trades": 118.0,
+  "total_commission": 287845.06,
+  "benchmark": "沪深300",
+  "benchmark_return": 56.16,
+  "benchmark_max_dd": -45.6,
+  "alpha": 15.28,
+  "overfit_detected": false,
+  "overfit_details": "训练集年化16.09% vs 测试集年化38.00%",
+  "consistency_check": {
+    "passed": false,
+    "warnings": [
+      "1y周期回撤-34.47%，超30%",
+      "3y周期回撤-34.47%，超30%",
+      "5y周期回撤-34.47%，超30%"
+    ],
+    "verdict": "不予采纳"
+  },
+  "period_results": {
+    "1y": {
+      "annual_return": 39.33,
+      "sharpe": 0.84,
+      "max_drawdown": -34.47,
+      "sharpe_pass": "True",
+      "dd_pass": "False"
+    },
+    "3y": {
+      "annual_return": 28.11,
+      "sharpe": 0.81,
+      "max_drawdown": -34.47,
+      "sharpe_pass": "True",
+      "dd_pass": "False"
+    },
+    "5y": {
+      "annual_return": 28.1,
+      "sharpe": 0.89,
+      "max_drawdown": -34.47,
+      "sharpe_pass": "True",
+      "dd_pass": "False"
+    }
+  },
+  "top_holdings": [
+    [
+      "豆粕ETF",
+      143,
+      8.4
+    ],
+    [
+      "纳指ETF",
+      138,
+      8.1
+    ],
+    [
+      "创业板成长ETF",
+      100,
+      5.9
+    ],
+    [
+      "南方原油",
+      99,
+      5.8
+    ],
+    [
+      "纳指科技ETF",
+      94,
+      5.5
+    ],
+    [
+      "白银LOF",
+      93,
+      5.5
+    ],
+    [
+      "中概互联网ETF",
+      90,
+      5.3
+    ],
+    [
+      "黄金ETF",
+      87,
+      5.1
+    ],
+    [
+      "货币基金",
+      69,
+      4.1
+    ],
+    [
+      "创业板ETF",
+      69,
+      4.1
+    ]
+  ],
+  "improvement_ratio": 0.64,
+  "recommend_adoption": false,
+  "optimization_notes": "策略在A股ETF池上表现取决于动量效应强度，震荡市中可能频繁换仓增加成本。建议: 1)增加换仓缓冲(hysteresis)降低交易频率 2)结合波动率调整仓位 3)考虑增加债券类ETF比重"
+}

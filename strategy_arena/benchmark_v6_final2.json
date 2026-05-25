@@ -1,0 +1,13 @@
+{
+  "total_variants": 162,
+  "l1_passed": 156,
+  "l1_eliminated": 6,
+  "l2_passed": 92,
+  "l2_eliminated": 64,
+  "l3_count": 10,
+  "data_time": 19.6,
+  "l1_time": 12.2,
+  "l2_time": 17.6,
+  "l3_time": 17.3,
+  "total_time": 66.7
+}

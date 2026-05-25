@@ -1,0 +1,572 @@
+[
+  {
+    "rank": 3,
+    "strategy_name": "七星高照V1.7.2-短周期(15日)",
+    "strategy_type": "七星高照V1.7.2",
+    "fingerprint": "v172_short15_2019_2024",
+    "main_period": {
+      "annual_return": 223.87,
+      "sharpe": 1.76,
+      "max_drawdown": 6.47,
+      "win_rate": 55.53,
+      "profit_factor": 2.46,
+      "avg_trades_per_year": 65.8,
+      "monthly_positive_rate": 0.901,
+      "yearly_returns": {
+        "2019": 84.61,
+        "2020": 368.97,
+        "2021": 153.68,
+        "2022": 562.46,
+        "2023": 103.22,
+        "2024": 288.2
+      },
+      "holding_distribution": {
+        "513100(纳指ETF)": 10.0,
+        "501018(南方原油ETF)": 9.4,
+        "159985(豆粕ETF)": 9.2,
+        "159967(创成长ETF)": 8.2,
+        "161226(白酒LOF)": 8.1,
+        "512890(红利低波ETF)": 6.4,
+        "159981(能源化工ETF)": 5.9,
+        "518880(黄金ETF)": 5.8,
+        "159915(创业板ETF)": 4.9,
+        "159509(中证500ETF联接)": 4.1,
+        "588080(科创50ETF2)": 3.6,
+        "512100(中证1000ETF)": 3.2,
+        "513500(标普500ETF)": 3.0,
+        "513290(纳斯达克生物ETF)": 2.7,
+        "512040(沪深300价值ETF)": 2.3,
+        "510050(上证50ETF)": 2.2,
+        "563300(中证2000ETF2)": 2.1,
+        "511010(国债ETF)": 1.9,
+        "159980(有色金属ETF)": 1.9,
+        "511220(城投ETF)": 1.4,
+        "159529(科创50ETF)": 1.2,
+        "511880(511880_XSHG)": 1.0,
+        "510300(沪深300ETF)": 0.8,
+        "510500(中证500ETF)": 0.5,
+        "513400(道琼斯ETF)": 0.4,
+        "510210(上证ETF)": 0.1
+      }
+    },
+    "stress_test": {
+      "annual_return": 104.46,
+      "max_drawdown": 6.26,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 17.87,
+      "sharpe_score": 12.07,
+      "max_drawdown_score": 20.62,
+      "profit_factor_score": 6.76,
+      "win_rate_score": 11.09,
+      "base_score": 68.41,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 5.0,
+      "monthly_positive_rate": 0.901,
+      "survivorship_penalty": -5.0,
+      "total_score": 73.41,
+      "grade": "S",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 1,
+    "strategy_name": "七星高照ETF轮动V1.7.2-无成交量过滤",
+    "strategy_type": "七星高照V1.7.2",
+    "fingerprint": "v172_novol_2019_2024",
+    "main_period": {
+      "annual_return": 150.4,
+      "sharpe": 3.43,
+      "max_drawdown": 9.06,
+      "win_rate": 54.43,
+      "profit_factor": 1.97,
+      "avg_trades_per_year": 53.3,
+      "monthly_positive_rate": 0.789,
+      "yearly_returns": {
+        "2019": 58.55,
+        "2020": 261.49,
+        "2021": 180.05,
+        "2022": 96.43,
+        "2023": 67.01,
+        "2024": 337.43
+      },
+      "holding_distribution": {
+        "513100(纳指ETF)": 11.5,
+        "159985(豆粕ETF)": 10.6,
+        "501018(南方原油ETF)": 8.3,
+        "159967(创成长ETF)": 7.1,
+        "161226(白酒LOF)": 6.9,
+        "512890(红利低波ETF)": 6.3,
+        "518880(黄金ETF)": 5.2,
+        "512100(中证1000ETF)": 5.2,
+        "159915(创业板ETF)": 4.8,
+        "159981(能源化工ETF)": 4.3,
+        "159509(中证500ETF联接)": 3.8,
+        "513290(纳斯达克生物ETF)": 3.4,
+        "588080(科创50ETF2)": 3.2,
+        "512040(沪深300价值ETF)": 3.0,
+        "511220(城投ETF)": 2.7,
+        "513500(标普500ETF)": 2.3,
+        "159980(有色金属ETF)": 2.2,
+        "159529(科创50ETF)": 1.9,
+        "511010(国债ETF)": 1.6,
+        "563300(中证2000ETF2)": 1.3,
+        "510050(上证50ETF)": 1.2,
+        "511880(511880_XSHG)": 1.1,
+        "510500(中证500ETF)": 0.7,
+        "510300(沪深300ETF)": 0.5,
+        "513400(道琼斯ETF)": 0.4,
+        "510210(上证ETF)": 0.1,
+        "511380(十年国开ETF)": 0.1
+      }
+    },
+    "stress_test": {
+      "annual_return": 177.88,
+      "max_drawdown": 7.76,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 15.63,
+      "sharpe_score": 16.49,
+      "max_drawdown_score": 18.33,
+      "profit_factor_score": 5.21,
+      "win_rate_score": 10.78,
+      "base_score": 66.44,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 5.0,
+      "monthly_positive_rate": 0.789,
+      "survivorship_penalty": -5.0,
+      "total_score": 71.44,
+      "grade": "S",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 4,
+    "strategy_name": "三马105七星17-原版组合(50%小市值+50%ETF轮动)",
+    "strategy_type": "混合策略",
+    "fingerprint": "sanma105_combo_2019_2024",
+    "main_period": {
+      "annual_return": 78.13,
+      "sharpe": 3.61,
+      "max_drawdown": 7.07,
+      "win_rate": 56.43,
+      "profit_factor": 2.02,
+      "avg_trades_per_year": 0,
+      "monthly_positive_rate": 0.817,
+      "yearly_returns": {
+        "2019": 38.31,
+        "2020": 112.52,
+        "2021": 84.17,
+        "2022": 57.69,
+        "2023": 33.03,
+        "2024": 170.71
+      },
+      "holding_distribution": {}
+    },
+    "stress_test": {
+      "annual_return": 85.11,
+      "max_drawdown": 7.42,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 12.1,
+      "sharpe_score": 16.85,
+      "max_drawdown_score": 20.07,
+      "profit_factor_score": 5.38,
+      "win_rate_score": 11.34,
+      "base_score": 65.74,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 5.0,
+      "monthly_positive_rate": 0.817,
+      "survivorship_penalty": -5.0,
+      "total_score": 70.74,
+      "grade": "S",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 2,
+    "strategy_name": "七星高照ETF轮动V1.7.2-大池完整版",
+    "strategy_type": "七星高照V1.7.2",
+    "fingerprint": "v172_full_2019_2024",
+    "main_period": {
+      "annual_return": 120.76,
+      "sharpe": 3.23,
+      "max_drawdown": 11.12,
+      "win_rate": 53.95,
+      "profit_factor": 1.83,
+      "avg_trades_per_year": 60.0,
+      "monthly_positive_rate": 0.789,
+      "yearly_returns": {
+        "2019": 48.23,
+        "2020": 229.28,
+        "2021": 171.54,
+        "2022": 92.85,
+        "2023": 69.1,
+        "2024": 150.23
+      },
+      "holding_distribution": {
+        "513100(纳指ETF)": 11.6,
+        "159985(豆粕ETF)": 10.4,
+        "501018(南方原油ETF)": 8.3,
+        "159967(创成长ETF)": 7.1,
+        "161226(白酒LOF)": 6.5,
+        "512890(红利低波ETF)": 6.2,
+        "518880(黄金ETF)": 5.8,
+        "512100(中证1000ETF)": 5.2,
+        "159915(创业板ETF)": 4.7,
+        "159981(能源化工ETF)": 4.3,
+        "159509(中证500ETF联接)": 3.7,
+        "513290(纳斯达克生物ETF)": 3.5,
+        "588080(科创50ETF2)": 3.2,
+        "511220(城投ETF)": 2.9,
+        "512040(沪深300价值ETF)": 2.8,
+        "513500(标普500ETF)": 2.8,
+        "159980(有色金属ETF)": 2.3,
+        "511010(国债ETF)": 1.6,
+        "159529(科创50ETF)": 1.5,
+        "563300(中证2000ETF2)": 1.3,
+        "510050(上证50ETF)": 1.2,
+        "511880(511880_XSHG)": 1.1,
+        "510500(中证500ETF)": 0.7,
+        "510300(沪深300ETF)": 0.5,
+        "513400(道琼斯ETF)": 0.3,
+        "510210(上证ETF)": 0.1,
+        "511380(十年国开ETF)": 0.1
+      }
+    },
+    "stress_test": {
+      "annual_return": 167.85,
+      "max_drawdown": 7.76,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 14.42,
+      "sharpe_score": 16.08,
+      "max_drawdown_score": 16.63,
+      "profit_factor_score": 4.69,
+      "win_rate_score": 10.64,
+      "base_score": 62.46,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 5.0,
+      "monthly_positive_rate": 0.789,
+      "survivorship_penalty": -5.0,
+      "total_score": 67.46,
+      "grade": "S",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 5,
+    "strategy_name": "七星高照6+1",
+    "strategy_type": "七星高照6+1",
+    "fingerprint": "qixing61_2019_2024",
+    "main_period": {
+      "annual_return": 63.59,
+      "sharpe": 2.09,
+      "max_drawdown": 14.11,
+      "win_rate": 54.16,
+      "profit_factor": 1.49,
+      "avg_trades_per_year": 22.2,
+      "monthly_positive_rate": 0.69,
+      "yearly_returns": {
+        "2019": 29.98,
+        "2020": 166.59,
+        "2021": 55.03,
+        "2022": 112.63,
+        "2023": 25.61,
+        "2024": 26.03
+      },
+      "holding_distribution": {
+        "513100(纳指ETF)": 23.6,
+        "159985(豆粕ETF)": 18.3,
+        "501018(南方原油ETF)": 17.2,
+        "161226(白酒LOF)": 14.0,
+        "159915(创业板ETF)": 12.6,
+        "518880(黄金ETF)": 10.0,
+        "511220(城投ETF)": 4.4
+      }
+    },
+    "stress_test": {
+      "annual_return": 142.22,
+      "max_drawdown": 92.39,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 11.04,
+      "sharpe_score": 13.16,
+      "max_drawdown_score": 14.33,
+      "profit_factor_score": 3.24,
+      "win_rate_score": 10.7,
+      "base_score": 52.47,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.69,
+      "survivorship_penalty": -5.0,
+      "total_score": 55.47,
+      "grade": "A",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 8,
+    "strategy_name": "双重动量_9M_阈值2%+3d缓冲",
+    "strategy_type": "内置轮动",
+    "fingerprint": "dual_9m_2pct_2019_2024",
+    "main_period": {
+      "annual_return": 17.23,
+      "sharpe": 0.98,
+      "max_drawdown": 17.67,
+      "win_rate": 55.46,
+      "profit_factor": 1.23,
+      "avg_trades_per_year": 8.8,
+      "monthly_positive_rate": 0.676,
+      "yearly_returns": {
+        "2019": 34.63,
+        "2020": 42.84,
+        "2021": 4.98,
+        "2022": -9.13,
+        "2023": 14.23,
+        "2024": 22.67
+      },
+      "holding_distribution": {
+        "518880(黄金ETF)": 56.6,
+        "510300(沪深300ETF)": 19.2,
+        "510500(中证500ETF)": 18.2,
+        "511880(511880_XSHG)": 3.1,
+        "511010(国债ETF)": 3.0
+      }
+    },
+    "stress_test": {
+      "annual_return": 9.59,
+      "max_drawdown": 18.84,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 5.34,
+      "sharpe_score": 8.68,
+      "max_drawdown_score": 12.36,
+      "profit_factor_score": 1.86,
+      "win_rate_score": 11.07,
+      "base_score": 39.31,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.676,
+      "survivorship_penalty": -5.0,
+      "total_score": 42.31,
+      "grade": "B",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 6,
+    "strategy_name": "SPY/GLD/SHY轮动_6M",
+    "strategy_type": "内置轮动",
+    "fingerprint": "spy_gld_shy_6m_2019_2024",
+    "main_period": {
+      "annual_return": 14.54,
+      "sharpe": 0.82,
+      "max_drawdown": 15.12,
+      "win_rate": 55.81,
+      "profit_factor": 1.21,
+      "avg_trades_per_year": 9.3,
+      "monthly_positive_rate": 0.662,
+      "yearly_returns": {
+        "2019": 14.44,
+        "2020": 27.63,
+        "2021": -2.58,
+        "2022": 0.35,
+        "2023": 16.58,
+        "2024": 35.3
+      },
+      "holding_distribution": {
+        "518880(黄金ETF)": 59.7,
+        "510300(沪深300ETF)": 27.4,
+        "511880(511880_XSHG)": 12.9
+      }
+    },
+    "stress_test": {
+      "annual_return": 17.53,
+      "max_drawdown": 16.07,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 4.76,
+      "sharpe_score": 7.77,
+      "max_drawdown_score": 13.62,
+      "profit_factor_score": 1.74,
+      "win_rate_score": 11.17,
+      "base_score": 39.06,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.662,
+      "survivorship_penalty": -5.0,
+      "total_score": 42.06,
+      "grade": "B",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 10,
+    "strategy_name": "双市场自适应_6M+3d缓冲",
+    "strategy_type": "内置轮动",
+    "fingerprint": "dual_mkt_6m3d_2019_2024",
+    "main_period": {
+      "annual_return": 15.24,
+      "sharpe": 0.83,
+      "max_drawdown": 17.32,
+      "win_rate": 53.75,
+      "profit_factor": 1.2,
+      "avg_trades_per_year": 9.0,
+      "monthly_positive_rate": 0.62,
+      "yearly_returns": {
+        "2019": 3.72,
+        "2020": 43.12,
+        "2021": 5.58,
+        "2022": -2.43,
+        "2023": 16.07,
+        "2024": 30.67
+      },
+      "holding_distribution": {
+        "518880(黄金ETF)": 53.7,
+        "510500(中证500ETF)": 21.2,
+        "510300(沪深300ETF)": 17.9,
+        "511260(511260_XSHG)": 6.6,
+        "511010(国债ETF)": 0.4,
+        "511880(511880_XSHG)": 0.2
+      }
+    },
+    "stress_test": {
+      "annual_return": 10.53,
+      "max_drawdown": 16.43,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 4.92,
+      "sharpe_score": 7.83,
+      "max_drawdown_score": 12.52,
+      "profit_factor_score": 1.67,
+      "win_rate_score": 10.58,
+      "base_score": 37.52,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.62,
+      "survivorship_penalty": -5.0,
+      "total_score": 40.52,
+      "grade": "B",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 7,
+    "strategy_name": "全天候_3M+7d缓冲",
+    "strategy_type": "内置轮动",
+    "fingerprint": "allweather_3m7d_2019_2024",
+    "main_period": {
+      "annual_return": 14.44,
+      "sharpe": 0.75,
+      "max_drawdown": 16.33,
+      "win_rate": 53.26,
+      "profit_factor": 1.18,
+      "avg_trades_per_year": 13.7,
+      "monthly_positive_rate": 0.563,
+      "yearly_returns": {
+        "2019": 17.69,
+        "2020": 41.66,
+        "2021": -3.17,
+        "2022": 5.85,
+        "2023": 0.27,
+        "2024": 27.44
+      },
+      "holding_distribution": {
+        "518880(黄金ETF)": 41.5,
+        "510500(中证500ETF)": 26.5,
+        "510300(沪深300ETF)": 18.1,
+        "511260(511260_XSHG)": 10.3,
+        "511010(国债ETF)": 1.9,
+        "511880(511880_XSHG)": 1.7
+      }
+    },
+    "stress_test": {
+      "annual_return": 1.56,
+      "max_drawdown": 26.61,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 4.74,
+      "sharpe_score": 7.33,
+      "max_drawdown_score": 13.0,
+      "profit_factor_score": 1.55,
+      "win_rate_score": 10.44,
+      "base_score": 37.06,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.563,
+      "survivorship_penalty": -5.0,
+      "total_score": 40.06,
+      "grade": "B",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  },
+  {
+    "rank": 9,
+    "strategy_name": "GEM4资产_9M+3d缓冲",
+    "strategy_type": "内置轮动",
+    "fingerprint": "gem4_9m3d_2019_2024",
+    "main_period": {
+      "annual_return": 5.51,
+      "sharpe": 0.31,
+      "max_drawdown": 25.6,
+      "win_rate": 55.81,
+      "profit_factor": 1.11,
+      "avg_trades_per_year": 8.5,
+      "monthly_positive_rate": 0.676,
+      "yearly_returns": {
+        "2019": 9.14,
+        "2020": 23.47,
+        "2021": 4.98,
+        "2022": -10.73,
+        "2023": -12.07,
+        "2024": 21.57
+      },
+      "holding_distribution": {
+        "511010(国债ETF)": 41.4,
+        "510300(沪深300ETF)": 31.5,
+        "510500(中证500ETF)": 23.1,
+        "511880(511880_XSHG)": 3.9
+      }
+    },
+    "stress_test": {
+      "annual_return": 10.88,
+      "max_drawdown": 18.84,
+      "passed": "True"
+    },
+    "score": {
+      "annual_return_score": 2.27,
+      "sharpe_score": 3.86,
+      "max_drawdown_score": 9.14,
+      "profit_factor_score": 1.07,
+      "win_rate_score": 11.17,
+      "base_score": 27.51,
+      "cross_period_bonus": 5.0,
+      "monthly_stability_bonus": 3.0,
+      "monthly_positive_rate": 0.676,
+      "survivorship_penalty": -5.0,
+      "total_score": 30.51,
+      "grade": "C",
+      "max_drawdown_hard_fail": "False",
+      "drawdown_penalty_tag": "False"
+    }
+  }
+]
