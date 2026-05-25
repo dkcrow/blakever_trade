@@ -217,7 +217,12 @@ def generate_html(results, rank_changes):
     try:
         with open('laplace_trades.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
-            trades = data.get('trades', [])[-20:]  # 最近20条
+            # 兼容数组格式 [{}, {}] 和字典格式 {'trades': [{}, {}]}
+            if isinstance(data, list):
+                trades = data[-20:]  # 数组格式，直接取最后20条
+            else:
+                trades = data.get('trades', [])[-20:]  # 字典格式
+            # trades = data.get('trades', data if isinstance(data, list) else [])[-20:]  # 最近20条
             if trades:
                 trades_html = '''
   <div style="margin-top:16px;padding:12px 16px;background:#ffffff;border-radius:8px;border:1px solid #e5e7eb;">
