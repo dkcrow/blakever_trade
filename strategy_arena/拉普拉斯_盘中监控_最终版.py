@@ -48,8 +48,45 @@ STATE_FILE = 'laplace_state.json'
 # =============================================================
 # 获取排名（最终修复版）
 # =============================================================
+
+def get_tencent_realtime_prices():
+    """用腾讯API批量获取实时价格"""
+    import urllib.request
+    import time
+    
+    prices = {}
+    # 分批查询（每次10个）
+    batch_size = 10
+    for i in range(0, len(ETF_POOL), batch_size):
+        batch = ETF_POOL[i:i+batch_size]
+        # 构造查询字符串：sh518880,sz159915,...
+        query = ','.join([
+            f'sh{code}' if code.startswith('5') or code.startswith('1') else f'sz{code}'
+            for code in batch
+        ])
+        url = f'http://qt.gtimg.cn/q={query}'
+        try:
+            with urllib.request.urlopen(url, timeout=3) as response:
+                data = response.read().decode('gbk')
+                # 解析多只ETF数据
+                for line in data.strip().split(';'):
+                    if '~' in line:
+                        parts = line.split('~')
+                        if len(parts) > 3:
+                            code = parts[2]  # 纯数字代码
+                            price = float(parts[3])  # 当前价
+                            prices[code] = price
+        except:
+            pass
+        time.sleep(0.1)  # 避免请求过快
+    return prices
+
+
 def get_rankings():
     rankings = []
+    # 获取腾讯API实时价格
+    tencent_prices = get_tencent_realtime_prices()
+    print(f"  [OK] 腾讯API获取 {len(tencent_prices)} 只ETF实时价格")
     for etf in ETF_POOL:
         for subdir in ['etf', 'etf_qixing']:
             csv_path = f"{BASE_DIR}\\{subdir}\\{etf}.csv"
@@ -94,7 +131,8 @@ def get_rankings():
                         'total_score': combined,
                         'short_score': short,
                         'long_score': long,
-                        'realtime_price': df['close'].iloc[-1]
+                        # 优先用腾讯API实时价格，失败则用CSV收盘价
+                        'realtime_price': tencent_prices.get(etf, df['close'].iloc[-1]) if 'tencent_prices' in dir() else df['close'].iloc[-1]
                     })
                     break
             except:
