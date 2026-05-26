@@ -1,0 +1,1712 @@
+[
+  {
+    "id": "hist_001",
+    "date": "2025-02-06",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 0.675,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_002",
+    "date": "2025-02-10",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 0.706,
+    "reason": "Top1 replaced",
+    "pnl_pct": 4.6
+  },
+  {
+    "id": "hist_003",
+    "date": "2025-02-10",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.813,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_004",
+    "date": "2025-02-27",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.924,
+    "reason": "Top1 replaced",
+    "pnl_pct": 13.7
+  },
+  {
+    "id": "hist_005",
+    "date": "2025-02-27",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 0.797,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_006",
+    "date": "2025-02-28",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 0.744,
+    "reason": "Top1 replaced",
+    "pnl_pct": -6.6
+  },
+  {
+    "id": "hist_007",
+    "date": "2025-02-28",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.871,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_008",
+    "date": "2025-03-03",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.876,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.6
+  },
+  {
+    "id": "hist_009",
+    "date": "2025-03-03",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "BUY",
+    "price": 1.088,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_010",
+    "date": "2025-03-05",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "SELL",
+    "price": 1.111,
+    "reason": "Top1 replaced",
+    "pnl_pct": 2.1
+  },
+  {
+    "id": "hist_011",
+    "date": "2025-03-05",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.917,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_012",
+    "date": "2025-03-06",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.971,
+    "reason": "Top1 replaced",
+    "pnl_pct": 5.9
+  },
+  {
+    "id": "hist_013",
+    "date": "2025-03-06",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "BUY",
+    "price": 1.574,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_014",
+    "date": "2025-03-11",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "SELL",
+    "price": 1.505,
+    "reason": "Top1 replaced",
+    "pnl_pct": -4.4
+  },
+  {
+    "id": "hist_015",
+    "date": "2025-03-11",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.936,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_016",
+    "date": "2025-03-13",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.906,
+    "reason": "Top1 replaced",
+    "pnl_pct": -3.2
+  },
+  {
+    "id": "hist_017",
+    "date": "2025-03-13",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "BUY",
+    "price": 1.725,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_018",
+    "date": "2025-03-14",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "SELL",
+    "price": 1.733,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.5
+  },
+  {
+    "id": "hist_019",
+    "date": "2025-03-14",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 0.791,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_020",
+    "date": "2025-03-18",
+    "etf": "513130",
+    "name": "恒生科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 0.816,
+    "reason": "Top1 replaced",
+    "pnl_pct": 3.2
+  },
+  {
+    "id": "hist_021",
+    "date": "2025-03-18",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "BUY",
+    "price": 1.595,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_022",
+    "date": "2025-03-19",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "SELL",
+    "price": 1.59,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.3
+  },
+  {
+    "id": "hist_023",
+    "date": "2025-03-19",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "BUY",
+    "price": 1.838,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_024",
+    "date": "2025-03-21",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "SELL",
+    "price": 1.773,
+    "reason": "Top1 replaced",
+    "pnl_pct": -3.5
+  },
+  {
+    "id": "hist_025",
+    "date": "2025-03-21",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "BUY",
+    "price": 1.582,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_026",
+    "date": "2025-03-26",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "SELL",
+    "price": 1.643,
+    "reason": "Top1 replaced",
+    "pnl_pct": 3.9
+  },
+  {
+    "id": "hist_027",
+    "date": "2025-03-26",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "BUY",
+    "price": 1.795,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_028",
+    "date": "2025-03-28",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "SELL",
+    "price": 1.75,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.5
+  },
+  {
+    "id": "hist_029",
+    "date": "2025-03-28",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "BUY",
+    "price": 6.938,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_030",
+    "date": "2025-04-08",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "SELL",
+    "price": 6.925,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.2
+  },
+  {
+    "id": "hist_031",
+    "date": "2025-04-08",
+    "etf": "159985",
+    "name": "豆粕ETF华夏",
+    "action": "BUY",
+    "price": 2.048,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_032",
+    "date": "2025-04-10",
+    "etf": "159985",
+    "name": "豆粕ETF华夏",
+    "action": "SELL",
+    "price": 1.989,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.9
+  },
+  {
+    "id": "hist_033",
+    "date": "2025-04-10",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "BUY",
+    "price": 7.164,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_034",
+    "date": "2025-04-28",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "SELL",
+    "price": 7.465,
+    "reason": "Top1 replaced",
+    "pnl_pct": 4.2
+  },
+  {
+    "id": "hist_035",
+    "date": "2025-04-28",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.153,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_036",
+    "date": "2025-05-12",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.217,
+    "reason": "Top1 replaced",
+    "pnl_pct": 5.6
+  },
+  {
+    "id": "hist_037",
+    "date": "2025-05-12",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "BUY",
+    "price": 1.9,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_038",
+    "date": "2025-05-13",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "SELL",
+    "price": 1.846,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.8
+  },
+  {
+    "id": "hist_039",
+    "date": "2025-05-13",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.214,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_040",
+    "date": "2025-05-14",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.237,
+    "reason": "Top1 replaced",
+    "pnl_pct": 1.9
+  },
+  {
+    "id": "hist_041",
+    "date": "2025-05-14",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "BUY",
+    "price": 1.626,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_042",
+    "date": "2025-05-15",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "SELL",
+    "price": 1.536,
+    "reason": "Top1 replaced",
+    "pnl_pct": -5.5
+  },
+  {
+    "id": "hist_043",
+    "date": "2025-05-15",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.244,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_044",
+    "date": "2025-05-16",
+    "etf": "513730",
+    "name": "东南亚科技ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.242,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.2
+  },
+  {
+    "id": "hist_045",
+    "date": "2025-05-16",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "BUY",
+    "price": 1.592,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_046",
+    "date": "2025-05-27",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "SELL",
+    "price": 1.593,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.1
+  },
+  {
+    "id": "hist_047",
+    "date": "2025-05-27",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "BUY",
+    "price": 1.887,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_048",
+    "date": "2025-05-28",
+    "etf": "513030",
+    "name": "德国ETF华安",
+    "action": "SELL",
+    "price": 1.888,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.1
+  },
+  {
+    "id": "hist_049",
+    "date": "2025-05-28",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "BUY",
+    "price": 1.602,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_050",
+    "date": "2025-05-29",
+    "etf": "159529",
+    "name": "标普消费ETF景顺",
+    "action": "SELL",
+    "price": 1.604,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.1
+  },
+  {
+    "id": "hist_051",
+    "date": "2025-05-29",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.571,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_052",
+    "date": "2025-06-05",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.555,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.0
+  },
+  {
+    "id": "hist_053",
+    "date": "2025-06-05",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.58,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_054",
+    "date": "2025-06-06",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.587,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.4
+  },
+  {
+    "id": "hist_055",
+    "date": "2025-06-06",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 1.029,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_056",
+    "date": "2025-06-13",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 1.024,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.5
+  },
+  {
+    "id": "hist_057",
+    "date": "2025-06-13",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.276,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_058",
+    "date": "2025-06-25",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.24,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.8
+  },
+  {
+    "id": "hist_059",
+    "date": "2025-06-25",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.674,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_060",
+    "date": "2025-07-01",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.663,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.7
+  },
+  {
+    "id": "hist_061",
+    "date": "2025-07-01",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.451,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_062",
+    "date": "2025-07-02",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.445,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.3
+  },
+  {
+    "id": "hist_063",
+    "date": "2025-07-02",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.647,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_064",
+    "date": "2025-07-03",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.664,
+    "reason": "Top1 replaced",
+    "pnl_pct": 1.0
+  },
+  {
+    "id": "hist_065",
+    "date": "2025-07-03",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.451,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_066",
+    "date": "2025-07-04",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.45,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.2
+  },
+  {
+    "id": "hist_067",
+    "date": "2025-07-04",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.664,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_068",
+    "date": "2025-07-11",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.69,
+    "reason": "Top1 replaced",
+    "pnl_pct": 1.6
+  },
+  {
+    "id": "hist_069",
+    "date": "2025-07-11",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.463,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_070",
+    "date": "2025-07-14",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.46,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.6
+  },
+  {
+    "id": "hist_071",
+    "date": "2025-07-14",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.684,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_072",
+    "date": "2025-07-16",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.715,
+    "reason": "Top1 replaced",
+    "pnl_pct": 1.8
+  },
+  {
+    "id": "hist_073",
+    "date": "2025-07-16",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.91,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_074",
+    "date": "2025-07-17",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.911,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.1
+  },
+  {
+    "id": "hist_075",
+    "date": "2025-07-17",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "BUY",
+    "price": 2.247,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_076",
+    "date": "2025-07-21",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "SELL",
+    "price": 2.275,
+    "reason": "Top1 replaced",
+    "pnl_pct": 1.2
+  },
+  {
+    "id": "hist_077",
+    "date": "2025-07-21",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.765,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_078",
+    "date": "2025-07-23",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.772,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.4
+  },
+  {
+    "id": "hist_079",
+    "date": "2025-07-23",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "BUY",
+    "price": 0.948,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_080",
+    "date": "2025-07-25",
+    "etf": "159792",
+    "name": "港股通互联网ETF富国",
+    "action": "SELL",
+    "price": 0.939,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.9
+  },
+  {
+    "id": "hist_081",
+    "date": "2025-07-25",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "BUY",
+    "price": 2.318,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_082",
+    "date": "2025-07-31",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "SELL",
+    "price": 2.301,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.7
+  },
+  {
+    "id": "hist_083",
+    "date": "2025-07-31",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.807,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_084",
+    "date": "2025-08-01",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.773,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.9
+  },
+  {
+    "id": "hist_085",
+    "date": "2025-08-01",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.269,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_086",
+    "date": "2025-08-04",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.241,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.2
+  },
+  {
+    "id": "hist_087",
+    "date": "2025-08-04",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "BUY",
+    "price": 1.077,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_088",
+    "date": "2025-08-06",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "SELL",
+    "price": 1.087,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.9
+  },
+  {
+    "id": "hist_089",
+    "date": "2025-08-06",
+    "etf": "563300",
+    "name": "中证2000ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 1.251,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_090",
+    "date": "2025-08-07",
+    "etf": "563300",
+    "name": "中证2000ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 1.251,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.0
+  },
+  {
+    "id": "hist_091",
+    "date": "2025-08-07",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.822,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_092",
+    "date": "2025-08-13",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.902,
+    "reason": "Top1 replaced",
+    "pnl_pct": 4.4
+  },
+  {
+    "id": "hist_093",
+    "date": "2025-08-13",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "BUY",
+    "price": 2.473,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_094",
+    "date": "2025-08-14",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "SELL",
+    "price": 2.446,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.1
+  },
+  {
+    "id": "hist_095",
+    "date": "2025-08-14",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 1.906,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_096",
+    "date": "2025-08-15",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 1.921,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.8
+  },
+  {
+    "id": "hist_097",
+    "date": "2025-08-15",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.529,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_098",
+    "date": "2025-08-22",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.55,
+    "reason": "Top1 replaced",
+    "pnl_pct": 4.0
+  },
+  {
+    "id": "hist_099",
+    "date": "2025-08-22",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "BUY",
+    "price": 1.295,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_100",
+    "date": "2025-09-04",
+    "etf": "588080",
+    "name": "科创50ETF易方达",
+    "action": "SELL",
+    "price": 1.252,
+    "reason": "Top1 replaced",
+    "pnl_pct": -3.3
+  },
+  {
+    "id": "hist_101",
+    "date": "2025-09-04",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "BUY",
+    "price": 2.751,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_102",
+    "date": "2025-09-10",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "SELL",
+    "price": 2.875,
+    "reason": "Top1 replaced",
+    "pnl_pct": 4.5
+  },
+  {
+    "id": "hist_103",
+    "date": "2025-09-10",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "BUY",
+    "price": 1.612,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_104",
+    "date": "2025-09-11",
+    "etf": "513050",
+    "name": "中概互联网ETF易方达",
+    "action": "SELL",
+    "price": 1.615,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.2
+  },
+  {
+    "id": "hist_105",
+    "date": "2025-09-11",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "BUY",
+    "price": 3.025,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_106",
+    "date": "2025-09-12",
+    "etf": "159915",
+    "name": "创业板ETF易方达",
+    "action": "SELL",
+    "price": 2.995,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.0
+  },
+  {
+    "id": "hist_107",
+    "date": "2025-09-12",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 2.069,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_108",
+    "date": "2025-10-13",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 2.402,
+    "reason": "Top1 replaced",
+    "pnl_pct": 16.1
+  },
+  {
+    "id": "hist_109",
+    "date": "2025-10-13",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 1.36,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_110",
+    "date": "2025-10-20",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 1.367,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.5
+  },
+  {
+    "id": "hist_111",
+    "date": "2025-10-20",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "BUY",
+    "price": 9.268,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_112",
+    "date": "2025-10-22",
+    "etf": "518880",
+    "name": "黄金ETF华安",
+    "action": "SELL",
+    "price": 9.101,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.8
+  },
+  {
+    "id": "hist_113",
+    "date": "2025-10-22",
+    "etf": "513520",
+    "name": "日经ETF华夏",
+    "action": "BUY",
+    "price": 1.931,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_114",
+    "date": "2025-10-27",
+    "etf": "513520",
+    "name": "日经ETF华夏",
+    "action": "SELL",
+    "price": 1.934,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.2
+  },
+  {
+    "id": "hist_115",
+    "date": "2025-10-27",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 2.604,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_116",
+    "date": "2025-11-07",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 2.666,
+    "reason": "Top1 replaced",
+    "pnl_pct": 2.4
+  },
+  {
+    "id": "hist_117",
+    "date": "2025-11-07",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "BUY",
+    "price": 1.436,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_118",
+    "date": "2025-11-10",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "SELL",
+    "price": 1.439,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.2
+  },
+  {
+    "id": "hist_119",
+    "date": "2025-11-10",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 2.695,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_120",
+    "date": "2025-11-11",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 2.706,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.4
+  },
+  {
+    "id": "hist_121",
+    "date": "2025-11-11",
+    "etf": "513690",
+    "name": "港股红利ETF博时",
+    "action": "BUY",
+    "price": 1.169,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_122",
+    "date": "2025-11-14",
+    "etf": "513690",
+    "name": "港股红利ETF博时",
+    "action": "SELL",
+    "price": 1.172,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.3
+  },
+  {
+    "id": "hist_123",
+    "date": "2025-11-14",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 1.43,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_124",
+    "date": "2025-11-17",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 1.384,
+    "reason": "Top1 replaced",
+    "pnl_pct": -3.2
+  },
+  {
+    "id": "hist_125",
+    "date": "2025-11-17",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "BUY",
+    "price": 1.502,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_126",
+    "date": "2025-11-19",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "SELL",
+    "price": 1.47,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.1
+  },
+  {
+    "id": "hist_127",
+    "date": "2025-11-19",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 1.406,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_128",
+    "date": "2025-11-21",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 1.369,
+    "reason": "Top1 replaced",
+    "pnl_pct": -2.6
+  },
+  {
+    "id": "hist_129",
+    "date": "2025-11-21",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "BUY",
+    "price": 1.457,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_130",
+    "date": "2025-11-28",
+    "etf": "513290",
+    "name": "纳指生物科技ETF汇添富",
+    "action": "SELL",
+    "price": 1.609,
+    "reason": "Top1 replaced",
+    "pnl_pct": 10.4
+  },
+  {
+    "id": "hist_131",
+    "date": "2025-11-28",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 1.528,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_132",
+    "date": "2026-01-05",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 2.372,
+    "reason": "Top1 replaced",
+    "pnl_pct": 55.2
+  },
+  {
+    "id": "hist_133",
+    "date": "2026-01-05",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 2.795,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_134",
+    "date": "2026-01-06",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 2.953,
+    "reason": "Top1 replaced",
+    "pnl_pct": 5.7
+  },
+  {
+    "id": "hist_135",
+    "date": "2026-01-06",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 2.598,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_136",
+    "date": "2026-01-07",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 2.565,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.3
+  },
+  {
+    "id": "hist_137",
+    "date": "2026-01-07",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 3.126,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_138",
+    "date": "2026-01-13",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 3.001,
+    "reason": "Top1 replaced",
+    "pnl_pct": -4.0
+  },
+  {
+    "id": "hist_139",
+    "date": "2026-01-13",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "BUY",
+    "price": 2.748,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_140",
+    "date": "2026-02-05",
+    "etf": "161226",
+    "name": "白银LOF国投瑞银",
+    "action": "SELL",
+    "price": 3.443,
+    "reason": "Top1 replaced",
+    "pnl_pct": 25.3
+  },
+  {
+    "id": "hist_141",
+    "date": "2026-02-05",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 3.415,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_142",
+    "date": "2026-02-06",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 3.405,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.3
+  },
+  {
+    "id": "hist_143",
+    "date": "2026-02-06",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.268,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_144",
+    "date": "2026-02-09",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.314,
+    "reason": "Top1 replaced",
+    "pnl_pct": 3.6
+  },
+  {
+    "id": "hist_145",
+    "date": "2026-02-09",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 3.533,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_146",
+    "date": "2026-02-10",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 3.489,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.2
+  },
+  {
+    "id": "hist_147",
+    "date": "2026-02-10",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.395,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_148",
+    "date": "2026-02-11",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.348,
+    "reason": "Top1 replaced",
+    "pnl_pct": -3.4
+  },
+  {
+    "id": "hist_149",
+    "date": "2026-02-11",
+    "etf": "513520",
+    "name": "日经ETF华夏",
+    "action": "BUY",
+    "price": 2.12,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_150",
+    "date": "2026-02-24",
+    "etf": "513520",
+    "name": "日经ETF华夏",
+    "action": "SELL",
+    "price": 2.105,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.7
+  },
+  {
+    "id": "hist_151",
+    "date": "2026-02-24",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.449,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_152",
+    "date": "2026-02-26",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.43,
+    "reason": "Top1 replaced",
+    "pnl_pct": -1.3
+  },
+  {
+    "id": "hist_153",
+    "date": "2026-02-26",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 4.321,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_154",
+    "date": "2026-03-02",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 4.103,
+    "reason": "Top1 replaced",
+    "pnl_pct": -5.0
+  },
+  {
+    "id": "hist_155",
+    "date": "2026-03-02",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.583,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_156",
+    "date": "2026-03-06",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 1.579,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.3
+  },
+  {
+    "id": "hist_157",
+    "date": "2026-03-06",
+    "etf": "159981",
+    "name": "能源化工ETF建信",
+    "action": "BUY",
+    "price": 1.473,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_158",
+    "date": "2026-03-10",
+    "etf": "159981",
+    "name": "能源化工ETF建信",
+    "action": "SELL",
+    "price": 1.477,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.3
+  },
+  {
+    "id": "hist_159",
+    "date": "2026-03-10",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 1.652,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_160",
+    "date": "2026-04-10",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 2.24,
+    "reason": "Top1 replaced",
+    "pnl_pct": 35.6
+  },
+  {
+    "id": "hist_161",
+    "date": "2026-04-10",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.712,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_162",
+    "date": "2026-04-13",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.717,
+    "reason": "Top1 replaced",
+    "pnl_pct": 0.7
+  },
+  {
+    "id": "hist_163",
+    "date": "2026-04-13",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "BUY",
+    "price": 2.366,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_164",
+    "date": "2026-04-14",
+    "etf": "501018",
+    "name": "南方原油LOF",
+    "action": "SELL",
+    "price": 2.266,
+    "reason": "Top1 replaced",
+    "pnl_pct": -4.2
+  },
+  {
+    "id": "hist_165",
+    "date": "2026-04-14",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "BUY",
+    "price": 0.736,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_166",
+    "date": "2026-04-27",
+    "etf": "159967",
+    "name": "创业板成长ETF华夏",
+    "action": "SELL",
+    "price": 0.776,
+    "reason": "Top1 replaced",
+    "pnl_pct": 5.4
+  },
+  {
+    "id": "hist_167",
+    "date": "2026-04-27",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "BUY",
+    "price": 2.37,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_168",
+    "date": "2026-04-28",
+    "etf": "159509",
+    "name": "纳指科技ETF景顺",
+    "action": "SELL",
+    "price": 2.366,
+    "reason": "Top1 replaced",
+    "pnl_pct": -0.2
+  },
+  {
+    "id": "hist_169",
+    "date": "2026-04-28",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 4.227,
+    "reason": "Top1 momentum",
+    "pnl_pct": 0
+  },
+  {
+    "id": "hist_170",
+    "date": "2026-05-21",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "SELL",
+    "price": 5.625,
+    "reason": "Simulation end",
+    "pnl_pct": 33.1
+  },
+  {
+    "id": "auto_1779809017",
+    "date": "2026-05-26",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 6.148,
+    "reason": "Initial Top1",
+    "pnl_pct": null
+  }
+]
