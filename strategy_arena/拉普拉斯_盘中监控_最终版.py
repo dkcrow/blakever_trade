@@ -125,14 +125,23 @@ def get_rankings():
                     # 综合得分（不截断，保留真实值）
                     combined = short * 1.0 + long * 0.5
                     
+                    # 获取腾讯API价格（包含昨收价）
+                    api_data = tencent_prices.get(etf)
+                    if api_data:
+                        realtime_price = api_data['price']
+                        yesterday_close = api_data['yesterday_close']
+                    else:
+                        realtime_price = df['close'].iloc[-1]
+                        yesterday_close = realtime_price  # 无法获取昨收，用当前价替代
+                    
                     rankings.append({
                         'code': etf,
                         'name': ETF_NAMES.get(etf, etf),
                         'total_score': combined,
                         'short_score': short,
                         'long_score': long,
-                        # 优先用腾讯API实时价格，失败则用CSV收盘价
-                        'realtime_price': tencent_prices.get(etf, df['close'].iloc[-1]) if 'tencent_prices' in dir() else df['close'].iloc[-1]
+                        'realtime_price': realtime_price,
+                        'yesterday_close': yesterday_close
                     })
                     break
             except:
@@ -232,13 +241,24 @@ def generate_html(results, rank_changes):
         else:
             rank_change_html = '<span style="color:#6b7280;font-size:11px">—</span>'
         
+        # 计算涨跌幅
+        price = r['realtime_price']
+        yesterday_close = r.get('yesterday_close', price)
+        if yesterday_close > 0:
+            pct_change = ((price - yesterday_close) / yesterday_close) * 100
+            pct_color = '#059669' if pct_change >= 0 else '#dc2626'
+            pct_sign = '+' if pct_change >= 0 else ''
+            pct_html = f'<span style="color:{pct_color};font-size:11px">{pct_sign}{pct_change:.2f}%</span>'
+        else:
+            pct_html = '<span style="color:#6b7280;font-size:11px">0.00%</span>'
+        
         rows_html += f'''    <tr>
         <td style="color:#374151;font-weight:600;width:28px">{rank_badge}{r['rank']}</td>
         <td style="text-align:left"><span style="color:#1d4ed8;font-weight:600;font-family:monospace;font-size:13px">{code}</span> <span style="color:#111827">{name}</span></td>
         <td style="font-weight:700;font-size:15px;color:{score_color}">{ts:.4f}</td>
         <td style="color:#6b7280;font-size:13px">{ss:.4f}</td>
         <td style="color:#6b7280;font-size:13px">{ls:.4f}</td>
-        <td style="color:#059669;font-weight:700;font-size:15px">{price:.3f} <span style="color:#059669;font-size:11px">0.0%</span></td>
+        <td style="color:#059669;font-weight:700;font-size:15px">{price:.3f} {pct_html}</td>
         <td>{rank_change_html}</td>
       </tr>
   '''
