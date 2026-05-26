@@ -215,7 +215,11 @@ def generate_html(results, rank_changes):
     # 交易记录
     trades_html = ''
     try:
-        with open('laplace_trades.json', 'r', encoding='utf-8') as f:
+        # 使用绝对路径读取根目录的 laplace_trades.json
+        import os
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        trades_file = os.path.join(root_dir, 'laplace_trades.json')
+        with open(trades_file, 'r', encoding='utf-8') as f:
             data = json.load(f)
             # 兼容数组格式 [{}, {}] 和字典格式 {'trades': [{}, {}]}
             if isinstance(data, list):
