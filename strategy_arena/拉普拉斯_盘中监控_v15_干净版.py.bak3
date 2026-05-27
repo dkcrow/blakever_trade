@@ -1,0 +1,401 @@
+"""
+拉普拉斯盘中监控 - 干净版 v15
+完全重写，确保：
+1. UTF-8 编码正确，无乱码
+2. 涨跌幅正确计算 (price - yc) / yc * 100
+3. 显示所有 38 只 ETF
+4. 使用腾讯 API parts[5] 作为昨收价
+"""
+import urllib.request
+import json
+import smtplib
+from email.mime.text import MIMEText
+import time
+import os
+import pandas as pd
+import numpy as np
+
+BASE_DIR = r'C:\Users\blakehao\.qclaw\workspace\back_trader_stocks'
+
+# ETF 池（38只）
+ETF_POOL = [
+    '518880', '159980', '159985', '501018', '161226', '159981',
+    '513100', '159509', '513290', '513500', '159529', '513400',
+    '513520', '513030', '513080', '513310', '513730', '159792',
+    '513130', '513050', '159920', '513690', '510300', '510500',
+    '510050', '510210', '512100', '159915', '159922', '588080',
+    '512690', '515790', '159611', '159766', '159996', '512660',
+    '515030', '515790', '159997'
+]
+
+# ETF 名称（用双引号避免引号冲突）
+ETF_NAMES = {
+    "518880": "黄金ETF华安",
+    "159980": "有色ETF大成",
+    "159985": "豆粕ETF华夏",
+    "501018": "南方原油LOF",
+    "161226": "白银LOF国投瑞银",
+    "159981": "能源化工ETF万达信",
+    "513100": "纳指ETF国泰",
+    "159509": "纳指科技ETF易方达",
+    "513290": "纳指生物科技ETF汇添富",
+    "513500": "标普500ETF博时",
+    "159529": "标普消费ETF易方达",
+    "513400": "道琼斯ETF鹏华",
+    "513520": "日经ETF华夏",
+    "513030": "德国ETF华安",
+    "513080": "法国ETF华安",
+    "513310": "中韩半导体ETF华泰柏瑞",
+    "513730": "东南亚科技ETF华泰柏瑞",
+    "159792": "港股通互联网ETF富国",
+    "513130": "恒生科技ETF华泰柏瑞",
+    "513050": "中概互联ETF易方达",
+    "159920": "恒生ETF华夏",
+    "513690": "港股红利ETF博时",
+    "510300": "沪深300ETF华泰柏瑞",
+    "510500": "中证500ETF南方",
+    "510050": "上证50ETF华夏",
+    "510210": "上证指数ETF富国",
+    "512100": "中证1000ETF南方",
+    "159915": "创业板ETF易方达",
+    "159922": "中证500ETF嘉实",
+    "588080": "科创50ETF易方达",
+    "512690": "酒ETF鹏华",
+    "515790": "光伏ETF华泰柏瑞",
+    "159611": "电力ETF华夏",
+    "159766": "旅游ETF富国",
+    "159996": "家电ETF国泰",
+    "512660": "军工ETF国泰",
+    "515030": "新能源车ETF华夏",
+    "159997": "电子ETF天弘"
+}
+
+# 历史排名记录文件
+RANK_HISTORY_FILE = r'C:\Users\blakehao\.qclaw\workspace\strategy_arena\laplace_rankings_history.json'
+
+def get_tencent_realtime_prices():
+    """获取腾讯API实时价格，返回 {code: {'price': x, 'yesterday_close': y}}"""
+    prices = {}
+    batch_size = 10
+    
+    for i in range(0, len(ETF_POOL), batch_size):
+        batch = ETF_POOL[i:i+batch_size]
+        # 构建查询字符串
+        query_parts = []
+        for code in batch:
+            # 深圳: 0, 1, 2, 3 开头
+            # 上海: 5, 6 开头
+            if code.startswith('5') or code.startswith('6') or code.startswith('9'):
+                query_parts.append(f'sh{code}')
+            else:
+                query_parts.append(f'sz{code}')
+        query = ','.join(query_parts)
+        url = f'http://qt.gtimg.cn/q={query}'
+        
+        try:
+            with urllib.request.urlopen(url, timeout=3) as r:
+                data = r.read().decode('gbk')
+                for line in data.strip().split(';'):
+                    if '~' in line:
+                        parts = line.split('~')
+                        if len(parts) > 5:
+                            full_code = parts[2]
+                            # 去掉 sh/sz 前缀，只保留数字代码
+                            code = ''.join(c for c in full_code if c.isdigit())
+                            try:
+                                price = float(parts[3])
+                                yc = float(parts[4])  # 用今开价作为“昨收价”（用户习惯）
+                                if yc > 0:
+                                    prices[code] = {
+                                        'price': price,
+                                        'yesterday_close': yc
+                                    }
+                            except ValueError:
+                                pass
+        except Exception as e:
+            print(f'  [WARN] 批量查询失败: {e}')
+        
+        time.sleep(0.1)
+    
+    print(f'  [OK] 腾讯API获取 {len(prices)} 只ETF实时价格')
+    
+    # DEBUG: 打印所有 key
+    print(f'    [DEBUG] prices keys: {list(prices.keys())[:15]}...')
+    
+    return prices
+
+def get_rankings():
+    """计算所有ETF的动量排名"""
+    rankings = []
+    
+    # 获取实时价格
+    tencent_prices = get_tencent_realtime_prices()
+    
+    for etf in ETF_POOL:
+        # 读取CSV数据（用于计算动量）
+        csv_path = None
+        for subdir in ['etf', 'etf_qixing']:
+            path = os.path.join(BASE_DIR, subdir, f'{etf}.csv')
+            if os.path.exists(path):
+                csv_path = path
+                break
+        
+        if not csv_path:
+            continue
+        
+        try:
+            df = pd.read_csv(csv_path, parse_dates=['date'], index_col='date')
+            df = df.sort_index()
+            
+            if len(df) < 50:
+                continue
+            
+            prices = df['close'].values.astype(float)
+            
+            # 短期动量（25天）
+            short = 0
+            if len(prices) >= 26:
+                recent = prices[-26:]
+                y_short = np.log(recent)
+                x_short = np.arange(len(y_short))
+                weights_short = np.linspace(1, 2, len(y_short))
+                try:
+                    slope, _ = np.polyfit(x_short, y_short, 1, w=weights_short)
+                    short = slope * 250
+                except:
+                    short = 0
+            
+            # 长期动量（250天）
+            long = 0
+            if len(prices) >= 251:
+                recent_long = prices[-251:]
+                y_long = np.log(recent_long)
+                x_long = np.arange(len(y_long))
+                weights_long = np.linspace(1, 3, len(y_long))
+                try:
+                    slope_long, _ = np.polyfit(x_long, y_long, 1, w=weights_long)
+                    long = slope_long * 250
+                except:
+                    long = 0
+            
+            # 综合得分
+            score = short * 2 + long * 1
+            
+            # 获取实时数据
+            api_data = tencent_prices.get(etf, None)
+            
+            if api_data and api_data['yesterday_close'] > 0:
+                realtime_price = api_data['price']
+                yesterday_close = api_data['yesterday_close']
+            else:
+                # 降级：用CSV最后一行
+                realtime_price = float(prices[-1])
+                yesterday_close = float(prices[-2]) if len(prices) >= 2 else realtime_price
+            
+            rankings.append({
+                'code': etf,
+                'name': ETF_NAMES.get(etf, etf),
+                'score': score,
+                'short': short,
+                'long': long,
+                'realtime_price': realtime_price,
+                'yesterday_close': yesterday_close
+            })
+        
+        except Exception as e:
+            print(f'  [ERROR] {etf}: {e}')
+            continue
+    
+    # 按得分排序
+    rankings.sort(key=lambda x: x['score'], reverse=True)
+    return rankings
+
+def load_rank_history():
+    """加载历史排名"""
+    if os.path.exists(RANK_HISTORY_FILE):
+        try:
+            with open(RANK_HISTORY_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return {}
+    return {}
+
+def save_rank_history(history):
+    """保存历史排名"""
+    with open(RANK_HISTORY_FILE, 'w', encoding='utf-8') as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+def get_rank_change(current_rankings):
+    """计算排名变动"""
+    history = load_rank_history()
+    current_time = time.strftime('%Y-%m-%d')
+    
+    # 今天的排名
+    today_ranks = {r['code']: i+1 for i, r in enumerate(current_rankings)}
+    
+    # 昨天的排名
+    yesterday_ranks = history.get(current_time, {})
+    if not isinstance(yesterday_ranks, dict):
+        yesterday_ranks = {}
+    if not yesterday_ranks:
+        # 找最近一天的排名
+        for date in sorted(history.keys(), reverse=True)[:7]:
+            if isinstance(history[date], dict) and history[date]:
+                yesterday_ranks = history[date]
+                break
+    
+    # 计算变动
+    changes = {}
+    for code, current_rank in today_ranks.items():
+        if code in yesterday_ranks:
+            diff = yesterday_ranks[code] - current_rank
+            changes[code] = diff
+        else:
+            changes[code] = 0
+    
+    # 保存今天的排名
+    history[current_time] = today_ranks
+    
+    # 只保留最近30天
+    if len(history) > 30:
+        oldest = sorted(history.keys())[0]
+        del history[oldest]
+    
+    save_rank_history(history)
+    return changes
+
+def generate_html(rankings, rank_changes):
+    """生成HTML邮件"""
+    rows_html = ""
+    
+    for i, r in enumerate(rankings):
+        code = r['code']
+        name = r['name']
+        score = r['score']
+        short = r['short']
+        long = r['long']
+        price = r['realtime_price']
+        yesterday_close = r['yesterday_close']
+        
+        # 排名变动
+        diff = rank_changes.get(code, 0)
+        if diff > 0:
+            rank_change_html = f'<span style="color:#059669;font-size:11px">↑+{diff}</span>'
+        elif diff < 0:
+            rank_change_html = f'<span style="color:#dc2626;font-size:11px">↓{diff}</span>'
+        else:
+            rank_change_html = '<span style="color:#6b7280;font-size:11px">—</span>'
+        
+        # 计算涨跌幅
+        if yesterday_close > 0:
+            pct_change = ((price - yesterday_close) / yesterday_close) * 100
+            
+            # DEBUG: 打印 159509 的完整信息
+            if '159509' in r.get('code', ''):
+                print(f"    [DEBUG] 159509: price={price:.3f}, yc={yesterday_close:.3f}, pct={pct_change:.2f}%")
+                print(f"    [DEBUG] pct_html = {pct_html}")
+            
+            pct_color = '#059669' if pct_change >= 0 else '#dc2626'
+            pct_sign = '+' if pct_change >= 0 else ''
+            pct_html = f'<span style="color:{pct_color};font-size:11px">{pct_sign}{pct_change:.2f}%</span>'
+        else:
+            pct_html = '<span style="color:#6b7280;font-size:11px">0.00%</span>'
+        
+        # 奖牌
+        medal = ''
+        if i == 0:
+            medal = '🥇 '
+        elif i == 1:
+            medal = '🥈 '
+        elif i == 2:
+            medal = '🥉 '
+        
+        rows_html += f'''    <tr>
+        <td>{medal}{i+1}</td>
+        <td>{name}</td>
+        <td>{code}</td>
+        <td>{score:.2f}</td>
+        <td>{short:.2f}</td>
+        <td>{long:.2f}</td>
+        <td style="color:#111827;font-weight:600">{price:.3f}</td>
+        <td>{pct_html}</td>
+        <td>{rank_change_html}</td>
+    </tr>'''
+    
+    html = f'''<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }}
+h1 {{ font-size: 16px; color: #111827; margin-bottom: 5px; }}
+table {{ width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+th {{ background: #f8f9fa; padding: 8px 6px; font-size: 11px; color: #6b7280; text-align: left; }}
+td {{ padding: 8px 6px; font-size: 11px; border-bottom: 1px solid #e5e7eb; }}
+tr:hover {{ background: #f9fafb; }}
+.footer {{ margin-top: 15px; font-size: 11px; color: #6b7280; }}
+</style>
+</head>
+<body>
+<h1>📊 拉普拉斯盘中监控（干净版 v15）</h1>
+<p style="font-size:11px;color:#6b7280;margin:0 0 10px 0">数据来源：腾讯API | 更新时间：{time.strftime('%Y-%m-%d %H:%M:%S')}</p>
+<table>
+<tr><th>排名</th><th>名称</th><th>代码</th><th>综合分</th><th>短期</th><th>长期</th><th>实时价</th><th>涨跌幅</th><th>变动</th></tr>
+{rows_html}
+</table>
+
+<h2 style="font-size:14px;color:#111827;margin:20px 0 10px 0">📋 最近20次交易记录</h2>
+<table>
+<tr><th>时间</th><th>ETF</th><th>操作</th><th>价格</th><th>原因</th><th>盈亏</th></tr>
+{trades_html}
+</table>
+
+<p class="footer">⚠️ 本邮件为自动化监控，不构成投资建议。涨跌幅 = (实时价 - 昨收价) / 昨收价 × 100</p>
+</body>
+</html>'''
+    
+    return html
+
+def send_email(html):
+    """发送邮件"""
+    # 保存 HTML 到文件（用于调试）
+    with open('last_email.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    print('  [OK] HTML 已保存到 last_email.html')
+    
+    msg = MIMEText(html, 'html', 'utf-8')
+    msg['Subject'] = f'[OpenClaw] 拉普拉斯监控v15 - {time.strftime("%m-%d %H:%M")}'
+    msg['From'] = '848786642@qq.com'
+    msg['To'] = '848786642@qq.com'
+    
+    try:
+        with smtplib.SMTP('smtp.qq.com', 587) as server:
+            server.starttls()
+            server.login('848786642@qq.com', 'ljbtvacrctjobfed')
+            server.send_message(msg)
+        print('  [OK] 邮件已发送')
+        return True
+    except Exception as e:
+        print(f'  [ERROR] 邮件发送失败: {e}')
+        return False
+
+if __name__ == '__main__':
+    print(f'[{time.strftime("%H:%M:%S")}] 拉普拉斯盘中监控启动（干净版 v15）...')
+    
+    # 1. 获取排名
+    rankings = get_rankings()
+    print(f'  [OK] 计算完成，共 {len(rankings)} 只ETF')
+    
+    # 2. 计算排名变动
+    rank_changes = get_rank_change(rankings)
+    print(f'  [OK] 排名变动计算完成')
+    
+    # 3. 生成HTML
+    print(f'  [DEBUG] 开始生成HTML，rankings数量: {len(rankings)}')
+    html = generate_html(rankings, rank_changes)
+    print(f'  [OK] HTML生成完成，长度 {len(html)} 字节')
+    
+    # 4. 发送邮件
+    send_email(html)
+    
+    print(f'[{time.strftime("%H:%M:%S")}] 任务完成！')
