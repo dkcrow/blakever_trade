@@ -137,12 +137,12 @@ tr:hover{{background:#f9fafb}}
                 
                 html += f'''
   <tr>
-    <td style="padding:4px 6px;color:#374151">{date}</td>
+    <td style="padding:4px 6px;color:#374151;white-space:nowrap">{date}</td>
     <td style="padding:4px 6px;color:#111827;white-space:nowrap">{name}</td>
     <td style="padding:4px 6px;color:#6b7280">{code}</td>
     <td style="padding:4px 6px;color:{ac}">{act}</td>
     <td style="padding:4px 6px;color:#111827">{price:.3f}</td>
-    <td style="padding:4px 6px;color:#6b7280;font-size:11px">{reason}</td>
+    <td style="padding:4px 6px;color:#6b7280;font-size:11px;white-space:nowrap">{reason}</td>
     <td style="padding:4px 6px;color:{pc}">{pnl_str}</td>
   </tr>
 '''
