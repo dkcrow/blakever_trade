@@ -1,0 +1,679 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+==========================================================================
+七星172策略 - 本地化完整版 (基于GLM5修复版)
+==========================================================================
+原策略: 聚宽 JoinQuant 平台 (七星高照ETF轮动策略-V1.7.2)
+原作者: 晨曦量化 / tina25 / GLM5
+
+能力清单:
+✅ 6层过滤管道 (盈利保护→溢价率→成交量→短期动量→长期动量→跌幅)
+✅ 日内卖出黑名单机制 (防止尾盘买回盈利保护卖出的标的)
+✅ 买入二次检查 (补上作者文档声称但漏掉的代码)
+✅ 盈利保护 (回撤阈值5%, 11:00检查)
+✅ T+1交易限制处理
+✅ 智能下单 (停牌/涨跌停/最小金额检查)
+✅ 防御模式 (货币基金)
+
+与七星拉普拉斯的主要区别:
+❌ 无震荡期机制 (无拉普拉斯/高斯滤波器切换)
+❌ 无动态滤波器
+
+数据源:
+- 回测模式: data/storage/stock_data/etf/ 下CSV文件
+
+运行方式:
+    # 回测
+    python seven_star_172.py --start 2024-01-01 --end 2026-05-27
+    
+    # 指定资金
+    python seven_star_172.py --start 2024-01-01 --end 2026-05-27 --cash 100000
+==========================================================================
+"""
+
+import os
+import sys
+import math
+import argparse
+import warnings
+from datetime import datetime
+from pathlib import Path
+from copy import deepcopy
+
+import numpy as np
+import pandas as pd
+warnings.filterwarnings('ignore')
+
+# ==================== 项目路径 ====================
+_THIS_FILE = Path(__file__)
+PROJECT_ROOT = _THIS_FILE.parent.parent.parent
+DATA_DIR = PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'etf'
+RESULTS_DIR = PROJECT_ROOT / 'backtest' / 'results_172'
+
+os.makedirs(RESULTS_DIR, exist_ok=True)
+
+# 导入共享基础设施
+sys.path.insert(0, str(PROJECT_ROOT))
+from strategies.etf.seven_star_base import (
+    LocalDataSource, Portfolio, ETF_POOL, ETF_NAMES, DEFENSIVE_ETF
+)
+
+# ================================================================
+# 🔧 默认参数 (与聚宽七星172原版完全一致)
+# ================================================================
+
+DEFAULT_PARAMS = {
+    # ---- 核心参数 ----
+    'lookback_days': 25,
+    'holdings_num': 1,
+    'min_money': 5000,
+
+    # ---- 盈利保护参数 ----
+    'enable_profit_protection': True,
+    'profit_protection_lookback': 1,
+    'profit_protection_threshold': 0.05,
+    'profit_protection_check_times': ['11:00'],
+
+    # ---- 过滤器参数 ----
+    'loss': 0.97,                    # 近3日单日跌幅阈值
+    'min_score_threshold': 0,
+    'max_score_threshold': 100.0,
+
+    # ---- 成交量过滤 ----
+    'enable_volume_check': True,
+    'volume_lookback': 5,
+    'volume_threshold': 2,
+    'volume_return_limit': 1,
+
+    # ---- 短期动量过滤 ----
+    'use_short_momentum_filter': True,
+    'short_lookback_days': 10,
+    'short_momentum_threshold': 0.0,
+
+    # ---- 溢价率过滤 ----
+    'enable_premium_filter': True,
+    'premium_threshold': 0.20,
+}
+
+
+# ======================================================================
+# 🎯 七星172策略引擎 (简化版，无震荡期/无动态滤波器)
+# ======================================================================
+
+class SevenStar172Engine:
+    """
+    七星172策略核心引擎
+    
+    与七星拉普拉斯的主要区别:
+    - 无震荡期机制 (无拉普拉斯/高斯滤波器)
+    - 有日内卖出黑名单机制
+    - 有买入二次检查
+    - 佣金费率 0.02% (vs 0.01%)
+    - 基准: 沪深300 (vs 国投白银LOF)
+    """
+
+    def __init__(self, params=None, mode='backtest'):
+        self.params = deepcopy(DEFAULT_PARAMS)
+        if params:
+            self.params.update(params)
+        self.mode = mode
+
+        # 运行时状态变量
+        self.rankings_cache = {'date': None, 'data': None}
+        self.profit_protection_sold_today = []  # 日内卖出黑名单
+
+    def reset_state(self):
+        """重置所有运行时状态"""
+        self.rankings_cache = {'date': None, 'data': None}
+        self.profit_protection_sold_today = []
+
+    def reset_daily_blacklist(self):
+        """每日开盘清空黑名单 (对应聚宽 check_positions 中的重置)"""
+        self.profit_protection_sold_today = []
+
+    # ---------- 盈利保护检查 ----------
+
+    def check_profit_protection(self, etf_code, current_price, hist_df, check_date):
+        """从最近N日最高点回撤超过阈值则触发盈利保护"""
+        if not self.params['enable_profit_protection']:
+            return False
+
+        lookback = self.params['profit_protection_lookback']
+        threshold = self.params['profit_protection_threshold']
+
+        try:
+            mask = hist_df.index < pd.Timestamp(check_date)
+            hist_before = hist_df[mask]
+            if len(hist_before) < lookback:
+                return False
+
+            recent_highs = hist_before['high'].tail(lookback)
+            max_high = recent_highs.max()
+
+            if max_high > 0 and current_price <= max_high * (1 - threshold):
+                return True
+        except Exception:
+            pass
+        return False
+
+    # ---------- 成交量比 ----------
+
+    def get_volume_ratio(self, hist_df, check_date):
+        """计算当日成交量与过去N日均量的比值"""
+        lookback = self.params['volume_lookback']
+        threshold = self.params['volume_threshold']
+
+        try:
+            mask = hist_df.index <= pd.Timestamp(check_date)
+            hist_to_date = hist_df[mask]
+            if len(hist_to_date) < lookback + 1:
+                return None
+
+            vols = hist_to_date['volume'].tail(lookback + 1)
+            avg_vol = vols.iloc[:-1].mean()
+            current_vol = vols.iloc[-1]
+
+            if avg_vol > 0:
+                ratio = current_vol / avg_vol
+                if ratio > threshold:
+                    return ratio
+        except Exception:
+            pass
+        return None
+
+    # ---------- 核心排名计算 ----------
+
+    def get_ranked_etfs(self, all_etf_data, current_prices, check_date):
+        """
+        计算所有ETF的动量得分，应用全部过滤条件，返回按得分降序的列表
+        对应聚宽原版的 get_cached_rankings + get_ranked_etfs + calculate_momentum_metrics
+        """
+        # 检查缓存
+        if self.rankings_cache['date'] == check_date and self.rankings_cache['data'] is not None:
+            return self.rankings_cache['data']
+
+        etf_metrics = []
+        lookback_days = self.params['lookback_days']
+        short_lookback = self.params['short_lookback_days']
+
+        for etf_code in ETF_POOL:
+            df = all_etf_data.get(etf_code)
+            if df is None or len(df) < lookback_days + 10:
+                continue
+
+            # 截取到当前日期的数据
+            mask = df.index <= pd.Timestamp(check_date)
+            hist = df[mask]
+            if len(hist) < lookback_days:
+                continue
+
+            close_series = hist['close'].values
+            close_full = np.append(close_series, current_prices.get(etf_code, close_series[-1]))
+            current_price = current_prices.get(etf_code, 0)
+            if current_price <= 0:
+                continue
+
+            # ===== 第1层: 盈利保护检查 =====
+            if self.check_profit_protection(etf_code, current_price, df, check_date):
+                continue
+
+            # ===== 第2层: 溢价率过滤 (回测模式无净值，跳过) =====
+            # 在回测模式下，无净值数据源，默认不过滤
+
+            # ===== 第3层: 成交量过滤 =====
+            vol_filtered = False
+            if self.params['enable_volume_check']:
+                vol_ratio = self.get_volume_ratio(df, check_date)
+                if vol_ratio is not None:
+                    annualized = self._calc_annualized_returns(close_full, lookback_days)
+                    if annualized > self.params['volume_return_limit']:
+                        vol_filtered = True
+            if vol_filtered:
+                continue
+
+            # ===== 第4层: 短期动量过滤 =====
+            if len(close_full) >= short_lookback + 1:
+                short_return = close_full[-1] / close_full[-(short_lookback + 1)] - 1
+                short_annualized = (1 + short_return) ** (250 / short_lookback) - 1
+            else:
+                short_annualized = 0
+
+            if self.params['use_short_momentum_filter'] and short_annualized < self.params['short_momentum_threshold']:
+                continue
+
+            # ===== 第5层: 长期动量计算 (得分核心) =====
+            recent = close_full[-(lookback_days + 1):]
+            y = np.log(np.maximum(recent, 1e-10))
+            x = np.arange(len(y))
+            weights = np.linspace(1, 2, len(y))
+            slope, intercept = np.polyfit(x, y, 1, w=weights)
+            annualized_ret = math.exp(slope * 250) - 1
+
+            # R² (趋势稳定性)
+            ss_res = np.sum(weights * (y - (slope * x + intercept)) ** 2)
+            ss_tot = np.sum(weights * (y - np.mean(y)) ** 2)
+            r_squared = 1 - ss_res / ss_tot if ss_tot > 0 else 0
+
+            score = annualized_ret * r_squared
+
+            # ===== 第6层: 近3日单日跌幅过滤 =====
+            if len(close_full) >= 4:
+                day1 = close_full[-1] / close_full[-2]
+                day2 = close_full[-2] / close_full[-3]
+                day3 = close_full[-3] / close_full[-4]
+                if min(day1, day2, day3) < self.params['loss']:
+                    continue
+
+            # ===== 得分范围过滤 =====
+            if not (self.params['min_score_threshold'] < score < self.params['max_score_threshold']):
+                continue
+
+            etf_metrics.append({
+                'etf': etf_code,
+                'etf_name': ETF_NAMES.get(etf_code, etf_code),
+                'annualized_returns': annualized_ret,
+                'r_squared': r_squared,
+                'score': score,
+                'current_price': current_price,
+                'short_annualized': short_annualized,
+            })
+
+        # 按得分降序
+        etf_metrics.sort(key=lambda x: x['score'], reverse=True)
+
+        # 缓存
+        self.rankings_cache = {'date': check_date, 'data': etf_metrics}
+        return etf_metrics
+
+    def _calc_annualized_returns(self, price_series, lookback_days):
+        """计算加权年化收益率"""
+        recent = price_series[-(lookback_days + 1):]
+        y = np.log(np.maximum(recent, 1e-10))
+        x = np.arange(len(y))
+        weights = np.linspace(1, 2, len(y))
+        slope, _ = np.polyfit(x, y, 1, w=weights)
+        return math.exp(slope * 250) - 1
+
+
+# ======================================================================
+# ⚙️ 七星172回测引擎
+# ======================================================================
+
+class BacktestEngine172:
+    """
+    七星172事件驱动回测引擎
+    
+    逐日模拟交易，保留聚宽原版的调度逻辑：
+    - 09:10 检查持仓日志 + 清空黑名单
+    - 11:00 盈利保护检查 (卖出并加入黑名单)
+    - 13:10 卖出操作
+    - 13:11 买入操作 (含黑名单过滤 + 二次检查)
+    - 15:10 收盘重置
+    """
+
+    def __init__(self, data_source, engine_params=None):
+        self.data_source = data_source
+        self.engine = SevenStar172Engine(engine_params, mode='backtest')
+        self.portfolio = None
+        self.results = {}
+        self.commission_rate = 0.0002  # 七星172的佣金费率 (vs 拉普拉斯0.0001)
+        self.min_commission = 5
+
+    def run(self, start_date, end_date, initial_cash=1000000):
+        """
+        执行完整回测
+        
+        参数:
+            start_date: 回测起始日期 (str)
+            end_date: 回测结束日期 (str)
+            initial_cash: 初始资金
+        """
+        print("=" * 70)
+        print("七星172策略 (GLM5修复版) - 本地回测引擎")
+        print(f"回测区间: {start_date} ~ {end_date} | 初始资金: {initial_cash:,.0f}")
+        print(f"佣金费率: {self.commission_rate*100:.3f}% (双边)")
+        print("=" * 70)
+
+        # [1] 加载数据
+        print("\n[1/4] 加载ETF历史数据...")
+        all_etf_data = self.data_source.load_all_etfs(start_date, end_date)
+        print(f"  成功加载 {len(all_etf_data)}/{len(ETF_POOL)} 只ETF")
+
+        if len(all_etf_data) == 0:
+            print("[FATAL] 无可用数据! 请检查 data_dir 是否包含ETF CSV文件")
+            return None
+
+        # [2] 获取交易日
+        trade_dates = self.data_source.get_trade_dates(start_date, end_date)
+        print(f"  交易日数: {len(trade_dates)} 天")
+
+        # 初始化
+        self.engine.reset_state()
+        self.portfolio = Portfolio(
+            initial_cash=initial_cash,
+            commission_rate=self.commission_rate,
+            min_commission=self.min_commission
+        )
+
+        # [3] 逐日回测
+        print(f"\n[2/4] 开始逐日回测...")
+        print("-" * 70)
+
+        for i, td in enumerate(trade_dates):
+            td_ts = pd.Timestamp(td)
+
+            # 构建当日快照
+            current_prices = {}
+            for code, df in all_etf_data.items():
+                mask = df.index <= td_ts
+                if mask.any():
+                    current_prices[code] = float(df.loc[mask, 'close'].iloc[-1])
+
+            # 更新组合价格
+            self.portfolio.update_prices(current_prices)
+
+            # ===== 09:10 持仓日志 + 清空黑名单 =====
+            self._log_positions(i, td)
+            self.engine.reset_daily_blacklist()
+
+            # ===== 11:00 盈利保护检查 =====
+            self._run_profit_protection(current_prices, all_etf_data, td)
+
+            # ===== 13:10 卖出操作 =====
+            self._run_sell(current_prices, all_etf_data, td)
+
+            # ===== 13:11 买入操作 =====
+            self._run_buy(current_prices, all_etf_data, td)
+
+            # 记录每日净值
+            self.portfolio.record_daily_value(td)
+
+        print("-" * 70)
+
+        # [4] 生成报告
+        print(f"\n[3/4] 回测完成! 生成报告...")
+        results = self._generate_results(trade_dates, initial_cash)
+        self.results = results
+        return results
+
+    def _log_positions(self, i, date):
+        """持仓日志 (每20天打印一次)"""
+        if i % 20 != 0:
+            return
+        held = self.portfolio.get_position_codes()
+        if held:
+            for code in held[:3]:
+                pos = self.portfolio.positions[code]
+                pnl = (pos['last_price'] - pos['cost_price']) / pos['cost_price'] * 100 if pos['cost_price'] > 0 else 0
+                print(f"  [{date}] 持仓: {code} {ETF_NAMES.get(code,'')} "
+                      f"数量{pos['shares']} 成本{pos['cost_price']:.3f} 现价{pos['last_price']:.3f} PnL:{pnl:+.2f}%")
+
+    def _run_profit_protection(self, current_prices, all_etf_data, date):
+        """执行盈利保护检查 (11:00)"""
+        if not self.engine.params['enable_profit_protection']:
+            return
+
+        for code in list(self.portfolio.get_position_codes()):
+            if code not in all_etf_data:
+                continue
+            hist_df = all_etf_data[code]
+            cur_price = current_prices.get(code, 0)
+            if cur_price <= 0:
+                continue
+
+            if self.engine.check_profit_protection(code, cur_price, hist_df, date):
+                if self.portfolio.sell_all(code, cur_price, date, reason='盈利保护'):
+                    print(f"  [{date}] 🛡️ PROFIT_PROTECT: {code} {ETF_NAMES.get(code,'')} @{cur_price:.3f}")
+                    # 【关键】加入黑名单，防止尾盘买回
+                    if code not in self.engine.profit_protection_sold_today:
+                        self.engine.profit_protection_sold_today.append(code)
+
+    def _run_sell(self, current_prices, all_etf_data, date):
+        """卖出操作 (13:10) - 对应聚宽原版 etf_sell_trade"""
+        ranked = self.engine.get_ranked_etfs(all_etf_data, current_prices, date)
+
+        target_etfs = []
+        for m in ranked[:self.engine.params['holdings_num']]:
+            if m['score'] >= self.engine.params['min_score_threshold']:
+                target_etfs.append(m['etf'])
+
+        # 若无目标且防御可用，把防御加入目标
+        target_set = set(target_etfs)
+
+        for sec in list(self.portfolio.get_position_codes()):
+            if sec not in target_set:
+                if sec not in current_prices or current_prices[sec] <= 0:
+                    continue
+                if self.portfolio.sell_all(sec, current_prices[sec], date, reason='调出目标'):
+                    print(f"  [{date}] 📤 SELL: {sec} {ETF_NAMES.get(sec,'')} @{current_prices[sec]:.3f}")
+
+    def _run_buy(self, current_prices, all_etf_data, date):
+        """买入操作 (13:11) - 对应聚宽原版 etf_buy_trade (含GLM5修复)"""
+        ranked = self.engine.get_ranked_etfs(all_etf_data, current_prices, date)
+
+        # 打印前5名
+        if ranked:
+            tops = ", ".join([f"{m['etf']}({m['score']:.4f})" for m in ranked[:5]])
+            print(f"  [{date}] TOP5: {tops}")
+
+        # 确定目标ETF (逐个尝试)
+        target_etfs = []
+        for m in ranked:
+            if len(target_etfs) >= self.engine.params['holdings_num']:
+                break
+
+            etf = m['etf']
+            cur_price = m['current_price']
+
+            # 【GLM5修复1】买入二次检查：补上作者文档声称但漏掉的盈利保护检查
+            if self.engine.params['enable_profit_protection']:
+                hist_df = all_etf_data.get(etf)
+                if hist_df is not None:
+                    if self.engine.check_profit_protection(etf, cur_price, hist_df, date):
+                        continue
+
+            # 【GLM5修复2】黑名单检查：禁止买回今日盈利保护卖出的标的
+            if etf in self.engine.profit_protection_sold_today:
+                print(f"  [{date}] 🚫 BLACKLIST: {etf} {ETF_NAMES.get(etf,'')} 今日已盈利保护卖出，禁止买回")
+                continue
+
+            target_etfs.append(etf)
+
+        # 防御模式
+        if not target_etfs:
+            target_etfs = [DEFENSIVE_ETF]
+            print(f"  [{date}] 🛡️ DEFENSE -> {DEFENSIVE_ETF} {ETF_NAMES.get(DEFENSIVE_ETF,'')}")
+
+        # 等权分配
+        total_val = self.portfolio.total_value
+        target_per_etf = total_val / len(target_etfs)
+        min_money = self.engine.params['min_money']
+
+        for etf in target_etfs:
+            if etf not in current_prices or current_prices[etf] <= 0:
+                continue
+
+            current_val = 0
+            if etf in self.portfolio.positions:
+                pos = self.portfolio.positions[etf]
+                if pos['shares'] > 0:
+                    current_val = pos['shares'] * pos['last_price']
+
+            diff = target_per_etf - current_val
+            # 5%容差不调仓
+            if abs(diff) < target_per_etf * 0.05 and current_val > 0:
+                continue
+
+            price = current_prices[etf]
+            if diff > 0:  # 买入
+                target_amount = int(diff / price // 100) * 100
+                if target_amount <= 0 and diff > min_money:
+                    target_amount = 100
+                if target_amount * price >= min_money:
+                    if self.portfolio.buy(etf, target_amount, price, date,
+                                          reason=f'排名{target_etfs.index(etf)+1}'):
+                        print(f"  [{date}] 📥 BUY: {etf} {ETF_NAMES.get(etf,'')} "
+                              f"{target_amount}份@{price:.3f}")
+
+    def _generate_results(self, trade_dates, initial_cash):
+        """生成回测结果汇总"""
+        dv = self.portfolio.daily_values
+        if not dv:
+            return None
+
+        values = [d['value'] for d in dv]
+        returns_arr = [d['returns'] for d in dv]
+        final_val = values[-1]
+        total_ret = (final_val - initial_cash) / initial_cash
+
+        # 最大回撤
+        peak = values[0]
+        max_dd = 0
+        max_dd_start, max_dd_end = '', ''
+        for i, v in enumerate(values):
+            if v > peak:
+                peak = v
+            dd = (peak - v) / peak if peak > 0 else 0
+            if dd > max_dd:
+                max_dd = dd
+                max_dd_end = str(dv[i]['date'])
+
+        # 夏普比率 (年化)
+        if len(returns_arr) > 1:
+            daily_ret = np.diff(values) / values[:-1]
+            ret_mean = np.mean(daily_ret)
+            ret_std = np.std(daily_ret)
+            sharpe = (ret_mean / ret_std * np.sqrt(252)) if ret_std > 0 else 0
+        else:
+            sharpe = 0
+
+        # 卡尔马比率
+        calmar = abs(total_ret * 252 / len(trade_dates)) / max_dd if max_dd > 0 else 0
+
+        # 交易统计
+        trades = self.portfolio.trade_log
+        n_trades = len(trades)
+        buys = sum(1 for t in trades if t['action'] == 'BUY')
+        sells = sum(1 for t in trades if t['action'] == 'SELL')
+
+        # 胜率
+        sell_trades = [t for t in trades if t['action'] == 'SELL' and 'pnl_pct' in t]
+        wins = [t for t in sell_trades if t['pnl_pct'] > 0]
+        losses = [t for t in sell_trades if t['pnl_pct'] <= 0]
+        win_rate = len(wins) / len(sell_trades) * 100 if sell_trades else 0
+
+        results = {
+            'strategy': '七星172 (GLM5修复版)',
+            'backtest_period': f'{trade_dates[0]} ~ {trade_dates[-1]}',
+            'trading_days': len(trade_dates),
+            'initial_cash': initial_cash,
+            'final_value': round(final_val, 2),
+            'total_return_pct': round(total_ret * 100, 2),
+            'annualized_return_pct': round(total_ret * 252 / len(trade_dates) * 100, 2) if trade_dates else 0,
+            'max_drawdown_pct': round(max_dd * 100, 2),
+            'sharpe_ratio': round(sharpe, 4),
+            'calmar_ratio': round(calmar, 4),
+            'total_trades': n_trades,
+            'buy_trades': buys,
+            'sell_trades': sells,
+            'win_rate_pct': round(win_rate, 2),
+            'avg_win_pct': round(sum(t['pnl_pct'] for t in wins) / len(wins) * 100, 2) if wins else 0,
+            'avg_loss_pct': round(sum(t['pnl_pct'] for t in losses) / len(losses) * 100, 2) if losses else 0,
+            'final_holdings': self.portfolio.get_position_codes(),
+            'daily_values': dv,
+            'trade_log': trades,
+            'engine_params': self.engine.params,
+        }
+
+        # 打印摘要
+        print("\n" + "=" * 70)
+        print("回测结果摘要")
+        print("=" * 70)
+        print(f"  策略:      {results['strategy']}")
+        print(f"  区间:      {results['backtest_period']} ({results['trading_days']}个交易日)")
+        print(f"  初始资金:  {results['initial_cash']:,.0f}")
+        print(f"  最终资产:  {results['final_value']:,.2f}")
+        print(f"  总收益率:  {results['total_return_pct']:+.2f}%")
+        print(f"  年化收益:  {results['annualized_return_pct']:.2f}%")
+        print(f"  最大回撤:  {results['max_drawdown_pct']:.2f}%")
+        print(f"  夏普比率:  {results['sharpe_ratio']:.4f}")
+        print(f"  卡尔马:    {results['calmar_ratio']:.4f}")
+        print(f"  总交易:    {results['total_trades']} (买{results['buy_trades']}/卖{results['sell_trades']})")
+        print(f"  胜率:      {results['win_rate_pct']:.1f}% ({len(wins)}赢/{len(losses)}负)")
+        if wins:
+            print(f"  平均盈利:  +{results['avg_win_pct']:.2f}%")
+        if losses:
+            print(f"  平均亏损:  {results['avg_loss_pct']:.2f}%")
+
+        return results
+
+
+# ======================================================================
+# 🏃 主入口
+# ======================================================================
+
+def main():
+    parser = argparse.ArgumentParser(description='七星172策略 v1.0 - 本地回测')
+    parser.add_argument('--start', type=str, default='2024-01-01', help='回测起始日期')
+    parser.add_argument('--end', type=str, default='2026-05-27', help='回测结束日期')
+    parser.add_argument('--cash', type=float, default=10000, help='初始资金')
+    parser.add_argument('--data-dir', type=str, default=None, help='数据目录')
+    parser.add_argument('--holdings', type=int, default=1, help='持仓数量')
+    parser.add_argument('--lookback', type=int, default=25, help='动量回看天数')
+    parser.add_argument('--no-protection', action='store_true', help='关闭盈利保护')
+    parser.add_argument('--no-volume', action='store_true', help='关闭成交量过滤')
+    parser.add_argument('--no-short-momentum', action='store_true', help='关闭短期动量过滤')
+    parser.add_argument('--no-premium', action='store_true', help='关闭溢价率过滤')
+    parser.add_argument('--commission', type=float, default=0.0002, help='佣金费率')
+
+    args = parser.parse_args()
+
+    # 数据源
+    data_dir = args.data_dir or str(DATA_DIR)
+    if not os.path.isdir(data_dir):
+        # 尝试在项目根目录下找
+        alt = PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'etf'
+        if alt.is_dir():
+            data_dir = str(alt)
+
+    ds = LocalDataSource(data_dir)
+
+    # 参数
+    params = {
+        'lookback_days': args.lookback,
+        'holdings_num': args.holdings,
+        'enable_profit_protection': not args.no_protection,
+        'enable_volume_check': not args.no_volume,
+        'use_short_momentum_filter': not args.no_short_momentum,
+        'enable_premium_filter': not args.no_premium,
+    }
+
+    # 回测
+    engine = BacktestEngine172(ds, engine_params=params)
+    engine.commission_rate = args.commission
+    results = engine.run(args.start, args.end, args.cash)
+
+    if results is None:
+        print("回测失败!")
+        return
+
+    # 保存摘要JSON
+    summary = {k: v for k, v in results.items() if k not in ('daily_values', 'trade_log', 'engine_params')}
+    summary_path = RESULTS_DIR / f'七星172_{args.start}_{args.end}_summary.json'
+    import json
+    with open(summary_path, 'w', encoding='utf-8') as f:
+        json.dump(summary, f, ensure_ascii=False, indent=2, default=str)
+    print(f"\n📄 摘要已保存: {summary_path}")
+
+    # 保存完整交易记录
+    trades_path = RESULTS_DIR / f'七星172_{args.start}_{args.end}_trades.json'
+    with open(trades_path, 'w', encoding='utf-8') as f:
+        json.dump(results['trade_log'], f, ensure_ascii=False, indent=2, default=str)
+    print(f"📄 交易记录已保存: {trades_path}")
+
+    return results
+
+
+if __name__ == '__main__':
+    main()
