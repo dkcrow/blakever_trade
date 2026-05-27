@@ -95,7 +95,7 @@ tr:hover{{background:#f9fafb}}
     
     html += "</table>"
     
-    # 交易记录（正确排版：日期、ETF名称、代码、操作、价格、原因、盈亏）
+    # 交易记录（宽度与排名表一致）
     html += '''
 <div style="background:#f8f9fa;padding:16px 24px;border-radius:0 0 12px 12px">
   <div style="font-size:13px;font-weight:600;color:#374151;margin-bottom:8px">近20次交易记录</div>
