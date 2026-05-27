@@ -1690,23 +1690,23 @@
     "pnl_pct": 0
   },
   {
-    "id": "hist_170",
-    "date": "2026-05-21",
-    "etf": "513310",
-    "name": "中韩半导体ETF华泰柏瑞",
-    "action": "SELL",
-    "price": 5.625,
-    "reason": "Simulation end",
-    "pnl_pct": 33.1
-  },
-  {
-    "id": "auto_1779809017",
+    "id": "auto_20260526",
     "date": "2026-05-26",
     "etf": "513310",
     "name": "中韩半导体ETF华泰柏瑞",
     "action": "BUY",
-    "price": 6.148,
-    "reason": "Initial Top1",
+    "price": 4.227,
+    "reason": "Holding from 2026-04-28 (simulation corrected)",
+    "pnl_pct": null
+  },
+  {
+    "id": "auto_20260526",
+    "date": "2026-05-26",
+    "etf": "513310",
+    "name": "中韩半导体ETF华泰柏瑞",
+    "action": "BUY",
+    "price": 4.227,
+    "reason": "Holding from 2026-04-28 (simulation corrected)",
     "pnl_pct": null
   }
 ]
