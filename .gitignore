@@ -30,6 +30,12 @@ v*_utf8.txt
 *_emoji.txt
 check_*.txt
 fixed_*.txt
+*_summary.md
+*_2026*.md
+*_2025*.md
+qixing_*monitor*.md
+laplace_*_*.md
+sanma_*monitor*.md
 
 # JSON state files (runtime state)
 laplace_state.json
@@ -66,6 +72,19 @@ fix_*.py
 send_*.py
 run_*.bat
 update_*.py
+*_check.py
+*_verify.py
+*_diagnose.py
+*_manual.py
+*_create.py
+*_replace.py
+*_rewrite.py
+*_patch.py
+*_super*.py
+*_ultimate*.py
+*_simple.py
+*_final.py
+*_add_*.py
 
 # Cron task temp files
 cron-task-*.md
