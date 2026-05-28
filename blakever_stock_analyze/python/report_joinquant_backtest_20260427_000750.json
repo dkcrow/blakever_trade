@@ -1,0 +1,55 @@
+{
+  "strategy_name": "小市值+ETF轮动+ST弱转强组合",
+  "strategy_source": "聚宽(弈剑/乐活智投/yun~~)",
+  "claimed_performance": "6年108倍(年化≈95%)",
+  "overfit_detected": true,
+  "overfit_details": "原始策略声称年化95%，远超本独立回测验证结果，差异可能来自：幸存者偏差、未来函数、数据源差异、无法复现的精确选股排序",
+  "period_results": {
+    "etf_momentum": {
+      "annual_return": 21.9,
+      "sharpe": 0.97,
+      "max_drawdown": 35.0,
+      "win_rate": 67.9,
+      "total_trades": 28,
+      "final_equity": 417019.55,
+      "calmar": 0.62,
+      "profit_loss_ratio": 0,
+      "years": 5.16,
+      "total_days": 1301
+    },
+    "small_cap": {
+      "annual_return": 0,
+      "sharpe": 0,
+      "max_drawdown": 100,
+      "win_rate": 0,
+      "total_trades": 0,
+      "final_equity": 350000.0,
+      "calmar": 0,
+      "profit_loss_ratio": 0,
+      "years": 0,
+      "total_days": 0
+    },
+    "st_strategy": {
+      "annual_return": 0,
+      "sharpe": 0,
+      "max_drawdown": 100,
+      "win_rate": 0,
+      "total_trades": 0,
+      "final_equity": 500000.0,
+      "calmar": 0,
+      "profit_loss_ratio": 0,
+      "years": 0,
+      "total_days": 0
+    },
+    "combined": {
+      "annual_return": 3.28,
+      "sharpe": 0.15,
+      "max_drawdown": 100,
+      "win_rate": 0,
+      "total_trades": 28,
+      "final_equity": 1032850.0,
+      "calmar": 0.03
+    }
+  },
+  "consistency_check": {
+    "passed": 

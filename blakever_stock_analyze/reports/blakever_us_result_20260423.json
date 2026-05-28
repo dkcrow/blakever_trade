@@ -1,0 +1,42 @@
+{
+  "report": "# Blakever 每日操作建议指南\n> 生成时间: 2026-04-23 20:46\n\n## 📊 大盘仪表盘\n\n**🇺🇸 美股大盘**\n- 行情定性: **🐂 趋势牛市**\n- 定性解读: 均线多头排列，ADX趋势确认，市场处于上升趋势，适合做多高动量个股\n- 置信度: 75%（当日原始判断: Bull 75%）\n- VIX: 19.2\n- 情绪因子: 0.62\n- 流动性预警: 否\n- 关键事件: 美联储维持3.50%-3.75%利率不变，预期零降息；10Y美债4.30%；VIX 19.22（中度恐惧区）；中美关税28.6%；中东停火脆弱\n\n## 🛡️ CRO 风控摘要\n- 强制空仓线: ✅ 未触发\n- VIX风险等级: 低\n- 总敞口使用率: 0.0%\n- 行业集中度预警: 0项\n- 隐性相关性预警: 0项\n\n## 📋 今日指令表\n无新开仓指令\n\n## ⚖️ 反向测试辩论庭\n\n## 💰 净值简报\n- 账户净值: 100,000,000\n- 现金: 100,000,000\n- 持仓市值: 0\n- 浮动盈亏: 0\n- 总收益率: 0.0%\n- 持仓数: 0\n\n*本报告由 Blakever 多智能体投资决策系统自动生成*\n",
+  "market_regime": "Bull",
+  "regime_confidence": 75,
+  "raw_regime": "Bull",
+  "raw_confidence": 75,
+  "pending_switch": null,
+  "execution_orders": [],
+  "cro_result": {
+    "force_close_only": false,
+    "vix_risk_level": "低",
+    "total_exposure_usage_pct": 0.0,
+    "portfolio_risk_check": {
+      "passed": true,
+      "total_potential_loss": 0.0,
+      "total_potential_loss_pct": 0.0,
+      "total_exposure_pct": 0.0,
+      "industry_warnings": [],
+      "rejected_symbols": [],
+      "notes": "OK"
+    },
+    "industry_concentration_warnings": [],
+    "hidden_correlation_warnings": [],
+    "notes": "OK"
+  },
+  "contrarian_entries": [],
+  "risk_warnings": [],
+  "experience_result": {
+    "new_insights": [],
+    "conflict_resolutions": [],
+    "expiration_warnings": [],
+    "knowledge_base_summary": "当前活跃规则数 0 / 待审核规则数 0 / 已废止规则数 0",
+    "trade_analyses": []
+  },
+  "approved_candidates": [],
+  "macro_narrative": {
+    "sentiment_factor": 0.62,
+    "macro_liquidity_warning": false,
+    "liquidity_keywords_detected": [],
+    "key_events": "美联储维持3.50%-3.75%利率不变，预期零降息；10Y美债4.30%；VIX 19.22（中度恐惧区）；中美关税28.6%；中东停火脆弱"
+  }
+}

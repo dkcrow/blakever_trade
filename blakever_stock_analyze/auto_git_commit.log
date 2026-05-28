@@ -1,0 +1,209 @@
+===== 2026-04-24 13:19:09 自动Git提交开始 =====
+检测到以下改动：
+ D "prompt/Agent 3 \347\211\233\345\270\202\346\212\225\350\265\204.md"
+ D "prompt/Agent 4 \351\234\207\350\215\241\345\270\202\346\212\225\350\265\204.md"
+ D "prompt/Agent 5 \347\206\212\345\270\202\346\212\225\350\265\204.md"
+ M "prompt/Agent 7 \347\273\217\351\252\214\346\200\273\347\273\223\345\244\215\347\233\230.md"
+ M "prompt/Agent 8 \347\255\226\347\225\245\345\233\236\346\265\213.md"
+ M "prompt/\344\270\273Agent Blakever\350\260\203\345\272\246\344\270\216\347\273\210\345\256\241.md"
+ M python/API_CONTRACT.md
+ D python/blakever_bear_strategy.py
+ D python/blakever_bull_strategy.py
+ D python/blakever_range_strategy.py
+ M python/blakever_trade_strategy.py
+ M python/cro_mgr.py
+ M python/cur_holdings.md
+ M python/fool_trader.py
+ M python/holdings_snapshot.json
+ M python/knowledge_base.json
+ M python/main_dispatcher.py
+ M python/run_production.py
+ M python/trade_history.md
+ M "\346\270\257\350\202\241\346\223\215\344\275\234\345\273\272\350\256\256_20260419.md"
+?? auto_git_commit.log
+?? auto_git_commit.sh
+?? regime_history.json
+?? reports/blakever_hk_daily_20260423.md
+?? reports/blakever_hk_email_20260423.html
+?? reports/blakever_us_daily_20260423.md
+?? reports/blakever_us_email_20260423.html
+?? reports/blakever_us_result_20260423.json
+[master 62182e6] chore: 2026-04-24 自动提交 - 28个文件改动(修改14/新增8/删除6)
+ 28 files changed, 1804 insertions(+), 2158 deletions(-)
+ create mode 100644 auto_git_commit.log
+ create mode 100755 auto_git_commit.sh
+ delete mode 100644 "prompt/Agent 3 \347\211\233\345\270\202\346\212\225\350\265\204.md"
+ delete mode 100644 "prompt/Agent 4 \351\234\207\350\215\241\345\270\202\346\212\225\350\265\204.md"
+ delete mode 100644 "prompt/Agent 5 \347\206\212\345\270\202\346\212\225\350\265\204.md"
+ delete mode 100644 python/blakever_bear_strategy.py
+ delete mode 100644 python/blakever_bull_strategy.py
+ delete mode 100644 python/blakever_range_strategy.py
+ create mode 100644 regime_history.json
+ create mode 100644 reports/blakever_hk_daily_20260423.md
+ create mode 100644 reports/blakever_hk_email_20260423.html
+ create mode 100644 reports/blakever_us_daily_20260423.md
+ create mode 100644 reports/blakever_us_email_20260423.html
+ create mode 100644 reports/blakever_us_result_20260423.json
+提交成功: chore: 2026-04-24 自动提交 - 28个文件改动(修改14/新增8/删除6)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 2        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   143da13..62182e6  HEAD -> master
+推送成功
+===== 2026-04-24 13:19:10 自动Git提交结束 =====
+
+===== 2026-04-25 01:01:01 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+ M python/main_dispatcher.py
+?? python/regime_history.json
+?? reports/blakever_hk_email_20260424.html
+?? reports/blakever_hk_report_20260424.md
+[master 8664300] chore: 2026-04-25 自动提交 - 5个文件改动(修改2/新增3/删除0)
+ 5 files changed, 837 insertions(+)
+ create mode 100644 python/regime_history.json
+ create mode 100644 reports/blakever_hk_email_20260424.html
+ create mode 100644 reports/blakever_hk_report_20260424.md
+提交成功: chore: 2026-04-25 自动提交 - 5个文件改动(修改2/新增3/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 2        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   62182e6..8664300  HEAD -> master
+推送成功
+===== 2026-04-25 01:01:03 自动Git提交结束 =====
+
+===== 2026-04-26 01:04:05 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+ M regime_history.json
+?? python/run_spx_analysis.py
+?? spx_kline_raw.txt
+[master f829947] chore: 2026-04-26 自动提交 - 4个文件改动(修改2/新增2/删除0)
+ 4 files changed, 356 insertions(+), 1 deletion(-)
+ create mode 100644 python/run_spx_analysis.py
+ create mode 100644 spx_kline_raw.txt
+提交成功: chore: 2026-04-26 自动提交 - 4个文件改动(修改2/新增2/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 1 (\)        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2 (|)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   8664300..f829947  HEAD -> master
+推送成功
+===== 2026-04-26 01:04:06 自动Git提交结束 =====
+
+===== 2026-04-27 01:04:55 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+?? python/backtest_joinquant_strategy.py
+?? python/report_joinquant_backtest_20260427_000750.json
+?? python/report_joinquant_backtest_20260427_001648.json
+?? python/report_joinquant_backtest_20260427_002104.json
+[master c9d89a5] chore: 2026-04-27 自动提交 - 5个文件改动(修改1/新增4/删除0)
+ 5 files changed, 1450 insertions(+)
+ create mode 100644 python/backtest_joinquant_strategy.py
+ create mode 100644 python/report_joinquant_backtest_20260427_000750.json
+ create mode 100644 python/report_joinquant_backtest_20260427_001648.json
+ create mode 100644 python/report_joinquant_backtest_20260427_002104.json
+提交成功: chore: 2026-04-27 自动提交 - 5个文件改动(修改1/新增4/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 2        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   f829947..c9d89a5  HEAD -> master
+推送成功
+===== 2026-04-27 01:04:56 自动Git提交结束 =====
+
+===== 2026-04-28 01:05:00 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+ M python/regime_history.json
+?? reports/blakever_hk_email_20260427.html
+?? reports/blakever_hk_report_20260427.md
+?? reports/us_daily_report_20260427.html
+?? reports/us_daily_report_20260427.md
+[master 459b356] chore: 2026-04-28 自动提交 - 6个文件改动(修改2/新增4/删除0)
+ 6 files changed, 1222 insertions(+), 8 deletions(-)
+ create mode 100644 reports/blakever_hk_email_20260427.html
+ create mode 100644 reports/blakever_hk_report_20260427.md
+ create mode 100644 reports/us_daily_report_20260427.html
+ create mode 100644 reports/us_daily_report_20260427.md
+提交成功: chore: 2026-04-28 自动提交 - 6个文件改动(修改2/新增4/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 1 (\)        remote: Processing pre-receive: push-check: 1 (|)        remote: Processing pre-receive: push-check: 2 (|)        remote: Processing pre-receive: push-check: 2 (/)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   c9d89a5..459b356  HEAD -> master
+推送成功
+===== 2026-04-28 01:05:02 自动Git提交结束 =====
+
+===== 2026-04-29 01:00:59 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+ M python/holdings_snapshot.json
+ M python/regime_history.json
+?? python/hk_quotes_20260428.json
+?? reports/us_daily_report_20260428.html
+?? reports/us_daily_report_20260428.md
+[master f7e27b7] chore: 2026-04-29 自动提交 - 6个文件改动(修改3/新增3/删除0)
+ 6 files changed, 778 insertions(+), 7 deletions(-)
+ create mode 100644 python/hk_quotes_20260428.json
+ create mode 100644 reports/us_daily_report_20260428.html
+ create mode 100644 reports/us_daily_report_20260428.md
+提交成功: chore: 2026-04-29 自动提交 - 6个文件改动(修改3/新增3/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 1 (\)        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2 (|)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   459b356..f7e27b7  HEAD -> master
+推送成功
+===== 2026-04-29 01:01:01 自动Git提交结束 =====
+
+===== 2026-04-30 01:02:15 自动Git提交开始 =====
+检测到以下改动：
+ M auto_git_commit.log
+ M python/regime_history.json
+?? reports/blakever_hk_email_20260429.html
+?? reports/blakever_hk_report_20260429.md
+[master 4bb7fdb] chore: 2026-04-30 自动提交 - 4个文件改动(修改2/新增2/删除0)
+ 4 files changed, 738 insertions(+), 4 deletions(-)
+ create mode 100644 reports/blakever_hk_email_20260429.html
+ create mode 100644 reports/blakever_hk_report_20260429.md
+提交成功: chore: 2026-04-30 自动提交 - 4个文件改动(修改2/新增2/删除0)
+remote: remote: Processing pre-receive: permission-checks: 1        remote: Processing pre-receive: event-create: 100% (1/1)        remote: Processing pre-receive: watch-path-check: 1        remote: Processing pre-receive: push-check: 2        remote: Processing pre-receive: push-check: 2 (\)        remote: Processing pre-receive: push-check: 2, done            
+remote: 
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: | To create a merge request for master, visit:                                                                                       |        
+remote: |     https://git.woa.com/blakehao/blakever_stock_analyze/-/merge_requests/new?ADTAG=git-cli&merge_request%5Bsource_branch%5D=master |        
+remote: +------------------------------------------------------------------------------------------------------------------------------------+        
+remote: 
+To https://git.woa.com/blakehao/blakever_stock_analyze.git
+   f7e27b7..4bb7fdb  HEAD -> master
+推送成功
+===== 2026-04-30 01:02:16 自动Git提交结束 =====
+

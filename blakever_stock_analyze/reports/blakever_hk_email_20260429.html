@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 每日港股操作建议指南 | 2026-04-29</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  
+  /* Header */
+  .header { background: linear-gradient(135deg, #1a5276 0%, #2e86c1 50%, #3498db 100%); border-radius: 16px 16px 0 0; padding: 30px; text-align: center; color: #fff; }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; opacity: 0.85; }
+  .header .date-badge { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 16px; font-size: 13px; margin-top: 10px; }
+  
+  /* Regime Dashboard */
+  .regime-dashboard { background: #fff; border-radius: 0 0 16px 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .regime-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+  .regime-card { border-radius: 12px; padding: 16px; text-align: center; }
+  .regime-card.active { background: #eaf2f8; border: 2px solid #2e86c1; }
+  .regime-card.inactive { background: #f8f9fa; border: 1px solid #dee2e6; opacity: 0.6; }
+  .regime-card .label { font-size: 12px; color: #7f8c8d; margin-bottom: 4px; }
+  .regime-card .value { font-size: 20px; font-weight: 700; }
+  .regime-card.active .value { color: #2e86c1; }
+  .regime-card .sub { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+  
+  /* Section Cards */
+  .card { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card-title { font-size: 16px; font-weight: 700; color: #1a5276; border-left: 4px solid #2e86c1; padding-left: 12px; margin-bottom: 14px; }
+  
+  /* Market Data Table */
+  .market-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .market-table th { background: #eaf2f8; color: #1a5276; padding: 8px 10px; text-align: left; font-weight: 600; border-bottom: 2px solid #2e86c1; }
+  .market-table td { padding: 8px 10px; border-bottom: 1px solid #eee; }
+  .market-table tr:hover { background: #f8f9fa; }
+  .red { color: #e74c3c; font-weight: 600; }
+  .green { color: #27ae60; font-weight: 600; }
+  
+  /* Position Cards */
+  .position-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .position-card { border-radius: 10px; padding: 14px; border: 1px solid #dee2e6; background: #fafbfc; }
+  .position-card .stock-name { font-size: 15px; font-weight: 700; color: #1a5276; }
+  .position-card .stock-code { font-size: 11px; color: #7f8c8d; }
+  .position-card .detail-row { display: flex; justify-content: space-between; font-size: 12px; margin-top: 6px; color: #555; }
+  .position-card .detail-row .val { font-weight: 600; color: #2c3e50; }
+  .position-card .score-badge { display: inline-block; background: #2e86c1; color: #fff; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+  .position-card .protection-badge { display: inline-block; background: #f39c12; color: #fff; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 4px; }
+  .position-card .rsi-badge { display: inline-block; background: #e74c3c; color: #fff; border-radius: 10px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-left: 4px; }
+  
+  /* Discount Chain */
+  .discount-chain { background: #f8f9fa; border-radius: 10px; padding: 14px; margin-top: 12px; font-size: 13px; }
+  .discount-chain .chain-step { display: inline-block; margin: 4px 2px; }
+  .discount-chain .chain-arrow { color: #95a5a6; margin: 0 2px; }
+  .discount-chain .chain-mult { color: #2e86c1; font-weight: 600; }
+  .discount-chain .chain-result { background: #1a5276; color: #fff; border-radius: 6px; padding: 2px 8px; font-weight: 700; }
+  
+  /* Debate Court */
+  .debate-box { border-radius: 10px; padding: 14px; margin-bottom: 10px; }
+  .debate-bull { background: #eafaf1; border-left: 4px solid #27ae60; }
+  .debate-bear { background: #fdedec; border-left: 4px solid #e74c3c; }
+  .debate-verdict { background: #eaf2f8; border-left: 4px solid #2e86c1; }
+  .debate-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .debate-bull .debate-title { color: #27ae60; }
+  .debate-bear .debate-title { color: #e74c3c; }
+  .debate-verdict .debate-title { color: #2e86c1; }
+  .debate-text { font-size: 13px; color: #555; }
+  
+  /* Risk Warning */
+  .risk-box { background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px; padding: 14px; margin-top: 12px; }
+  .risk-box .risk-title { color: #856404; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .risk-box .risk-text { color: #856404; font-size: 13px; }
+  
+  /* Footer */
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: #95a5a6; }
+  
+  /* Tags */
+  .tag { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin: 2px; }
+  .tag-blue { background: #d4e6f1; color: #1a5276; }
+  .tag-green { background: #d5f5e3; color: #1e8449; }
+  .tag-red { background: #fadbd8; color: #922b21; }
+  .tag-yellow { background: #fdebd0; color: #b7950b; }
+  
+  /* Existing Positions */
+  .existing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .existing-card { background: #f8f9fa; border-radius: 8px; padding: 10px; border: 1px solid #dee2e6; }
+  .existing-card .name { font-weight: 700; font-size: 13px; color: #2c3e50; }
+  .existing-card .row { font-size: 11px; color: #666; margin-top: 3px; display: flex; justify-content: space-between; }
+  
+  /* Left Fishing */
+  .left-fish { background: linear-gradient(135deg, #f8f9fa, #eaf2f8); border-radius: 10px; padding: 14px; border: 1px dashed #2e86c1; }
+  .left-fish .title { font-weight: 700; color: #2e86c1; font-size: 14px; margin-bottom: 8px; }
+  .left-fish .item { font-size: 13px; color: #555; margin-bottom: 4px; }
+  
+  @media (max-width: 600px) {
+    .regime-grid { grid-template-columns: repeat(2, 1fr); }
+    .position-grid { grid-template-columns: 1fr; }
+    .existing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>🏛️ Blakever 每日港股操作建议指南</h1>
+  <div class="subtitle">GEM双动量轮动策略 | 震荡市杠铃配置</div>
+  <div class="date-badge">📅 2026年4月29日 星期三 | 会话: blakever-hk</div>
+</div>
+
+<!-- ===== REGIME DASHBOARD ===== -->
+<div class="regime-dashboard">
+  <div style="text-align:center; font-size:14px; font-weight:600; color:#1a5276; margin-bottom:4px;">📊 市场环境仪表盘</div>
+  <div class="regime-grid">
+    <div class="regime-card inactive"><div class="label">🐂 牛市 Bull</div><div class="value">—</div><div class="sub">风险90%</div></div>
+    <div class="regime-card active"><div class="label">⚖️ 震荡 Range</div><div class="value">60%</div><div class="sub">✅ 第7日确认</div></div>
+    <div class="regime-card inactive"><div class="label">🐻 熊市 Bear</div><div class="value">—</div><div class="sub">安全90%</div></div>
+    <div class="regime-card inactive"><div class="label">⚠️ 恐慌 Panic</div><div class="value">—</div><div class="sub">全仓安全</div></div>
+  </div>
+  <div style="margin-top:12px; text-align:center; font-size:12px; color:#7f8c8d;">
+    Bull确认: 0/2日（今日HSI跌破MA20，确认失败重置）| VHSI: 20.52 | 置信度: 60%
+  </div>
+</div>
+
+<!-- ===== MARKET OVERVIEW ===== -->
+<div class="card">
+  <div class="card-title">🌍 市场概览与宏观叙事</div>
+  <table class="market-table">
+    <tr><th>指标</th><th>数值</th><th>变动</th><th>信号</th></tr>
+    <tr><td>恒生指数</td><td>25,679.78</td><td class="red">-0.95%</td><td>跌破MA20</td></tr>
+    <tr><td>恒生科技</td><td>—</td><td class="red">-2.28%</td><td>科技回调</td></tr>
+    <tr><td>VHSI</td><td>20.52</td><td class="green">↓0.17</td><td>波动率下降</td></tr>
+    <tr><td>恒指期货夜盘</td><td>—</td><td class="green">+0.26%</td><td>微幅反弹</td></tr>
+    <tr><td>牛熊街货比</td><td>63:37</td><td>—</td><td>偏多</td></tr>
+    <tr><td>南向资金</td><td>净流入</td><td>—</td><td>✅ 持续回流</td></tr>
+  </table>
+  
+  <div style="margin-top:14px; padding:12px; background:#eaf2f8; border-radius:8px; font-size:13px;">
+    <strong>📰 宏观叙事：</strong>政治局会议明确"稳房地产+稳资本市场"双稳信号，政策底进一步夯实。但4/29超级星期三（Mag7四家财报+FOMC利率决议）构成重大事件风险，市场选择观望回调。科技股领跌（腾讯-1%/阿里-2.8%/小米-3.8%），而高股息防御板块（银行/电信/能源）保持相对强势。CRO板块因药明康德Q1超预期逆市暴涨13.6%，成为结构性亮点。瑞银看好未来两月港股上行空间。VHSI持续回落至20.52，市场恐慌情绪不高。
+  </div>
+  
+  <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+    <span class="tag tag-green">✅ 政策底夯实</span>
+    <span class="tag tag-green">✅ 外资回流</span>
+    <span class="tag tag-red">❌ 超级星期三风险</span>
+    <span class="tag tag-yellow">⚠️ 科技回调</span>
+    <span class="tag tag-blue">📊 VHSI低位</span>
+  </div>
+</div>
+
+<!-- ===== TECHNICAL ANALYSIS ===== -->
+<div class="card">
+  <div class="card-title">📈 行情判断 (Agent 1)</div>
+  <table class="market-table">
+    <tr><th>技术指标</th><th>数值</th><th>判断</th></tr>
+    <tr><td>EMA12 vs EMA26</td><td>25929 vs 25847</td><td class="green">✅ 多头排列</td></tr>
+    <tr><td>Close vs MA20</td><td>25679 vs 25749</td><td class="red">❌ 跌破20日线</td></tr>
+    <tr><td>MACD</td><td>DIF=82.5 DEA=76.7 红柱</td><td class="green">✅ 红柱持续</td></tr>
+    <tr><td>ADX</td><td>25.24</td><td>趋势偏弱</td></tr>
+    <tr><td>PDI vs MDI</td><td>26.79 vs 30.57</td><td class="red">❌ 空头略强</td></tr>
+    <tr><td>RSI6</td><td>37.15</td><td>⚠️ 接近超卖区</td></tr>
+    <tr><td>布林带</td><td>25679 < 中轨25749</td><td>⚠️ 中轨下方</td></tr>
+    <tr><td>5日/20日涨跌</td><td>-3.05% / +3.31%</td><td>短期回调中期偏多</td></tr>
+  </table>
+  
+  <div style="margin-top:12px; padding:12px; background:#f8f9fa; border-radius:8px; font-size:13px;">
+    <strong>🎯 行情定性：Range 震荡市 | 置信度 60%</strong><br>
+    EMA12>EMA26维持多头排列，MACD红柱持续，但HSI跌破MA20且PDI<MDI空头略强。Bull确认连续2日待确认后今日回落，确认失败，重置为0/2日。ADX<30不加成，超级星期三事件风险压制置信度-5%至60%。待4/30 Fed决议落地后再评估Bull信号。
+  </div>
+</div>
+
+<!-- ===== STOCK SELECTION ===== -->
+<div class="card">
+  <div class="card-title">🎯 GEM选股：六维评分Top5 (Range杠铃策略)</div>
+  <div style="margin-bottom:10px; font-size:12px; color:#7f8c8d;">Range策略: 风险权重50% + 安全权重50% → 杠铃配置（银行/能源/电信防御 + CRO成长端）</div>
+  
+  <div class="position-grid">
+    <!-- 中海油 -->
+    <div class="position-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="stock-name">中国海洋石油</span>
+          <span class="stock-code">hk00883</span>
+        </div>
+        <span class="score-badge">85分</span>
+      </div>
+      <div class="detail-row"><span>现价</span><span class="val">HKD 28.98</span></div>
+      <div class="detail-row"><span>建议仓位</span><span class="val">19,006股 ≈ 55.08万</span></div>
+      <div class="detail-row"><span>止损价</span><span class="val">27.00 (-6.8%)</span></div>
+      <div class="detail-row"><span>PE/股息率</span><span class="val">10.2x / 4.80%</span></div>
+      <div style="margin-top:6px;">
+        <span class="protection-badge">🛡️3天保护期</span>
+        <span class="rsi-badge">RSI=79.9×0.9</span>
+      </div>
+      <div style="margin-top:6px; font-size:11px; color:#666;">ADX=30.8强趋势+MACD金叉+低估值+高股息</div>
+    </div>
+    
+    <!-- 中国移动 -->
+    <div class="position-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="stock-name">中国移动</span>
+          <span class="stock-code">hk00941</span>
+        </div>
+        <span class="score-badge">83分</span>
+      </div>
+      <div class="detail-row"><span>现价</span><span class="val">HKD 84.65</span></div>
+      <div class="detail-row"><span>建议仓位</span><span class="val">6,506股 ≈ 55.07万</span></div>
+      <div class="detail-row"><span>止损价</span><span class="val">80.00 (-5.5%)</span></div>
+      <div class="detail-row"><span>PE/股息率</span><span class="val">11.9x / 6.18%</span></div>
+      <div style="margin-top:6px;">
+        <span class="protection-badge">🛡️3天保护期</span>
+        <span class="rsi-badge">RSI=86.5×0.9</span>
+      </div>
+      <div style="margin-top:6px; font-size:11px; color:#666;">ADX=88.6极强趋势+均线多头+电信防御+高股息</div>
+    </div>
+    
+    <!-- 药明康德 -->
+    <div class="position-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="stock-name">药明康德</span>
+          <span class="stock-code">hk02359</span>
+        </div>
+        <span class="score-badge">81分</span>
+      </div>
+      <div class="detail-row"><span>现价</span><span class="val">HKD 143.10</span></div>
+      <div class="detail-row"><span>建议仓位</span><span class="val">3,635股 ≈ 52.02万</span></div>
+      <div class="detail-row"><span>止损价</span><span class="val">136.00 (-5.0%)</span></div>
+      <div class="detail-row"><span>PE/股息率</span><span class="val">18.6x / 1.24%</span></div>
+      <div style="margin-top:6px;">
+        <span class="protection-badge">🛡️3天保护期</span>
+        <span class="rsi-badge">RSI=86.0×0.9</span>
+      </div>
+      <div style="margin-top:6px; font-size:11px; color:#666;">Q1超预期+13.57%大涨+动量极强+CRO龙头(杠铃成长端)</div>
+    </div>
+    
+    <!-- 建设银行 -->
+    <div class="position-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="stock-name">建设银行</span>
+          <span class="stock-code">hk00939</span>
+        </div>
+        <span class="score-badge">79分</span>
+      </div>
+      <div class="detail-row"><span>现价</span><span class="val">HKD 8.89</span></div>
+      <div class="detail-row"><span>建议仓位</span><span class="val">68,841股 ≈ 61.20万</span></div>
+      <div class="detail-row"><span>止损价</span><span class="val">8.40 (-5.5%)</span></div>
+      <div class="detail-row"><span>PE/股息率</span><span class="val">6.2x / 4.69%</span></div>
+      <div style="margin-top:6px;">
+        <span class="protection-badge">🛡️3天保护期</span>
+        <span class="tag tag-green" style="font-size:10px;">RSI=65.9正常</span>
+      </div>
+      <div style="margin-top:6px; font-size:11px; color:#666;">均线多头+MACD金叉+极低估值+高股息+内银龙头</div>
+    </div>
+    
+    <!-- 工商银行 -->
+    <div class="position-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="stock-name">工商银行</span>
+          <span class="stock-code">hk01398</span>
+        </div>
+        <span class="score-badge">76分</span>
+      </div>
+      <div class="detail-row"><span>现价</span><span class="val">HKD 7.18</span></div>
+      <div class="detail-row"><span>建议仓位</span><span class="val">85,236股 ≈ 61.20万</span></div>
+      <div class="detail-row"><span>止损价</span><span class="val">6.80 (-5.3%)</span></div>
+      <div class="detail-row"><span>PE/股息率</span><span class="val">6.3x / 4.68%</span></div>
+      <div style="margin-top:6px;">
+        <span class="protection-badge">🛡️3天保护期</span>
+        <span class="tag tag-green" style="font-size:10px;">RSI=58.7正常</span>
+      </div>
+      <div style="margin-top:6px; font-size:11px; color:#666;">均线多头+极低估值+高股息+内银龙头</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DISCOUNT CHAIN ===== -->
+<div class="card">
+  <div class="card-title">🔗 CRO折扣链透明化</div>
+  
+  <div class="discount-chain">
+    <div style="font-size:12px; color:#7f8c8d; margin-bottom:8px;">最终仓位 = CRO基础 × VHSI系数 × 置信度系数 × RSI折扣</div>
+    
+    <div style="margin-bottom:10px;">
+      <strong>中海油 hk00883:</strong><br>
+      <span class="chain-step">90万</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×VHSI <span class="chain-mult">0.85</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×置信度 <span class="chain-mult">0.80</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×RSI超买 <span class="chain-mult">0.90</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-result">55.08万 HKD</span>
+    </div>
+    
+    <div style="margin-bottom:10px;">
+      <strong>中国移动 hk00941:</strong><br>
+      <span class="chain-step">90万</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×VHSI <span class="chain-mult">0.85</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×置信度 <span class="chain-mult">0.80</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×RSI超买 <span class="chain-mult">0.90</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-result">55.07万 HKD</span>
+    </div>
+    
+    <div style="margin-bottom:10px;">
+      <strong>药明康德 hk02359:</strong><br>
+      <span class="chain-step">85万</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×VHSI <span class="chain-mult">0.85</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×置信度 <span class="chain-mult">0.80</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×RSI超买 <span class="chain-mult">0.90</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-result">52.02万 HKD</span>
+    </div>
+    
+    <div style="margin-bottom:10px;">
+      <strong>建设银行 hk00939:</strong><br>
+      <span class="chain-step">90万</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×VHSI <span class="chain-mult">0.85</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×置信度 <span class="chain-mult">0.80</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×RSI正常 <span class="chain-mult">1.00</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-result">61.20万 HKD</span>
+    </div>
+    
+    <div>
+      <strong>工商银行 hk01398:</strong><br>
+      <span class="chain-step">90万</span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×VHSI <span class="chain-mult">0.85</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×置信度 <span class="chain-mult">0.80</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-step">×RSI正常 <span class="chain-mult">1.00</span></span>
+      <span class="chain-arrow">→</span>
+      <span class="chain-result">61.20万 HKD</span>
+    </div>
+  </div>
+  
+  <div style="margin-top:12px; text-align:center; font-size:14px; font-weight:700; color:#1a5276;">
+    总敞口: 284.57万 HKD = 2.85% | Range上限60% → ✅ 在限制内
+  </div>
+</div>
+
+<!-- ===== DEBATE COURT ===== -->
+<div class="card">
+  <div class="card-title">⚖️ 反向辩论庭</div>
+  
+  <div class="debate-box debate-bull">
+    <div class="debate-title">🐂 多方论点</div>
+    <div class="debate-text">
+      ① 政治局会议双稳信号明确，政策底持续夯实<br>
+      ② VHSI降至20.52低位，市场恐慌情绪消退<br>
+      ③ 外资+南向同步回流，资金面支撑<br>
+      ④ HSI EMA仍多头排列+MACD红柱，中期趋势未破<br>
+      ⑤ 银行/能源/电信高股息板块强势，防御中有进攻<br>
+      ⑥ 药明康德Q1超预期，CRO结构性机会确认
+    </div>
+  </div>
+  
+  <div class="debate-box debate-bear">
+    <div class="debate-title">🐻 空方论点</div>
+    <div class="debate-text">
+      ① 4/29超级星期三：Mag7四家财报+FOMC决议，极端事件风险<br>
+      ② HSI跌破MA20，Bull确认失败，技术面短期转弱<br>
+      ③ 科技股领跌(腾讯-1%/阿里-2.8%/小米-3.8%)，市场信心不足<br>
+      ④ PDI<MDI空头略强+ADX=25趋势偏弱，方向不明确<br>
+      ⑤ 银行股RSI偏高(工商58/建行66)，短期追高风险<br>
+      ⑥ 中海油/中国移动RSI超买>80，回调压力大
+    </div>
+  </div>
+  
+  <div class="debate-box debate-verdict">
+    <div class="debate-title">⚖️ 终审判决</div>
+    <div class="debate-text">
+      多空力量4:4平手。超级星期三事件风险为核心变量：<br>
+      <strong>情景A（概率45%）：</strong>Mag7财报超预期+Fed鸽派 → 4/30确认Bull → 加仓至90%敞口<br>
+      <strong>情景B（概率35%）：</strong>财报平淡+Fed中性 → 维持Range → 当前仓位合适<br>
+      <strong>情景C（概率20%）：</strong>财报低于预期+Fed鹰派 → 可能转Bear → 减仓至30%<br><br>
+      <strong>决策：</strong>维持Range低仓位(2.85%)，保留97%现金。等4/30事件落地后再行动。RSI超买标的(中海油/中国移动/药明康德)仓位9折限制。
+    </div>
+  </div>
+</div>
+
+<!-- ===== LEFT FISHING ===== -->
+<div class="card">
+  <div class="card-title">🎣 左侧捡漏评估</div>
+  <div class="left-fish">
+    <div class="title">🔍 当前左侧捡漏权限：<span style="color:#27ae60;">✅ 开放（Range低置信）</span></div>
+    <div class="item">📌 <strong>腾讯控股 (hk00700)</strong> — 现价473.8，距52周高点683跌-30.7%，PE=17.4x，RSI6=24.7极度超卖。若Fed鸽派+AI利好可考虑左侧布局，止损440（MA250附近）</div>
+    <div class="item">📌 <strong>紫金矿业 (hk02899)</strong> — 现价35.36，PE=13.5x，股息1.54%，RSI6=30.1偏超卖。黄金+铜双逻辑，地缘风险受益</div>
+    <div class="item">⚠️ 左侧仓位控制在总敞口5%以内，每票不超50万HKD</div>
+    <div class="item">⚠️ 必须设定严格止损(8%-10%)，左侧不配保护期</div>
+  </div>
+</div>
+
+<!-- ===== EXPERIENCE AUDIT ===== -->
+<div class="card">
+  <div class="card-title">📚 经验库终审 (Agent 7)</div>
+  <table class="market-table">
+    <tr><th>经验规则</th><th>本次应用</th><th>状态</th></tr>
+    <tr><td>内银股RSI超买折扣</td><td>中海油RSI=79.9/中国移动RSI=86.5 → ×0.9</td><td class="green">✅ 已执行</td></tr>
+    <tr><td>科技EMA空头排除</td><td>腾讯EMA12<EMA26空头，排除选股</td><td class="green">✅ 已排除</td></tr>
+    <tr><td>港股ADX不可用替代</td><td>使用MACD柱连续3天>0替代ADX</td><td class="green">✅ 已替代</td></tr>
+    <tr><td>VHSI减仓触发器</td><td>VHSI=20.52 → 20-25区间维持42%敞口</td><td class="green">✅ 已执行</td></tr>
+    <tr><td>财报季前置减仓</td><td>4/29超级星期三前保持低仓位2.85%</td><td class="green">✅ 保守应对</td></tr>
+    <tr><td>杠铃策略对冲</td><td>银行/能源/电信(防御端) + 药明康德(成长端)</td><td class="green">✅ 已配置</td></tr>
+    <tr><td>阶梯止盈延迟</td><td>新开仓无历史最高浮盈，不触发</td><td class="green">✅ 无触发</td></tr>
+    <tr><td>策略保护期</td><td>5只评分均≥60 → 3天保护期</td><td class="green">✅ 已配置</td></tr>
+  </table>
+</div>
+
+<!-- ===== EXISTING POSITIONS ===== -->
+<div class="card">
+  <div class="card-title">📋 当前持仓状态 (美股ETF)</div>
+  <div style="font-size:12px; color:#7f8c8d; margin-bottom:10px;">注：港股为新建仓标的，以下为美股GEM策略ETF持仓</div>
+  <div class="existing-grid">
+    <div class="existing-card">
+      <div class="name">VEA (国际股票ETF)</div>
+      <div class="row"><span>4,402股</span><span class="red">-0.40%</span></div>
+      <div class="row"><span>入场 68.34</span><span>现价 68.07</span></div>
+      <div class="row"><span>盈亏</span><span class="red">-$1,207.91</span></div>
+    </div>
+    <div class="existing-card">
+      <div class="name">SPY (标普500ETF)</div>
+      <div class="row"><span>420股</span><span class="green">+0.07%</span></div>
+      <div class="row"><span>入场 714.65</span><span>现价 715.17</span></div>
+      <div class="row"><span>盈亏</span><span class="green">+$216.76</span></div>
+    </div>
+    <div class="existing-card">
+      <div class="name">AGG (全债市ETF)</div>
+      <div class="row"><span>3,012股</span><span class="red">-0.65%</span></div>
+      <div class="row"><span>入场 100.09</span><span>现价 99.44</span></div>
+      <div class="row"><span>盈亏</span><span class="red">-$1,951.47</span></div>
+    </div>
+    <div class="existing-card">
+      <div class="name">SHY (短债ETF)</div>
+      <div class="row"><span>3,633股</span><span class="red">-0.52%</span></div>
+      <div class="row"><span>入场 82.98</span><span>现价 82.55</span></div>
+      <div class="row"><span>盈亏</span><span class="red">-$1,572.36</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center; font-size:13px; color:#555;">
+    现金: $98,839,474.52 | 总净值: ~$100,001,151 | 持仓盈亏: -$4,514.98
+  </div>
+</div>
+
+<!-- ===== RISK WARNING ===== -->
+<div class="risk-box">
+  <div class="risk-title">⚠️ 关键风险提示</div>
+  <div class="risk-text">
+    1. 🔴 <strong>4/29超级星期三</strong>：Mag7四家财报(Apple/Amazon/Meta/Microsoft)+FOMC利率决议，极端波动风险<br>
+    2. 🟡 <strong>RSI超买标的回调风险</strong>：中海油(79.9)/中国移动(86.5)/药明康德(86.0)均处超买区，短期可能回调5-8%<br>
+    3. 🟡 <strong>科技股持续弱势</strong>：恒生科技-2.28%，腾讯EMA空头排列，短期难反转<br>
+    4. 🟢 <strong>VHSI低位</strong>：20.52处于偏低水平，恐慌风险可控<br>
+    5. 🟢 <strong>政策支撑</strong>：政治局双稳信号，下行空间有限
+  </div>
+</div>
+
+<!-- ===== ACTION SUMMARY ===== -->
+<div class="card">
+  <div class="card-title">📝 今日操作清单</div>
+  <table class="market-table">
+    <tr><th>操作</th><th>标的</th><th>数量</th><th>金额(HKD)</th><th>止损</th><th>保护期</th><th>状态</th></tr>
+    <tr><td>🟢 开仓</td><td>中国海洋石油 hk00883</td><td>19,006股</td><td>550,794</td><td>27.00</td><td>🛡️3天</td><td>RSI超买×0.9</td></tr>
+    <tr><td>🟢 开仓</td><td>中国移动 hk00941</td><td>6,506股</td><td>550,733</td><td>80.00</td><td>🛡️3天</td><td>RSI超买×0.9</td></tr>
+    <tr><td>🟢 开仓</td><td>建设银行 hk00939</td><td>68,841股</td><td>611,996</td><td>8.40</td><td>🛡️3天</td><td>正常</td></tr>
+    <tr><td>🟢 开仓</td><td>工商银行 hk01398</td><td>85,236股</td><td>611,994</td><td>6.80</td><td>🛡️3天</td><td>正常</td></tr>
+    <tr><td>🟢 开仓</td><td>药明康德 hk02359</td><td>3,635股</td><td>520,168</td><td>136.00</td><td>🛡️3天</td><td>RSI超买×0.9</td></tr>
+  </table>
+  
+  <div style="margin-top:12px; padding:12px; background:#eaf2f8; border-radius:8px; font-size:13px;">
+    <strong>💡 4/30关注点：</strong>若Mag7财报超预期+Fed鸽派 → HSI有望重回MA20上方，Bull信号重新启动(0/2日)。届时可加仓至Range 42%敞口或确认Bull后加至90%。若不及预期则维持低仓防御。
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <p>Blakever 多智能体投资决策系统 v3.0 | 数据来源: westock-data</p>
+  <p>本报告由AI生成，仅供模拟交易参考，不构成投资建议</p>
+  <p>生成时间: 2026-04-29 08:04 CST | 会话: blakever-hk</p>
+</div>
+
+</div>
+</body>
+</html>

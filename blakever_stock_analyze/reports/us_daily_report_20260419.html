@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 美股每日操作建议指南 | 2026-04-19</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #c9d1d9; margin: 0; padding: 20px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { color: #58a6ff; border-bottom: 2px solid #30363d; padding-bottom: 10px; font-size: 1.5em; }
+  h2 { color: #79c0ff; border-bottom: 1px solid #21262d; padding-bottom: 8px; margin-top: 30px; font-size: 1.2em; }
+  h3 { color: #d2a8ff; font-size: 1em; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.85em; }
+  th { background: #161b22; color: #58a6ff; padding: 8px 10px; text-align: left; border: 1px solid #30363d; }
+  td { padding: 6px 10px; border: 1px solid #21262d; }
+  tr:nth-child(even) { background: #161b22; }
+  .bullish { color: #3fb950; }
+  .bearish { color: #f85149; }
+  .warning { color: #d29922; }
+  .neutral { color: #8b949e; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; }
+  .tag-bull { background: #1a3a2a; color: #3fb950; }
+  .tag-bear { background: #3a1a1a; color: #f85149; }
+  .tag-warn { background: #3a2a1a; color: #d29922; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin: 10px 0; }
+  .metric { text-align: center; padding: 10px; }
+  .metric-value { font-size: 1.8em; font-weight: bold; }
+  .metric-label { font-size: 0.8em; color: #8b949e; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stop-loss { color: #f85149; font-weight: bold; }
+  .take-profit { color: #3fb950; font-weight: bold; }
+  .risk-section { border-left: 3px solid #d29922; padding-left: 12px; margin: 8px 0; }
+  .footer { text-align: center; color: #484f58; font-size: 0.75em; margin-top: 30px; border-top: 1px solid #21262d; padding-top: 10px; }
+  .emoji { font-size: 1.1em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📊 Blakever 美股每日操作建议指南</h1>
+<p style="color:#8b949e;">数据日期：2026-04-17（最新交易日，4/18-19周末休市） | 报告生成：2026-04-19 20:00 CST</p>
+
+<!-- 大盘仪表盘 -->
+<h2>1️⃣ 大盘仪表盘</h2>
+<div class="grid">
+  <div class="card metric">
+    <div class="metric-value bullish">趋势牛市</div>
+    <div class="metric-label">行情定性</div>
+  </div>
+  <div class="card metric">
+    <div class="metric-value">78%</div>
+    <div class="metric-label">置信度</div>
+  </div>
+  <div class="card metric">
+    <div class="metric-value bullish">+0.7</div>
+    <div class="metric-label">情绪因子</div>
+  </div>
+</div>
+
+<table>
+  <tr><th>指数</th><th>收盘价</th><th>EMA12</th><th>EMA26</th><th>EMA排列</th><th>ADX</th><th>MACD柱</th><th>RSI6</th><th>5日涨幅</th></tr>
+  <tr><td>SPY</td><td>710.14</td><td>681.17</td><td>673.30</td><td class="bullish">🟢 多头</td><td>28.11</td><td>13.60</td><td class="warning">91.28 ⚠️</td><td class="bullish">+4.52%</td></tr>
+  <tr><td>QQQ</td><td>648.85</td><td>614.02</td><td>604.40</td><td class="bullish">🟢 多头</td><td>26.83</td><td>15.26</td><td class="warning">91.92 ⚠️</td><td class="bullish">+6.18%</td></tr>
+</table>
+
+<p><span class="tag tag-warn">⚠️ 修正说明</span> Python模块(SMA)判断"震荡市73%"，以westock-data EMA实时指标为准，修正为趋势牛市。理由：EMA12>EMA26多头+ADX>20+MACD>0三条件全满，且纳指13连阳创34年纪录。</p>
+
+<!-- 宏观叙事 -->
+<h2>2️⃣ 宏观叙事</h2>
+<div class="card">
+  <h3>🟢 利多因素</h3>
+  <ul>
+    <li><strong>美伊谈判重大突破</strong>：伊朗宣布开放霍尔木兹海峡，地缘风险急剧缓和</li>
+    <li><strong>纳指13连阳</strong>：创1992年以来最长连涨纪录</li>
+    <li><strong>"逼空+量化回补"</strong>：资金涌入高风险板块</li>
+    <li><strong>VIX持续下降</strong>：VIXY收27.93(-1.27%)，恐慌情绪消退</li>
+  </ul>
+  <h3>🔴 利空因素</h3>
+  <ul>
+    <li><strong>美银Hartnett警告</strong>：本轮反弹正演变为"多头陷阱"</li>
+    <li><strong>RSI全面极度超买</strong>：5只候选股RSI全部>88，回调风险高</li>
+    <li><strong>原油闪崩10%+</strong>：需求担忧信号</li>
+    <li><strong>特朗普/共和党支持率下滑</strong>：政治不确定性</li>
+  </ul>
+  <h3>⚠️ 关键事件预警</h3>
+  <table>
+    <tr><th>事件</th><th>日期</th><th>影响</th><th>建议</th></tr>
+    <tr><td>🇺🇸🇮🇷 美伊停火谈判截止</td><td>4/21（2天后）</td><td class="bearish">谈判破裂→VIX飙升</td><td>事件前控制敞口≤30%</td></tr>
+    <tr><td>🏛 FOMC会议</td><td>4/28-29</td><td class="warning">利率决策不确定性</td><td>提前3天评估</td></tr>
+    <tr><td>📋 301调查听证会</td><td>4/28</td><td class="warning">中美贸易风险</td><td>关注中概股</td></tr>
+    <tr><td>📊 GOOGL财报</td><td>4/29</td><td class="warning">单股波动</td><td>财报前1天减仓GOOGL</td></tr>
+    <tr><td>📊 MSFT/META财报</td><td>4/30</td><td class="warning">科技龙头财报季</td><td>提前1天评估</td></tr>
+    <tr><td>📊 NVDA财报</td><td>5/20</td><td class="neutral">AI龙头</td><td>关注指引</td></tr>
+  </table>
+</div>
+
+<!-- CRO风控 -->
+<h2>3️⃣ CRO 风控摘要</h2>
+<div class="card">
+  <table>
+    <tr><th>指标</th><th>CRO原始建议</th><th>VIX规则上限</th><th>取值</th></tr>
+    <tr><td>单只仓位</td><td>$17,500 (1.75%)</td><td>$420,000 (42%)</td><td>$17,500 (CRO约束更严)</td></tr>
+    <tr><td>总敞口</td><td>$87,500 (8.75%)</td><td>牛市90%</td><td>5.51% (折扣后)</td></tr>
+  </table>
+  <p><strong>折扣链</strong>：CRO基础仓位 × VIX上限取min × 隐性相关性(×0.90) × RSI折扣(×0.70) × Bias调整(×1.0)</p>
+  <p><strong>VIX规则</strong>：VIX=23.0 → 落入20-25档 → 单只上限42% (当前CRO仅1.75%，远低于VIX上限)</p>
+  <p class="warning">⚠️ CRO仓位极度保守：5只合计仅$55,125 (5.51%)，远低于牛市80-90%总敞口上限。主因：Kelly公式对大市值科技股的风险溢价要求高。</p>
+</div>
+
+<!-- 今日指令表 -->
+<h2>4️⃣ 今日指令表</h2>
+<table>
+  <tr><th>#</th><th>标的</th><th>方向</th><th>现价</th><th>V2条件</th><th>ADX</th><th>RSI6</th><th>最终仓位</th><th>仓位%</th><th class="stop-loss">止损(EMA26)</th><th class="take-profit">止盈规则</th><th>辩论置信度</th></tr>
+  <tr>
+    <td>1</td><td class="bullish">NVDA</td><td>做多</td><td>201.68</td><td>3/3 ✅</td><td>32.47</td><td class="warning">90.8</td><td>$11,025</td><td>1.10%</td>
+    <td class="stop-loss">184.10 (-8.7%)</td><td class="take-profit">阶梯止盈(含兜底)</td><td>57.6 (40%错误概率)</td>
+  </tr>
+  <tr>
+    <td>2</td><td class="bullish">MSFT</td><td>做多</td><td>422.79</td><td>3/3 ✅</td><td>36.82</td><td class="warning">90.3</td><td>$11,025</td><td>1.10%</td>
+    <td class="stop-loss">387.71 (-8.3%)</td><td class="take-profit">阶梯止盈(含兜底)</td><td>56.4 (40%错误概率)</td>
+  </tr>
+  <tr>
+    <td>3</td><td class="bullish">AVGO</td><td>做多</td><td>406.54</td><td>3/3 ✅</td><td>47.16</td><td class="warning">93.7</td><td>$11,025</td><td>1.10%</td>
+    <td class="stop-loss">344.68 (-15.2%)</td><td class="take-profit">阶梯止盈(含兜底)</td><td>59.8 (35%错误概率)</td>
+  </tr>
+  <tr>
+    <td>4</td><td class="bullish">GOOGL</td><td>做多</td><td>341.68</td><td>3/3 ✅</td><td>46.54</td><td class="warning">89.2</td><td>$11,025</td><td>1.10%</td>
+    <td class="stop-loss">311.05 (-9.0%)</td><td class="take-profit">阶梯止盈(含兜底)</td><td>52.8 (40%错误概率)</td>
+  </tr>
+  <tr>
+    <td>5</td><td class="bullish">META</td><td>做多</td><td>688.55</td><td>3/3 ✅</td><td>34.54</td><td class="warning">88.9</td><td>$11,025</td><td>1.10%</td>
+    <td class="stop-loss">620.48 (-9.9%)</td><td class="take-profit">阶梯止盈(含兜底)</td><td>51.6 (40%错误概率)</td>
+  </tr>
+</table>
+<p><strong>总敞口：5.51%</strong> | <strong>总止损风险：约$4,870 (0.49%净值)</strong></p>
+
+<p><span class="tag tag-bear">🔴 隐性相关性预警</span> 5只全部为科技巨头，同行业高度相关。若科技板块整体回调，5只可能同时触发止损。已额外打折10%。</p>
+
+<!-- 左侧试探 -->
+<h2>5️⃣ 左侧试探仓位</h2>
+<div class="card">
+  <p>❌ <strong>未触发</strong>。左侧捡漏需同时满足：VIX>35 + VIX长上影线 + 成交量≥2倍均量。当前VIX=23.0，远低于触发线。</p>
+</div>
+
+<!-- 经验终审 -->
+<h2>6️⃣ 经验终审对照表</h2>
+<table>
+  <tr><th>教训</th><th>内容</th><th>是否违反</th><th>处理方式</th></tr>
+  <tr><td>E01</td><td>个股价格必须从westock-data实时获取</td><td class="bullish">✅ 未违反</td><td>所有价格均为westock-data实时验证</td></tr>
+  <tr><td>E02</td><td>V2策略验证用westock-data技术指标</td><td class="bullish">✅ 未违反</td><td>EMA/ADX/MACD均为westock-data数据</td></tr>
+  <tr><td>E03</td><td>CRO仓位与VIX规则协调</td><td class="bullish">✅ 未违反</td><td>取min(CRO, VIX上限)×情绪系数×RSI折扣</td></tr>
+  <tr><td>E04</td><td>RSI超买打折扣</td><td class="bullish">✅ 未违反</td><td>5只RSI>85全部打7折</td></tr>
+  <tr><td>E05</td><td>科技巨头隐性相关性检查</td><td class="bullish">✅ 未违反</td><td>5只同行业额外打折10%</td></tr>
+</table>
+
+<!-- 净值简报 -->
+<h2>7️⃣ 净值简报</h2>
+<div class="grid">
+  <div class="card metric">
+    <div class="metric-value">$1,050,630</div>
+    <div class="metric-label">账户净值</div>
+  </div>
+  <div class="card metric">
+    <div class="metric-value bullish">+5.06%</div>
+    <div class="metric-label">总收益率</div>
+  </div>
+  <div class="card metric">
+    <div class="metric-value">$1,026,880</div>
+    <div class="metric-label">现金</div>
+  </div>
+</div>
+
+<h3>现有持仓</h3>
+<table>
+  <tr><th>标的</th><th>方向</th><th>入场价</th><th>现价</th><th>持仓市值</th><th>浮盈</th><th>浮盈%</th></tr>
+  <tr><td>AAPL</td><td>做多</td><td>176.04</td><td>270.23</td><td>$135,115</td><td class="bullish">+$47,041</td><td class="bullish">+53.5%</td></tr>
+  <tr><td>MSFT</td><td>做多</td><td>421.26</td><td>422.79</td><td>$42,279</td><td class="bullish">+$153</td><td class="bullish">+0.36%</td></tr>
+</table>
+<p>⚠️ AAPL浮盈53.5%，建议启用阶梯止盈（利润回吐超50%→减仓50%）</p>
+
+<!-- 知识效期预警 -->
+<h2>8️⃣ 知识效期预警</h2>
+<div class="card">
+  <p>暂无知识条目触失效期预警。</p>
+</div>
+
+<!-- 风险提示 -->
+<div class="card" style="border-left: 3px solid #f85149;">
+  <h3 style="color:#f85149;">⚠️ 全局风险提示</h3>
+  <ol>
+    <li><strong>RSI全面极度超买</strong>：5只候选+2只持仓(SPY/QQQ)全部RSI>80，回调概率显著升高</li>
+    <li><strong>4/21美伊谈判截止</strong>：2天后关键事件，若谈判破裂可能导致科技股集体回调</li>
+    <li><strong>"多头陷阱"风险</strong>：美银Hartnett警告当前反弹可能为空头陷阱</li>
+    <li><strong>财报季集中</strong>：4/29-30三只持仓有财报（GOOGL/MSFT/META），波动性将大幅增加</li>
+    <li><strong>科技板块集中度</strong>：新开5仓+现有2仓=7只科技股，极端集中风险</li>
+  </ol>
+  <p><strong>建议</strong>：4/21前不新增仓位；4/29-30财报前对GOOGL/MSFT/META执行减仓操作；AAPL启用阶梯止盈保利润。</p>
+</div>
+
+<div class="footer">
+  <p>Blakever Multi-Agent Investment Decision System v2.2.2 | 数据来源：westock-data (实时) | 风控引擎：cro_mgr.py</p>
+  <p>本报告仅供参考，不构成投资建议。投资有风险，决策需谨慎。</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{
+  "current_regime": "Range",
+  "confidence": 60,
+  "confirmation_days": 8,
+  "last_update": "2026-04-30",
+  "history": [
+    {
+      "date": "2026-04-21",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-22",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-23",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-24",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-27",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-28",
+      "regime": "Range",
+      "confidence": 65,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-29",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    },
+    {
+      "date": "2026-04-30",
+      "regime": "Range",
+      "confidence": 60,
+      "confirmed": true
+    }
+  ],
+  "confirmation_rules": {
+    "Panic": "immediate",
+    "high_confidence_80": "1_day",
+    "normal": "2_consecutive_days",
+    "grace_period_decay": "-10%_per_day"
+  },
+  "2026-04-27": {
+    "regime": "Range",
+    "confidence": 60,
+    "pending_bull_days": 1,
+    "notes": "EMA多头+MACD红柱+ADX>30,但RSI6>80超买+财报周不确定。Bull信号75%置信度,需2日确认(1/2)。维持Range。"
+  },
+  "2026-04-28": {
+    "regime": "Range",
+    "confidence": 65,
+    "pending_bull_days": 2,
+    "notes": "EMA多头排列持续+MACD红柱+ADX=62.5强趋势,但RSI6=78.3超买仍存+4/29超级日(Mag7财报+Fed决议)不确定。Bull信号连续第2日,置信度75%提升至80%但受事件风险压制。维持Range,待4/30确认。"
+  },
+  "2026-04-29": {
+    "regime": "Range",
+    "confidence": 60,
+    "pending_bull_days": 0,
+    "notes": "4/28 SPY收711.69(-0.49%),EMA多头+MACD红柱+ADX=59.2强趋势+PDI>MDI多头主导,Bull信号技术面成立但4/29超级星期三(FOMC+Mag7财报)事件不确定性极大+RSI6=70.9超买+油价破百通胀3.3%滞胀风险+Bull确认在4/28连续2日后4/29回落确认失败重置0/2。维持Range,置信度60%。"
+  },
+  "pending_bull_days": 0,
+  "2026-04-30": {
+    "regime": "Range",
+    "confidence": 60,
+    "pending_bull_days": 0,
+    "notes": "恒指+1.68%收复26000,EMA金叉+MACD红柱扩大,但ADX=19.11极弱趋势+VHSI=20.13低波动+4/30 FOMC决议事件不确定性。Bull确认0/2日(4/29重置)。维持Range,置信度60%。数据源恢复正常(9/9成功),置信度提升至85%。"
+  }
+}

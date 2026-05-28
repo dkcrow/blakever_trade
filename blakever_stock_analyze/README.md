@@ -1,0 +1,1 @@
+blakever_stock_analyze

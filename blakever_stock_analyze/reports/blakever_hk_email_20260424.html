@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 港股每日操作建议 | 2026-04-24</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.header { background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 50%, #1a3a5c 100%); color: white; padding: 30px; border-radius: 12px 12px 0 0; text-align: center; }
+.header h1 { font-size: 24px; margin-bottom: 8px; letter-spacing: 2px; }
+.header .subtitle { font-size: 14px; opacity: 0.85; }
+.header .date { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+.card { background: white; border-radius: 8px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card h2 { font-size: 18px; color: #1a3a5c; border-left: 4px solid #2d6a9f; padding-left: 12px; margin-bottom: 16px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-right: 4px; }
+.badge-green { background: #e8f5e9; color: #2e7d32; }
+.badge-red { background: #ffebee; color: #c62828; }
+.badge-yellow { background: #fff8e1; color: #f57f17; }
+.badge-blue { background: #e3f2fd; color: #1565c0; }
+.badge-purple { background: #f3e5f5; color: #7b1fa2; }
+.badge-orange { background: #fff3e0; color: #e65100; }
+.dashboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.dash-item { background: #f8f9fa; border-radius: 8px; padding: 16px; text-align: center; }
+.dash-item .label { font-size: 12px; color: #666; margin-bottom: 4px; }
+.dash-item .value { font-size: 20px; font-weight: 700; }
+.dash-item .value.green { color: #2e7d32; }
+.dash-item .value.red { color: #c62828; }
+.dash-item .value.blue { color: #1565c0; }
+.dash-item .value.orange { color: #e65100; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #f0f4f8; padding: 10px 8px; text-align: left; font-weight: 600; color: #1a3a5c; border-bottom: 2px solid #dde3ea; }
+td { padding: 8px; border-bottom: 1px solid #eee; }
+tr:hover { background: #f8f9ff; }
+.pnl-pos { color: #2e7d32; font-weight: 600; }
+.pnl-neg { color: #c62828; font-weight: 600; }
+.debate-card { background: #f8f9fa; border-radius: 8px; padding: 12px; margin-bottom: 8px; border-left: 4px solid #2d6a9f; }
+.debate-pass { border-left-color: #2e7d32; }
+.debate-fail { border-left-color: #c62828; }
+.debate-warn { border-left-color: #f57f17; }
+.alert-box { background: #fff3e0; border: 1px solid #ffcc02; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+.alert-box h3 { color: #e65100; font-size: 14px; margin-bottom: 8px; }
+.alert-box ul { margin-left: 16px; font-size: 13px; }
+.info-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+.info-box h3 { color: #1565c0; font-size: 14px; margin-bottom: 8px; }
+.discount-chain { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; font-size: 13px; margin: 8px 0; }
+.discount-chain .arrow { color: #999; }
+.discount-chain .factor { background: #e3f2fd; padding: 2px 8px; border-radius: 4px; }
+.footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+.brand { background: #1a3a5c; color: white; padding: 12px; text-align: center; font-size: 12px; border-radius: 0 0 12px 12px; }
+.section-divider { border: none; border-top: 1px dashed #ddd; margin: 20px 0; }
+.regime-badge { display: inline-block; background: linear-gradient(135deg, #ff9800, #f57c00); color: white; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 700; margin: 4px; }
+.confirm-badge { background: #fff8e1; color: #f57f17; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+.reset-notice { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #1565c0; border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: center; }
+.reset-notice h3 { color: #1565c0; font-size: 16px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+<h1>📊 Blakever 港股每日操作建议</h1>
+<div class="subtitle">多智能体投资决策系统 | <span class="regime-badge">震荡市 Range</span></div>
+<div class="date">2026-04-24 | 数据截止: 盘中实时 | 会话: blakever-hk</div>
+</div>
+
+<!-- 账户重置通知 -->
+<div class="reset-notice">
+<h3>🔄 账户状态：全新起始</h3>
+<p style="font-size:13px;color:#333;">2026-04-23已执行全面重置（清空持仓→¥1亿初始资金），切换GEM双动量策略。今日为重置后<strong>首个交易日</strong>，从零建仓。</p>
+</div>
+
+<!-- 大盘仪表盘 -->
+<div class="card">
+<h2>🌡️ 大盘仪表盘</h2>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">行情定性</div>
+<div class="value orange">震荡</div>
+<span class="badge badge-yellow">✅已确认</span>
+</div>
+<div class="dash-item">
+<div class="label">置信度</div>
+<div class="value blue">60%</div>
+<span class="badge badge-yellow">中等偏低</span>
+</div>
+<div class="dash-item">
+<div class="label">情绪因子</div>
+<div class="value">0.95</div>
+<span class="badge badge-yellow">谨慎偏弱</span>
+</div>
+</div>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">HSI</div>
+<div class="value red">25,915</div>
+<span class="badge badge-red">-0.95%</span>
+</div>
+<div class="dash-item">
+<div class="label">HSTECH</div>
+<div class="value red">5,009</div>
+<span class="badge badge-red">-1.51%</span>
+</div>
+<div class="dash-item">
+<div class="label">VHSI</div>
+<div class="value">21.14</div>
+<span class="badge badge-yellow">20-25区间</span>
+</div>
+</div>
+</div>
+
+<!-- 宏观叙事 -->
+<div class="card">
+<h2>🌍 宏观叙事 (Agent 2)</h2>
+<div class="info-box">
+<h3>「连跌三日后的暗流涌动」</h3>
+<ul>
+<li><strong>港股连跌3日</strong>: 恒指从26487→25915，累计-2.16%，科技/消费领跌</li>
+<li><strong>中美贸易</strong>: 4/28 301听证会逼近，市场观望情绪浓厚</li>
+<li><strong>原油</strong>: 地缘风险溢价仍高，油气股逆势走强（中海油+1.08%）</li>
+<li><strong>美债</strong>: 10Y=4.30%，利率高企压制成长估值</li>
+<li><strong>南向资金</strong>: 前日净流入48.9亿港元，内地资金仍在逢低布局</li>
+<li><strong>情绪因子=0.95</strong>: 连跌3日+MACD死叉+均线空头，但VHSI仍低未触发恐慌</li>
+</ul>
+</div>
+</div>
+
+<!-- 行情判断过程 -->
+<div class="card">
+<h2>🔍 行情判断过程 (Agent 1)</h2>
+<table>
+<tr><th>指标</th><th>数值</th><th>信号</th></tr>
+<tr><td>VHSI</td><td>21.14</td><td>🟢 20-25区间，未触发恐慌</td></tr>
+<tr><td>MACD</td><td>DIF=-52.5 DEA=-35.9 柱=-33.2</td><td>🔴 死叉，空头信号</td></tr>
+<tr><td>RSI6</td><td>46.3</td><td>🟡 中性偏弱，非超卖</td></tr>
+<tr><td>均线排列</td><td>Close<MA5<MA20</td><td>🔴 短期空头排列</td></tr>
+<tr><td>3日累计跌幅</td><td>-2.16%</td><td>🟡 温和回调，非崩盘</td></tr>
+<tr><td>板块分化</td><td>内银+油强/科技弱</td><td>🟡 典型震荡市特征</td></tr>
+</table>
+<p style="margin-top:12px;font-size:13px;color:#1a3a5c;"><strong>综合判定</strong>: 震荡市(Range) | 置信度60% | 已连续3日确认(04-21起)</p>
+<p style="font-size:12px;color:#666;">低置信度限流规则：置信度<60%时CRO额外×0.5折扣，当前恰好60%不触发限流</p>
+</div>
+
+<!-- CRO风控摘要 -->
+<div class="card">
+<h2>🛡️ CRO风控摘要 (Agent 0)</h2>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">VHSI仓位上限</div>
+<div class="value">42%</div>
+</div>
+<div class="dash-item">
+<div class="label">情绪系数</div>
+<div class="value">0.95</div>
+</div>
+<div class="dash-item">
+<div class="label">当前港股敞口</div>
+<div class="value blue">0%</div>
+</div>
+</div>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">Range总敞口上限</div>
+<div class="value">60%</div>
+</div>
+<div class="dash-item">
+<div class="label">单票上限</div>
+<div class="value">35%</div>
+</div>
+<div class="dash-item">
+<div class="label">建仓节奏</div>
+<div class="value green">可建仓</div>
+</div>
+</div>
+<p style="font-size:12px;color:#666;margin-top:8px;">CRO备注: 账户重置后首个交易日，建议分批建仓，首日不超过总敞口30%</p>
+</div>
+
+<!-- GEM策略选股 -->
+<div class="card">
+<h2>🎯 GEM双动量选股 (震荡市策略)</h2>
+<div class="info-box">
+<h3>策略参数</h3>
+<ul>
+<li>行情: Range | risk_weight=50%, safe_weight=50%</li>
+<li>动量回看: 9个月 | 缓冲期: 3天</li>
+<li>杠铃策略: 成长端(动量Top) + 防御端(高息/低波动)</li>
+</ul>
+</div>
+
+<h3 style="margin-top:16px;font-size:14px;color:#1a3a5c;">六维评分Top5候选</h3>
+<table>
+<tr><th>标的</th><th>现价</th><th>动量(9M)</th><th>MACD柱</th><th>RSI6</th><th>股息率</th><th>综合评分</th><th>杠铃</th></tr>
+<tr>
+<td><strong>中国海洋石油(00883)</strong></td>
+<td>27.96</td>
+<td style="color:#2e7d32;">+31.27%</td>
+<td>正</td>
+<td>63.8</td>
+<td>4.97%</td>
+<td><span class="badge badge-green">82</span></td>
+<td><span class="badge badge-blue">🔵防御端</span></td>
+</tr>
+<tr>
+<td><strong>工商银行(01398)</strong></td>
+<td>7.25</td>
+<td style="color:#2e7d32;">+15.26%</td>
+<td>正</td>
+<td>74.8</td>
+<td>4.64%</td>
+<td><span class="badge badge-green">76</span></td>
+<td><span class="badge badge-blue">🔵防御端</span></td>
+</tr>
+<tr>
+<td><strong>建设银行(00939)</strong></td>
+<td>8.92</td>
+<td style="color:#2e7d32;">+15.99%</td>
+<td>正</td>
+<td>72.9</td>
+<td>4.67%</td>
+<td><span class="badge badge-green">74</span></td>
+<td><span class="badge badge-blue">🔵防御端</span></td>
+</tr>
+<tr>
+<td><strong>中芯国际(00981)</strong></td>
+<td>63.25</td>
+<td style="color:#2e7d32;">+11.72%</td>
+<td>1.98</td>
+<td>75.1</td>
+<td>—</td>
+<td><span class="badge badge-yellow">68</span></td>
+<td><span class="badge badge-green">🟢成长端</span></td>
+</tr>
+<tr>
+<td><strong>中国移动(00941)</strong></td>
+<td>83.85</td>
+<td style="color:#2e7d32;">+2.63%</td>
+<td>正</td>
+<td>46.6</td>
+<td>6.24%</td>
+<td><span class="badge badge-yellow">65</span></td>
+<td><span class="badge badge-blue">🔵防御端</span></td>
+</tr>
+</table>
+</div>
+
+<!-- 今日新开仓指令 -->
+<div class="card">
+<h2>📋 今日新开仓指令</h2>
+<table>
+<tr><th>标的</th><th>执行价</th><th>方向</th><th>金额(HK$)</th><th>止损</th><th>RSI6</th><th>置信度</th><th>杠铃</th></tr>
+<tr>
+<td><strong>中海油(00883)</strong></td>
+<td>27.99</td>
+<td>多</td>
+<td>999,983</td>
+<td>25.16</td>
+<td>63.8</td>
+<td><span class="badge badge-green">82%</span></td>
+<td><span class="badge badge-blue">🔵防御</span></td>
+</tr>
+<tr>
+<td><strong>工商银行(01398)</strong></td>
+<td>7.26</td>
+<td>多</td>
+<td>999,999</td>
+<td>6.89</td>
+<td>74.8</td>
+<td><span class="badge badge-green">76%</span></td>
+<td><span class="badge badge-blue">🔵防御</span></td>
+</tr>
+<tr>
+<td><strong>中芯国际(00981)</strong></td>
+<td>63.31</td>
+<td>多</td>
+<td>999,970</td>
+<td>58.05</td>
+<td>75.1</td>
+<td><span class="badge badge-yellow">68%</span></td>
+<td><span class="badge badge-green">🟢成长</span></td>
+</tr>
+</table>
+
+<h3 style="margin-top:16px;font-size:14px;color:#1a3a5c;">仓位折扣链</h3>
+<table>
+<tr><th>标的</th><th>基础仓位</th><th>隐性相关</th><th>RSI折扣</th><th>VHSI系数</th><th>情绪系数</th><th>最终</th></tr>
+<tr><td>中海油</td><td>500万</td><td>×1.0</td><td>×1.0</td><td>×0.8</td><td>×0.95</td><td><strong>380万→100万⬇</strong></td></tr>
+<tr><td>工商银行</td><td>400万</td><td>×0.90</td><td>×0.9(RSI75)</td><td>×0.8</td><td>×0.95</td><td><strong>246万→100万⬇</strong></td></tr>
+<tr><td>中芯国际</td><td>400万</td><td>×1.0</td><td>×0.9(RSI75)</td><td>×0.8</td><td>×0.95</td><td><strong>274万→100万⬇</strong></td></tr>
+</table>
+<p style="margin-top:8px;font-size:12px;color:#666;">首日建仓上限: 总敞口≤30%，即约2,700万HKD。受单票100万上限限制，实际建仓300万HKD(~2.7%)，资金利用率较低。</p>
+</div>
+
+<!-- 反向辩论庭 -->
+<div class="card">
+<h2>⚖️ 反向测试辩论庭</h2>
+<div class="debate-card debate-pass">
+<strong>✅ 中海油(00883)</strong> | 原置信度85% → 错误率12% → <span style="color:#2e7d32;font-weight:700;">最终82%</span>
+<br><small>看多: 9M动量+31.3%+股息4.97%+油价支撑 | 看空: YTD+31%高位+地缘不确定性 | 结论: 防御端首选保留</small>
+</div>
+<div class="debate-card debate-pass">
+<strong>✅ 工商银行(01398)</strong> | 原置信度80% → 错误率15% → <span style="color:#2e7d32;font-weight:700;">最终76%</span>
+<br><small>看多: 内银股利率受益+股息4.64%+9M动量+15% | 看空: RSI74.8偏高(超买打9折)+经济复苏不确定 | 结论: 防御端保留(RSI>70已打9折)</small>
+</div>
+<div class="debate-card debate-warn">
+<strong>⚠️ 中芯国际(00981)</strong> | 原置信度75% → 错误率18% → <span style="color:#f57f17;font-weight:700;">最终68%</span>
+<br><small>看多: 半导体逆势拉升+MACD柱1.98+国产替代逻辑 | 看空: 科技股整体弱势+RSI75偏高+地缘敏感 | 结论: 成长端代表，边缘保留</small>
+</div>
+</div>
+
+<!-- 杠铃策略预警 -->
+<div class="alert-box">
+<h3>⚠️ 杠铃策略与逻辑分裂预警</h3>
+<ul>
+<li><strong>🔵防御端</strong>：中海油（能源+高息）+ 工商银行（内银+利率受益）</li>
+<li><strong>🟢成长端</strong>：中芯国际（半导体国产替代）</li>
+<li>震荡市杠铃策略对冲合理：防御端占2/3仓位，成长端占1/3</li>
+<li>双方仓位已各额外打折10%（隐性相关×0.90）</li>
+<li>VHSI>30时需关注双杀风险</li>
+</ul>
+</div>
+
+<!-- 左侧捡漏 -->
+<div class="card">
+<h2>🎣 左侧试探仓位</h2>
+<p style="color:#999;text-align:center;padding:12px;">❌ 未触发 — VHSI=21.14 远低于35阈值，无恐慌性错杀机会</p>
+</div>
+
+<!-- 经验终审 -->
+<div class="card">
+<h2>📚 经验终审对照表 (Agent 7)</h2>
+<table>
+<tr><th>候选标的</th><th>E01(ADX替代)</th><th>E02(内银超买)</th><th>E03(科技空头)</th><th>E04(VHSI仓位)</th><th>E05(流动性)</th><th>结论</th></tr>
+<tr><td>中海油</td><td>✅MACD柱正</td><td>N/A</td><td>N/A</td><td>✅<25</td><td>✅日均5.8亿</td><td><span class="badge badge-green">通过</span></td></tr>
+<tr><td>工商银行</td><td>✅MACD柱正</td><td>⚠️RSI75(打9折)</td><td>N/A</td><td>✅<25</td><td>✅日均11.3亿</td><td><span class="badge badge-green">通过</span></td></tr>
+<tr><td>中芯国际</td><td>✅柱1.98</td><td>N/A</td><td>⚠️科技弱势</td><td>✅<25</td><td>✅日均44亿</td><td><span class="badge badge-yellow">边缘通过</span></td></tr>
+</table>
+<p style="margin-top:8px;font-size:12px;color:#666;">经验库关键教训已对照: 内银RSI>70打9折(E02)、科技EMA空头但中芯例外(E03)、VHSI<25仓位不缩(E04)</p>
+</div>
+
+<!-- 持仓管理表（傻瓜交易员） -->
+<div class="card">
+<h2>📊 持仓管理表（傻瓜交易员）</h2>
+<table>
+<tr><th>标的</th><th>方向</th><th>建仓价</th><th>现价</th><th>数量</th><th>持仓金额</th><th>浮盈亏</th><th>盈亏%</th><th>止损价</th><th>建仓日期</th><th>状态</th></tr>
+<tr><td>中海油(HK00883)</td><td>多</td><td>27.99</td><td>27.99</td><td>35,729</td><td>999,983</td><td>0</td><td>0.00%</td><td>25.16</td><td>2026-04-24</td><td><span class="badge badge-green">🟢信号健康</span></td></tr>
+<tr><td>工商银行(HK01398)</td><td>多</td><td>7.26</td><td>7.26</td><td>137,794</td><td>999,999</td><td>0</td><td>0.00%</td><td>6.89</td><td>2026-04-24</td><td><span class="badge badge-green">🟢信号健康</span></td></tr>
+<tr><td>中芯国际(HK00981)</td><td>多</td><td>63.31</td><td>63.31</td><td>15,794</td><td>999,970</td><td>0</td><td>0.00%</td><td>58.05</td><td>2026-04-24</td><td><span class="badge badge-green">🟢信号健康</span></td></tr>
+<tr style="font-weight:bold;background:rgba(0,0,0,0.03);"><td>合计</td><td></td><td></td><td></td><td></td><td>2,999,952</td><td>0</td><td></td><td></td><td></td><td></td></tr>
+</table>
+<p style="margin-top:8px;font-size:12px;color:#666;">📌 建仓Regime: 3只均为Range(2026-04-24) | 保护期内止损放宽1个ATR | 今日首日建仓，盈亏为0</p>
+</div>
+
+<!-- 净值简报 -->
+<div class="card">
+<h2>💰 净值简报</h2>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">账户净值</div>
+<div class="value">1.00亿</div>
+</div>
+<div class="dash-item">
+<div class="label">现金</div>
+<div class="value">9,700万</div>
+</div>
+<div class="dash-item">
+<div class="label">持仓市值</div>
+<div class="value">300万</div>
+</div>
+</div>
+<div class="dashboard">
+<div class="dash-item">
+<div class="label">港股敞口</div>
+<div class="value blue">~2.7%</div>
+</div>
+<div class="dash-item">
+<div class="label">Range上限</div>
+<div class="value">60%</div>
+</div>
+<div class="dash-item">
+<div class="label">距上限</div>
+<div class="value green">充裕</div>
+</div>
+</div>
+</div>
+
+<!-- 知识效期预警 -->
+<div class="card">
+<h2>🔔 知识效期预警</h2>
+<table>
+<tr><th>级别</th><th>预警项</th><th>影响</th></tr>
+<tr><td><span class="badge badge-red">🔴</span></td><td>4/28 301听证会(4天后)</td><td>中美贸易风险升级</td></tr>
+<tr><td><span class="badge badge-orange">🟠</span></td><td>4/29-30 FOMC会议(5-6天后)</td><td>可能改变利率预期</td></tr>
+<tr><td><span class="badge badge-orange">🟠</span></td><td>恒指连跌3日+MACD死叉</td><td>可能转Bear</td></tr>
+<tr><td><span class="badge badge-yellow">🟡</span></td><td>内银RSI偏高(工行75/农行75)</td><td>超买回调风险</td></tr>
+<tr><td><span class="badge badge-green">🟢</span></td><td>南向资金持续流入</td><td>支撑港股底部</td></tr>
+</table>
+</div>
+
+<!-- 特殊执行规则 -->
+<div class="card">
+<h2>⚡ 特殊执行规则</h2>
+<ul style="margin-left:16px;font-size:13px;">
+<li>📊 今日若HSI低开>2%：暂停所有新开仓买入</li>
+<li>📉 VHSI>30：立即压缩敞口至20-25%</li>
+<li>🔴 VHSI>35：红色预警，敞口≤15%</li>
+<li>🟠 4/28 301听证会：当日额外压缩敞口10%</li>
+<li>🟠 4/29-30 FOMC：会议前后控制新增敞口</li>
+<li>📌 震荡市确认期：已连续3日确认(04-21起)</li>
+<li>🛡️ 保护期规则：评分≥60分配3天保护期，保护期内止损放宽1个ATR</li>
+<li>🔄 首日建仓限制：总敞口≤30%，约2,700万HKD</li>
+</ul>
+</div>
+
+</div>
+
+<!-- Footer -->
+<div class="brand">
+Blakever 多智能体投资决策系统 | 主Agent调度与终审 | V2.2.4 | 2026-04-24<br>
+数据来源: westock-data (实时) | 风控引擎: cro_mgr.py | GEM策略: blakever_trade_strategy.py
+</div>
+
+</body>
+</html>

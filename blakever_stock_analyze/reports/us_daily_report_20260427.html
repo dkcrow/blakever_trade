@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blakever 每日美股操作建议指南 | 2026-04-27</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #0a0e17; color: #e0e6f0; line-height: 1.6; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  
+  /* Header */
+  .header { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); border-radius: 16px; padding: 30px; margin-bottom: 24px; text-align: center; border: 1px solid rgba(100,200,255,0.15); }
+  .header h1 { font-size: 28px; color: #64d8ff; margin-bottom: 8px; letter-spacing: 2px; }
+  .header .subtitle { font-size: 14px; color: #8ba4c4; }
+  .header .date-badge { display: inline-block; background: rgba(100,216,255,0.15); color: #64d8ff; padding: 4px 16px; border-radius: 20px; font-size: 13px; margin-top: 10px; border: 1px solid rgba(100,216,255,0.3); }
+  
+  /* Status Cards */
+  .status-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .status-card { background: linear-gradient(135deg, #141c2e, #1a2540); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid rgba(100,200,255,0.1); }
+  .status-card .label { font-size: 12px; color: #6b8ab5; margin-bottom: 6px; }
+  .status-card .value { font-size: 20px; font-weight: 700; }
+  .status-card .value.green { color: #4ade80; }
+  .status-card .value.yellow { color: #fbbf24; }
+  .status-card .value.red { color: #f87171; }
+  .status-card .value.blue { color: #64d8ff; }
+  
+  /* Section */
+  .section { background: #111827; border-radius: 12px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(100,200,255,0.08); }
+  .section-title { font-size: 18px; font-weight: 700; color: #64d8ff; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(100,200,255,0.15); }
+  .section-title .icon { margin-right: 8px; }
+  
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: rgba(100,216,255,0.08); color: #64d8ff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  tr:hover td { background: rgba(100,216,255,0.03); }
+  
+  /* Tags */
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .tag-green { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+  .tag-yellow { background: rgba(251,191,36,0.15); color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+  .tag-red { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+  .tag-blue { background: rgba(100,216,255,0.15); color: #64d8ff; border: 1px solid rgba(100,216,255,0.3); }
+  
+  /* Momentum Bar */
+  .momentum-bar { height: 8px; border-radius: 4px; background: #1e293b; overflow: hidden; margin-top: 4px; }
+  .momentum-fill { height: 100%; border-radius: 4px; }
+  .momentum-fill.positive { background: linear-gradient(90deg, #4ade80, #22d3ee); }
+  .momentum-fill.negative { background: linear-gradient(90deg, #f87171, #fb923c); }
+  
+  /* Debate */
+  .debate-row { display: flex; align-items: center; margin: 8px 0; }
+  .debate-label { width: 80px; font-size: 13px; color: #8ba4c4; }
+  .debate-bar-container { flex: 1; height: 24px; border-radius: 12px; background: #1e293b; overflow: hidden; position: relative; }
+  .debate-bull { height: 100%; background: linear-gradient(90deg, #4ade80, #22d3ee); border-radius: 12px 0 0 12px; position: absolute; left: 0; }
+  .debate-bear { height: 100%; background: linear-gradient(90deg, #f87171, #fb923c); border-radius: 0 12px 12px 0; position: absolute; right: 0; }
+  .debate-pct { position: absolute; top: 3px; font-size: 11px; font-weight: 700; color: #fff; }
+  
+  /* Discount Chain */
+  .discount-chain { background: #0f172a; border-radius: 8px; padding: 16px; font-family: 'Courier New', monospace; font-size: 13px; color: #94a3b8; line-height: 2; margin: 12px 0; }
+  .discount-chain .highlight { color: #64d8ff; font-weight: 700; }
+  .discount-chain .result { color: #4ade80; font-weight: 700; }
+  
+  /* Risk Items */
+  .risk-item { padding: 10px 14px; margin: 8px 0; border-radius: 8px; font-size: 13px; border-left: 3px solid; }
+  .risk-item.warning { background: rgba(251,191,36,0.08); border-color: #fbbf24; }
+  .risk-item.danger { background: rgba(248,113,113,0.08); border-color: #f87171; }
+  .risk-item.info { background: rgba(100,216,255,0.08); border-color: #64d8ff; }
+  
+  /* Footer */
+  .footer { text-align: center; padding: 20px; color: #4b5e7a; font-size: 12px; border-top: 1px solid rgba(100,200,255,0.08); margin-top: 24px; }
+  
+  /* Execution Table */
+  .exec-table td:first-child { font-weight: 700; color: #64d8ff; }
+  
+  @media (max-width: 600px) {
+    .status-grid { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>📊 Blakever 每日美股操作建议指南</h1>
+  <div class="subtitle">多智能体投资决策框架 · Range→Bull待确认 · GEM双动量轮动</div>
+  <div class="date-badge">📅 2026年4月27日 星期一 · 会话 blakever-us</div>
+</div>
+
+<!-- Status Dashboard -->
+<div class="status-grid">
+  <div class="status-card">
+    <div class="label">账户净值</div>
+    <div class="value blue">$100M</div>
+  </div>
+  <div class="status-card">
+    <div class="label">市场状态</div>
+    <div class="value yellow">Range⏳</div>
+  </div>
+  <div class="status-card">
+    <div class="label">VIX恐慌</div>
+    <div class="value green">15.5</div>
+  </div>
+  <div class="status-card">
+    <div class="label">总敞口</div>
+    <div class="value blue">2.2%</div>
+  </div>
+</div>
+
+<!-- Section 1: 宏观叙事 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🌍</span>宏观叙事与情绪因子</div>
+  <table>
+    <tr><th>因子</th><th>评分</th><th>方向</th></tr>
+    <tr><td>美联储政策</td><td>7/10</td><td><span class="tag tag-green">偏鸽支撑</span></td></tr>
+    <tr><td>美债收益率</td><td>7/10</td><td><span class="tag tag-green">利率下行利好</span></td></tr>
+    <tr><td>VIX恐慌</td><td>8/10</td><td><span class="tag tag-green">低波动安全</span></td></tr>
+    <tr><td>中美关系</td><td>5/10</td><td><span class="tag tag-yellow">中性</span></td></tr>
+    <tr><td>财报季不确定性</td><td>4/10</td><td><span class="tag tag-red">高不确定性</span></td></tr>
+    <tr style="border-top:2px solid rgba(100,216,255,0.2)"><td style="font-weight:700;color:#64d8ff">综合情绪因子</td><td style="font-weight:700;color:#fbbf24">6.2/10</td><td><span class="tag tag-yellow">中性偏积极</span></td></tr>
+  </table>
+  <div style="margin-top:12px;font-size:13px;color:#8ba4c4">
+    <p>▸ 联邦基金利率4.25%-4.50%，6月降息概率68%（CME FedWatch）</p>
+    <p>▸ 10Y美债4.28%持续下行，2Y-10Y利差+53bp正常化</p>
+    <p>▸ 中美关税谈判窗口期，短期无升级风险</p>
+  </div>
+</div>
+
+<!-- Section 2: 行情判断 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📈</span>市场行情判断 · Range→Bull待确认</div>
+  <table>
+    <tr><th>指标</th><th>SPY</th><th>QQQ</th><th>信号</th></tr>
+    <tr><td>收盘价</td><td>713.94</td><td>663.88</td><td>—</td></tr>
+    <tr><td>EMA排列</td><td>多头 ✅</td><td>多头 ✅</td><td>强势</td></tr>
+    <tr><td>MACD柱</td><td>+9.13</td><td>+12.33</td><td>多头强化</td></tr>
+    <tr><td>ADX</td><td>61.20</td><td>67.51</td><td>极强趋势</td></tr>
+    <tr><td>RSI6</td><td>81.56 ⚠️</td><td>89.04 ⚠️</td><td>严重超买</td></tr>
+    <tr><td>Close vs MA20</td><td>+4.8%</td><td>+7.9%</td><td>远离均线</td></tr>
+  </table>
+  <div style="margin-top:16px">
+    <div class="debate-row">
+      <div class="debate-label">置信度</div>
+      <div class="debate-bar-container">
+        <div class="debate-bull" style="width:75%"></div>
+        <div class="debate-pct" style="left:35%">Bull 75%</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#8ba4c4;margin-top:8px">▸ 防抖：Range→Bull切换需连续2日确认，当前1/2日 ⏳</p>
+    <p style="font-size:12px;color:#fbbf24">▸ 若明日仍为Bull信号则确认切换；信号消失则置信度衰减10%/日</p>
+  </div>
+</div>
+
+<!-- Section 3: GEM动量轮动 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔄</span>GEM双动量轮动策略 · Range市杠铃配置</div>
+  <table>
+    <tr><th>资产</th><th>类型</th><th>YTD动量</th><th>20日动量</th><th>权重</th><th>动量条</th></tr>
+    <tr>
+      <td style="font-weight:700;color:#64d8ff">SPY</td>
+      <td>风险</td><td>+4.98%</td><td>+10.67%</td><td>30%</td>
+      <td><div class="momentum-bar"><div class="momentum-fill positive" style="width:70%"></div></div></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;color:#64d8ff">VEA</td>
+      <td>风险</td><td>+9.26%</td><td>+9.06%</td><td>20%</td>
+      <td><div class="momentum-bar"><div class="momentum-fill positive" style="width:65%"></div></div></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;color:#94a3b8">AGG</td>
+      <td>安全</td><td>+0.68%</td><td>+1.40%</td><td>30%</td>
+      <td><div class="momentum-bar"><div class="momentum-fill positive" style="width:15%"></div></div></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;color:#94a3b8">SHY</td>
+      <td>安全</td><td>+0.57%</td><td>+0.73%</td><td>20%</td>
+      <td><div class="momentum-bar"><div class="momentum-fill positive" style="width:12%"></div></div></td>
+    </tr>
+  </table>
+  <div style="margin-top:12px;padding:12px;background:rgba(100,216,255,0.05);border-radius:8px;font-size:13px;color:#8ba4c4">
+    <p>▸ 策略逻辑：Range市50%风险+50%安全杠铃配置</p>
+    <p>▸ 风险端捕捉上行收益，安全端提供回撤缓冲</p>
+    <p>▸ 若Bull确认，风险权重可提升至90%</p>
+  </div>
+</div>
+
+<!-- Section 4: CRO风控 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🛡️</span>CRO风控审查 · 生存第一</div>
+  
+  <div style="margin-bottom:16px">
+    <p style="font-size:14px;color:#4ade80;font-weight:700">✅ 强制空仓线：未触发</p>
+    <p style="font-size:12px;color:#8ba4c4">VIX=15.5 远低于35阈值 | 无连续回撤 | 允许所有资产开仓</p>
+  </div>
+
+  <table class="exec-table">
+    <tr><th>标的</th><th>方向</th><th>入场价</th><th>止损价</th><th>CRO批准</th><th>保护期</th></tr>
+    <tr><td>SPY</td><td>Long</td><td>713.94</td><td>680.00</td><td>$550,000</td><td><span class="tag tag-green">🛡️3天</span></td></tr>
+    <tr><td>VEA</td><td>Long</td><td>68.14</td><td>66.00</td><td>$550,000</td><td><span class="tag tag-green">🛡️3天</span></td></tr>
+    <tr><td>AGG</td><td>Long</td><td>99.59</td><td>97.50</td><td>$550,000</td><td><span class="tag tag-yellow">无</span></td></tr>
+    <tr><td>SHY</td><td>Long</td><td>82.57</td><td>81.50</td><td>$550,000</td><td><span class="tag tag-yellow">无</span></td></tr>
+  </table>
+
+  <div class="discount-chain">
+    <span class="highlight">SPY折扣链：</span><br>
+    Kelly $1,000,000<br>
+    × 情绪系数 <span class="highlight">1.1</span> = $1,100,000<br>
+    × 低置信度折扣 <span class="highlight">0.5</span> = <span class="result">$550,000 ✅</span><br>
+    <span style="color:#6b8ab5;font-size:11px">(Range市待确认Bull，低置信度保守执行)</span>
+  </div>
+</div>
+
+<!-- Section 5: 辩论庭 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚖️</span>反向测试辩论庭</div>
+  
+  <div class="debate-row">
+    <div class="debate-label">技术面</div>
+    <div class="debate-bar-container">
+      <div class="debate-bull" style="width:60%"></div>
+      <div class="debate-bear" style="width:40%;right:0"></div>
+      <div class="debate-pct" style="left:25%">多60%</div>
+      <div class="debate-pct" style="right:10%">空40%</div>
+    </div>
+  </div>
+  <div class="debate-row">
+    <div class="debate-label">基本面</div>
+    <div class="debate-bar-container">
+      <div class="debate-bull" style="width:55%"></div>
+      <div class="debate-bear" style="width:45%;right:0"></div>
+      <div class="debate-pct" style="left:20%">多55%</div>
+      <div class="debate-pct" style="right:12%">空45%</div>
+    </div>
+  </div>
+  <div class="debate-row">
+    <div class="debate-label">情绪面</div>
+    <div class="debate-bar-container">
+      <div class="debate-bull" style="width:50%"></div>
+      <div class="debate-bear" style="width:50%;right:0"></div>
+      <div class="debate-pct" style="left:18%">多50%</div>
+      <div class="debate-pct" style="right:18%">空50%</div>
+    </div>
+  </div>
+  <div class="debate-row">
+    <div class="debate-label">事件面</div>
+    <div class="debate-bar-container">
+      <div class="debate-bull" style="width:30%"></div>
+      <div class="debate-bear" style="width:70%;right:0"></div>
+      <div class="debate-pct" style="left:6%">多30%</div>
+      <div class="debate-pct" style="right:22%">空70%</div>
+    </div>
+  </div>
+  
+  <div style="margin-top:16px;padding:14px;background:rgba(251,191,36,0.08);border-radius:8px;border:1px solid rgba(251,191,36,0.2)">
+    <p style="font-size:14px;color:#fbbf24;font-weight:700">⚖️ 裁决：空头略占优（49% vs 51%）</p>
+    <p style="font-size:12px;color:#8ba4c4;margin-top:6px">市场超买+强趋势并存，维持Range杠铃配置是当前最优选择</p>
+  </div>
+</div>
+
+<!-- Section 6: 左侧捡漏 -->
+<div class="section">
+  <div class="section-title"><span class="icon">🔍</span>左侧捡漏权限</div>
+  <table>
+    <tr><th>条件</th><th>当前值</th><th>阈值</th><th>满足</th></tr>
+    <tr><td>VIX恐慌</td><td>15.5</td><td>>25</td><td><span class="tag tag-red">❌</span></td></tr>
+    <tr><td>急跌幅度</td><td>N/A</td><td>单日>3%</td><td><span class="tag tag-red">❌</span></td></tr>
+    <tr><td>RSI超卖</td><td>N/A</td><td>&lt;30</td><td><span class="tag tag-red">❌</span></td></tr>
+  </table>
+  <p style="font-size:13px;color:#f87171;margin-top:8px">❌ 当前不具备左侧捡漏条件，需等待市场恐慌时触发</p>
+</div>
+
+<!-- Section 7: 风险提示 -->
+<div class="section">
+  <div class="section-title"><span class="icon">⚠️</span>风险提示</div>
+  <div class="risk-item warning">⚠️ 超买回调风险：SPY/QQQ RSI严重超买，短期3-5%回调概率较高</div>
+  <div class="risk-item danger">🔴 财报周波动：本周多家巨头财报，业绩不及预期可能触发板块轮动</div>
+  <div class="risk-item warning">⚠️ 流动性风险：对冲基金持续净卖出，若加速流出可能引发连锁反应</div>
+  <div class="risk-item warning">⚠️ 地缘黑天鹅：中美关系虽短期稳定，但政策突变风险始终存在</div>
+  <div class="risk-item info">ℹ️ 低置信度警告：Range→Bull转换仅确认1/2日，判断可能被推翻</div>
+</div>
+
+<!-- Section 8: 执行方案 -->
+<div class="section">
+  <div class="section-title"><span class="icon">📋</span>最终执行方案</div>
+  <table class="exec-table">
+    <tr><th>标的</th><th>方向</th><th>金额</th><th>入场价</th><th>止损</th><th>目标</th><th>保护期</th></tr>
+    <tr><td>SPY</td><td>Long</td><td>$550K</td><td>713.94</td><td>680.00</td><td>735.00</td><td>🛡️3天</td></tr>
+    <tr><td>VEA</td><td>Long</td><td>$550K</td><td>68.14</td><td>66.00</td><td>70.00</td><td>🛡️3天</td></tr>
+    <tr><td>AGG</td><td>Long</td><td>$550K</td><td>99.59</td><td>97.50</td><td>101.00</td><td>—</td></tr>
+    <tr><td>SHY</td><td>Long</td><td>$550K</td><td>82.57</td><td>81.50</td><td>83.50</td><td>—</td></tr>
+  </table>
+  <div style="margin-top:16px;padding:14px;background:rgba(100,216,255,0.05);border-radius:8px;border:1px solid rgba(100,216,255,0.1)">
+    <p style="font-size:14px;color:#64d8ff;font-weight:700;margin-bottom:8px">📌 执行要点</p>
+    <p style="font-size:13px;color:#8ba4c4">1. 仓位极轻：总敞口仅2.2%（$2.2M/$100M），保留97.8%现金</p>
+    <p style="font-size:13px;color:#8ba4c4">2. 等待确认：若明日Bull信号确认，可追加至Range上限60%敞口</p>
+    <p style="font-size:13px;color:#8ba4c4">3. 超买警告：RSI6>80，日内波动可能加大，建议限价单入场</p>
+    <p style="font-size:13px;color:#8ba4c4">4. 财报防御：本周重磅财报密集，维持轻仓</p>
+    <p style="font-size:13px;color:#8ba4c4">5. 止损纪律：SPY跌破680（MA20附近）立即止损</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>本报告由Blakever多智能体投资框架自动生成，仅供参考，不构成投资建议</p>
+  <p>数据来源：westock-data实时行情 | 生成时间：2026-04-27 20:03 CST</p>
+</div>
+
+</div>
+</body>
+</html>

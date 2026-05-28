@@ -1,0 +1,85 @@
+[
+  {
+    "date": "2026-04-23",
+    "raw_regime": "Range",
+    "raw_confidence": 0,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 0
+  },
+  {
+    "date": "2026-04-23",
+    "raw_regime": "Range",
+    "raw_confidence": 0,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 0
+  },
+  {
+    "date": "2026-04-24",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65,
+    "confirmation_status": "✅ 连续2日确认",
+    "vhsi": 21.14,
+    "hsi_close": 25915.2,
+    "macd_signal": "金叉(DIF=139.58>DEA=49.53)",
+    "adx": 33.35,
+    "rsi6": 46.3
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 0,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 0
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  },
+  {
+    "date": "2026-04-25",
+    "raw_regime": "Range",
+    "raw_confidence": 65,
+    "confirmed_regime": "Range",
+    "confirmed_confidence": 65
+  }
+]

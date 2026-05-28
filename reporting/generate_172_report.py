@@ -9,9 +9,9 @@
 3. 生成HTML邮件发送
 """
 
-import os, sys, math, json, warnings
+import os, sys, math, json, warnings, urllib.request
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import numpy as np
 import pandas as pd
@@ -25,7 +25,78 @@ from strategies.etf.seven_star_base import (
 
 HISTORY_FILE = Path(__file__).parent / '172_ranking_history.json'
 TRADES_XLSX = Path(__file__).parent.parent / 'backtest' / 'results_172' / '七星172_交易记录_2026.xlsx'
-LATEST_DATE = '2026-05-27'
+
+
+def get_latest_trading_date():
+    """动态计算最新交易日（跳过周末）"""
+    today = datetime.now()
+    if today.weekday() == 5:      # 周六 → 周五
+        today = today - timedelta(days=1)
+    elif today.weekday() == 6:    # 周日 → 周五
+        today = today - timedelta(days=2)
+    return today.strftime('%Y-%m-%d')
+
+
+LATEST_DATE = get_latest_trading_date()
+
+
+# ================================================================
+# 实时行情获取（盘中价格替换CSV收盘价）
+# ================================================================
+
+def fetch_realtime_prices(codes):
+    """
+    通过新浪实时行情接口获取ETF最新价和涨跌幅。
+    仅支持A股ETF（sh/sz开头），返回 {code: {'price': float, 'change_pct': float}}
+    """
+    import urllib.request
+    import re
+
+    realtime = {}
+    # 过滤A股ETF
+    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
+    if not a_codes:
+        return realtime
+
+    # 新浪接口每次最多请求约 50 只
+    batch_size = 50
+    for i in range(0, len(a_codes), batch_size):
+        batch = a_codes[i:i + batch_size]
+        url = f'http://hq.sinajs.cn/list={",".join(batch)}'
+
+        try:
+            req = urllib.request.Request(url, headers={
+                'Referer': 'https://finance.sina.com.cn'
+            })
+            resp = urllib.request.urlopen(req, timeout=10)
+            raw = resp.read().decode('gbk')
+
+            # 解析每行: var hq_str_sh513100="名称,今开,昨收,当前价,最高,最低,..."
+            for line in raw.strip().split('\n'):
+                m = re.search(r'hq_str_(\w+)=\"(.*)\"', line)
+                if not m:
+                    continue
+                code_key = m.group(1)  # sh513100 或 sz159915
+                fields = m.group(2).split(',')
+                if len(fields) < 4:
+                    continue
+
+                # 新浪ETF字段: 0=名称, 1=今开, 2=昨收, 3=当前(最新)价
+                try:
+                    cur_price = float(fields[3])
+                    prev_close = float(fields[2])
+                    if cur_price > 0 and prev_close > 0:
+                        change_pct = (cur_price - prev_close) / prev_close * 100
+                        realtime[code_key] = {
+                            'price': cur_price,
+                            'change_pct': round(change_pct, 2)
+                        }
+                except (ValueError, IndexError):
+                    continue
+        except Exception as e:
+            pass  # 静默失败，降级到CSV价格
+
+    return realtime
 
 
 # ================================================================
@@ -60,16 +131,26 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 
 
 def get_current_rankings():
-    """获取最新交易日ETF完整排名"""
+    """获取最新交易日ETF完整排名（价格优先使用实时行情）"""
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
+
+    # 获取实时行情
+    print("  [RT] Fetching realtime prices...")
+    realtime = fetch_realtime_prices(ETF_POOL)
+    realtime_count = len(realtime)
+    print(f"  [RT] Got {realtime_count}/{len(ETF_POOL)} realtime quotes")
 
     current_prices = {}
     prev_prices = {}
     for code, df in all_data.items():
         mask = df.index <= pd.Timestamp(LATEST_DATE)
         if mask.any():
-            current_prices[code] = float(df.loc[mask, 'close'].iloc[-1])
+            # 优先使用实时价格
+            if code in realtime:
+                current_prices[code] = realtime[code]['price']
+            else:
+                current_prices[code] = float(df.loc[mask, 'close'].iloc[-1])
             closes = df.loc[mask, 'close']
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
 
@@ -105,9 +186,12 @@ def get_current_rankings():
             d = [close_full[-1]/close_full[-2], close_full[-2]/close_full[-3], close_full[-3]/close_full[-4]]
             drop3 = min(d) < 0.97
 
-        # 涨跌幅
-        prev = prev_prices.get(code, cur)
-        change_pct = (cur - prev) / prev * 100 if prev > 0 else 0
+        # 涨跌幅（有实时价格时用实时涨跌幅）
+        if code in realtime and 'change_pct' in realtime[code]:
+            change_pct = realtime[code]['change_pct']
+        else:
+            prev = prev_prices.get(code, cur)
+            change_pct = (cur - prev) / prev * 100 if prev > 0 else 0
 
         ranked.append({
             'code': code,
@@ -204,6 +288,14 @@ def check_and_execute_trades(ranked):
     根据排名检查是否需要换仓，如果需要则记录到交易表
     返回: (是否发生了交易, trade_description)
     """
+    # 全局检查: 同一天内如果已在之前时间点换仓，不再重复换仓
+    if TRADES_XLSX.exists():
+        df_check = pd.read_excel(TRADES_XLSX)
+        today_trades = df_check[df_check['交易日期'] == str(LATEST_DATE)]
+        if len(today_trades) > 0:
+            directions = today_trades['方向'].tolist()
+            return False, f"今日已有换仓操作({', '.join(directions)})，跳过重复执行"
+
     holding = get_holding_from_xlsx()
     target = pick_trade_target(ranked)
 
@@ -241,10 +333,26 @@ def check_and_execute_trades(ranked):
         old_score = old_ranked['score']
         sell_price = old_ranked['price']  # 用旧持仓的实际价格
 
+    # 构造真实的卖出理由
+    sell_reason = '调出目标(排名下降)'
+    if old_ranked:
+        if old_ranked.get('filtered'):
+            # 被过滤，找出具体原因
+            reasons = []
+            if old_ranked.get('protected'):
+                reasons.append(f"盈利保护(回撤超5%)")
+            if old_ranked.get('drop3'):
+                reasons.append(f"近3日跌幅>3%")
+            if old_ranked.get('short_score', 0) < 0:
+                reasons.append(f"短期动量负({old_ranked['short_score']:.2f})")
+            sell_reason = '; '.join(reasons) if reasons else '被过滤规则排除'
+        elif old_ranked.get('prev_rank') is not None:
+            sell_reason = f"排名从{old_ranked['prev_rank']}→新第1不等,调出"
+
     append_trade_to_xlsx(
         '卖出', holding['code'], holding['name'],
         sell_price, LATEST_DATE, old_score,
-        '调出目标(排名下降)'
+        sell_reason
     )
 
     # 买入新品种
@@ -612,7 +720,7 @@ def send_report_email(html_content, md_path):
 
     now = datetime.now()
     msg = MIMEMultipart("mixed")
-    msg["Subject"] = f"🚀 七星172盘后报告 - {now.strftime('%Y-%m-%d')}"
+    msg["Subject"] = f"⚡ 核心交易 七星172盘中监控 - {now.strftime('%Y-%m-%d %H:%M')}"
     msg["From"] = SENDER
     msg["To"] = RECEIVER
     msg["Date"] = now.strftime("%a, %d %b %Y %H:%M:%S +0800")
@@ -649,8 +757,9 @@ def main():
     ranked, prices = get_current_rankings()
     print(f"  {len(ranked)} 只有效, Top3:")
     for r in ranked[:3]:
-        print(f"    {r['name']:16s} 综合={r['score']:.4f}  短期={r['short_score']:.4f}  "
-              f"涨跌={fmt_change_pct(r['change_pct'])}  {'🛡️' if r['filtered'] else '✅'}")
+        flag = '[FILT]' if r['filtered'] else '[OK]'
+        print(f"    {r['name']:16s} score={r['score']:.4f}  short={r['short_score']:.4f}  "
+              f"chg={fmt_change_pct(r['change_pct'])}  {flag}")
 
     # 2. 交易检查
     print("\n[2/5] 检查交易信号...")

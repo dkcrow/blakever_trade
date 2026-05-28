@@ -1,0 +1,47 @@
+{
+  "positions": [
+    {
+      "symbol": "VEA",
+      "direction": "long",
+      "entry_price": 68.3444,
+      "current_price": 68.07,
+      "quantity": 4402,
+      "pnl": -1207.91,
+      "pnl_pct": -0.4,
+      "max_profit": -1207.91
+    },
+    {
+      "symbol": "SPY",
+      "direction": "long",
+      "entry_price": 714.6539,
+      "current_price": 715.17,
+      "quantity": 420,
+      "pnl": 216.76,
+      "pnl_pct": 0.07,
+      "max_profit": 216.76
+    },
+    {
+      "symbol": "AGG",
+      "direction": "long",
+      "entry_price": 100.0879,
+      "current_price": 99.44,
+      "quantity": 3012,
+      "pnl": -1951.47,
+      "pnl_pct": -0.65,
+      "max_profit": -1951.47
+    },
+    {
+      "symbol": "SHY",
+      "direction": "long",
+      "entry_price": 82.9828,
+      "current_price": 82.55,
+      "quantity": 3633,
+      "pnl": -1572.36,
+      "pnl_pct": -0.52,
+      "max_profit": -1572.36
+    }
+  ],
+  "cash": 98839474.52,
+  "last_update": "2026-04-28 20:03:00",
+  "inception_equity": 100000000.0
+}
