@@ -122,6 +122,7 @@ class SevenStar172Engine:
         # 运行时状态变量
         self.rankings_cache = {'date': None, 'data': None}
         self.profit_protection_sold_today = []  # 日内卖出黑名单
+        self.nav_data = {}  # 净值数据缓存 {code: Series}
 
     def reset_state(self):
         """重置所有运行时状态"""
@@ -156,6 +157,35 @@ class SevenStar172Engine:
         except Exception:
             pass
         return False
+
+    # ---------- 溢价率计算 ----------
+
+    def get_premium_rate(self, etf_code, check_date):
+        """
+        获取溢价率（与聚宽原版一致：用前一日净值计算）
+        返回 (premium_rate, price, net_value) 或 (None, None, None)
+        """
+        if not self.params.get('enable_premium_filter', True):
+            return None, None, None
+        if etf_code not in self.nav_data:
+            return None, None, None
+
+        nav_series = self.nav_data.get(etf_code)
+        if nav_series is None or len(nav_series) == 0:
+            return None, None, None
+
+        check_ts = pd.Timestamp(check_date)
+        # 获取前一日净值（聚宽原版逻辑：prev_date = 前一个交易日）
+        mask = nav_series.index < check_ts  # 严格小于，取前一日
+        available = nav_series[mask]
+        if len(available) == 0:
+            return None, None, None
+
+        # 向前搜索最多5个交易日（与聚宽原版max_back_days=5一致）
+        recent = available.tail(5)
+        net_value = float(recent.iloc[-1])
+        used_date = str(recent.index[-1].date())
+        return None, net_value, used_date  # price 由调用方提供
 
     # ---------- 成交量比 ----------
 
@@ -209,8 +239,11 @@ class SevenStar172Engine:
                 continue
 
             close_series = hist['close'].values
-            close_full = np.append(close_series, current_prices.get(etf_code, close_series[-1]))
-            current_price = current_prices.get(etf_code, 0)
+            # 【修复】close_series 已包含当天收盘价，不应重复追加
+            # 聚宽原版中 attribute_history 不含当天，才需要 append current_price
+            # 本地回测中 hist 已截取到当天，直接用即可
+            close_full = close_series
+            current_price = close_series[-1]
             if current_price <= 0:
                 continue
 
@@ -218,8 +251,13 @@ class SevenStar172Engine:
             if self.check_profit_protection(etf_code, current_price, df, check_date):
                 continue
 
-            # ===== 第2层: 溢价率过滤 (回测模式无净值，跳过) =====
-            # 在回测模式下，无净值数据源，默认不过滤
+            # ===== 第2层: 溢价率过滤 =====
+            if self.params.get('enable_premium_filter', True) and self.nav_data:
+                _, net_value, used_date = self.get_premium_rate(etf_code, check_date)
+                if net_value is not None and net_value > 0:
+                    premium = (current_price - net_value) / net_value
+                    if premium > self.params.get('premium_threshold', 0.20):
+                        continue  # 溢价率超标，排除
 
             # ===== 第3层: 成交量过滤 =====
             vol_filtered = False
@@ -340,6 +378,12 @@ class BacktestEngine172:
         all_etf_data = self.data_source.load_all_etfs(start_date, end_date)
         print(f"  成功加载 {len(all_etf_data)}/{len(ETF_POOL)} 只ETF")
 
+        # 加载净值数据（用于溢价率过滤）
+        nav_data = self.data_source.load_all_navs()
+        self.engine.nav_data = nav_data
+        nav_count = len(nav_data)
+        print(f"  净值数据: {nav_count}/{len(ETF_POOL)} 只ETF (溢价率过滤{'启用' if self.engine.params.get('enable_premium_filter') else '关闭'})")
+
         if len(all_etf_data) == 0:
             print("[FATAL] 无可用数据! 请检查 data_dir 是否包含ETF CSV文件")
             return None
@@ -438,7 +482,10 @@ class BacktestEngine172:
             if m['score'] >= self.engine.params['min_score_threshold']:
                 target_etfs.append(m['etf'])
 
-        # 若无目标且防御可用，把防御加入目标
+        # 【修复】补齐防御ETF保护：无合格目标时，防御ETF不卖出（与聚宽原版一致）
+        if not target_etfs:
+            target_etfs = [DEFENSIVE_ETF]
+
         target_set = set(target_etfs)
 
         for sec in list(self.portfolio.get_position_codes()):

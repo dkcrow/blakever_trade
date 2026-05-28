@@ -63,6 +63,7 @@ DEFENSIVE_ETF = "sh511880"  # 银华日利(货币基金)
 
 # 默认数据目录
 DEFAULT_DATA_DIR = Path(__file__).parent.parent.parent / 'data' / 'storage' / 'stock_data' / 'etf'
+DEFAULT_NAV_DIR = Path(__file__).parent.parent.parent / 'data' / 'storage' / 'stock_data' / 'etf_nav'
 
 
 # ================================================================
@@ -164,6 +165,54 @@ class LocalDataSource:
             if df is not None and len(df) > min_rows:
                 data[code] = df
         return data
+
+    def load_nav(self, etf_code):
+        """加载单只ETF的净值数据，返回 Series (index=date, values=unit_nav)"""
+        nav_file = DEFAULT_NAV_DIR / f'{etf_code}_nav.csv'
+        if not nav_file.exists():
+            return None
+        try:
+            df = pd.read_csv(nav_file, encoding='utf-8')
+            # 处理列名可能是中文的情况
+            if '净值日期' in df.columns and '单位净值' in df.columns:
+                df = df.rename(columns={'净值日期': 'date', '单位净值': 'unit_nav'})
+            if 'date' not in df.columns or 'unit_nav' not in df.columns:
+                return None
+            df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            df = df.dropna(subset=['date', 'unit_nav'])
+            df = df.set_index('date').sort_index()
+            return df['unit_nav']
+        except Exception:
+            return None
+
+    def load_all_navs(self):
+        """加载所有ETF的净值数据，返回 {code: Series} 字典"""
+        navs = {}
+        for code in ETF_POOL:
+            nav = self.load_nav(code)
+            if nav is not None and len(nav) > 0:
+                navs[code] = nav
+        return navs
+
+    def get_nav_on_date(self, etf_code, nav_date):
+        """
+        获取指定日期的ETF净值，若当天无数据则向前搜索最多5个交易日
+        返回 (nav_value, used_date) 或 (None, None)
+        """
+        nav_series = self.load_nav(etf_code)
+        if nav_series is None or len(nav_series) == 0:
+            return None, None
+        nav_date_ts = pd.Timestamp(nav_date)
+        # 尝试获取 <= nav_date 的净值（与聚宽原版逻辑一致：用前一日净值）
+        mask = nav_series.index <= nav_date_ts
+        available = nav_series[mask]
+        if len(available) == 0:
+            return None, None
+        # 取最近5个交易日内最新的净值
+        recent = available.tail(5)
+        if len(recent) == 0:
+            return None, None
+        return float(recent.iloc[-1]), str(recent.index[-1].date())
 
 
 # ================================================================
