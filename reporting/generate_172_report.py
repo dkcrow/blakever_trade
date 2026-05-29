@@ -595,23 +595,35 @@ def generate_report(ranked, recent_trades, trade_info):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
-    # 构建展示排名：有效ETF前10 + 被过滤ETF排在末尾
-    display_order = get_display_order(ranked)
-    valid_display = [r for r in display_order if not r['filtered']]
-    blocked_display = [r for r in display_order if r['filtered']]
+    # 构建展示排名：
+    # - 得分前十中不被过滤的 ETF → 正常排名 1~N
+    # - 得分前十但被过滤的 ETF → 从第11名顺排，变动列显示原因
+    top10_by_score = ranked[:10]
+    valid_in_top10 = [r for r in top10_by_score if not r['filtered']]
+    filtered_in_top10 = [r for r in top10_by_score if r['filtered']]
 
-    # 给有效ETF填排名和变动
-    for i, r in enumerate(valid_display):
+    # 从得分前十以外补足到10只有效ETF
+    rest_valid = [r for r in ranked if not r['filtered'] and r not in valid_in_top10]
+    need = 10 - len(valid_in_top10)
+    valid_in_top10.extend(rest_valid[:need])
+
+    # 有效ETF：正常排名和变动
+    for i, r in enumerate(valid_in_top10):
         r['rank'] = i + 1
         r['rchange'] = fmt_rank_change(r.get('prev_rank'), r['rank'])
 
-    # Top10: 有效ETF先取前10，不够就用被过滤的补
-    top10 = valid_display[:10]
-    # 被过滤ETF排在后面，变动显示 ✗
-    for i, r in enumerate(blocked_display):
-        r['rank'] = len(valid_display) + i + 1  # 从第N+1名开始
-        r['rchange'] = '✗'
-        top10.append(r)
+    # 被过滤ETF：从第11名顺排，变动显示具体原因
+    for i, r in enumerate(filtered_in_top10):
+        r['rank'] = 11 + i
+        reasons = []
+        if r.get('premium_filtered'): reasons.append(f'溢价>{r.get("premium_pct",0):.0f}%')
+        if r.get('protected'): reasons.append('盈利保护')
+        if r.get('drop3'): reasons.append('近3日跌>3%')
+        if r.get('short_score', 0) < 0: reasons.append('短期动量负')
+        r['rchange'] = '/'.join(reasons) if reasons else '过滤'
+
+    # 合并为展示列表
+    top10 = valid_in_top10 + filtered_in_top10
 
     # ---- Markdown ----
     if current_holding:
@@ -723,7 +735,15 @@ def generate_report(ranked, recent_trades, trade_info):
         chg = fmt_change_pct(r['change_pct'])
         chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
         rc = r['rchange']
-        rc_c = '#DC3545' if rc == '✗' else ('#28A745' if '↑' in rc else ('#DC3545' if '↓' in rc else '#888'))
+        # 变动列颜色：过滤原因显示为红色，正常变动按方向着色
+        if '保护' in rc or '溢价' in rc or '跌' in rc or '动量负' in rc or '过滤' in rc:
+            rc_c = '#DC3545'
+        elif '↑' in rc:
+            rc_c = '#28A745'
+        elif '↓' in rc:
+            rc_c = '#DC3545'
+        else:
+            rc_c = '#888'
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
         prem = r.get('premium_pct', 0)
         prem_str = f'{prem:.1f}%' if prem else '-'
