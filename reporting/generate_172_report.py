@@ -351,8 +351,13 @@ def append_trade_to_xlsx(direction, code, name, price, date, score, reason):
     else:
         df = pd.DataFrame(columns=['交易日期','ETF名称','ETF代码','方向','成交价格','综合动量得分','交易理由'])
 
+    # 如果是纯日期，附加当前时间精确到分钟
+    date_str = str(date)
+    if len(date_str) == 10 and date_str.count('-') == 2:
+        date_str = f'{date_str} {datetime.now().strftime("%H:%M")}'
+
     new_row = {
-        '交易日期': str(date),
+        '交易日期': date_str,
         'ETF名称': name,
         'ETF代码': code,
         '方向': direction,
@@ -372,7 +377,7 @@ def check_and_execute_trades(ranked):
     # 全局检查: 同一天内如果已在之前时间点换仓，不再重复换仓
     if TRADES_XLSX.exists():
         df_check = pd.read_excel(TRADES_XLSX)
-        today_trades = df_check[df_check['交易日期'] == str(LATEST_DATE)]
+        today_trades = df_check[df_check['交易日期'].astype(str).str.startswith(str(LATEST_DATE))]
         if len(today_trades) > 0:
             directions = today_trades['方向'].tolist()
             return False, f"今日已有换仓操作({', '.join(directions)})，跳过重复执行"
@@ -400,7 +405,7 @@ def check_and_execute_trades(ranked):
     # 检查是否同一天已有操作(避免重复)
     if TRADES_XLSX.exists():
         df = pd.read_excel(TRADES_XLSX)
-        today_trades = df[df['交易日期'] == str(LATEST_DATE)]
+        today_trades = df[df['交易日期'].astype(str).str.startswith(str(LATEST_DATE))]
         for _, row in today_trades.iterrows():
             if row.get('方向') == '卖出' and row.get('ETF代码') == holding['code']:
                 return False, f"今日已卖出 {holding['name']}，跳过"

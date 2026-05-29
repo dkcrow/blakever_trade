@@ -1,6 +1,6 @@
 {
   "date": "2026-05-29",
-  "generated": "2026-05-29T12:59:10.602877",
+  "generated": "2026-05-29T13:06:19.158010",
   "rankings": [
     {
       "code": "sz159967",
@@ -10,22 +10,22 @@
     {
       "code": "sh513100",
       "rank": 2,
-      "score": 3.7174
+      "score": 3.7233
     },
     {
       "code": "sz159915",
       "rank": 3,
-      "score": 1.5504
+      "score": 1.5649
     },
     {
       "code": "sh513500",
       "rank": 4,
-      "score": 0.6637
+      "score": 0.6676
     },
     {
       "code": "sh513520",
       "rank": 5,
-      "score": 0.5537
+      "score": 0.5746
     },
     {
       "code": "sh563360",
@@ -35,22 +35,22 @@
     {
       "code": "sh510300",
       "rank": 7,
-      "score": 0.1153
+      "score": 0.1213
     },
     {
       "code": "sz159529",
       "rank": 8,
-      "score": 0.0796
+      "score": 0.0876
     },
     {
       "code": "sz159980",
       "rank": 9,
-      "score": 0.0767
+      "score": 0.0755
     },
     {
       "code": "sh513400",
       "rank": 10,
-      "score": 0.0573
+      "score": 0.0588
     },
     {
       "code": "sh511010",
@@ -65,22 +65,22 @@
     {
       "code": "sh513030",
       "rank": 13,
-      "score": 0.0
+      "score": -0.0
     },
     {
       "code": "sh513730",
       "rank": 14,
-      "score": -0.0312
+      "score": -0.0421
     },
     {
       "code": "sh513290",
       "rank": 15,
-      "score": -0.0583
+      "score": -0.056
     },
     {
       "code": "sh513080",
       "rank": 16,
-      "score": -0.1004
+      "score": -0.0964
     },
     {
       "code": "sh513310",
@@ -90,27 +90,27 @@
     {
       "code": "sh588080",
       "rank": 18,
-      "score": 11.0942
+      "score": 11.0112
     },
     {
       "code": "sz159509",
       "rank": 19,
-      "score": 3.3395
+      "score": 3.3827
     },
     {
       "code": "sh512100",
       "rank": 20,
-      "score": 0.1451
+      "score": 0.143
     },
     {
       "code": "sh563300",
       "rank": 21,
-      "score": 0.1382
+      "score": 0.1341
     },
     {
       "code": "sh510500",
       "rank": 22,
-      "score": 0.0794
+      "score": 0.0811
     },
     {
       "code": "sh510210",
@@ -120,37 +120,37 @@
     {
       "code": "sh510050",
       "rank": 24,
-      "score": -0.0007
-    },
-    {
-      "code": "sh501018",
-      "rank": 25,
-      "score": -0.0652
+      "score": -0.0005
     },
     {
       "code": "sh513130",
+      "rank": 25,
+      "score": -0.0642
+    },
+    {
+      "code": "sh501018",
       "rank": 26,
-      "score": -0.073
+      "score": -0.0656
     },
     {
       "code": "sh511380",
       "rank": 27,
-      "score": -0.0743
+      "score": -0.0737
     },
     {
       "code": "sh513690",
       "rank": 28,
-      "score": -0.0991
+      "score": -0.0964
     },
     {
       "code": "sh512040",
       "rank": 29,
-      "score": -0.13
+      "score": -0.1287
     },
     {
       "code": "sz159981",
       "rank": 30,
-      "score": -0.1972
+      "score": -0.1964
     },
     {
       "code": "sz159985",
@@ -160,37 +160,37 @@
     {
       "code": "sz159920",
       "rank": 32,
-      "score": -0.2124
+      "score": -0.21
     },
     {
       "code": "sh512890",
       "rank": 33,
-      "score": -0.3039
+      "score": -0.3004
     },
     {
       "code": "sh518880",
       "rank": 34,
-      "score": -0.3986
+      "score": -0.3942
     },
     {
       "code": "sh513050",
       "rank": 35,
-      "score": -0.4315
+      "score": -0.4304
     },
     {
       "code": "sz159201",
       "rank": 36,
-      "score": -0.4506
+      "score": -0.4475
     },
     {
       "code": "sz159792",
       "rank": 37,
-      "score": -0.5461
+      "score": -0.5454
     },
     {
       "code": "sz161226",
       "rank": 38,
-      "score": -0.68
+      "score": -0.6805
     }
   ]
 }
