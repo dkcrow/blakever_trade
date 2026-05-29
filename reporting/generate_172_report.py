@@ -174,28 +174,41 @@ def fetch_premium_rates(codes):
     if not output:
         return premium_rates
 
-    # 解析输出：每行 | code | name | ... | closePrice | ... | nav | disc | ...
+    # 解析输出。由于 investScope/investStrategy 列可能包含 | 字符，
+    # 简单 split('|') 会造成列数偏移。改用右侧定位法：
+    # nav 是倒数第40个 segment，disc 是倒数第39个（从右侧数，跳过末尾空）
     for line in output.split('\n'):
         stripped = line.strip()
         if not re.match(r'^\| (sh|sz|bj)\d{5,6} \|', stripped):
             continue
         segments = [s.strip() for s in stripped.split('|')]
-        segments = [s for s in segments if s]  # 去除首尾空
-        if len(segments) >= 26:
-            code = segments[0]
-            nav_str = segments[24]
-            disc_str = segments[25]
+        segments = [s for s in segments if s]
+        if len(segments) < 40:
+            continue
+        code = segments[0]
+        # 自适应右侧偏移：investStrategy 列可能含 |，导致列数在 62~64 波动
+        # 尝试多个偏移组合，取第一个 nav>0.01 且 |disc|<100 的组合
+        found = False
+        for offset in (40, 39, 38, 41):
+            if len(segments) < offset + 1:
+                continue
             try:
-                nav_val = float(nav_str)
-                disc_val = float(disc_str)
-                # 过滤净值极小的ETF（货币/债券类，disc 无参考意义）
-                if nav_val < 0.01:
-                    continue
-                # 过滤异常溢折价（数据错误）
-                if abs(disc_val) > 100:
-                    continue
-                premium_rates[code] = disc_val
-            except ValueError:
+                nav_val = float(segments[-offset])
+                disc_val = float(segments[-(offset-1)])
+                if nav_val >= 0.01 and abs(disc_val) <= 100:
+                    premium_rates[code] = disc_val
+                    found = True
+                    break
+            except (ValueError, IndexError):
+                continue
+        if not found:
+            # 最终降级：尝试 segments[24]/[25]（标准位置，列数=64时精确）
+            try:
+                nav_val = float(segments[24]) if len(segments) > 24 else 0
+                disc_val = float(segments[25]) if len(segments) > 25 else 0
+                if nav_val >= 0.01 and abs(disc_val) <= 100:
+                    premium_rates[code] = disc_val
+            except (ValueError, IndexError):
                 pass
 
     return premium_rates
