@@ -137,20 +137,17 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 WESTOCK_CLI = str(Path.home() / '.workbuddy' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
 NODE_PATH = str(Path.home() / '.workbuddy' / 'binaries' / 'node' / 'versions' / '22.22.2' / 'node.exe')
 
-def fetch_premium_rates(codes):
+def fetch_etf_navs(codes):
     """
-    通过 westock-data etf 批量获取官方溢折价率 (disc)。
-    返回 {code: float}，disc 为百分比值（如 21.25 表示 21.25%）。
-    westock-data 的 disc 基于交易所 IOPV（实时参考净值），
-    而非本地存储的盘后单位净值，精度更高。
+    通过 westock-data etf 批量获取单位净值 (nav 字段)。
+    返回 {code: float}，单位净值。
     """
     import subprocess, re
-    premium_rates = {}
+    navs = {}
 
-    # 过滤非A股ETF（港股/美股不支持）
     a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
     if not a_codes:
-        return premium_rates
+        return navs
 
     code_str = ','.join(a_codes)
     cli_dir = str(Path(WESTOCK_CLI).parent.parent)
@@ -162,56 +159,42 @@ def fetch_premium_rates(codes):
         )
         output = result.stdout
         if result.returncode != 0:
-            print(f"  [PREM WARN] westock-data exited with code {result.returncode}: {result.stderr[:200]}")
-            return premium_rates
-    except FileNotFoundError:
-        print(f"  [PREM WARN] Node.js not found at {NODE_PATH}, falling back")
-        return premium_rates
+            print(f"  [NAV WARN] westock-data exit {result.returncode}")
+            return navs
     except Exception as e:
-        print(f"  [PREM WARN] westock-data call failed: {e}")
-        return premium_rates
+        print(f"  [NAV WARN] westock-data failed: {e}")
+        return navs
 
     if not output:
-        return premium_rates
+        return navs
 
-    # 解析输出。由于 investScope/investStrategy 列可能包含 | 字符，
-    # 简单 split('|') 会造成列数偏移。改用右侧定位法：
-    # nav 是倒数第40个 segment，disc 是倒数第39个（从右侧数，跳过末尾空）
     for line in output.split('\n'):
         stripped = line.strip()
         if not re.match(r'^\| (sh|sz|bj)\d{5,6} \|', stripped):
             continue
         segments = [s.strip() for s in stripped.split('|')]
         segments = [s for s in segments if s]
-        if len(segments) < 40:
+        n = len(segments)
+        if n < 39:
             continue
         code = segments[0]
-        # 自适应右侧偏移：investStrategy 列可能含 |，导致列数在 62~64 波动
-        # 尝试多个偏移组合，取第一个 nav>0.01 且 |disc|<100 的组合
-        found = False
-        for offset in (40, 39, 38, 41):
-            if len(segments) < offset + 1:
-                continue
+        # nav（单位净值）= 倒数第38~41，自适应偏移
+        # 验证：nav 后一位是 disc（|disc|<200）或 size（>1e6），用此排除误判
+        for off in (40, 39, 38, 41):
             try:
-                nav_val = float(segments[-offset])
-                disc_val = float(segments[-(offset-1)])
-                if nav_val >= 0.01 and abs(disc_val) <= 100:
-                    premium_rates[code] = disc_val
-                    found = True
-                    break
+                v = float(segments[-off])
+                if not (0.01 <= v <= 10000):
+                    continue
+                # 后一位置：如果是 disc（-200~200），则是正确偏移；如果是 size（>1e6），则偏移错了
+                next_v = float(segments[-(off-1)])
+                if abs(next_v) > 1e6:
+                    continue  # 后一个是 size，说明当前 v 是 disc 不是 nav
+                navs[code] = v
+                break
             except (ValueError, IndexError):
                 continue
-        if not found:
-            # 最终降级：尝试 segments[24]/[25]（标准位置，列数=64时精确）
-            try:
-                nav_val = float(segments[24]) if len(segments) > 24 else 0
-                disc_val = float(segments[25]) if len(segments) > 25 else 0
-                if nav_val >= 0.01 and abs(disc_val) <= 100:
-                    premium_rates[code] = disc_val
-            except (ValueError, IndexError):
-                pass
 
-    return premium_rates
+    return navs
 
 
 def load_nav_fallback(codes, check_date):
@@ -261,23 +244,21 @@ def get_current_rankings():
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
 
-    # 获取官方溢折价率（westock-data disc，基于IOPV实时参考净值）
-    print("  [PREM] Fetching premium rates from westock-data...")
-    premium_rates = fetch_premium_rates(ETF_POOL)
-    print(f"  [PREM] Got {len(premium_rates)}/{len(ETF_POOL)} ETF premium rates")
+    # 获取单位净值（westock-data nav 字段 = 单位净值，用于溢价率计算）
+    print("  [NAV] Fetching unit NAVs from westock-data...")
+    unit_navs = fetch_etf_navs(ETF_POOL)
+    print(f"  [NAV] Got {len(unit_navs)}/{len(ETF_POOL)} unit NAVs")
 
     # 获取实时行情
     print("  [RT] Fetching realtime prices...")
     realtime = fetch_realtime_prices(ETF_POOL)
-    realtime_count = len(realtime)
-    print(f"  [RT] Got {realtime_count}/{len(ETF_POOL)} realtime quotes")
+    print(f"  [RT] Got {len(realtime)}/{len(ETF_POOL)} realtime quotes")
 
     current_prices = {}
     prev_prices = {}
     for code, df in all_data.items():
         mask = df.index <= pd.Timestamp(LATEST_DATE)
         if mask.any():
-            # 优先使用实时价格
             if code in realtime:
                 current_prices[code] = realtime[code]['price']
             else:
@@ -286,18 +267,13 @@ def get_current_rankings():
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
 
     # 降级：westock-data 缺失的 ETF 用本地 CSV 净值补充
-    missing = [c for c in ETF_POOL if c not in premium_rates and (c.startswith('sh') or c.startswith('sz'))]
+    missing = [c for c in ETF_POOL if c not in unit_navs and (c.startswith('sh') or c.startswith('sz'))]
     if missing:
         nav_fb = load_nav_fallback(missing, LATEST_DATE)
-        fallback_added = 0
         for code in missing:
-            if code in nav_fb and code in current_prices:
-                net_val = nav_fb[code]
-                price = current_prices[code]
-                if net_val > 0 and price > 0:
-                    premium_rates[code] = round((price - net_val) / net_val * 100, 2)
-                    fallback_added += 1
-        print(f"  [PREM] Fallback (local CSV): +{fallback_added} ETFs")
+            if code in nav_fb:
+                unit_navs[code] = nav_fb[code]
+        print(f"  [NAV] Fallback (local CSV): +{len([c for c in missing if c in nav_fb])} ETFs")
 
     prev_rankings = load_previous_rankings()
     prev_rank_map = {r['code']: r['rank'] for r in prev_rankings}
@@ -325,9 +301,13 @@ def get_current_rankings():
         # 盈利保护
         protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
-        # 溢价率（直接用 westock-data 官方 disc）
-        premium_pct = premium_rates.get(code, 0.0)
-        premium_filtered = check_premium_by_disc(premium_pct)
+        # 溢价率 = (当前价 - 单位净值) / 单位净值 * 100
+        nav = unit_navs.get(code)
+        if nav and nav > 0:
+            premium_pct = round((cur - nav) / nav * 100, 2)
+        else:
+            premium_pct = None
+        premium_filtered = (premium_pct is not None and premium_pct > 20.0)
 
         # 近3日跌幅
         drop3 = False
@@ -706,7 +686,7 @@ def generate_report(ranked, recent_trades, trade_info):
     for i, r in enumerate(filtered_in_top10):
         r['rank'] = 11 + i
         reasons = []
-        if r.get('premium_filtered'): reasons.append(f'溢价>{r.get("premium_pct",0):.0f}%')
+        if r.get('premium_filtered'): reasons.append(f"溢价>{(r.get('premium_pct') or 0):.0f}%")
         if r.get('protected'): reasons.append('盈利保护')
         if r.get('drop3'): reasons.append('近3日跌>3%')
         if r.get('short_score', 0) < 0: reasons.append('短期动量负')
@@ -723,7 +703,7 @@ def generate_report(ranked, recent_trades, trade_info):
 
     top10_md = ""
     for r in top10:
-        prem = f"{r.get('premium_pct', 0):.2f}%" if r.get('premium_pct') else '-'
+        prem = f"{r.get('premium_pct') or 0:.2f}%" if r.get('premium_pct') is not None else '-'
         top10_md += (f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']} "
                      f"| {r['short_score']} | {r['long_score']} "
                      f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {prem} | {r['rchange']} |\n")
@@ -838,7 +818,7 @@ def generate_report(ranked, recent_trades, trade_info):
         else:
             rc_c = '#888'
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
-        prem = r.get('premium_pct', 0)
+        prem = r.get('premium_pct') or 0
         prem_str = f'{prem:.2f}%' if prem else '-'
         prem_c = '#DC3545' if prem > 20 else ('#E65100' if prem > 10 else '#888')
 
@@ -911,7 +891,7 @@ def generate_report(ranked, recent_trades, trade_info):
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
     <b>过滤规则:</b> 溢价率>20% → 盈利保护(回撤>5%) → 短期动量(<0) → 近3日跌幅(>3%)<br>
     <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤)<br>
-    <b>溢价率:</b> 来自交易所IOPV(实时参考净值)官方溢折价率 | 红色>20%触发过滤 | ✗=被过滤未交易 | '-'=暂无净值数据
+    <b>溢价率:</b> (市价-单位净值)/单位净值 | 红色>20%触发过滤 | '-'=暂无净值数据
 </div>
 
 <div style="text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
