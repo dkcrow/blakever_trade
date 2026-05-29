@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from strategies.etf.seven_star_base import (
-    LocalDataSource, ETF_POOL, ETF_NAMES, DEFENSIVE_ETF, DEFAULT_NAV_DIR
+    LocalDataSource, ETF_POOL, ETF_NAMES, DEFENSIVE_ETF
 )
 
 HISTORY_FILE = Path(__file__).parent / '172_ranking_history.json'
@@ -131,48 +131,79 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 
 
 # ================================================================
-# 溢价率过滤 + 净值加载
+# 溢价率获取（westock-data 官方溢折价率 disc，基于IOPV实时参考净值）
 # ================================================================
 
-def load_nav_data():
-    """加载所有ETF净值数据"""
-    navs = {}
-    nav_dir = DEFAULT_NAV_DIR
-    if not nav_dir.exists():
-        return navs
-    for f in nav_dir.glob('*_nav.csv'):
-        code = f.stem.replace('_nav', '')
-        try:
-            df = pd.read_csv(f, encoding='utf-8')
-            if '净值日期' in df.columns and '单位净值' in df.columns:
-                df = df.rename(columns={'净值日期': 'date', '单位净值': 'unit_nav'})
-            if 'date' not in df.columns or 'unit_nav' not in df.columns:
-                continue
-            df['date'] = pd.to_datetime(df['date'], errors='coerce')
-            df = df.dropna(subset=['date', 'unit_nav'])
-            df = df.set_index('date').sort_index()
-            navs[code] = df['unit_nav']
-        except Exception:
-            pass
-    return navs
+WESTOCK_CLI = str(Path.home() / '.workbuddy' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
+NODE_PATH = str(Path.home() / '.workbuddy' / 'binaries' / 'node' / 'versions' / '22.22.2' / 'node.exe')
+
+def fetch_premium_rates(codes):
+    """
+    通过 westock-data etf 批量获取官方溢折价率 (disc)。
+    返回 {code: float}，disc 为百分比值（如 21.25 表示 21.25%）。
+    westock-data 的 disc 基于交易所 IOPV（实时参考净值），
+    而非本地存储的盘后单位净值，精度更高。
+    """
+    import subprocess, re
+    premium_rates = {}
+
+    # 过滤非A股ETF（港股/美股不支持）
+    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
+    if not a_codes:
+        return premium_rates
+
+    code_str = ','.join(a_codes)
+    cli_dir = str(Path(WESTOCK_CLI).parent.parent)
+    try:
+        result = subprocess.run(
+            [NODE_PATH, WESTOCK_CLI, 'etf', code_str],
+            capture_output=True, text=True, timeout=45,
+            cwd=cli_dir, encoding='utf-8', errors='replace'
+        )
+        output = result.stdout
+        if result.returncode != 0:
+            print(f"  [PREM WARN] westock-data exited with code {result.returncode}: {result.stderr[:200]}")
+            return premium_rates
+    except FileNotFoundError:
+        print(f"  [PREM WARN] Node.js not found at {NODE_PATH}, falling back")
+        return premium_rates
+    except Exception as e:
+        print(f"  [PREM WARN] westock-data call failed: {e}")
+        return premium_rates
+
+    if not output:
+        return premium_rates
+
+    # 解析输出：每行 | code | name | ... | closePrice | ... | nav | disc | ...
+    for line in output.split('\n'):
+        stripped = line.strip()
+        if not re.match(r'^\| (sh|sz|bj)\d{5,6} \|', stripped):
+            continue
+        segments = [s.strip() for s in stripped.split('|')]
+        segments = [s for s in segments if s]  # 去除首尾空
+        if len(segments) >= 26:
+            code = segments[0]
+            nav_str = segments[24]
+            disc_str = segments[25]
+            try:
+                nav_val = float(nav_str)
+                disc_val = float(disc_str)
+                # 过滤净值极小的ETF（货币/债券类，disc 无参考意义）
+                if nav_val < 0.01:
+                    continue
+                # 过滤异常溢折价（数据错误）
+                if abs(disc_val) > 100:
+                    continue
+                premium_rates[code] = disc_val
+            except ValueError:
+                pass
+
+    return premium_rates
 
 
-def check_premium(code, cur_price, nav_data, check_date, threshold=0.20):
-    """溢价率检查：当前价格 vs 前一日净值，超过20%则过滤"""
-    if code not in nav_data:
-        return False
-    nav_series = nav_data[code]
-    check_ts = pd.Timestamp(check_date)
-    mask = nav_series.index < check_ts
-    available = nav_series[mask]
-    if len(available) == 0:
-        return False
-    recent = available.tail(5)
-    net_value = float(recent.iloc[-1])
-    if net_value <= 0:
-        return False
-    premium = (cur_price - net_value) / net_value
-    return premium > threshold
+def check_premium_by_disc(premium_pct, threshold=20.0):
+    """基于 westock-data disc 的溢价率检查"""
+    return premium_pct > threshold
 
 
 def get_current_rankings():
@@ -180,9 +211,10 @@ def get_current_rankings():
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
 
-    # 加载净值数据（用于溢价率过滤）
-    nav_data = load_nav_data()
-    print(f"  [NAV] Loaded {len(nav_data)} ETF net values")
+    # 获取官方溢折价率（westock-data disc，基于IOPV实时参考净值）
+    print("  [PREM] Fetching premium rates from westock-data...")
+    premium_rates = fetch_premium_rates(ETF_POOL)
+    print(f"  [PREM] Got {len(premium_rates)}/{len(ETF_POOL)} ETF premium rates")
 
     # 获取实时行情
     print("  [RT] Fetching realtime prices...")
@@ -229,20 +261,9 @@ def get_current_rankings():
         # 盈利保护
         protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
-        # 溢价率过滤（当前价 vs 前一日净值，超过20%过滤）
-        premium_filtered = check_premium(code, cur, nav_data, LATEST_DATE)
-
-        # 计算实际溢价率（用于展示）
-        premium_pct = 0.0
-        if code in nav_data:
-            nav_series = nav_data[code]
-            check_ts = pd.Timestamp(LATEST_DATE)
-            mask = nav_series.index < check_ts
-            available = nav_series[mask]
-            if len(available) > 0:
-                net_value = float(available.iloc[-1])
-                if net_value > 0:
-                    premium_pct = round((cur - net_value) / net_value * 100, 2)
+        # 溢价率（直接用 westock-data 官方 disc）
+        premium_pct = premium_rates.get(code, 0.0)
+        premium_filtered = check_premium_by_disc(premium_pct)
 
         # 近3日跌幅
         drop3 = False
