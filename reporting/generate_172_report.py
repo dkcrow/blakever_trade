@@ -131,42 +131,43 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 
 
 # ================================================================
-# 溢价率获取（westock-data 官方溢折价率 disc，基于IOPV实时参考净值）
+# 溢价率获取（westock-data disc = IOPV溢折价率，匹配同花顺口径）
 # ================================================================
 
 WESTOCK_CLI = str(Path.home() / '.workbuddy' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
 NODE_PATH = str(Path.home() / '.workbuddy' / 'binaries' / 'node' / 'versions' / '22.22.2' / 'node.exe')
 
-def fetch_etf_navs(codes):
+def fetch_etf_disc_and_nav(codes):
     """
-    通过 westock-data etf 批量获取单位净值 (nav 字段)。
-    返回 {code: float}，单位净值。
+    通过 westock-data etf 批量获取 disc(溢折价率) 和 nav(单位净值)。
+    返回 {code: {'disc': float, 'nav': float}}。
+    disc 基于 IOPV 实时参考净值，与同花顺口径一致。
     """
     import subprocess, re
-    navs = {}
+    result = {}
 
     a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
     if not a_codes:
-        return navs
+        return result
 
     code_str = ','.join(a_codes)
     cli_dir = str(Path(WESTOCK_CLI).parent.parent)
     try:
-        result = subprocess.run(
+        proc = subprocess.run(
             [NODE_PATH, WESTOCK_CLI, 'etf', code_str],
             capture_output=True, text=True, timeout=45,
             cwd=cli_dir, encoding='utf-8', errors='replace'
         )
-        output = result.stdout
-        if result.returncode != 0:
-            print(f"  [NAV WARN] westock-data exit {result.returncode}")
-            return navs
+        output = proc.stdout
+        if proc.returncode != 0:
+            print(f"  [DISC WARN] westock-data exit {proc.returncode}")
+            return result
     except Exception as e:
-        print(f"  [NAV WARN] westock-data failed: {e}")
-        return navs
+        print(f"  [DISC WARN] westock-data failed: {e}")
+        return result
 
     if not output:
-        return navs
+        return result
 
     for line in output.split('\n'):
         stripped = line.strip()
@@ -178,23 +179,22 @@ def fetch_etf_navs(codes):
         if n < 39:
             continue
         code = segments[0]
-        # nav（单位净值）= 倒数第38~41，自适应偏移
-        # 验证：nav 后一位是 disc（|disc|<200）或 size（>1e6），用此排除误判
+
+        # 自适应偏移取 nav + disc (nav 在 disc 前一位)
         for off in (40, 39, 38, 41):
             try:
-                v = float(segments[-off])
-                if not (0.01 <= v <= 10000):
+                nav_val = float(segments[-off])
+                next_val = float(segments[-(off-1)])
+                if not (0.01 <= nav_val <= 10000):
                     continue
-                # 后一位置：如果是 disc（-200~200），则是正确偏移；如果是 size（>1e6），则偏移错了
-                next_v = float(segments[-(off-1)])
-                if abs(next_v) > 1e6:
-                    continue  # 后一个是 size，说明当前 v 是 disc 不是 nav
-                navs[code] = v
+                if abs(next_val) > 1e6:
+                    continue  # next_val 是 size，非 disc，偏移错了
+                result[code] = {'disc': next_val, 'nav': nav_val}
                 break
             except (ValueError, IndexError):
                 continue
 
-    return navs
+    return result
 
 
 def load_nav_fallback(codes, check_date):
@@ -244,10 +244,10 @@ def get_current_rankings():
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
 
-    # 获取单位净值（westock-data nav 字段 = 单位净值，用于溢价率计算）
-    print("  [NAV] Fetching unit NAVs from westock-data...")
-    unit_navs = fetch_etf_navs(ETF_POOL)
-    print(f"  [NAV] Got {len(unit_navs)}/{len(ETF_POOL)} unit NAVs")
+    # 获取 IOPV 溢折价率 + 单位净值（westock-data，与同花顺口径一致）
+    print("  [DISC] Fetching disc+nav from westock-data...")
+    disc_nav = fetch_etf_disc_and_nav(ETF_POOL)
+    print(f"  [DISC] Got {len(disc_nav)}/{len(ETF_POOL)} ETF data")
 
     # 获取实时行情
     print("  [RT] Fetching realtime prices...")
@@ -266,14 +266,25 @@ def get_current_rankings():
             closes = df.loc[mask, 'close']
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
 
-    # 降级：westock-data 缺失的 ETF 用本地 CSV 净值补充
-    missing = [c for c in ETF_POOL if c not in unit_navs and (c.startswith('sh') or c.startswith('sz'))]
-    if missing:
-        nav_fb = load_nav_fallback(missing, LATEST_DATE)
-        for code in missing:
-            if code in nav_fb:
-                unit_navs[code] = nav_fb[code]
-        print(f"  [NAV] Fallback (local CSV): +{len([c for c in missing if c in nav_fb])} ETFs")
+    # 降级 + 混合策略：disc 为主（IOPV 溢折价率，匹配同花顺口径），
+    # 仅当 disc 缺失时降级到本地 CSV 净值
+    premium_rates = {}
+    nav_fb = load_nav_fallback(ETF_POOL, LATEST_DATE)
+    fb_used = 0
+    for code in ETF_POOL:
+        if not (code.startswith('sh') or code.startswith('sz')):
+            continue
+        dn = disc_nav.get(code)
+        cur_price = current_prices.get(code)
+        local_nav = nav_fb.get(code)
+        if dn:
+            premium_rates[code] = dn['disc']
+        elif local_nav and cur_price:
+            premium_rates[code] = round((cur_price - local_nav) / local_nav * 100, 2)
+            fb_used += 1
+
+    if fb_used:
+        print(f"  [DISC] Hybrid fallback (local CSV): {fb_used} ETFs")
 
     prev_rankings = load_previous_rankings()
     prev_rank_map = {r['code']: r['rank'] for r in prev_rankings}
@@ -301,12 +312,8 @@ def get_current_rankings():
         # 盈利保护
         protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
-        # 溢价率 = (当前价 - 单位净值) / 单位净值 * 100
-        nav = unit_navs.get(code)
-        if nav and nav > 0:
-            premium_pct = round((cur - nav) / nav * 100, 2)
-        else:
-            premium_pct = None
+        # 溢价率（优先级: westock-data disc → 本地CSV净值计算）
+        premium_pct = premium_rates.get(code)
         premium_filtered = (premium_pct is not None and premium_pct > 20.0)
 
         # 近3日跌幅
