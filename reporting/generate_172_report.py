@@ -131,123 +131,28 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 
 
 # ================================================================
-# 溢价率获取（westock-data disc = IOPV溢折价率，匹配同花顺口径）
+# 溢价率获取（纯 neodata 单位净值计算，匹配同花顺口径）
 # ================================================================
 
-WESTOCK_CLI = str(Path.home() / '.workbuddy' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
-NODE_PATH = str(Path.home() / '.workbuddy' / 'binaries' / 'node' / 'versions' / '22.22.2' / 'node.exe')
 PYTHON = str(Path.home() / '.workbuddy' / 'binaries' / 'python' / 'envs' / 'default' / 'Scripts' / 'python.exe')
-
-def fetch_etf_disc_and_nav(codes):
-    """
-    通过 westock-data etf 批量获取 disc(溢折价率) 和 nav(单位净值)。
-    返回 {code: {'disc': float, 'nav': float}}。
-    disc 基于 IOPV 实时参考净值，与同花顺口径一致。
-    """
-    import subprocess, re
-    result = {}
-
-    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
-    if not a_codes:
-        return result
-
-    code_str = ','.join(a_codes)
-    cli_dir = str(Path(WESTOCK_CLI).parent.parent)
-    try:
-        proc = subprocess.run(
-            [NODE_PATH, WESTOCK_CLI, 'etf', code_str],
-            capture_output=True, text=True, timeout=45,
-            cwd=cli_dir, encoding='utf-8', errors='replace'
-        )
-        output = proc.stdout
-        if proc.returncode != 0:
-            print(f"  [DISC WARN] westock-data exit {proc.returncode}")
-            return result
-    except Exception as e:
-        print(f"  [DISC WARN] westock-data failed: {e}")
-        return result
-
-    if not output:
-        return result
-
-    for line in output.split('\n'):
-        stripped = line.strip()
-        if not re.match(r'^\| (sh|sz|bj)\d{5,6} \|', stripped):
-            continue
-        segments = [s.strip() for s in stripped.split('|')]
-        segments = [s for s in segments if s]
-        n = len(segments)
-        if n < 39:
-            continue
-        code = segments[0]
-
-        # 自适应偏移取 nav + disc (nav 在 disc 前一位)
-        for off in (40, 39, 38, 41):
-            try:
-                nav_val = float(segments[-off])
-                next_val = float(segments[-(off-1)])
-                if not (0.01 <= nav_val <= 10000):
-                    continue
-                if abs(next_val) > 1e6:
-                    continue  # next_val 是 size，非 disc，偏移错了
-                result[code] = {'disc': next_val, 'nav': nav_val}
-                break
-            except (ValueError, IndexError):
-                continue
-
-    return result
-
-
-def load_nav_fallback(codes, check_date):
-    """
-    降级方案：对于 westock-data 缺失的ETF，使用本地CSV单位净值计算溢价率。
-    返回 {code: float} 百分比值。仅用于补充缺失数据。
-    """
-    fallback = {}
-    nav_dir = Path(__file__).parent.parent / 'data' / 'storage' / 'stock_data' / 'etf_nav'
-    if not nav_dir.exists():
-        return fallback
-
-    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
-    check_ts = pd.Timestamp(check_date)
-
-    for code in a_codes:
-        csv_path = nav_dir / f'{code}_nav.csv'
-        if not csv_path.exists():
-            continue
-        try:
-            df = pd.read_csv(csv_path, encoding='utf-8')
-            if 'date' not in df.columns or 'unit_nav' not in df.columns:
-                continue
-            df['date'] = pd.to_datetime(df['date'], errors='coerce')
-            df = df.dropna(subset=['date', 'unit_nav'])
-            df = df.set_index('date').sort_index()
-            mask = df.index < check_ts
-            available = df[mask]
-            if len(available) == 0:
-                continue
-            net_val = float(available['unit_nav'].iloc[-1])
-            if net_val <= 0:
-                continue
-            fallback[code] = net_val
-        except Exception:
-            pass
-    return fallback
-
-
 NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
 
-def fetch_neodata_navs():
+def fetch_neodata_navs(etf_codes):
     """
     通过 neodata 获取最新单位净值。返回 {code(str): float}。
+    neodata 返回纯数字代码（如 '513310'），调用方负责映射到 sh/sz 前缀。
     """
     import subprocess, json, re
     navs = {}
+    # 去掉 sh/sz 前缀，构建查询字符串
+    raw_codes = [c[2:] if (c.startswith('sh') or c.startswith('sz')) and len(c)>2 else c
+                 for c in etf_codes if c.startswith('sh') or c.startswith('sz')]
+    if not raw_codes:
+        return navs
+    query = 'ETF ' + ' '.join(raw_codes) + ' 最新行情 单位净值'
     try:
         result = subprocess.run(
-            [PYTHON, NEODATA_SCRIPT, '--query',
-             'ETF 513100 513310 159509 159529 588080 最新行情 单位净值 IOPV',
-             '--data-type', 'api'],
+            [PYTHON, NEODATA_SCRIPT, '--query', query, '--data-type', 'api'],
             capture_output=True, text=True, timeout=30,
             cwd=str(Path(NEODATA_SCRIPT).parent),
             encoding='utf-8', errors='replace'
@@ -268,13 +173,11 @@ def fetch_neodata_navs():
     for r in api.get('apiRecall', []):
         content = r.get('content', '')
         rtype = r.get('type', '')
-        # 实时行情表：最后一列为单位净值
         if '实时行情' in rtype:
             for line in content.strip().split('\n')[2:]:
                 parts = [p.strip() for p in line.split('|') if p.strip()]
                 if len(parts) < 4:
                     continue
-                # 找纯数字6位代码
                 code = None
                 for p in parts:
                     if re.match(r'^\d{5,6}$', p):
@@ -282,14 +185,12 @@ def fetch_neodata_navs():
                         break
                 if not code:
                     continue
-                # 最后一列 = 单位净值
                 try:
                     nav = float(parts[-1])
                     if 0.01 < nav < 10000:
                         navs[code] = nav
                 except ValueError:
                     pass
-        # 净值回报表：第4列为单位净值
         elif '净值' in rtype or '净值' in r.get('desc', ''):
             for line in content.strip().split('\n')[2:]:
                 parts = [p.strip() for p in line.split('|') if p.strip()]
@@ -307,20 +208,26 @@ def fetch_neodata_navs():
     return navs
 
 
-def check_premium_by_disc(premium_pct, threshold=20.0):
-    """基于 westock-data disc 的溢价率检查"""
-    return premium_pct > threshold
-
-
 def get_current_rankings():
-    """获取最新交易日ETF完整排名（价格优先使用实时行情，含溢价率过滤）"""
+    """获取最新交易日ETF完整排名（价格优先使用实时行情，纯neodata净值计算溢价率）"""
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
 
-    # 获取 IOPV 溢折价率 + 单位净值（westock-data，与同花顺口径一致）
-    print("  [DISC] Fetching disc+nav from westock-data...")
-    disc_nav = fetch_etf_disc_and_nav(ETF_POOL)
-    print(f"  [DISC] Got {len(disc_nav)}/{len(ETF_POOL)} ETF data")
+    # 获取单位净值（neodata，与同花顺口径一致）
+    print("  [NAV] Fetching unit NAVs from neodata...")
+    neo_navs_raw = fetch_neodata_navs(ETF_POOL)
+    # neodata 返回纯数字代码(如'513310')，需映射到 sh/sz 前缀
+    neo_navs = {}
+    for code, nav in neo_navs_raw.items():
+        for prefix in ('sh', 'sz', 'bj'):
+            full_code = prefix + code
+            if full_code in ETF_POOL:
+                neo_navs[full_code] = nav
+                break
+        if code not in neo_navs:
+            neo_navs[code] = nav
+    mapped_count = len([c for c in neo_navs if c in ETF_POOL])
+    print(f"  [NAV] Got {len(neo_navs_raw)} → mapped {mapped_count}/{len([c for c in ETF_POOL if c.startswith('sh') or c.startswith('sz')])} ETF NAVs")
 
     # 获取实时行情
     print("  [RT] Fetching realtime prices...")
@@ -338,54 +245,6 @@ def get_current_rankings():
                 current_prices[code] = float(df.loc[mask, 'close'].iloc[-1])
             closes = df.loc[mask, 'close']
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
-
-    # 混合策略：neodata 单位净值为主（更新鲜，匹配同花顺QDII ETF），
-    # 极端负溢价（<-2%）降级到 westock-data disc（IOPV实时参考净值）
-    print("  [ND] Fetching unit NAVs from neodata...")
-    neo_navs_raw = fetch_neodata_navs()
-    # neodata 返回纯数字代码(如'513310')，需映射到 sh/sz 前缀
-    neo_navs = {}
-    for code, nav in neo_navs_raw.items():
-        # 尝试匹配带前缀的代码
-        for prefix in ('sh', 'sz', 'bj'):
-            full_code = prefix + code
-            if full_code in ETF_POOL:
-                neo_navs[full_code] = nav
-                break
-        if code not in neo_navs:
-            # 纯数字代码直接存一份（兜底）
-            neo_navs[code] = nav
-    print(f"  [ND] Got {len(neo_navs_raw)} → mapped {len([c for c in neo_navs if c in ETF_POOL])} ETF unit NAVs")
-
-    premium_rates = {}
-    nav_fb = load_nav_fallback(ETF_POOL, LATEST_DATE)
-    fb_used = 0
-    for code in ETF_POOL:
-        if not (code.startswith('sh') or code.startswith('sz')):
-            continue
-        dn = disc_nav.get(code)
-        cur_price = current_prices.get(code)
-        neo_nav = neo_navs.get(code) or neo_navs.get(code[2:] if len(code)>2 else '')  # 去掉/加上sh前缀
-        local_nav = nav_fb.get(code)
-
-        # 优先用 neodata 单位净值计算（同花顺口径）
-        if neo_nav and cur_price and neo_nav > 0:
-            nav_prem = (cur_price - neo_nav) / neo_nav * 100
-            if nav_prem > -2:  # 合理范围，采用
-                premium_rates[code] = round(nav_prem, 2)
-            elif dn:
-                premium_rates[code] = dn['disc']  # 极端负溢价→IOPV修正
-            elif local_nav and local_nav > 0:
-                premium_rates[code] = round((cur_price - local_nav) / local_nav * 100, 2)
-                fb_used += 1
-        elif dn:
-            premium_rates[code] = dn['disc']  # neodata缺失→westock disc
-        elif local_nav and cur_price:
-            premium_rates[code] = round((cur_price - local_nav) / local_nav * 100, 2)
-            fb_used += 1
-
-    if fb_used:
-        print(f"  [DISC] Hybrid fallback (local CSV): {fb_used} ETFs")
 
     prev_rankings = load_previous_rankings()
     prev_rank_map = {r['code']: r['rank'] for r in prev_rankings}
@@ -413,8 +272,13 @@ def get_current_rankings():
         # 盈利保护
         protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
-        # 溢价率（优先级: westock-data disc → 本地CSV净值计算）
-        premium_pct = premium_rates.get(code)
+        # 溢价率 = (当前价 - neodata单位净值) / neodata单位净值 * 100
+        # 获取不到净值 → None（显示 "-"，不触发过滤）
+        neo_nav = neo_navs.get(code) or neo_navs.get(code[2:] if len(code)>2 else '')
+        if neo_nav and cur > 0 and neo_nav > 0:
+            premium_pct = round((cur - neo_nav) / neo_nav * 100, 2)
+        else:
+            premium_pct = None
         premium_filtered = (premium_pct is not None and premium_pct > 20.0)
 
         # 近3日跌幅
@@ -926,8 +790,9 @@ def generate_report(ranked, recent_trades, trade_info):
         else:
             rc_c = '#888'
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
-        prem = r.get('premium_pct') or 0
-        prem_str = f'{prem:.2f}%' if prem else '-'
+        prem_val = r.get('premium_pct')
+        prem_str = f'{prem_val:.2f}%' if prem_val is not None else '-'
+        prem = prem_val if prem_val is not None else 0
         prem_c = '#DC3545' if prem > 20 else ('#E65100' if prem > 10 else '#888')
 
         html += f"""
@@ -1068,9 +933,13 @@ def main():
         print(f"    {r['name']:16s} score={r['score']:.4f}  short={r['short_score']:.4f}  "
               f"chg={fmt_change_pct(r['change_pct'])}  {flag}")
 
-    # 2. 交易检查
+    # 2. 交易检查（排名第一无neodata净值时跳过交易，仅更新排名）
     print("\n[2/5] 检查交易信号...")
-    traded, trade_desc = check_and_execute_trades(ranked)
+    top1 = ranked[0] if ranked else None
+    if top1 and top1.get('premium_pct') is None:
+        traded, trade_desc = False, f"排名第一{top1['name']}无neodata净值数据，仅更新排名不交易"
+    else:
+        traded, trade_desc = check_and_execute_trades(ranked)
     if traded:
         print(f"  ⚡ 已执行: {trade_desc}")
     else:
