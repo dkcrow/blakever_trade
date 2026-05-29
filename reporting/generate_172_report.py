@@ -567,11 +567,21 @@ def generate_report(ranked, recent_trades, trade_info):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
-    # Top10 (不过滤, 展示所有)
+    # Top10 (展示所有，被过滤的标注原因)
     top10 = ranked[:10]
     for i, r in enumerate(top10, 1):
         r['rank'] = i
         r['rchange'] = fmt_rank_change(r['prev_rank'], i)
+        # 构造过滤标签
+        if r.get('filtered'):
+            reasons = []
+            if r.get('protected'): reasons.append('盈利保护')
+            if r.get('premium_filtered'): reasons.append('溢价>20%')
+            if r.get('drop3'): reasons.append('近3日跌>3%')
+            if r.get('short_score', 0) < 0: reasons.append('短期动量负')
+            r['filter_label'] = f"[{'/'.join(reasons)}]" if reasons else "[已过滤]"
+        else:
+            r['filter_label'] = ''
 
     # ---- Markdown ----
     if current_holding:
@@ -581,7 +591,8 @@ def generate_report(ranked, recent_trades, trade_info):
 
     top10_md = ""
     for r in top10:
-        top10_md += (f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']} "
+        name_display = f"{r['name']} {r['filter_label']}" if r['filter_label'] else r['name']
+        top10_md += (f"| {r['rank']} | {name_display} | {r['code']} | {r['score']} "
                      f"| {r['short_score']} | {r['long_score']} "
                      f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {r['rchange']} |\n")
 
@@ -677,17 +688,19 @@ def generate_report(ranked, recent_trades, trade_info):
 
     for r in top10:
         is_hold = r['code'] == holding_code
-        bg = '#FEF9E7' if is_hold else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA')
+        is_filt = r.get('filtered', False)
+        bg = '#FEF9E7' if is_hold else ('#FFF3E0' if is_filt else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA'))
         chg = fmt_change_pct(r['change_pct'])
         chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
         rc = r['rchange']
         rc_c = '#28A745' if '↑' in rc else ('#DC3545' if '↓' in rc else '#888')
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
+        fl = f' <span style="color:#E65100;font-weight:bold;font-size:10px;">{r["filter_label"]}</span>' if r['filter_label'] else ''
 
         html += f"""
         <tr style="background:{bg};white-space:nowrap;">
             <td style="padding:4px 6px;text-align:center;font-weight:bold;">{r['rank']}</td>
-            <td style="padding:4px 6px;">{r['name']}</td>
+            <td style="padding:4px 6px;">{r['name']}{fl}</td>
             <td style="padding:4px 6px;text-align:center;color:#888;font-size:11px;">{r['code']}</td>
             <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{sc_c};">{r['score']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;">{r['short_score']:.4f}</td>
@@ -746,8 +759,8 @@ def generate_report(ranked, recent_trades, trade_info):
 </div>
 
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
-    <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤) | 涨跌幅=(当日-前日)/前日<br>
-    <b>规则:</b> 盈利保护(回撤>5%)→成交量放量→短期动量<0→近3日跌幅>3% | 每日13:10卖13:11买,黑名单防反弹
+    <b>过滤规则:</b> 溢价率>20% → 盈利保护(回撤>5%) → 短期动量(<0) → 近3日跌幅(>3%)<br>
+    <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤) | 涨跌幅=(当日-前日)/前日 | 橙色行=已被过滤不交易
 </div>
 
 <div style="text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
