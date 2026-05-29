@@ -276,12 +276,31 @@ def load_previous_rankings():
     return []
 
 
+def get_display_order(ranked):
+    """
+    返回显示排序：有效ETF按得分降序 + 溢价率过滤的ETF排在末尾
+    """
+    valid = [r for r in ranked if not r['filtered']]
+    premium_blocked = [r for r in ranked if r.get('premium_filtered')]
+    blocked_codes = set(r['code'] for r in premium_blocked)
+    result = list(valid)
+    extra_rank = len(valid) + 1
+    for r in premium_blocked:
+        if r['code'] not in [x['code'] for x in result]:
+            r['rank'] = extra_rank
+            result.append(r)
+            extra_rank += 1
+    return result
+
+
 def save_rankings(ranked):
+    """保存排名历史（按显示顺序）"""
+    display_order = get_display_order(ranked)
     data = {
         'date': LATEST_DATE,
         'generated': datetime.now().isoformat(),
         'rankings': [{'code': r['code'], 'rank': i+1, 'score': r['score']}
-                      for i, r in enumerate(ranked)]
+                      for i, r in enumerate(display_order)]
     }
     with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -567,21 +586,23 @@ def generate_report(ranked, recent_trades, trade_info):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
-    # Top10 (展示所有，被过滤的标注原因)
-    top10 = ranked[:10]
-    for i, r in enumerate(top10, 1):
-        r['rank'] = i
-        r['rchange'] = fmt_rank_change(r['prev_rank'], i)
-        # 构造过滤标签
-        if r.get('filtered'):
-            reasons = []
-            if r.get('protected'): reasons.append('盈利保护')
-            if r.get('premium_filtered'): reasons.append('溢价>20%')
-            if r.get('drop3'): reasons.append('近3日跌>3%')
-            if r.get('short_score', 0) < 0: reasons.append('短期动量负')
-            r['filter_label'] = f"[{'/'.join(reasons)}]" if reasons else "[已过滤]"
-        else:
-            r['filter_label'] = ''
+    # 构建展示排名：有效ETF Top10 + 溢价率过滤ETF排在末尾
+    display_order = get_display_order(ranked)
+    valid_display = [r for r in display_order if not r.get('premium_filtered')]
+    premium_display = [r for r in display_order if r.get('premium_filtered')]
+
+    # Top10: 有效ETF前10名
+    top10 = valid_display[:10]
+    # 溢价率过滤的ETF追加，从第11名开始，变动显示 x
+    for i, r in enumerate(premium_display):
+        r['rank'] = 11 + i
+        r['rchange'] = '✗'
+        top10.append(r)
+
+    # 给有效ETF填排名和变动
+    for i, r in enumerate(valid_display[:10]):
+        r['rank'] = i + 1
+        r['rchange'] = fmt_rank_change(r.get('prev_rank'), r['rank'])
 
     # ---- Markdown ----
     if current_holding:
@@ -591,8 +612,7 @@ def generate_report(ranked, recent_trades, trade_info):
 
     top10_md = ""
     for r in top10:
-        name_display = f"{r['name']} {r['filter_label']}" if r['filter_label'] else r['name']
-        top10_md += (f"| {r['rank']} | {name_display} | {r['code']} | {r['score']} "
+        top10_md += (f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']} "
                      f"| {r['short_score']} | {r['long_score']} "
                      f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {r['rchange']} |\n")
 
@@ -688,19 +708,17 @@ def generate_report(ranked, recent_trades, trade_info):
 
     for r in top10:
         is_hold = r['code'] == holding_code
-        is_filt = r.get('filtered', False)
-        bg = '#FEF9E7' if is_hold else ('#FFF3E0' if is_filt else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA'))
+        bg = '#FEF9E7' if is_hold else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA')
         chg = fmt_change_pct(r['change_pct'])
         chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
         rc = r['rchange']
-        rc_c = '#28A745' if '↑' in rc else ('#DC3545' if '↓' in rc else '#888')
+        rc_c = '#DC3545' if rc == '✗' else ('#28A745' if '↑' in rc else ('#DC3545' if '↓' in rc else '#888'))
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
-        fl = f' <span style="color:#E65100;font-weight:bold;font-size:10px;">{r["filter_label"]}</span>' if r['filter_label'] else ''
 
         html += f"""
         <tr style="background:{bg};white-space:nowrap;">
             <td style="padding:4px 6px;text-align:center;font-weight:bold;">{r['rank']}</td>
-            <td style="padding:4px 6px;">{r['name']}{fl}</td>
+            <td style="padding:4px 6px;">{r['name']}</td>
             <td style="padding:4px 6px;text-align:center;color:#888;font-size:11px;">{r['code']}</td>
             <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{sc_c};">{r['score']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;">{r['short_score']:.4f}</td>
