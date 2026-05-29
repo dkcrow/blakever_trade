@@ -640,8 +640,11 @@ def generate_report(ranked, recent_trades, trade_info):
 
     trade_md = ""
     for t in recent_trades:
+        price_raw = t.get('成交价格', '')
+        try: price_str = f'{float(price_raw):.3f}'
+        except: price_str = str(price_raw)
         trade_md += (f"| {t.get('交易日期','')} | {t.get('方向','')} | {t.get('ETF名称','')} "
-                     f"| {t.get('ETF代码','')} | {t.get('成交价格','')} "
+                     f"| {t.get('ETF代码','')} | {price_str} "
                      f"| {fmt_score(t.get('综合动量得分'))} | {t.get('交易理由','')} "
                      f"| {t.get('_pnl','-')} |\n")
 
@@ -795,13 +798,17 @@ def generate_report(ranked, recent_trades, trade_info):
         else:
             pnl_c = '#888'
 
+        price_raw = t.get('成交价格', '')
+        try: price_str = f'{float(price_raw):.3f}'
+        except: price_str = str(price_raw)
+
         html += f"""
         <tr style="background:{bg};white-space:nowrap;">
             <td style="padding:4px 8px;">{t.get('交易日期','')}</td>
             <td style="padding:4px 8px;font-weight:bold;">{direction}</td>
             <td style="padding:4px 8px;">{t.get('ETF名称','')}</td>
             <td style="padding:4px 8px;color:#888;font-size:11px;">{t.get('ETF代码','')}</td>
-            <td style="padding:4px 8px;text-align:right;">{t.get('成交价格','')}</td>
+            <td style="padding:4px 8px;text-align:right;">{price_str}</td>
             <td style="padding:4px 8px;text-align:right;">{fmt_score(t.get('综合动量得分'))}</td>
             <td style="padding:4px 8px;font-size:11px;color:#555;max-width:200px;overflow:hidden;text-overflow:ellipsis;">{t.get('交易理由','')}</td>
             <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{pnl_c};">{pnl}</td>
