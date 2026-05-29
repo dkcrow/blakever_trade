@@ -847,7 +847,7 @@ def generate_report(ranked, recent_trades, trade_info):
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
     <b>过滤规则:</b> 溢价率>20% → 盈利保护(回撤>5%) → 短期动量(<0) → 近3日跌幅(>3%)<br>
     <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤)<br>
-    <b>溢价率:</b> (当前价-前日净值)/前日净值 | 红色>20%触发过滤 | ✗=被过滤未交易
+    <b>溢价率:</b> 来自交易所IOPV(实时参考净值)官方溢折价率 | 红色>20%触发过滤 | ✗=被过滤未交易 | '-'=暂无净值数据
 </div>
 
 <div style="text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
