@@ -20,7 +20,7 @@ warnings.filterwarnings('ignore')
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from strategies.etf.seven_star_base import (
-    LocalDataSource, ETF_POOL, ETF_NAMES, DEFENSIVE_ETF
+    LocalDataSource, ETF_POOL, ETF_NAMES, DEFENSIVE_ETF, DEFAULT_NAV_DIR
 )
 
 HISTORY_FILE = Path(__file__).parent / '172_ranking_history.json'
@@ -130,10 +130,59 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
     return False
 
 
+# ================================================================
+# 溢价率过滤 + 净值加载
+# ================================================================
+
+def load_nav_data():
+    """加载所有ETF净值数据"""
+    navs = {}
+    nav_dir = DEFAULT_NAV_DIR
+    if not nav_dir.exists():
+        return navs
+    for f in nav_dir.glob('*_nav.csv'):
+        code = f.stem.replace('_nav', '')
+        try:
+            df = pd.read_csv(f, encoding='utf-8')
+            if '净值日期' in df.columns and '单位净值' in df.columns:
+                df = df.rename(columns={'净值日期': 'date', '单位净值': 'unit_nav'})
+            if 'date' not in df.columns or 'unit_nav' not in df.columns:
+                continue
+            df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            df = df.dropna(subset=['date', 'unit_nav'])
+            df = df.set_index('date').sort_index()
+            navs[code] = df['unit_nav']
+        except Exception:
+            pass
+    return navs
+
+
+def check_premium(code, cur_price, nav_data, check_date, threshold=0.20):
+    """溢价率检查：当前价格 vs 前一日净值，超过20%则过滤"""
+    if code not in nav_data:
+        return False
+    nav_series = nav_data[code]
+    check_ts = pd.Timestamp(check_date)
+    mask = nav_series.index < check_ts
+    available = nav_series[mask]
+    if len(available) == 0:
+        return False
+    recent = available.tail(5)
+    net_value = float(recent.iloc[-1])
+    if net_value <= 0:
+        return False
+    premium = (cur_price - net_value) / net_value
+    return premium > threshold
+
+
 def get_current_rankings():
-    """获取最新交易日ETF完整排名（价格优先使用实时行情）"""
+    """获取最新交易日ETF完整排名（价格优先使用实时行情，含溢价率过滤）"""
     ds = LocalDataSource()
     all_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
+
+    # 加载净值数据（用于溢价率过滤）
+    nav_data = load_nav_data()
+    print(f"  [NAV] Loaded {len(nav_data)} ETF net values")
 
     # 获取实时行情
     print("  [RT] Fetching realtime prices...")
@@ -180,6 +229,9 @@ def get_current_rankings():
         # 盈利保护
         protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
+        # 溢价率过滤（当前价 vs 前一日净值，超过20%过滤）
+        premium_filtered = check_premium(code, cur, nav_data, LATEST_DATE)
+
         # 近3日跌幅
         drop3 = False
         if len(close_full) >= 4:
@@ -204,7 +256,8 @@ def get_current_rankings():
             'short_mom_annual': round(ann_ret_l, 8),  # 用于过滤判断
             'protected': protected,
             'drop3': drop3,
-            'filtered': protected or drop3 or short_score < 0,
+            'premium_filtered': premium_filtered,
+            'filtered': protected or premium_filtered or drop3 or short_score < 0,
             'prev_rank': prev_rank_map.get(code, None),
             'hist_df': df,  # 暂存用于后续成交量检查
         })
@@ -341,6 +394,8 @@ def check_and_execute_trades(ranked):
             reasons = []
             if old_ranked.get('protected'):
                 reasons.append(f"盈利保护(回撤超5%)")
+            if old_ranked.get('premium_filtered'):
+                reasons.append(f"溢价率>20%过滤")
             if old_ranked.get('drop3'):
                 reasons.append(f"近3日跌幅>3%")
             if old_ranked.get('short_score', 0) < 0:
