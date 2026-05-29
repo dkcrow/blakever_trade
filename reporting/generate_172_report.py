@@ -232,6 +232,18 @@ def get_current_rankings():
         # 溢价率过滤（当前价 vs 前一日净值，超过20%过滤）
         premium_filtered = check_premium(code, cur, nav_data, LATEST_DATE)
 
+        # 计算实际溢价率（用于展示）
+        premium_pct = 0.0
+        if code in nav_data:
+            nav_series = nav_data[code]
+            check_ts = pd.Timestamp(LATEST_DATE)
+            mask = nav_series.index < check_ts
+            available = nav_series[mask]
+            if len(available) > 0:
+                net_value = float(available.iloc[-1])
+                if net_value > 0:
+                    premium_pct = round((cur - net_value) / net_value * 100, 2)
+
         # 近3日跌幅
         drop3 = False
         if len(close_full) >= 4:
@@ -257,6 +269,7 @@ def get_current_rankings():
             'protected': protected,
             'drop3': drop3,
             'premium_filtered': premium_filtered,
+            'premium_pct': premium_pct,
             'filtered': protected or premium_filtered or drop3 or short_score < 0,
             'prev_rank': prev_rank_map.get(code, None),
             'hist_df': df,  # 暂存用于后续成交量检查
@@ -278,18 +291,14 @@ def load_previous_rankings():
 
 def get_display_order(ranked):
     """
-    返回显示排序：有效ETF按得分降序 + 溢价率过滤的ETF排在末尾
+    返回显示排序：有效ETF按得分降序 + 被过滤的ETF排在末尾
     """
     valid = [r for r in ranked if not r['filtered']]
-    premium_blocked = [r for r in ranked if r.get('premium_filtered')]
-    blocked_codes = set(r['code'] for r in premium_blocked)
+    blocked = [r for r in ranked if r['filtered']]
     result = list(valid)
-    extra_rank = len(valid) + 1
-    for r in premium_blocked:
-        if r['code'] not in [x['code'] for x in result]:
-            r['rank'] = extra_rank
-            result.append(r)
-            extra_rank += 1
+    for i, r in enumerate(blocked):
+        r['rank'] = len(valid) + i + 1
+        result.append(r)
     return result
 
 
@@ -586,23 +595,23 @@ def generate_report(ranked, recent_trades, trade_info):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
-    # 构建展示排名：有效ETF Top10 + 溢价率过滤ETF排在末尾
+    # 构建展示排名：有效ETF前10 + 被过滤ETF排在末尾
     display_order = get_display_order(ranked)
-    valid_display = [r for r in display_order if not r.get('premium_filtered')]
-    premium_display = [r for r in display_order if r.get('premium_filtered')]
-
-    # Top10: 有效ETF前10名
-    top10 = valid_display[:10]
-    # 溢价率过滤的ETF追加，从第11名开始，变动显示 x
-    for i, r in enumerate(premium_display):
-        r['rank'] = 11 + i
-        r['rchange'] = '✗'
-        top10.append(r)
+    valid_display = [r for r in display_order if not r['filtered']]
+    blocked_display = [r for r in display_order if r['filtered']]
 
     # 给有效ETF填排名和变动
-    for i, r in enumerate(valid_display[:10]):
+    for i, r in enumerate(valid_display):
         r['rank'] = i + 1
         r['rchange'] = fmt_rank_change(r.get('prev_rank'), r['rank'])
+
+    # Top10: 有效ETF先取前10，不够就用被过滤的补
+    top10 = valid_display[:10]
+    # 被过滤ETF排在后面，变动显示 ✗
+    for i, r in enumerate(blocked_display):
+        r['rank'] = len(valid_display) + i + 1  # 从第N+1名开始
+        r['rchange'] = '✗'
+        top10.append(r)
 
     # ---- Markdown ----
     if current_holding:
@@ -612,9 +621,10 @@ def generate_report(ranked, recent_trades, trade_info):
 
     top10_md = ""
     for r in top10:
+        prem = f"{r.get('premium_pct', 0):.1f}%" if r.get('premium_pct') else '-'
         top10_md += (f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']} "
                      f"| {r['short_score']} | {r['long_score']} "
-                     f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {r['rchange']} |\n")
+                     f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {prem} | {r['rchange']} |\n")
 
     trade_md = ""
     for t in recent_trades:
@@ -636,8 +646,8 @@ def generate_report(ranked, recent_trades, trade_info):
 {trade_note}
 ## ETF动量排名 Top 10
 
-| 排名 | 名称 | 代码 | 综合得分 | 短期得分 | 长期得分 | 价格 | 涨跌幅 | 变动 |
-|------|------|------|----------|----------|----------|------|--------|------|
+| 排名 | 名称 | 代码 | 综合得分 | 短期得分 | 长期得分 | 价格 | 涨跌幅 | 溢价率 | 变动 |
+|------|------|------|----------|----------|----------|------|--------|--------|------|
 {top10_md}
 ## 最近20条交易记录
 
@@ -703,6 +713,7 @@ def generate_report(ranked, recent_trades, trade_info):
             <th nowrap style="padding:6px 6px;text-align:right;">长期</th>
             <th nowrap style="padding:6px 6px;text-align:right;">价格</th>
             <th nowrap style="padding:6px 6px;text-align:right;">涨跌幅</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">溢价率</th>
             <th nowrap style="padding:6px 6px;text-align:center;">变动</th>
         </tr>"""
 
@@ -714,6 +725,9 @@ def generate_report(ranked, recent_trades, trade_info):
         rc = r['rchange']
         rc_c = '#DC3545' if rc == '✗' else ('#28A745' if '↑' in rc else ('#DC3545' if '↓' in rc else '#888'))
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
+        prem = r.get('premium_pct', 0)
+        prem_str = f'{prem:.1f}%' if prem else '-'
+        prem_c = '#DC3545' if prem > 20 else ('#E65100' if prem > 10 else '#888')
 
         html += f"""
         <tr style="background:{bg};white-space:nowrap;">
@@ -725,6 +739,7 @@ def generate_report(ranked, recent_trades, trade_info):
             <td style="padding:4px 6px;text-align:right;">{r['long_score']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;">{r['price']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;color:{chg_c};font-weight:bold;">{chg}</td>
+            <td style="padding:4px 6px;text-align:right;color:{prem_c};font-weight:bold;">{prem_str}</td>
             <td style="padding:4px 6px;text-align:center;color:{rc_c};font-weight:bold;">{rc}</td>
         </tr>"""
 
@@ -778,7 +793,8 @@ def generate_report(ranked, recent_trades, trade_info):
 
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
     <b>过滤规则:</b> 溢价率>20% → 盈利保护(回撤>5%) → 短期动量(<0) → 近3日跌幅(>3%)<br>
-    <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤) | 涨跌幅=(当日-前日)/前日 | 橙色行=已被过滤不交易
+    <b>得分:</b> 综合=长期(25日动量×R²) | 短期=10日动量×R² (<0过滤)<br>
+    <b>溢价率:</b> (当前价-前日净值)/前日净值 | 红色>20%触发过滤 | ✗=被过滤未交易
 </div>
 
 <div style="text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
