@@ -139,71 +139,76 @@ NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / '
 
 def fetch_neodata_navs(etf_codes):
     """
-    通过 neodata 获取最新单位净值。返回 {code(str): float}。
+    通过 neodata 分批获取最新单位净值。返回 {code(str): float}。
     neodata 返回纯数字代码（如 '513310'），调用方负责映射到 sh/sz 前缀。
     """
     import subprocess, json, re
     navs = {}
-    # 去掉 sh/sz 前缀，构建查询字符串
+    # 去掉 sh/sz 前缀
     raw_codes = [c[2:] if (c.startswith('sh') or c.startswith('sz')) and len(c)>2 else c
                  for c in etf_codes if c.startswith('sh') or c.startswith('sz')]
     if not raw_codes:
         return navs
-    query = 'ETF ' + ' '.join(raw_codes) + ' 最新行情 单位净值'
-    try:
-        result = subprocess.run(
-            [PYTHON, NEODATA_SCRIPT, '--query', query, '--data-type', 'api'],
-            capture_output=True, text=True, timeout=30,
-            cwd=str(Path(NEODATA_SCRIPT).parent),
-            encoding='utf-8', errors='replace'
-        )
-        output = result.stdout
-    except Exception:
-        return navs
 
-    m = re.search(r'\{[\s\S]*\}', output)
-    if not m:
-        return navs
-    try:
-        data = json.loads(m.group())
-    except Exception:
-        return navs
+    # 分批查询（每批最多15个，避免查询字符串过长导致API截断）
+    batch_size = 15
+    for batch_idx in range(0, len(raw_codes), batch_size):
+        batch = raw_codes[batch_idx:batch_idx + batch_size]
+        query = 'ETF ' + ' '.join(batch) + ' 最新行情 单位净值'
+        try:
+            result = subprocess.run(
+                [PYTHON, NEODATA_SCRIPT, '--query', query, '--data-type', 'api'],
+                capture_output=True, text=True, timeout=30,
+                cwd=str(Path(NEODATA_SCRIPT).parent),
+                encoding='utf-8', errors='replace'
+            )
+            output = result.stdout
+        except Exception:
+            continue
 
-    api = data.get('data', {}).get('apiData', {})
-    for r in api.get('apiRecall', []):
-        content = r.get('content', '')
-        rtype = r.get('type', '')
-        if '实时行情' in rtype:
-            for line in content.strip().split('\n')[2:]:
-                parts = [p.strip() for p in line.split('|') if p.strip()]
-                if len(parts) < 4:
-                    continue
-                code = None
-                for p in parts:
-                    if re.match(r'^\d{5,6}$', p):
-                        code = p
-                        break
-                if not code:
-                    continue
-                try:
-                    nav = float(parts[-1])
-                    if 0.01 < nav < 10000:
-                        navs[code] = nav
-                except ValueError:
-                    pass
-        elif '净值' in rtype or '净值' in r.get('desc', ''):
-            for line in content.strip().split('\n')[2:]:
-                parts = [p.strip() for p in line.split('|') if p.strip()]
-                if len(parts) >= 4:
-                    code = parts[0] if re.match(r'^\d{6}$', parts[0]) else None
-                    if code:
-                        try:
-                            nav = float(parts[3])
-                            if 0.01 < nav < 10000:
-                                if code not in navs:
-                                    navs[code] = nav
-                        except ValueError:
-                            pass
+        m = re.search(r'\{[\s\S]*\}', output)
+        if not m:
+            continue
+        try:
+            data = json.loads(m.group())
+        except Exception:
+            continue
+
+        api = data.get('data', {}).get('apiData', {})
+        for r in api.get('apiRecall', []):
+            content = r.get('content', '')
+            rtype = r.get('type', '')
+            if '实时行情' in rtype:
+                for line in content.strip().split('\n')[2:]:
+                    parts = [p.strip() for p in line.split('|') if p.strip()]
+                    if len(parts) < 4:
+                        continue
+                    code = None
+                    for p in parts:
+                        if re.match(r'^\d{5,6}$', p):
+                            code = p
+                            break
+                    if not code:
+                        continue
+                    try:
+                        nav = float(parts[-1])
+                        if 0.01 < nav < 10000:
+                            navs[code] = nav
+                    except ValueError:
+                        pass
+            elif '净值' in rtype or '净值' in r.get('desc', ''):
+                for line in content.strip().split('\n')[2:]:
+                    parts = [p.strip() for p in line.split('|') if p.strip()]
+                    if len(parts) >= 4:
+                        code = parts[0] if re.match(r'^\d{6}$', parts[0]) else None
+                        if code:
+                            try:
+                                nav = float(parts[3])
+                                if 0.01 < nav < 10000:
+                                    if code not in navs:
+                                        navs[code] = nav
+                            except ValueError:
+                                pass
 
     return navs
 
