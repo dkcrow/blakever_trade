@@ -1,0 +1,199 @@
+{
+  "download_time": "2026-05-28 23:04:41.171152",
+  "total": 38,
+  "success": 38,
+  "skipped": 0,
+  "failed": 0,
+  "details": {
+    "sh518880": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "NaT"
+    },
+    "sz159980": {
+      "status": "ok",
+      "records": 1570,
+      "last_date": "2026-05-28"
+    },
+    "sz159985": {
+      "status": "ok",
+      "records": 1584,
+      "last_date": "2026-05-28"
+    },
+    "sh501018": {
+      "status": "ok",
+      "records": 2416,
+      "last_date": "2026-05-27"
+    },
+    "sz161226": {
+      "status": "ok",
+      "records": 2628,
+      "last_date": "2026-05-28"
+    },
+    "sz159981": {
+      "status": "ok",
+      "records": 1548,
+      "last_date": "2026-05-28"
+    },
+    "sh513100": {
+      "status": "ok",
+      "records": 2744,
+      "last_date": "2026-05-27"
+    },
+    "sz159509": {
+      "status": "ok",
+      "records": 684,
+      "last_date": "NaT"
+    },
+    "sh513290": {
+      "status": "ok",
+      "records": 911,
+      "last_date": "2026-05-27"
+    },
+    "sh513500": {
+      "status": "ok",
+      "records": 2720,
+      "last_date": "2026-05-27"
+    },
+    "sz159529": {
+      "status": "ok",
+      "records": 560,
+      "last_date": "2026-05-27"
+    },
+    "sh513400": {
+      "status": "ok",
+      "records": 561,
+      "last_date": "2026-05-27"
+    },
+    "sh513520": {
+      "status": "ok",
+      "records": 1674,
+      "last_date": "2026-05-28"
+    },
+    "sh513030": {
+      "status": "ok",
+      "records": 2775,
+      "last_date": "2026-05-27"
+    },
+    "sh513080": {
+      "status": "ok",
+      "records": 1448,
+      "last_date": "2026-05-27"
+    },
+    "sh513310": {
+      "status": "ok",
+      "records": 841,
+      "last_date": "2026-05-28"
+    },
+    "sh513730": {
+      "status": "ok",
+      "records": 606,
+      "last_date": "2026-05-27"
+    },
+    "sz159792": {
+      "status": "ok",
+      "records": 1137,
+      "last_date": "2026-05-28"
+    },
+    "sh513130": {
+      "status": "ok",
+      "records": 1216,
+      "last_date": "2026-05-28"
+    },
+    "sh513050": {
+      "status": "ok",
+      "records": 2251,
+      "last_date": "2026-05-27"
+    },
+    "sz159920": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sh513690": {
+      "status": "ok",
+      "records": 1224,
+      "last_date": "2026-05-28"
+    },
+    "sh510300": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sh510500": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sh510050": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sh510210": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sz159915": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sh588080": {
+      "status": "ok",
+      "records": 1354,
+      "last_date": "2026-05-28"
+    },
+    "sh512100": {
+      "status": "ok",
+      "records": 2335,
+      "last_date": "2026-05-28"
+    },
+    "sh563360": {
+      "status": "ok",
+      "records": 395,
+      "last_date": "2026-05-28"
+    },
+    "sh563300": {
+      "status": "ok",
+      "records": 655,
+      "last_date": "NaT"
+    },
+    "sh512890": {
+      "status": "ok",
+      "records": 1793,
+      "last_date": "2026-05-28"
+    },
+    "sz159967": {
+      "status": "ok",
+      "records": 1674,
+      "last_date": "2026-05-28"
+    },
+    "sh512040": {
+      "status": "ok",
+      "records": 1836,
+      "last_date": "NaT"
+    },
+    "sz159201": {
+      "status": "ok",
+      "records": 306,
+      "last_date": "2026-05-28"
+    },
+    "sh511380": {
+      "status": "ok",
+      "records": 1497,
+      "last_date": "2026-05-28"
+    },
+    "sh511010": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    },
+    "sz511220": {
+      "status": "ok",
+      "records": 2776,
+      "last_date": "2026-05-28"
+    }
+  }
+}

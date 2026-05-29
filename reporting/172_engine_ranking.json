@@ -1,0 +1,100 @@
+{
+  "date": "2026-05-27",
+  "generated": "2026-05-28T22:34:03.550556",
+  "engine": "七星172 (SevenStar172Engine)",
+  "data_source": "C:\\Users\\blakehao\\Desktop\\blakever_trade\\data\\storage\\stock_data\\etf",
+  "total_etfs": 38,
+  "valid_etfs": 10,
+  "rankings": [
+    {
+      "rank": 1,
+      "code": "sh588080",
+      "name": "科创50ETF易方达",
+      "score": 14.8791,
+      "annualized_ret": 16.3029,
+      "r_squared": 0.9127,
+      "short_annualized": 0.9514
+    },
+    {
+      "rank": 2,
+      "code": "sz159967",
+      "name": "创业板成长ETF华夏",
+      "score": 4.1203,
+      "annualized_ret": 5.3043,
+      "r_squared": 0.7768,
+      "short_annualized": 0.8766
+    },
+    {
+      "rank": 3,
+      "code": "sh513100",
+      "name": "纳指ETF国泰",
+      "score": 3.3419,
+      "annualized_ret": 3.7978,
+      "r_squared": 0.88,
+      "short_annualized": 3.5108
+    },
+    {
+      "rank": 4,
+      "code": "sz159509",
+      "name": "纳指科技ETF景顺",
+      "score": 3.2895,
+      "annualized_ret": 3.9895,
+      "r_squared": 0.8245,
+      "short_annualized": 1.9828
+    },
+    {
+      "rank": 5,
+      "code": "sz159915",
+      "name": "创业板ETF易方达",
+      "score": 1.4492,
+      "annualized_ret": 1.9105,
+      "r_squared": 0.7585,
+      "short_annualized": 0.0506
+    },
+    {
+      "rank": 6,
+      "code": "sh513500",
+      "name": "标普500ETF博时",
+      "score": 0.6215,
+      "annualized_ret": 0.8741,
+      "r_squared": 0.711,
+      "short_annualized": 0.6938
+    },
+    {
+      "rank": 7,
+      "code": "sh513520",
+      "name": "日经ETF华夏",
+      "score": 0.4094,
+      "annualized_ret": 0.9767,
+      "r_squared": 0.4192,
+      "short_annualized": 0.7171
+    },
+    {
+      "rank": 8,
+      "code": "sh513400",
+      "name": "道琼斯ETF鹏华",
+      "score": 0.0442,
+      "annualized_ret": 0.2153,
+      "r_squared": 0.2051,
+      "short_annualized": 0.4938
+    },
+    {
+      "rank": 9,
+      "code": "sh511010",
+      "name": "国债ETF国泰",
+      "score": 0.0389,
+      "annualized_ret": 0.0443,
+      "r_squared": 0.8764,
+      "short_annualized": 0.0551
+    },
+    {
+      "rank": 10,
+      "code": "sz511220",
+      "name": "城投债ETF海富通",
+      "score": 0.0353,
+      "annualized_ret": 0.0401,
+      "r_squared": 0.88,
+      "short_annualized": 0.0725
+    }
+  ]
+}
