@@ -201,6 +201,43 @@ def fetch_premium_rates(codes):
     return premium_rates
 
 
+def load_nav_fallback(codes, check_date):
+    """
+    降级方案：对于 westock-data 缺失的ETF，使用本地CSV单位净值计算溢价率。
+    返回 {code: float} 百分比值。仅用于补充缺失数据。
+    """
+    fallback = {}
+    nav_dir = Path(__file__).parent.parent / 'data' / 'storage' / 'stock_data' / 'etf_nav'
+    if not nav_dir.exists():
+        return fallback
+
+    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
+    check_ts = pd.Timestamp(check_date)
+
+    for code in a_codes:
+        csv_path = nav_dir / f'{code}_nav.csv'
+        if not csv_path.exists():
+            continue
+        try:
+            df = pd.read_csv(csv_path, encoding='utf-8')
+            if 'date' not in df.columns or 'unit_nav' not in df.columns:
+                continue
+            df['date'] = pd.to_datetime(df['date'], errors='coerce')
+            df = df.dropna(subset=['date', 'unit_nav'])
+            df = df.set_index('date').sort_index()
+            mask = df.index < check_ts
+            available = df[mask]
+            if len(available) == 0:
+                continue
+            net_val = float(available['unit_nav'].iloc[-1])
+            if net_val <= 0:
+                continue
+            fallback[code] = net_val
+        except Exception:
+            pass
+    return fallback
+
+
 def check_premium_by_disc(premium_pct, threshold=20.0):
     """基于 westock-data disc 的溢价率检查"""
     return premium_pct > threshold
@@ -234,6 +271,20 @@ def get_current_rankings():
                 current_prices[code] = float(df.loc[mask, 'close'].iloc[-1])
             closes = df.loc[mask, 'close']
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
+
+    # 降级：westock-data 缺失的 ETF 用本地 CSV 净值补充
+    missing = [c for c in ETF_POOL if c not in premium_rates and (c.startswith('sh') or c.startswith('sz'))]
+    if missing:
+        nav_fb = load_nav_fallback(missing, LATEST_DATE)
+        fallback_added = 0
+        for code in missing:
+            if code in nav_fb and code in current_prices:
+                net_val = nav_fb[code]
+                price = current_prices[code]
+                if net_val > 0 and price > 0:
+                    premium_rates[code] = round((price - net_val) / net_val * 100, 2)
+                    fallback_added += 1
+        print(f"  [PREM] Fallback (local CSV): +{fallback_added} ETFs")
 
     prev_rankings = load_previous_rankings()
     prev_rank_map = {r['code']: r['rank'] for r in prev_rankings}
@@ -659,7 +710,7 @@ def generate_report(ranked, recent_trades, trade_info):
 
     top10_md = ""
     for r in top10:
-        prem = f"{r.get('premium_pct', 0):.1f}%" if r.get('premium_pct') else '-'
+        prem = f"{r.get('premium_pct', 0):.2f}%" if r.get('premium_pct') else '-'
         top10_md += (f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']} "
                      f"| {r['short_score']} | {r['long_score']} "
                      f"| {r['price']} | {fmt_change_pct(r['change_pct'])} | {prem} | {r['rchange']} |\n")
@@ -775,7 +826,7 @@ def generate_report(ranked, recent_trades, trade_info):
             rc_c = '#888'
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
         prem = r.get('premium_pct', 0)
-        prem_str = f'{prem:.1f}%' if prem else '-'
+        prem_str = f'{prem:.2f}%' if prem else '-'
         prem_c = '#DC3545' if prem > 20 else ('#E65100' if prem > 10 else '#888')
 
         html += f"""
