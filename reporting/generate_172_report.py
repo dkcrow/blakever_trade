@@ -885,7 +885,7 @@ def generate_report(ranked, recent_trades, trade_info):
 # 发送邮件
 # ================================================================
 
-def send_report_email(html_content, md_path):
+def send_report_email(html_content, md_path, mode_label="仅排名"):
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
@@ -897,7 +897,7 @@ def send_report_email(html_content, md_path):
 
     now = datetime.now()
     msg = MIMEMultipart("mixed")
-    msg["Subject"] = f"⚡ 核心交易 七星172盘中监控 - {now.strftime('%Y-%m-%d %H:%M')}"
+    msg["Subject"] = f"[{mode_label}] 七星172盘中监控 - {now.strftime('%Y-%m-%d %H:%M')}"
     msg["From"] = SENDER
     msg["To"] = RECEIVER
     msg["Date"] = now.strftime("%a, %d %b %Y %H:%M:%S +0800")
@@ -925,8 +925,12 @@ def send_report_email(html_content, md_path):
 # ================================================================
 
 def main():
+    # 解析命令行参数
+    no_trade = '--no-trade' in sys.argv
+
+    mode_label = "排名+交易" if not no_trade else "仅排名"
     print("=" * 60)
-    print("七星172盘后报告生成器 V3")
+    print(f"七星172盘后报告生成器 V3 [{mode_label}]")
     print("=" * 60)
 
     # 1. 排名
@@ -938,13 +942,16 @@ def main():
         print(f"    {r['name']:16s} score={r['score']:.4f}  short={r['short_score']:.4f}  "
               f"chg={fmt_change_pct(r['change_pct'])}  {flag}")
 
-    # 2. 交易检查（排名第一无neodata净值时跳过交易，仅更新排名）
+    # 2. 交易检查
     print("\n[2/5] 检查交易信号...")
-    top1 = ranked[0] if ranked else None
-    if top1 and top1.get('premium_pct') is None:
-        traded, trade_desc = False, f"排名第一{top1['name']}无neodata净值数据，仅更新排名不交易"
+    if no_trade:
+        traded, trade_desc = False, "仅排名模式（未触发交易）"
     else:
-        traded, trade_desc = check_and_execute_trades(ranked)
+        top1 = ranked[0] if ranked else None
+        if top1 and top1.get('premium_pct') is None:
+            traded, trade_desc = False, f"排名第一{top1['name']}无neodata净值数据，仅更新排名不交易"
+        else:
+            traded, trade_desc = check_and_execute_trades(ranked)
     if traded:
         print(f"  ⚡ 已执行: {trade_desc}")
     else:
@@ -972,7 +979,7 @@ def main():
 
     # 5. 发送 + 保存历史
     print("\n[5/5] 发送邮件 + 保存排名历史...")
-    success = send_report_email(html_content, str(md_path))
+    success = send_report_email(html_content, str(md_path), mode_label)
     save_rankings(ranked)
 
     print("\n" + "=" * 60)
