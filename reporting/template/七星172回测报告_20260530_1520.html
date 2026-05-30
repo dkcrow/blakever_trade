@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+    body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; font-size:14px; color:#333; max-width:800px; margin:0 auto; padding:10px; }
+    h2 { color:#667eea; margin:6px 0; }
+    hr { border:none; border-top:2px solid #667eea; margin:10px 0; }
+    td, th { white-space:nowrap; word-break:keep-all; }
+</style></head><body>
+
+<h2>七星172 回测报告</h2>
+<p style="color:#888;font-size:12px;">生成时间: 2026-05-30 15:20 | 回测区间: 2025-01-01 ~ 2026-05-30 | ETF池: 39只</p>
+
+
+
+<hr>
+<h2>📋 当前ETF池 (39只)</h2>
+<table style="border-collapse:collapse;width:100%;font-size:12px;"><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">大宗商品</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">黄金ETF华安</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh518880</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">有色ETF大成</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159980</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">豆粕ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159985</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">南方原油LOF</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh501018</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">白银LOF国投</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz161226</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">能源化工ETF建信</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159981</td></tr><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">国际ETF</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">纳指ETF国泰</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513100</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">纳指科技ETF景顺</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159509</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">纳指生物科技ETF汇添富</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513290</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">标普500ETF博时</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513500</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">标普消费ETF景顺</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159529</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">道琼斯ETF鹏华</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513400</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">日经ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513520</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">德国ETF华安</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513030</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">法国ETF华安</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513080</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">中韩半导体ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513310</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">东南亚科技ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513730</td></tr><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">香港ETF</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">港股通互联网ETF富国</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159792</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">恒生科技ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513130</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">中概互联网ETF易方达</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513050</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">恒生ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159920</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">港股红利ETF博时</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh513690</td></tr><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">指数ETF</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">沪深300ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh510300</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">中证500ETF南方</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh510500</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">上证50ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh510050</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">上证指数ETF富国</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh510210</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">创业板ETF易方达</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159915</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">科创50ETF易方达</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh588080</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">中证1000ETF南方</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh512100</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">A500ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh563360</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">中证2000ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh563300</td></tr><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">风格ETF</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">红利低波ETF华泰柏瑞</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh512890</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">创业板成长ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159967</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">价值100ETF富国</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh512040</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">自由现金流ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz159201</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">机器人ETF华夏</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh562500</td></tr><tr><td colspan="3" style="background:#667eea;color:#fff;padding:4px 10px;font-weight:bold;font-size:12px;">债券ETF</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">可转债ETF博时</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh511380</td></tr><tr style="background:#fff;"><td style="padding:2px 10px;">国债ETF国泰</td><td style="padding:2px 6px;color:#888;font-size:11px;">sh511010</td></tr><tr style="background:#f0f4ff;"><td style="padding:2px 10px;">城投债ETF海富通</td><td style="padding:2px 6px;color:#888;font-size:11px;">sz511220</td></tr></table>
+
+<hr>
+<h2>📊 回测结果</h2>
+<div style="margin:8px 0;">
+    <h3 style="margin:4px 0;color:#667eea;">回测结果</h3>
+    <table style="border-collapse:collapse;font-size:13px;width:100%;max-width:500px;"><tr><td style="padding:3px 10px;text-align:right;color:#666;">回测区间</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">2025-01-01 ~ 2026-05-30</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">ETF数量</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">39</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">交易日数</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">336</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">初始资金</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">10,000</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">最终资产</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">28,072.24¥</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">年化收益率</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">135.54%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">总收益率</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">180.72%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">最大回撤</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">17.71%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">夏普比率</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">2.2012</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">卡尔马比率</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">7.6542</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">总交易次数</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">213</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">买入/卖出</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">107/106</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">胜率</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">61.32%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">平均盈利</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">3.52%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">平均亏损</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">-2.54%</td></tr><tr><td style="padding:3px 10px;text-align:right;color:#666;">盈亏比</td><td style="padding:3px 10px;text-align:right;font-weight:bold;">1.3889</td></tr></table>
+</div>
+
+<hr>
+<h2>🏆 ETF盈亏排行榜</h2>
+<div style="margin:8px 0;">
+    <h3 style="margin:4px 0;color:#667eea;">🟢 回测盈利 Top 10</h3>
+    <table style="border-collapse:collapse;font-size:12px;width:100%;">
+        <tr style="background:#667eea;color:#fff;"><th style="padding:4px 8px;">#</th><th style="padding:4px 8px;text-align:left;">ETF名称</th><th style="padding:4px 8px;">代码</th><th style="padding:4px 8px;text-align:right;">总盈亏</th><th style="padding:4px 8px;text-align:center;">交易统计</th></tr>
+        <tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">1</td>
+            <td style="padding:3px 8px;">创业板成长ETF华夏</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz159967</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+21.87%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">7次(4赢/3亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">2</td>
+            <td style="padding:3px 8px;">中韩半导体ETF华泰柏瑞</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513310</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+19.93%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">13次(5赢/8亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">3</td>
+            <td style="padding:3px 8px;">纳指科技ETF景顺</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz159509</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+15.35%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">9次(7赢/2亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">4</td>
+            <td style="padding:3px 8px;">白银LOF国投</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz161226</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+15.18%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">6次(3赢/3亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">5</td>
+            <td style="padding:3px 8px;">南方原油LOF</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh501018</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+13.92%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">2次(2赢/0亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">6</td>
+            <td style="padding:3px 8px;">有色ETF大成</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz159980</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+11.22%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">5次(5赢/0亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">7</td>
+            <td style="padding:3px 8px;">纳指生物科技ETF汇添富</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513290</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+8.73%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">2次(1赢/1亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">8</td>
+            <td style="padding:3px 8px;">创业板ETF易方达</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz159915</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+8.14%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">3次(2赢/1亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">9</td>
+            <td style="padding:3px 8px;">黄金ETF华安</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh518880</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+6.75%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">7次(4赢/3亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">10</td>
+            <td style="padding:3px 8px;">机器人ETF华夏</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh562500</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+6.69%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">2次(2赢/0亏)</td>
+        </tr>
+    </table>
+</div>
+<div style="margin:8px 0;">
+    <h3 style="margin:4px 0;color:#667eea;">🔴 回测亏损 Top 10</h3>
+    <table style="border-collapse:collapse;font-size:12px;width:100%;">
+        <tr style="background:#667eea;color:#fff;"><th style="padding:4px 8px;">#</th><th style="padding:4px 8px;text-align:left;">ETF名称</th><th style="padding:4px 8px;">代码</th><th style="padding:4px 8px;text-align:right;">总盈亏</th><th style="padding:4px 8px;text-align:center;">交易统计</th></tr>
+        <tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">1</td>
+            <td style="padding:3px 8px;">能源化工ETF建信</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz159981</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#28A745;">-18.75%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">5次(1赢/4亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">2</td>
+            <td style="padding:3px 8px;">科创50ETF易方达</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh588080</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#28A745;">-2.25%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">4次(1赢/3亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">3</td>
+            <td style="padding:3px 8px;">东南亚科技ETF华泰柏瑞</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513730</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#28A745;">-0.93%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">3次(2赢/1亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">4</td>
+            <td style="padding:3px 8px;">港股红利ETF博时</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513690</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#28A745;">-0.33%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">8次(3赢/5亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">5</td>
+            <td style="padding:3px 8px;">红利低波ETF华泰柏瑞</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh512890</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#28A745;">-0.30%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">2次(1赢/1亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">6</td>
+            <td style="padding:3px 8px;">中证2000ETF华泰柏瑞</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh563300</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+0.13%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">1次(1赢/0亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">7</td>
+            <td style="padding:3px 8px;">城投债ETF海富通</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sz511220</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+0.22%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">2次(2赢/0亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">8</td>
+            <td style="padding:3px 8px;">日经ETF华夏</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513520</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+1.01%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">4次(3赢/1亏)</td>
+        </tr><tr style="background:#fff5f5;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">9</td>
+            <td style="padding:3px 8px;">中证500ETF南方</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh510500</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+1.10%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">1次(1赢/0亏)</td>
+        </tr><tr style="background:#fff;">
+            <td style="padding:3px 8px;text-align:center;font-weight:bold;">10</td>
+            <td style="padding:3px 8px;">纳指ETF国泰</td>
+            <td style="padding:3px 8px;color:#888;font-size:11px;">sh513100</td>
+            <td style="padding:3px 8px;text-align:right;font-weight:bold;color:#DC3545;">+1.34%</td>
+            <td style="padding:3px 8px;text-align:center;color:#888;">1次(1赢/0亏)</td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+<p style="color:#aaa;font-size:11px;text-align:center;">七星172策略回测报告 | 初始资金10000 佣金万二 | 数据来源: 本地CSV历史数据</p>
+</body></html>
