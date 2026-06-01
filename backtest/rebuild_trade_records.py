@@ -116,6 +116,14 @@ for t in trades:
 df = pd.DataFrame(records)
 df.to_excel(TRADES_XLSX, index=False)
 
+# 补充时间戳（回测记录默认 09:30）
+_pdf = pd.read_excel(TRADES_XLSX)
+for _i, _r in _pdf.iterrows():
+    _d = str(_r['交易日期'])
+    if ':' not in _d:
+        _pdf.at[_i, '交易日期'] = _d + ' 09:30'
+_pdf.to_excel(TRADES_XLSX, index=False)
+
 # 6. 计算盈亏
 buy_queue = {}
 for i in range(len(records) - 1, -1, -1):
