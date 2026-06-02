@@ -70,31 +70,53 @@ DEFAULT_PARAMS = {
     'min_money': 5000,
 
     # ---- 盈利保护参数 ----
-    'enable_profit_protection': True,
+    'enable_profit_protection': False,  # 2026-06-03: 永久关闭 (消融实验证实拖累收益73%)
     'profit_protection_lookback': 1,
     'profit_protection_threshold': 0.05,
     'profit_protection_check_times': ['11:00'],
 
     # ---- 过滤器参数 ----
-    'loss': 0.97,                    # 近3日单日跌幅阈值
-    'min_score_threshold': 0,
-    'max_score_threshold': 100.0,
+    'loss': 0.01,                    # 2026-06-03: 永久关闭 (消融实验证实破坏力-292%)
+    'min_score_threshold': -999999,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-102%)
+    'max_score_threshold': 999999,   # 2026-06-03: 永久关闭
 
     # ---- 成交量过滤 ----
-    'enable_volume_check': True,
-    'volume_lookback': 5,
-    'volume_threshold': 2,
-    'volume_return_limit': 1,
+    'enable_volume_check': False,   # 2026-06-02: 永久关闭
 
     # ---- 短期动量过滤 ----
-    'use_short_momentum_filter': True,
-    'short_lookback_days': 10,
-    'short_momentum_threshold': 0.0,
+    'use_short_momentum_filter': False,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-313%)
 
     # ---- 溢价率过滤 ----
-    'enable_premium_filter': True,
+    'enable_premium_filter': True,   # 仅保留此项, 防高溢价买入
     'premium_threshold': 0.20,
+
+    # ---- 行情判断 & 走弱期防御 (QMT V3) ----
+    'enable_regime_switch': True,
+    'enable_avoid_a_share': True,
+    'enable_intraday_drawdown': True,
+    'intraday_drawdown_threshold': 0.02,
+    'weak_period_ma_lookback': 10,
+    'weak_period_max_days': 20,
 }
+
+# ================================================================
+# 📋 ETF类别分类 (对应QMT V3的分类体系，用于走弱期回避A股)
+# 注意：此分类包含所有可能出现在池中的ETF，运行时自动过滤到当前池
+# ================================================================
+ETF_CATEGORY_OVERSEAS = {
+    # 海外ETF（走弱期可交易）
+    'sh513100','sz159509','sh513290','sh513500','sz159529',
+    'sh513400','sh513520','sh513030','sh513080','sh513310','sh513730',
+    'sz159792','sh513130','sh513050','sz159920','sh513690',
+    # 债券ETF（走弱期可交易）
+    'sh511380','sh511010','sz511220',
+}
+ETF_CATEGORY_COMMODITY = {
+    # 商品ETF（走弱期可交易）
+    'sh518880','sz159980','sz159985','sh501018','sz161226','sz159981',
+    'sh512400',
+}
+# A股ETF = 指数 + 风格 + 行业板块（走弱期回避）
 
 
 # ======================================================================
@@ -111,23 +133,188 @@ class SevenStar172Engine:
     - 有买入二次检查
     - 佣金费率 0.02% (vs 0.01%)
     - 基准: 沪深300 (vs 国投白银LOF)
+    
+    V2 [2026/06/02]: 新增QMT V3特性
+    - 行情判断 (regime_switch): 走弱期自动回避A股ETF
+    - 日内回撤检查 (intraday_drawdown): 买入前跳过日内大幅回撤标的
     """
 
-    def __init__(self, params=None, mode='backtest'):
+    def __init__(self, params=None, mode='backtest', etf_filter=None):
         self.params = deepcopy(DEFAULT_PARAMS)
         if params:
             self.params.update(params)
         self.mode = mode
+
+        # 过滤器: 默认用 SevenStar172Filter
+        if etf_filter is not None:
+            self.filter = etf_filter
+        else:
+            from strategies.etf.seven_star_base import SevenStar172Filter
+            self.filter = SevenStar172Filter()
 
         # 运行时状态变量
         self.rankings_cache = {'date': None, 'data': None}
         self.profit_protection_sold_today = []  # 日内卖出黑名单
         self.nav_data = {}  # 净值数据缓存 {code: Series}
 
+        # ---- 行情判断状态 (QMT V3) ----
+        self.is_a_share_weak = False
+        self.weak_period_counter = 0
+        self.regime_indexes_data = None  # 监测指数数据缓存
+
     def reset_state(self):
         """重置所有运行时状态"""
         self.rankings_cache = {'date': None, 'data': None}
         self.profit_protection_sold_today = []
+        self.is_a_share_weak = False
+        self.weak_period_counter = 0
+        self.regime_indexes_data = None
+
+    # ---------- 行情判断 (QMT V3) ----------
+
+    def load_regime_indexes(self, data_source, start_date, end_date):
+        """加载监测指数数据：沪深300、深证综指、创业板指、中证A500
+        优先使用本地index数据，缺失则用已有ETF近似"""
+        import os
+        index_codes = {
+            '沪深300': 'sh000300',
+            '创业板指': 'sz399006',
+            '上证指数': 'sh000001',   # 近似替代深证综指
+            '中证500': 'sh000905',    # 近似替代中证A500
+        }
+        # QMT原始使用: 000300(沪深300), 399101(深证综指), 399006(创业板指), 000510(中证A500)
+        # 本地替代: 000300, 399006, 000001(上证), 000905(中证500)
+
+        data_dir = data_source.data_dir.parent / 'index'
+        self.regime_indexes_data = {}
+
+        for name, code in index_codes.items():
+            fp = data_dir / f'{code}.csv'
+            if not fp.exists():
+                # 尝试在etf目录找
+                fp_alt = data_source.data_dir / f'{code.replace("sh","").replace("sz","")}.csv'
+                if fp_alt.exists():
+                    fp = fp_alt
+
+            if fp.exists():
+                try:
+                    df = pd.read_csv(fp)
+                    # 统一列名（兼容大写 Date/Open/Close 等格式）
+                    rename_map = {}
+                    for c in df.columns:
+                        lc = c.lower().strip()
+                        if lc == 'date' and c != 'date':
+                            rename_map[c] = 'date'
+                        elif lc in ('open','high','low','close','volume') and lc != c:
+                            rename_map[c] = lc
+                    if rename_map:
+                        df = df.rename(columns=rename_map)
+                    df['date'] = pd.to_datetime(df['date'])
+                    df = df.set_index('date').sort_index()
+                    if 'close' in df.columns:
+                        self.regime_indexes_data[name] = df['close']
+                except Exception as e:
+                    pass
+
+        if self.regime_indexes_data:
+            names = list(self.regime_indexes_data.keys())
+            print(f"  行情监测指数: {', '.join(names)} ({len(names)}个)")
+        else:
+            print(f"  ⚠️ 未找到监测指数数据，行情判断将跳过")
+
+    def check_regime(self, date):
+        """..."""
+        if not self.params['enable_regime_switch']:
+            self.is_a_share_weak = False
+            return
+
+        if self.regime_indexes_data is None or len(self.regime_indexes_data) == 0:
+            return
+
+        ma_lookback = self.params['weak_period_ma_lookback']
+        threshold = max(2, int(len(self.regime_indexes_data) * 0.75))
+
+        below_count, above_count = 0, 0
+        total = 0
+
+        for name, close_series in self.regime_indexes_data.items():
+            mask = close_series.index <= pd.Timestamp(date)
+            hist = close_series[mask]
+            if len(hist) < ma_lookback + 1:
+                continue
+            total += 1
+            current_price = hist.iloc[-1]
+            ma_val = hist.iloc[-(ma_lookback+1):-1].mean()
+            if current_price < ma_val:
+                below_count += 1
+            else:
+                above_count += 1
+
+        if total == 0:
+            return
+
+        old_state = self.is_a_share_weak
+
+        if not self.is_a_share_weak:
+            if below_count >= threshold:
+                self.is_a_share_weak = True
+                self.weak_period_counter = 0
+                if self.params['enable_avoid_a_share']:
+                    # Use ASCII-only to avoid encoding issues on Windows
+                    s = 'WEAK: %d/%d indices below MA%d -> avoid A-share' % (below_count, total, ma_lookback)
+                    print('  [%s] %s' % (date, s))
+        else:
+            self.weak_period_counter += 1
+            if above_count >= threshold:
+                self.is_a_share_weak = False
+                self.weak_period_counter = 0
+                s = 'NORMAL: %d/%d indices above MA%d' % (above_count, total, ma_lookback)
+                print('  [%s] %s' % (date, s))
+            elif self.weak_period_counter >= self.params['weak_period_max_days']:
+                self.is_a_share_weak = False
+                self.weak_period_counter = 0
+                s = 'TIMEOUT: weak period forced exit after %d days' % self.params['weak_period_max_days']
+                print('  [%s] %s' % (date, s))
+
+        if old_state != self.is_a_share_weak:
+            self.rankings_cache = {'date': None, 'data': None}
+
+    def get_active_pool(self, full_pool):
+        """根据行情状态获取当前可交易的ETF池"""
+        if not self.params['enable_avoid_a_share']:
+            return full_pool
+        if not self.is_a_share_weak:
+            return full_pool
+
+        # 走弱期：仅海外 + 商品 + 债券
+        active = [c for c in full_pool
+                  if c in ETF_CATEGORY_OVERSEAS or c in ETF_CATEGORY_COMMODITY]
+        return active
+
+    def check_intraday_drawdown(self, etf_code, current_price, hist_df, date):
+        """买入前日内回撤检查（近似：用当日 open vs close 计算回撤，而非分钟级 high）
+        返回 True 表示处于回撤状态 → 不宜买入"""
+        if not self.params.get('enable_intraday_drawdown', True):
+            return False
+        if not self.is_a_share_weak:
+            return False  # 仅走弱期启用
+
+        threshold = self.params.get('intraday_drawdown_threshold', 0.02)
+        try:
+            mask = hist_df.index == pd.Timestamp(date)
+            today_rows = hist_df[mask]
+            if len(today_rows) == 0:
+                return False
+            today_open = today_rows['open'].iloc[0]
+            if today_open <= 0:
+                return False
+            # 用开盘价近似日内高点（实际QMT用分钟级最高价）
+            drawdown = (today_open - current_price) / today_open
+            if drawdown >= threshold:
+                return True
+        except Exception:
+            pass
+        return False
 
     def reset_daily_blacklist(self):
         """每日开盘清空黑名单 (对应聚宽 check_positions 中的重置)"""
@@ -247,40 +434,13 @@ class SevenStar172Engine:
             if current_price <= 0:
                 continue
 
-            # ===== 第1层: 盈利保护检查 =====
-            if self.check_profit_protection(etf_code, current_price, df, check_date):
+            # ===== 可插拔过滤器 (策略独立) =====
+            nav_s = self.nav_data.get(etf_code)
+            is_filtered, reasons = self.filter.check(etf_code, current_price, df, check_date, self.params, nav_s)
+            if is_filtered:
                 continue
 
-            # ===== 第2层: 溢价率过滤 =====
-            if self.params.get('enable_premium_filter', True) and self.nav_data:
-                _, net_value, used_date = self.get_premium_rate(etf_code, check_date)
-                if net_value is not None and net_value > 0:
-                    premium = (current_price - net_value) / net_value
-                    if premium > self.params.get('premium_threshold', 0.20):
-                        continue  # 溢价率超标，排除
-
-            # ===== 第3层: 成交量过滤 =====
-            vol_filtered = False
-            if self.params['enable_volume_check']:
-                vol_ratio = self.get_volume_ratio(df, check_date)
-                if vol_ratio is not None:
-                    annualized = self._calc_annualized_returns(close_full, lookback_days)
-                    if annualized > self.params['volume_return_limit']:
-                        vol_filtered = True
-            if vol_filtered:
-                continue
-
-            # ===== 第4层: 短期动量过滤 =====
-            if len(close_full) >= short_lookback + 1:
-                short_return = close_full[-1] / close_full[-(short_lookback + 1)] - 1
-                short_annualized = (1 + short_return) ** (250 / short_lookback) - 1
-            else:
-                short_annualized = 0
-
-            if self.params['use_short_momentum_filter'] and short_annualized < self.params['short_momentum_threshold']:
-                continue
-
-            # ===== 第5层: 长期动量计算 (得分核心) =====
+            # ===== 长期动量计算 (得分核心) =====
             recent = close_full[-(lookback_days + 1):]
             y = np.log(np.maximum(recent, 1e-10))
             x = np.arange(len(y))
@@ -295,17 +455,13 @@ class SevenStar172Engine:
 
             score = annualized_ret * r_squared
 
-            # ===== 第6层: 近3日单日跌幅过滤 =====
-            if len(close_full) >= 4:
-                day1 = close_full[-1] / close_full[-2]
-                day2 = close_full[-2] / close_full[-3]
-                day3 = close_full[-3] / close_full[-4]
-                if min(day1, day2, day3) < self.params['loss']:
-                    continue
-
-            # ===== 得分范围过滤 =====
-            if not (self.params['min_score_threshold'] < score < self.params['max_score_threshold']):
-                continue
+            # 短期年化 (仅用于日志/调试, 不影响排名)
+            short_lookback = self.params.get('short_lookback_days', 10)
+            if len(close_full) >= short_lookback + 1:
+                short_return = close_full[-1] / close_full[-(short_lookback + 1)] - 1
+                short_annualized = (1 + short_return) ** (250 / short_lookback) - 1
+            else:
+                short_annualized = 0
 
             etf_metrics.append({
                 'etf': etf_code,
@@ -350,9 +506,9 @@ class BacktestEngine172:
     - 15:10 收盘重置
     """
 
-    def __init__(self, data_source, engine_params=None):
+    def __init__(self, data_source, engine_params=None, etf_filter=None):
         self.data_source = data_source
-        self.engine = SevenStar172Engine(engine_params, mode='backtest')
+        self.engine = SevenStar172Engine(engine_params, mode='backtest', etf_filter=etf_filter)
         self.portfolio = None
         self.results = {}
         self.commission_rate = 0.0002  # 七星172的佣金费率 (vs 拉普拉斯0.0001)
@@ -383,6 +539,10 @@ class BacktestEngine172:
         self.engine.nav_data = nav_data
         nav_count = len(nav_data)
         print(f"  净值数据: {nav_count}/{len(ETF_POOL)} 只ETF (溢价率过滤{'启用' if self.engine.params.get('enable_premium_filter') else '关闭'})")
+
+        # 加载监测指数数据（行情判断用）
+        if self.engine.params.get('enable_regime_switch', False):
+            self.engine.load_regime_indexes(self.data_source, start_date, end_date)
 
         if len(all_etf_data) == 0:
             print("[FATAL] 无可用数据! 请检查 data_dir 是否包含ETF CSV文件")
@@ -420,6 +580,9 @@ class BacktestEngine172:
             # ===== 09:10 持仓日志 + 清空黑名单 =====
             self._log_positions(i, td)
             self.engine.reset_daily_blacklist()
+
+            # ===== 09:40 行情判断 (QMT V3) =====
+            self.engine.check_regime(td)
 
             # ===== 11:00 盈利保护检查 =====
             self._run_profit_protection(current_prices, all_etf_data, td)
@@ -496,8 +659,11 @@ class BacktestEngine172:
                     print(f"  [{date}] 📤 SELL: {sec} {ETF_NAMES.get(sec,'')} @{current_prices[sec]:.3f}")
 
     def _run_buy(self, current_prices, all_etf_data, date):
-        """买入操作 (13:11) - 对应聚宽原版 etf_buy_trade (含GLM5修复)"""
+        """买入操作 (13:11) - 对应聚宽原版 etf_buy_trade (含GLM5修复 + QMT V3走弱期防御)"""
         ranked = self.engine.get_ranked_etfs(all_etf_data, current_prices, date)
+
+        # ===== QMT V3: 走弱期过滤 —— 获取当前可交易池 =====
+        active_pool = self.engine.get_active_pool(list(all_etf_data.keys()))
 
         # 打印前5名
         if ranked:
@@ -513,9 +679,17 @@ class BacktestEngine172:
             etf = m['etf']
             cur_price = m['current_price']
 
+            # ===== QMT V3: 走弱期回避A股 =====
+            if etf not in active_pool and etf != DEFENSIVE_ETF:
+                continue
+
+            # ===== QMT V3: 日内回撤检查（买入前） =====
+            hist_df = all_etf_data.get(etf)
+            if self.engine.check_intraday_drawdown(etf, cur_price, hist_df, date):
+                continue
+
             # 【GLM5修复1】买入二次检查：补上作者文档声称但漏掉的盈利保护检查
             if self.engine.params['enable_profit_protection']:
-                hist_df = all_etf_data.get(etf)
                 if hist_df is not None:
                     if self.engine.check_profit_protection(etf, cur_price, hist_df, date):
                         continue

@@ -12,6 +12,8 @@
 """
 
 import os
+import math
+import numpy as np
 import pandas as pd
 from pathlib import Path
 
@@ -158,10 +160,12 @@ class LocalDataSource:
             return float(df.loc[df.index.date <= dt, 'close'].iloc[-1])
         return float(df['close'].iloc[-1])
 
-    def load_all_etfs(self, start_date=None, end_date=None, min_rows=25):
-        """加载所有ETF数据，返回 {code: DataFrame} 字典"""
+    def load_all_etfs(self, start_date=None, end_date=None, min_rows=25, pool=None):
+        """加载ETF数据，返回 {code: DataFrame} 字典
+        pool: 指定ETF代码列表，默认使用 ETF_POOL（七星172池）"""
         data = {}
-        for code in ETF_POOL:
+        codes = pool if pool is not None else ETF_POOL
+        for code in codes:
             df = self.load_etf_kline(code, start_date, end_date)
             if df is not None and len(df) > min_rows:
                 data[code] = df
@@ -186,10 +190,12 @@ class LocalDataSource:
         except Exception:
             return None
 
-    def load_all_navs(self):
-        """加载所有ETF的净值数据，返回 {code: Series} 字典"""
+    def load_all_navs(self, pool=None):
+        """加载ETF净值数据，返回 {code: Series} 字典
+        pool: 指定ETF代码列表，默认使用 ETF_POOL"""
         navs = {}
-        for code in ETF_POOL:
+        codes = pool if pool is not None else ETF_POOL
+        for code in codes:
             nav = self.load_nav(code)
             if nav is not None and len(nav) > 0:
                 navs[code] = nav
@@ -214,6 +220,277 @@ class LocalDataSource:
         if len(recent) == 0:
             return None, None
         return float(recent.iloc[-1]), str(recent.index[-1].date())
+
+
+# ================================================================
+# 🎛️ 可插拔ETF过滤器接口
+# ================================================================
+
+class EtfFilter:
+    """
+    ETF过滤器抽象基类
+    
+    不同策略实现不同的过滤逻辑，互不干扰。
+    回测引擎通过 self.filter.check() 调用，返回过滤结果。
+    """
+    name = "BaseFilter"
+
+    def check(self, code, current_price, hist_df, date, params, nav_series=None):
+        """
+        检查ETF是否应该被过滤
+        
+        参数:
+            code: ETF代码 (如 'sz159995')
+            current_price: 当前价格
+            hist_df: 历史数据 DataFrame (索引为date, 包含open/high/low/close/volume列)
+            date: 检查日期
+            params: 策略参数字典
+            nav_series: 净值序列 (可选, 用于溢价率检查)
+        
+        返回:
+            (is_filtered: bool, reasons: list[str])
+        """
+        raise NotImplementedError
+
+
+class SevenStar172Filter(EtfFilter):
+    """七星172策略过滤器 (6层过滤, 与原引擎内联逻辑逐层对齐)"""
+    name = "SevenStar172"
+
+    def check(self, code, current_price, hist_df, date, params, nav_series=None):
+        reasons = []
+        close_arr = hist_df['close'].values
+        close_full = np.append(close_arr, current_price) if close_arr[-1] != current_price else close_arr
+        lookback = params.get('lookback_days', 25)
+        short_lb = params.get('short_lookback_days', 10)
+
+        # 第1层: 盈利保护 (受 enable_profit_protection 控制, 与 check_profit_protection() 第332行一致)
+        if params.get('enable_profit_protection', False):
+            if self._check_profit_protection_172(code, current_price, hist_df, date, params):
+                reasons.append('盈利保护')
+
+        # 第2层: 溢价率 (可开关, 前一日净值, 与 get_premium_rate() 第355行一致)
+        if params.get('enable_premium_filter', True) and nav_series is not None and len(nav_series) > 0:
+            threshold = params.get('premium_threshold', 0.20)
+            if self._check_premium(current_price, nav_series, date, threshold):
+                reasons.append(f'溢价率>{threshold:.0%}')
+
+        # 第3层: 成交量 (可开关, 172特有: 有量比+年化>3.0才过滤, 与 get_volume_ratio 第384行一致)
+        if params.get('enable_volume_check', False):
+            if self._check_volume_172(hist_df, date, close_full, lookback, params):
+                reasons.append('成交量不足')
+
+        # 第4层: 短期动量 (可开关)
+        if params.get('use_short_momentum_filter', False) and len(close_full) >= short_lb + 1:
+            short_momentum = self._calc_short_momentum(close_full, short_lb)
+            if short_momentum < params.get('short_momentum_threshold', 0):
+                reasons.append('短期动量负')
+
+        # 第5层: 近3日单日跌幅 (始终启用, 旧内联代码无开关)
+        if len(close_full) >= 4:
+            day1 = close_full[-1] / close_full[-2]
+            day2 = close_full[-2] / close_full[-3]
+            day3 = close_full[-3] / close_full[-4]
+            if min(day1, day2, day3) < params.get('loss', 0.97):
+                reasons.append('近3日跌>3%')
+
+        # 第6层: 得分范围 (始终启用)
+        score = self._calc_score(close_full, lookback)
+        min_s = params.get('min_score_threshold', -999)
+        max_s = params.get('max_score_threshold', 999)
+        if not (min_s < score < max_s):
+            reasons.append('得分越界')
+
+        return len(reasons) > 0, reasons
+
+    def _check_profit_protection_172(self, code, current_price, hist_df, date, params):
+        """盈利保护: 前N日最高点回撤>5%. 使用严格 < (原引擎第339行)"""
+        lookback = params.get('profit_protection_lookback', 1)
+        threshold = params.get('profit_protection_threshold', 0.05)
+        try:
+            mask = hist_df.index < pd.Timestamp(date)  # 严格小于, 排除当日
+            hist = hist_df[mask]
+            if len(hist) < lookback:
+                return False
+            max_high = hist['high'].tail(lookback).max()
+            if max_high > 0 and current_price <= max_high * (1 - threshold):
+                return True
+        except Exception:
+            pass
+        return False
+
+    def _check_premium(self, current_price, nav_series, date, threshold):
+        """溢价率检查：用前一日净值 (与原引擎 get_premium_rate 一致, 严格 < 而非 <=)"""
+        try:
+            check_ts = pd.Timestamp(date)
+            mask = nav_series.index < check_ts  # 严格小于, 取前一日
+            available = nav_series[mask]
+            if len(available) == 0:
+                return False
+            recent = available.tail(5)  # 向前搜索最多5日
+            nav = float(recent.iloc[-1])
+            if nav > 0:
+                return (current_price - nav) / nav > threshold
+        except Exception:
+            pass
+        return False
+
+    def _check_volume_172(self, hist_df, date, close_full, lookback, params):
+        """172成交量过滤: 放量 + 高年化收益 → 过滤. 与原引擎内联逻辑一致:
+        仅当 (vol_ratio 可计算) AND (annualized > volume_return_limit) 时过滤"""
+        try:
+            vols = hist_df['volume']
+            mask = vols.index <= pd.Timestamp(date)
+            vols_to_date = vols[mask]
+            vol_lookback = params.get('volume_lookback', 20)
+            if len(vols_to_date) < vol_lookback + 1:
+                return False
+            avg_vol = vols_to_date.iloc[-(vol_lookback+1):-1].mean()
+            current_vol = vols_to_date.iloc[-1]
+            # vol_ratio 可计算即可, 不比较阈值 (与原 get_volume_ratio 一致)
+            if avg_vol > 0:
+                annualized = self._calc_annualized_only(close_full, lookback)
+                if annualized > params.get('volume_return_limit', 3.0):
+                    return True
+        except Exception:
+            pass
+        return False
+
+    @staticmethod
+    def _calc_annualized_only(close_full, lookback):
+        """纯年化收益率(不含R2)，用于成交量过滤判断"""
+        recent = close_full[-(lookback + 1):]
+        y = np.log(np.maximum(recent, 1e-10))
+        x = np.arange(len(y))
+        weights = np.linspace(1, 2, len(y))
+        slope, _ = np.polyfit(x, y, 1, w=weights)
+        return math.exp(slope * 250) - 1
+
+    @staticmethod
+    def _calc_short_momentum(close_full, short_lb):
+        if len(close_full) < short_lb + 1:
+            return 0
+        short_return = close_full[-1] / close_full[-(short_lb + 1)] - 1
+        return (1 + short_return) ** (250 / short_lb) - 1
+
+    @staticmethod
+    def _calc_score(close_full, lookback):
+        recent = close_full[-(lookback + 1):]
+        y = np.log(np.maximum(recent, 1e-10))
+        x = np.arange(len(y))
+        weights = np.linspace(1, 2, len(y))
+        slope, intercept = np.polyfit(x, y, 1, w=weights)
+        annualized = math.exp(slope * 250) - 1
+        ss_res = np.sum(weights * (y - (slope * x + intercept)) ** 2)
+        ss_tot = np.sum(weights * (y - np.mean(y)) ** 2)
+        r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0
+        return annualized * r2
+
+
+class QMTFilter(EtfFilter):
+    """七星QMT V3策略过滤器 (4层过滤, 与QMT聚宽版一致)"""
+    name = "QMT"
+
+    def check(self, code, current_price, hist_df, date, params, nav_series=None):
+        reasons = []
+        close_arr = hist_df['close'].values
+        close_full = np.append(close_arr, current_price) if close_arr[-1] != current_price else close_arr
+
+        # 第1层: 盈利保护 (回撤>5%)
+        if params.get('enable_profit_protection', False):
+            if self._check_profit_protection(code, current_price, hist_df, date, params):
+                drawdown = self._calc_drawdown(current_price, hist_df, date, params)
+                if drawdown is not None:
+                    reasons.append(f'盈利保护(回撤{drawdown:.0f}%)')
+                else:
+                    reasons.append('盈利保护')
+
+        # 第2层: 成交量放量 (最新日量<20日均量50% → 过滤)
+        if params.get('enable_volume_check', False):
+            if self._check_volume_qmt(hist_df, date):
+                reasons.append('量缩')
+
+        # 第3层: 短期动量 (<0 → 过滤)
+        if params.get('use_short_momentum_filter', False):
+            short_lb = params.get('short_lookback_days', 10)
+            if len(close_full) >= short_lb + 1:
+                sm = self._calc_short_momentum(close_full, short_lb)
+                if sm < 0:
+                    reasons.append(f'短期动量负({sm:.2f})')
+
+        # 第4层: 溢价率 (>20% → 过滤)
+        if params.get('enable_premium_filter', True) and nav_series is not None and len(nav_series) > 0:
+            threshold = params.get('premium_threshold', 0.20)
+            if self._check_premium(current_price, nav_series, date, threshold):
+                reasons.append(f'溢价率>{threshold:.0%}')
+
+        return len(reasons) > 0, reasons
+
+    def _check_profit_protection(self, code, current_price, hist_df, date, params):
+        lookback = params.get('profit_protection_lookback', 1)
+        threshold = params.get('profit_protection_threshold', 0.05)
+        try:
+            mask = hist_df.index <= pd.Timestamp(date)
+            hist = hist_df[mask]
+            if len(hist) < lookback:
+                return False
+            max_high = hist['high'].tail(lookback).max()
+            if max_high > 0 and current_price <= max_high * (1 - threshold):
+                return True
+        except Exception:
+            pass
+        return False
+
+    def _calc_drawdown(self, current_price, hist_df, date, params):
+        try:
+            mask = hist_df.index <= pd.Timestamp(date)
+            hist = hist_df[mask]
+            lookback = params.get('profit_protection_lookback', 1)
+            if len(hist) < lookback:
+                return None
+            max_high = hist['high'].tail(lookback).max()
+            if max_high > 0:
+                return (1 - current_price / max_high) * 100
+        except Exception:
+            pass
+        return None
+
+    def _check_volume_qmt(self, hist_df, date):
+        """QMT成交量过滤: 最新日量 < 20日均量50%"""
+        try:
+            vols = hist_df['volume']
+            mask = vols.index <= pd.Timestamp(date)
+            vols_to_date = vols[mask]
+            if len(vols_to_date) < 21:
+                return False
+            avg_vol = vols_to_date.iloc[-21:-1].mean()
+            latest_vol = vols_to_date.iloc[-1]
+            if avg_vol > 0 and latest_vol < avg_vol * 0.5:
+                return True
+        except Exception:
+            pass
+        return False
+
+    @staticmethod
+    def _check_premium(current_price, nav_series, date, threshold):
+        try:
+            mask = nav_series.index <= pd.Timestamp(date)
+            available = nav_series[mask]
+            if len(available) == 0:
+                return False
+            nav = float(available.iloc[-1])
+            if nav > 0:
+                return (current_price - nav) / nav > threshold
+        except Exception:
+            pass
+        return False
+
+    @staticmethod
+    def _calc_short_momentum(close_full, short_lb):
+        if len(close_full) < short_lb + 1:
+            return 0
+        short_return = close_full[-1] / close_full[-(short_lb + 1)] - 1
+        return (1 + short_return) ** (250 / short_lb) - 1
 
 
 # ================================================================
