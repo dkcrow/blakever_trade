@@ -70,7 +70,7 @@ DEFAULT_PARAMS = {
     'min_money': 5000,
 
     # ---- 盈利保护参数 ----
-    'enable_profit_protection': False,  # 2026-06-03: 永久关闭 (消融实验证实拖累收益73%)
+    'enable_profit_protection': True,   # 2026-06-03: 重新启用 (独立测试: +35%收益 -2.2%回撤)
     'profit_protection_lookback': 1,
     'profit_protection_threshold': 0.05,
     'profit_protection_check_times': ['11:00'],

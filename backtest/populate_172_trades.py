@@ -1,6 +1,6 @@
-"""重建七星172历史交易记录 (成交量过滤已关闭)
+"""重建七星172历史交易记录
 回测: 2025-01-02 ~ 2026-06-02
-过滤器: SevenStar172Filter (5层, 成交量关闭)
+过滤器: 盈利保护(回撤>5%) + 溢价率>20%
 输出: backtest/results_172/七星172_交易记录_2026.xlsx
 """
 import sys, warnings, io
@@ -15,16 +15,16 @@ from strategies.etf.seven_star_172 import BacktestEngine172
 from strategies.etf.seven_star_base import LocalDataSource, ETF_NAMES
 
 START = '2025-01-02'
-END = '2026-06-03'
+END = '2026-06-02'
 
-# 参数: 仅保留溢价率过滤 (消融实验证实其余5层均为负贡献)
+# 参数: 盈利保护 + 溢价率 (消融实验证实其余4层均为负贡献)
 PARAMS = {
     'lookback_days': 25,
     'holdings_num': 1,
-    'enable_profit_protection': False,     # 永久关闭
+    'enable_profit_protection': True,      # 重新启用: +35%收益 -2.2%回撤
     'enable_volume_check': False,          # 永久关闭
     'use_short_momentum_filter': False,    # 永久关闭
-    'enable_premium_filter': True,         # 仅保留
+    'enable_premium_filter': True,         # 保留
     'enable_regime_switch': True,
     'enable_avoid_a_share': True,
     'enable_intraday_drawdown': True,

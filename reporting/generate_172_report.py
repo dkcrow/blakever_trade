@@ -24,6 +24,7 @@ from strategies.etf.seven_star_base import (
 )
 
 HISTORY_FILE = Path(__file__).parent / '172_ranking_history.json'
+BLACKLIST_FILE = Path(__file__).parent / '172_blacklist.json'
 TRADES_XLSX = Path(__file__).parent.parent / 'backtest' / 'results_172' / '七星172_交易记录_2026.xlsx'
 
 
@@ -338,6 +339,38 @@ def _map_raw_navs(raw_navs, etf_codes):
     return navs
 
 
+# ================================================================
+# 🚫 盈利保护日内黑名单
+# ================================================================
+
+def load_blacklist():
+    """加载磁盘黑名单: {code: date}"""
+    if BLACKLIST_FILE.exists():
+        try:
+            with open(BLACKLIST_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {}
+
+def save_blacklist(bl):
+    """保存黑名单到磁盘"""
+    with open(BLACKLIST_FILE, 'w', encoding='utf-8') as f:
+        json.dump(bl, f, ensure_ascii=False)
+
+def clear_blacklist_if_new_day():
+    """如果黑名单日期不是今天, 清空 (每日 09:10 首次调用时自动清除昨日黑名单)"""
+    bl = load_blacklist()
+    if not bl:
+        return
+    # 检查黑名单中任意 ETF 的日期是否为今天
+    dates = set(bl.values())
+    today = LATEST_DATE
+    if today not in dates:
+        print(f"  [黑名单] 清除 {len(bl)} 条昨日黑名单记录")
+        save_blacklist({})
+
+
 def get_current_rankings():
     """获取最新交易日ETF完整排名（价格优先使用实时行情，三级兜底净值计算溢价率）"""
     ds = LocalDataSource()
@@ -366,6 +399,10 @@ def get_current_rankings():
             closes = df.loc[mask, 'close']
             prev_prices[code] = float(closes.iloc[-2]) if len(closes) >= 2 else current_prices[code]
 
+    # 盈利保护日内黑名单 (11:00触发后禁止13:04买回)
+    blacklist = load_blacklist()
+    blacklist_today = {code for code, d in blacklist.items() if str(d) == str(LATEST_DATE)}
+
     prev_rankings = load_previous_rankings()
     prev_rank_map = {r['code']: r['rank'] for r in prev_rankings}
 
@@ -390,8 +427,8 @@ def get_current_rankings():
         # 短期得分 (10日)
         short_score, _ = compute_scores(close_full, 10) if len(close_full) >= 11 else (0, 0)
 
-        # 盈利保护: 基于实时价判断 — 当日盘中已从近期高点大幅回落则过滤
-        protected = False  # 2026-06-03: 永久关闭
+        # 盈利保护: 重新启用 (独立测试证实 +35%收益 -2.2%回撤)
+        protected = check_profit_protection(code, cur, df, LATEST_DATE)
 
         # 溢价率 = (当前价 - neodata单位净值) / neodata单位净值 * 100
         # 获取不到净值 → None（显示 "-"，不触发过滤）
@@ -425,7 +462,8 @@ def get_current_rankings():
             'drop3': drop3,
             'premium_filtered': premium_filtered,
             'premium_pct': premium_pct,
-            'filtered': premium_filtered,  # 2026-06-03: 仅保留溢价率过滤
+            'blacklisted': code in blacklist_today,
+            'filtered': protected or premium_filtered or (code in blacklist_today),  # +黑名单
             'prev_rank': prev_rank_map.get(code, None),
             'hist_df': df,  # 暂存用于后续成交量检查
         })
@@ -446,10 +484,10 @@ def load_previous_rankings():
 
 def get_display_order(ranked):
     """
-    返回显示排序：有效ETF按得分降序 + 被过滤的ETF排在末尾
+    返回显示排序：有效ETF按得分降序 + 被过滤/黑名单的ETF排在末尾
     """
-    valid = [r for r in ranked if not r['filtered']]
-    blocked = [r for r in ranked if r['filtered']]
+    valid = [r for r in ranked if not r['filtered'] and not r.get('blacklisted', False)]
+    blocked = [r for r in ranked if r['filtered'] or r.get('blacklisted', False)]
     result = list(valid)
     for i, r in enumerate(blocked):
         r['rank'] = len(valid) + i + 1
@@ -475,26 +513,28 @@ def save_rankings(ranked):
 # ================================================================
 
 def get_holding_from_xlsx():
-    """从交易记录xlsx中获取当前持仓"""
+    """从交易记录xlsx中获取当前持仓 (正序遍历: 买入→有持仓, 卖出→无持仓)"""
     if not TRADES_XLSX.exists():
         return None
     df = pd.read_excel(TRADES_XLSX)
-    # 从后往前找最后一条买入
-    for _, row in df.iloc[::-1].iterrows():
+    holding = None
+    for _, row in df.iterrows():
         if row.get('方向') == '买入':
-            return {
+            holding = {
                 'code': row.get('ETF代码', ''),
                 'name': row.get('ETF名称', ''),
                 'price': row.get('成交价格', 0),
                 'date': row.get('交易日期', ''),
             }
-    return None
+        elif row.get('方向') == '卖出':
+            holding = None
+    return holding
 
 
 def pick_trade_target(ranked):
-    """从排名中选出实际交易目标 (应用过滤)"""
+    """从排名中选出实际交易目标 (应用过滤 + 黑名单)"""
     for r in ranked:
-        if not r['filtered']:
+        if not r['filtered'] and not r.get('blacklisted', False):
             return r
     return None
 
@@ -529,13 +569,14 @@ def check_and_execute_trades(ranked):
     根据排名检查是否需要换仓，如果需要则记录到交易表
     返回: (是否发生了交易, trade_description)
     """
-    # 全局检查: 同一天内如果已在之前时间点换仓，不再重复换仓
+    # 全局检查: 今日若已完成完整换仓(有买有卖)则跳过, 仅有卖出(盈利保护)则允许继续买入
     if TRADES_XLSX.exists():
         df_check = pd.read_excel(TRADES_XLSX)
         today_trades = df_check[df_check['交易日期'].astype(str).str.startswith(str(LATEST_DATE))]
         if len(today_trades) > 0:
             directions = today_trades['方向'].tolist()
-            return False, f"今日已有换仓操作({', '.join(directions)})，跳过重复执行"
+            if '买入' in directions:
+                return False, f"今日已有完整换仓操作({', '.join(directions)})，跳过重复执行"
 
     holding = get_holding_from_xlsx()
     target = pick_trade_target(ranked)
@@ -780,15 +821,18 @@ def generate_report(ranked, recent_trades, trade_info, nav_failed=False):
         r['rank'] = i + 1
         r['rchange'] = fmt_rank_change(r.get('prev_rank'), r['rank'])
 
-    # 被过滤ETF：从第11名顺排，变动显示具体原因
+    # 被过滤/黑名单ETF：从第11名顺排，变动显示具体原因
     for i, r in enumerate(filtered_in_top10):
         r['rank'] = 11 + i
-        reasons = []
-        if r.get('premium_filtered'): reasons.append(f"溢价>{(r.get('premium_pct') or 0):.0f}%")
-        if r.get('protected'): reasons.append('盈利保护')
-        if r.get('drop3'): reasons.append('近3日跌>3%')
-        if r.get('short_score', 0) < 0: reasons.append('短期动量负')
-        r['rchange'] = '/'.join(reasons) if reasons else '过滤'
+        if r.get('blacklisted'):
+            r['rchange'] = '盈利保护(当日已卖出)'
+        else:
+            reasons = []
+            if r.get('premium_filtered'): reasons.append(f"溢价>{(r.get('premium_pct') or 0):.0f}%")
+            if r.get('protected'): reasons.append('盈利保护')
+            if r.get('drop3'): reasons.append('近3日跌>3%')
+            if r.get('short_score', 0) < 0: reasons.append('短期动量负')
+            r['rchange'] = '/'.join(reasons) if reasons else '过滤'
 
     # 合并为展示列表
     top10 = valid_in_top10 + filtered_in_top10
@@ -841,7 +885,7 @@ def generate_report(ranked, recent_trades, trade_info, nav_failed=False):
 - **短期得分** = 10日动量×R², <0过滤
 - **涨跌幅** = (当日收盘-前日收盘)/前日收盘
 - **变动** = 与上次报告对比 ↑升 ↓降 -不变
-- **过滤规则**: 仅溢价率>20% (其余5层已永久关闭 — 消融实验证实均为负贡献)
+- **过滤规则**: 盈利保护(回撤>5%) + 溢价率>20% (其余4层已永久关闭)
 
 ## 时间
 - 报告生成: {now_str} | 数据截止: {LATEST_DATE} | 引擎: 七星172 (GLM5修复版)
@@ -992,7 +1036,7 @@ def generate_report(ranked, recent_trades, trade_info, nav_failed=False):
 </div>
 
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
-    <b>过滤规则:</b> 仅溢价率>20% (其余5层已永久关闭)<br>
+    <b>过滤规则:</b> 盈利保护(回撤>5%) + 溢价率>20% (其余4层已永久关闭)<br>
     <b>得分:</b> 综合=长期(25日动量xR2) | 短期=10日动量xR2 (<0过滤)<br>
     <b>溢价率:</b> (市价-单位净值)/单位净值 | 红色>20%触发过滤 | '-'=暂无净值数据
 </div>
@@ -1049,9 +1093,52 @@ def send_report_email(html_content, md_path, mode_label="仅排名"):
 # 🏃 主入口
 # ================================================================
 
+def check_profit_protection_sell(ranked):
+    """11:00 盈利保护独立检查: 持仓从最近1日最高点回撤>5%则立即卖出
+    对应聚宽 profit_protection_check(11:00), 卖出后加入黑名单禁止日内买回"""
+    holding = get_holding_from_xlsx()
+    if holding is None:
+        return False, "无持仓"
+
+    code = holding['code']
+    # 获取实时价格
+    realtime = fetch_realtime_prices([code])
+    if code in realtime:
+        cur_price = realtime[code]['price']
+    else:
+        return False, f"无法获取 {code} 实时价格"
+
+    # 获取历史数据用于盈利保护检查
+    ds = LocalDataSource()
+    pool_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
+    df = pool_data.get(code)
+    if df is None:
+        return False, f"无法获取 {code} 历史数据"
+
+    # 盈利保护检查
+    if check_profit_protection(code, cur_price, df, LATEST_DATE, lookback=1, threshold=0.05):
+        # 触发: 立即卖出 + 加入黑名单
+        old_ranked = next((r for r in ranked if r['code'] == code), None)
+        old_score = old_ranked['score'] if old_ranked else 'N/A'
+        append_trade_to_xlsx('卖出', code, holding['name'], cur_price,
+                             LATEST_DATE, old_score,
+                             f"盈利保护卖出(回撤超5%)")
+        # 加入黑名单: {code: date}
+        bl = load_blacklist()
+        bl[code] = LATEST_DATE
+        save_blacklist(bl)
+        print(f"  [黑名单] 已加入: {holding['name']}({code}) 禁止日内买回")
+        return True, f"盈利保护卖出: {holding['name']}({code})@{cur_price:.4f}"
+
+    return False, f"未触发: {holding['name']} 回撤<5%"
+
+
 def main():
     # 解析命令行参数
     no_trade = '--no-trade' in sys.argv
+
+    # 每日首次运行时清除昨日黑名单
+    clear_blacklist_if_new_day()
 
     mode_label = "排名+交易" if not no_trade else "仅排名"
     print("=" * 60)
@@ -1069,13 +1156,53 @@ def main():
 
     # 2. 交易检查
     print("\n[2/5] 检查交易信号...")
+    is_eleven_am = datetime.now().hour == 11
+
     if nav_failed:
         traded, trade_desc = False, "溢价率获取失败，放弃本次交易"
         print(f"  ⚠️ {trade_desc}")
     elif no_trade:
         traded, trade_desc = False, "仅排名模式（未触发交易）"
+    elif is_eleven_am:
+        # 11:00 仅执行盈利保护卖出检查
+        print("  [11:00] 盈利保护检查模式...")
+        traded, trade_desc = check_profit_protection_sell(ranked)
+        if not traded:
+            trade_desc = f"盈利保护未触发: {trade_desc}"
     else:
-        traded, trade_desc = check_and_execute_trades(ranked)
+        # 13:04 或其它时间: 完整排名轮动
+        # 先检查持仓是否被盈利保护过滤(盘中暴跌), 被过滤则卖出
+        holding = get_holding_from_xlsx()
+        if holding:
+            # 排名阶段已过滤, 检查持仓是否在过滤名单中
+            for r in ranked:
+                if r['code'] == holding['code'] and r['filtered']:
+                    # 持仓被过滤(盈利保护触发), 先卖出
+                    sell_reasons = []
+                    if r.get('protected'): sell_reasons.append('盈利保护')
+                    if r.get('premium_filtered'): sell_reasons.append('溢价>' + str(int(r.get('premium_pct', 0))) + '%')
+                    reason_str = '; '.join(sell_reasons)
+                    # 获取实时价
+                    rt = fetch_realtime_prices([holding['code']])
+                    sell_price = rt[holding['code']]['price'] if holding['code'] in rt else float(holding['price'])
+                    append_trade_to_xlsx('卖出', holding['code'], holding['name'],
+                                         sell_price, LATEST_DATE, r['score'],
+                                         f'被过滤规则拦截调出: {reason_str}')
+                    # 买入第一个未过滤的
+                    target = pick_trade_target(ranked)
+                    if target and target['code'] != holding['code']:
+                        append_trade_to_xlsx('买入', target['code'], target['name'],
+                                             target['price'], LATEST_DATE, target['score'],
+                                             f'动量排名第1/{len(ETF_POOL)}')
+                        traded, trade_desc = True, '换仓: ' + str(holding['name']) + '(被过滤) -> ' + str(target['name'])
+                    else:
+                        traded, trade_desc = True, '卖出: ' + str(holding['name']) + '(被过滤), 无合格买入标的'
+                    break
+            else:
+                # 持仓未被过滤, 正常检查排名轮动
+                traded, trade_desc = check_and_execute_trades(ranked)
+        else:
+            traded, trade_desc = check_and_execute_trades(ranked)
     if traded:
         print(f"  ⚡ 已执行: {trade_desc}")
     else:

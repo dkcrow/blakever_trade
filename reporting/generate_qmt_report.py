@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-七星QMT原版盘中监控报告 (基于 V3 原版, 全过滤器开启)
+七星QMT精简版盘中监控报告 (基于 V3, 关闭成交量+短期动量过滤)
 
 每次执行:
 1. 获取实时行情, 计算51只ETF动量排名
@@ -320,10 +320,10 @@ def append_trade_to_xlsx(direction, code, name, price, date, score, reason):
     TRADES_XLSX.parent.mkdir(parents=True, exist_ok=True)
     df.to_excel(TRADES_XLSX, index=False)
 
-# ---- 策略参数 (QMT V3 原版: 全过滤器开启) ----
+# ---- 策略参数 (QMT精简版: 仅盈利保护+溢价率, 关闭成交量+短期动量) ----
 ENABLE_PROFIT_PROTECTION = True    # 盈利保护 (11:00 回撤>5%卖出)
-ENABLE_VOLUME_CHECK = True         # 成交量放量过滤
-ENABLE_SHORT_MOMENTUM_FILTER = True  # 短期动量过滤
+ENABLE_VOLUME_CHECK = False        # 成交量放量过滤 (回测证实负向, 2026-06-03永久关闭)
+ENABLE_SHORT_MOMENTUM_FILTER = False  # 短期动量过滤 (回测证实负向, 2026-06-03永久关闭)
 PROFIT_PROTECTION_LOOKBACK = 1
 PROFIT_PROTECTION_THRESHOLD = 0.05
 SHORT_MOMENTUM_LOOKBACK = 10
@@ -673,7 +673,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 
 <div style="background:#fff;padding:12px 18px;border-radius:8px;border-left:4px solid #1F4E79;margin-bottom:12px;font-size:13px;">
     <b>策略:</b> 七星QMT原版 | <b>ETF池:</b> {len(QMT_POOL)}只 | <b>周期:</b> 25日 | <b>佣金:</b> 0.02%
-    | <b>过滤:</b> 盈利保护(开) 成交量(开) 短期动量(开)
+    | <b>过滤:</b> 盈利保护(开) 成交量(关) 短期动量(关)
 </div>
 {holding_html}
 {trade_alert}
@@ -772,7 +772,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 </div>
 
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
-    <b>过滤规则 (QMT V3原版):</b> 盈利保护(回撤>5%) → 成交量放量(>20日均量80%) → 短期动量(<0过滤) → 溢价率(>20%)<br>
+    <b>过滤规则 (QMT精简版):</b> 盈利保护(回撤>5%) → 溢价率(>20%)<br>
     <b>得分:</b> 综合=长期(25日动量xR2) | 短期=10日动量xR2<br>
     <b>变动:</b> 与上次报告对比 ↑升 ↓降 -不变<br>
     <b>回报:</b> 回测年化435.62% (2025.1-2026.5) | 聚宽验证总收益640% (2024.1-2026.5)
@@ -803,7 +803,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 ## 策略概况
 - **策略名称**: 七星QMT原版
 - **ETF池**: {len(QMT_POOL)}只 | **周期**: 25日 | **佣金**: 0.02%
-- **过滤配置**: 盈利保护(开) | 成交量(开) | 短期动量(开)
+- **过滤配置**: 盈利保护(开) | 成交量(关) | 短期动量(关)
 {hline}
 {trade_note}
 ## ETF动量排名 Top 10

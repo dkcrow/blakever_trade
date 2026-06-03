@@ -273,7 +273,7 @@ class SevenStar172Filter(EtfFilter):
         if params.get('enable_premium_filter', True) and nav_series is not None and len(nav_series) > 0:
             threshold = params.get('premium_threshold', 0.20)
             if self._check_premium(current_price, nav_series, date, threshold):
-                reasons.append(f'溢价率>{threshold:.0%}')
+                reasons.append(f'溢价率>{int(threshold*100)}%')
 
         # 第3层: 成交量 (可开关, 172特有: 有量比+年化>3.0才过滤, 与 get_volume_ratio 第384行一致)
         if params.get('enable_volume_check', False):
@@ -320,10 +320,10 @@ class SevenStar172Filter(EtfFilter):
         return False
 
     def _check_premium(self, current_price, nav_series, date, threshold):
-        """溢价率检查：用前一日净值 (与原引擎 get_premium_rate 一致, 严格 < 而非 <=)"""
+        """溢价率检查：用当日净值 (NAV当日早上已发布, 使用 <= 取当天)"""
         try:
             check_ts = pd.Timestamp(date)
-            mask = nav_series.index < check_ts  # 严格小于, 取前一日
+            mask = nav_series.index <= check_ts  # <= 取当日早上已发布的净值
             available = nav_series[mask]
             if len(available) == 0:
                 return False
@@ -422,7 +422,7 @@ class QMTFilter(EtfFilter):
         if params.get('enable_premium_filter', True) and nav_series is not None and len(nav_series) > 0:
             threshold = params.get('premium_threshold', 0.20)
             if self._check_premium(current_price, nav_series, date, threshold):
-                reasons.append(f'溢价率>{threshold:.0%}')
+                reasons.append(f'溢价率>{int(threshold*100)}%')
 
         return len(reasons) > 0, reasons
 
