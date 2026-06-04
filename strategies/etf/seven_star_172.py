@@ -85,6 +85,7 @@ DEFAULT_PARAMS = {
 
     # ---- 短期动量过滤 ----
     'use_short_momentum_filter': False,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-313%)
+    'short_lookback_days': 10,           # 短期动量回看天数 (get_ranked_etfs需要, 即使过滤关闭)
 
     # ---- 溢价率过滤 ----
     'enable_premium_filter': True,   # 仅保留此项, 防高溢价买入

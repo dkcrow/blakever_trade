@@ -16,7 +16,7 @@
   15:05 盘后总结 [仅排名]  - daily_summary
 """
 
-import os, sys, math, json, warnings, urllib.request, re
+import os, sys, math, json, warnings, urllib.request, re, subprocess, time
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -26,6 +26,11 @@ warnings.filterwarnings('ignore')
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from strategies.etf.seven_star_base import LocalDataSource, DEFENSIVE_ETF
+
+# 溢价率获取工具（复用172报告三级兜底）
+PYTHON_EXE = str(Path.home() / '.workbuddy' / 'binaries' / 'python' / 'envs' / 'default' / 'Scripts' / 'python.exe')
+NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
 
 # ================================================================
 # QMT 51只ETF池 (聚宽格式 → 本地格式映射)
@@ -123,6 +128,189 @@ def fetch_realtime_prices(codes):
     return realtime
 
 # ================================================================
+# 溢价率获取（三级兜底：neodata → akshare → westock-data）
+# ================================================================
+
+def _fetch_navs_tier1_neodata(raw_codes):
+    """Tier 1: neodata API → {code: float}"""
+    navs = {}
+    batch_size = 15
+    for batch_idx in range(0, len(raw_codes), batch_size):
+        batch = raw_codes[batch_idx:batch_idx + batch_size]
+        query = 'ETF ' + ' '.join(batch) + ' 最新行情 单位净值'
+        try:
+            result = subprocess.run(
+                [PYTHON_EXE, NEODATA_SCRIPT, '--query', query, '--data-type', 'api'],
+                capture_output=True, text=True, timeout=30,
+                cwd=str(Path(NEODATA_SCRIPT).parent),
+                encoding='utf-8', errors='replace'
+            )
+            output = result.stdout
+        except Exception:
+            continue
+        m = re.search(r'\{[\s\S]*\}', output)
+        if not m:
+            continue
+        try:
+            data = json.loads(m.group())
+        except Exception:
+            continue
+        api = data.get('data', {}).get('apiData', {})
+        for r in api.get('apiRecall', []):
+            content = r.get('content', '')
+            rtype = r.get('type', '')
+            if '实时行情' in rtype:
+                for line in content.strip().split('\n')[2:]:
+                    parts = [p.strip() for p in line.split('|') if p.strip()]
+                    if len(parts) < 4:
+                        continue
+                    code = None
+                    for p in parts:
+                        if re.match(r'^\d{5,6}$', p):
+                            code = p
+                            break
+                    if not code:
+                        continue
+                    try:
+                        nav = float(parts[-1])
+                        if 0.01 < nav < 10000:
+                            navs[code] = nav
+                    except ValueError:
+                        pass
+            elif '净值' in rtype or '净值' in r.get('desc', ''):
+                for line in content.strip().split('\n')[2:]:
+                    parts = [p.strip() for p in line.split('|') if p.strip()]
+                    if len(parts) >= 4:
+                        code = parts[0] if re.match(r'^\d{6}$', parts[0]) else None
+                        if code:
+                            try:
+                                nav = float(parts[3])
+                                if 0.01 < nav < 10000:
+                                    if code not in navs:
+                                        navs[code] = nav
+                            except ValueError:
+                                pass
+    return navs
+
+
+def _fetch_navs_tier2_akshare(raw_codes, date_str):
+    """Tier 2: akshare 下载最新 NAV → {code: float}"""
+    try:
+        import akshare as ak
+    except ImportError:
+        return {}
+    navs = {}
+    for code in raw_codes:
+        try:
+            end_dt = pd.Timestamp(date_str)
+            start_dt = end_dt - pd.Timedelta(days=2)
+            df_nav = ak.fund_etf_fund_info_em(
+                fund=code,
+                start_date=start_dt.strftime('%Y%m%d'),
+                end_date=end_dt.strftime('%Y%m%d')
+            )
+            if len(df_nav) > 0 and '单位净值' in df_nav.columns:
+                nav_val = float(df_nav['单位净值'].iloc[-1])
+                if 0.01 < nav_val < 10000:
+                    navs[code] = nav_val
+            time.sleep(0.3)
+        except Exception:
+            pass
+    return navs
+
+
+def _fetch_navs_tier3_westock(raw_codes):
+    """Tier 3: westock-data CLI → {code: float}"""
+    navs = {}
+    batch_size = 10
+    for batch_idx in range(0, len(raw_codes), batch_size):
+        batch = raw_codes[batch_idx:batch_idx + batch_size]
+        codes_str = ','.join(batch)
+        try:
+            result = subprocess.run(
+                ['node', WESTOCK_SCRIPT, 'etf', codes_str],
+                capture_output=True, text=True, timeout=60,
+                encoding='utf-8', errors='replace'
+            )
+            output = result.stdout
+        except Exception:
+            continue
+        for line in output.split('\n'):
+            line = line.strip()
+            if not line.startswith('|'):
+                continue
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) < 7:
+                continue
+            code = parts[1] if re.match(r'^\d{5,6}$', parts[1]) else None
+            if not code:
+                continue
+            for p in parts[-3:]:
+                try:
+                    nav = float(p)
+                    if 0.01 < nav < 10000:
+                        navs[code] = nav
+                        break
+                except ValueError:
+                    continue
+    return navs
+
+
+def _map_raw_navs(raw_navs, etf_codes):
+    """将纯数字代码映射回 sh/sz 前缀"""
+    navs = {}
+    for code, nav in raw_navs.items():
+        mapped = False
+        for prefix in ('sh', 'sz', 'bj'):
+            full_code = prefix + code
+            if full_code in etf_codes:
+                navs[full_code] = nav
+                mapped = True
+        if not mapped and code not in navs:
+            navs[code] = nav
+    return navs
+
+
+def fetch_all_navs(etf_codes):
+    """三级兜底获取ETF净值。返回 (navs_dict, source_name)"""
+    raw_codes = [c[2:] if (c.startswith('sh') or c.startswith('sz')) and len(c) > 2 else c
+                 for c in etf_codes if c.startswith('sh') or c.startswith('sz')]
+    if not raw_codes:
+        return {}, None
+
+    # Tier 1: neodata
+    print("  [NAV] Tier1: neodata...")
+    raw_navs = _fetch_navs_tier1_neodata(raw_codes)
+    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
+        navs = _map_raw_navs(raw_navs, etf_codes)
+        print(f"  [NAV] neodata OK: {len(navs)} ETFs")
+        return navs, 'neodata'
+    print(f"  [NAV] neodata gave {len(raw_navs)} navs, trying next tier...")
+
+    # Tier 2: akshare
+    print("  [NAV] Tier2: akshare...")
+    date_fmt = LATEST_DATE.replace('-', '')
+    raw_navs = _fetch_navs_tier2_akshare(raw_codes, date_fmt)
+    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
+        navs = _map_raw_navs(raw_navs, etf_codes)
+        print(f"  [NAV] akshare OK: {len(navs)} ETFs")
+        return navs, 'akshare'
+    print(f"  [NAV] akshare gave {len(raw_navs)} navs, trying next tier...")
+
+    # Tier 3: westock-data
+    print("  [NAV] Tier3: westock-data...")
+    raw_navs = _fetch_navs_tier3_westock(raw_codes)
+    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
+        navs = _map_raw_navs(raw_navs, etf_codes)
+        print(f"  [NAV] westock-data OK: {len(navs)} ETFs")
+        return navs, 'westock'
+    print(f"  [NAV] westock-data gave {len(raw_navs)} navs")
+
+    # All failed
+    print("  [NAV] ⚠️ ALL TIERS FAILED — 溢价率获取失败, 报告中显示为'-'")
+    return {}, None
+
+# ================================================================
 # 排名计算
 # ================================================================
 def compute_scores(close_full, lookback):
@@ -143,6 +331,11 @@ def get_current_rankings():
     # 筛选QMT池
     pool_data = {c: all_data[c] for c in QMT_POOL if c in all_data}
     print(f"  [DATA] QMT池 {len(QMT_POOL)}只, 本地有数据 {len(pool_data)}只")
+
+    # 获取净值（三级兜底）
+    print("  [NAV] Fetching ETF NAVs...")
+    navs_dict, nav_source = fetch_all_navs(QMT_POOL)
+    nav_available = nav_source is not None
 
     print("  [RT] Fetching realtime prices...")
     realtime = fetch_realtime_prices(QMT_POOL)
@@ -219,10 +412,14 @@ def get_current_rankings():
             short_momentum_filtered = True
             filter_reasons.append(f'短期动量负({short_score:.2f})')
 
-        # 4. 溢价率: >20% → 过滤 (简化版, 不实时获取NAV)
-        premium_filtered = False
-        premium_pct = None
-        # NAV数据暂不实时获取, 仅标记
+        # 4. 溢价率: >20% → 过滤
+        # 三级兜底获取净值，计算溢价率
+        nav = navs_dict.get(code)
+        if nav and cur > 0 and nav > 0:
+            premium_pct = round((cur - nav) / nav * 100, 2)
+        else:
+            premium_pct = None
+        premium_filtered = (premium_pct is not None and premium_pct > 20.0)
 
         filtered = profit_protected or volume_filtered or short_momentum_filtered or premium_filtered
 
@@ -245,7 +442,7 @@ def get_current_rankings():
         })
 
     ranked.sort(key=lambda x: x['score'], reverse=True)
-    return ranked, current_prices
+    return ranked, current_prices, nav_available
 
 def load_previous_rankings():
     if HISTORY_FILE.exists():
@@ -601,7 +798,7 @@ def get_regime_status():
 # ================================================================
 # 生成报告 (HTML)
 # ================================================================
-def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None):
+def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
@@ -679,6 +876,9 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 {trade_alert}
 {regime_html}
 
+<!-- NAV失败警告 -->
+""" + ("""        <div style="background:#FFF3CD;border:1px solid #FFC107;padding:10px;border-radius:6px;margin-bottom:12px;font-weight:bold;color:#856404;">⚠️ 溢价率获取失败，报告中显示为'-'</div>
+""" if not nav_available else "") + f"""
 <!-- ETF排名 Top10 -->
 <div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
     <h3 style="font-size:15px;color:#1F4E79;margin:0 0 10px 0;">ETF动量排名 Top 10</h3>
@@ -692,6 +892,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
             <th nowrap style="padding:6px 6px;text-align:right;">长期得分</th>
             <th nowrap style="padding:6px 6px;text-align:right;">价格</th>
             <th nowrap style="padding:6px 6px;text-align:right;">涨跌幅</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">溢价率</th>
             <th nowrap style="padding:6px 6px;text-align:center;">变动</th>
         </tr>"""
 
@@ -711,6 +912,15 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
         else: rc_c = '#888'
         sc_c = '#28A745' if r['score'] > 0 else '#DC3545'
 
+        # 溢价率
+        prem_val = r.get('premium_pct')
+        if prem_val is not None:
+            prem_str = f'{prem_val:.2f}%'
+            prem_c = '#DC3545' if prem_val > 20 else ('#28A745' if prem_val < -5 else '#888')
+        else:
+            prem_str = '-'
+            prem_c = '#888'
+
         html += f"""
         <tr style="background:{bg};white-space:nowrap;">
             <td style="padding:4px 6px;text-align:center;font-weight:bold;">{r['rank']}</td>
@@ -721,6 +931,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
             <td style="padding:4px 6px;text-align:right;">{r['long_score']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;">{r['price']:.4f}</td>
             <td style="padding:4px 6px;text-align:right;color:{chg_c};font-weight:bold;">{chg}</td>
+            <td style="padding:4px 6px;text-align:right;color:{prem_c};font-weight:bold;">{prem_str}</td>
             <td style="padding:4px 6px;text-align:center;color:{rc_c};font-weight:bold;">{rc}</td>
         </tr>"""
 
@@ -773,6 +984,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 
 <div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
     <b>过滤规则 (QMT精简版):</b> 盈利保护(回撤>5%) → 溢价率(>20%)<br>
+    <b>溢价率:</b> (市价-单位净值)/单位净值 | 红色>20%触发过滤 | '-'=暂无净值数据<br>
     <b>得分:</b> 综合=长期(25日动量xR2) | 短期=10日动量xR2<br>
     <b>变动:</b> 与上次报告对比 ↑升 ↓降 -不变<br>
     <b>回报:</b> 回测年化435.62% (2025.1-2026.5) | 聚宽验证总收益640% (2024.1-2026.5)
@@ -792,11 +1004,15 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 
     top10_md = ""
     for r in top10:
-        top10_md += f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']:.4f} | {r['short_score']:.4f} | {r['long_score']:.4f} | {r['price']:.4f} | {fmt_change_pct(r['change_pct'])} | {r['rchange']} |\n"
+        prem_val = r.get('premium_pct')
+        prem_md = f'{prem_val:.2f}%' if prem_val is not None else '-'
+        top10_md += f"| {r['rank']} | {r['name']} | {r['code']} | {r['score']:.4f} | {r['short_score']:.4f} | {r['long_score']:.4f} | {r['price']:.4f} | {fmt_change_pct(r['change_pct'])} | {prem_md} | {r['rchange']} |\n"
 
     trade_note = ""
     if trade_info[0]:
         trade_note = f"\n### 本次交易\n{trade_info[1]}\n"
+
+    nav_warn_md = ""  # nav warning placeholder
 
     md = f"""# 七星QMT原版 [{time_label}] - {now_str}
 
@@ -806,16 +1022,18 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 - **过滤配置**: 盈利保护(开) | 成交量(关) | 短期动量(关)
 {hline}
 {trade_note}
+{nav_warn_md}
 ## ETF动量排名 Top 10
 
-| 排名 | 名称 | 代码 | 综合得分 | 短期得分 | 长期得分 | 价格 | 涨跌幅 | 变动 |
-|------|------|------|----------|----------|----------|------|--------|------|
+| 排名 | 名称 | 代码 | 综合得分 | 短期得分 | 长期得分 | 价格 | 涨跌幅 | 溢价率 | 变动 |
+|------|------|------|----------|----------|----------|------|--------|--------|------|
 {top10_md}
 ## 说明
 - **综合得分** = 长期得分(25日动量xR2), 用于排名
 - **短期得分** = 10日动量xR2
+- **溢价率** = (市价-单位净值)/单位净值, '-'=暂无净值数据
 - **变动** = 与上次报告对比 ↑升 ↓降 -不变
-- **全过滤**: 盈利保护(5%回撤) + 成交量放量 + 短期动量 + 溢价率检查
+- **全过滤**: 盈利保护(5%回撤) + 溢价率检查(>20%) | 成交量+短期动量已永久关闭
 
 ## 时间
 - 报告生成: {now_str} | 数据截止: {LATEST_DATE} | 引擎: 七星QMT原版
@@ -887,7 +1105,7 @@ def main():
 
     # 1. 排名
     print("\n[1/4] Computing ETF momentum rankings...")
-    ranked, prices = get_current_rankings()
+    ranked, prices, nav_available = get_current_rankings()
     print(f"  {len(ranked)} valid, Top3:")
     for r in ranked[:3]:
         flag = '[FILT]' if r['filtered'] else '[OK]'
@@ -940,7 +1158,7 @@ def main():
     # 4. 生成报告 + 发送
     print("\n[4/4] Generating report + sending email...")
     recent_trades = get_recent_trades(ranked)
-    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info)
+    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available)
 
     output_dir = Path(__file__).parent / 'template'
     output_dir.mkdir(parents=True, exist_ok=True)

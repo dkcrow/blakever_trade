@@ -9,3 +9,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# YFinance cache
+data/yf_cache/
