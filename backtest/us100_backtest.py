@@ -18,7 +18,7 @@ DATA_DIR = PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'us'
 OUTPUT_DIR = PROJECT_ROOT / 'backtest' / 'results_us100'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-STRATEGY_NAME = '七星美股版(最优) x5'
+STRATEGY_NAME = '七星美股版(最优) x7'
 START_DATE = '2023-06-01'
 END_DATE = '2026-04-23'  # 本地数据最新日期
 
@@ -43,7 +43,7 @@ POOL_SYMBOLS = [
 ]
 
 PARAMS = {
-    'lookback_days': 25, 'holdings_num': 5, 'min_money': 500,
+    'lookback_days': 25, 'holdings_num': 7, 'min_money': 500,
     'enable_profit_protection': False,
     'profit_protection_lookback': 1, 'profit_protection_threshold': 0.05,
 }
