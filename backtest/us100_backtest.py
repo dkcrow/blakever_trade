@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 七星美股版策略回测 (Nasdaq 100 动量策略)
-基于七星QMT框架，成分股 = 纳斯达克100成分股
+基于七星QMT框架，成分股 = 高成长35只优化池 (无防御板块，PP关)
 数据源: 本地CSV (data/storage/stock_data/us/)
 """
 import sys, os, math, json, warnings
@@ -13,35 +13,39 @@ import pandas as pd
 warnings.filterwarnings('ignore')
 
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 DATA_DIR = PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'us'
 OUTPUT_DIR = PROJECT_ROOT / 'backtest' / 'results_us100'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-STRATEGY_NAME = '七星美股版(Nasdaq100)'
+STRATEGY_NAME = '七星美股版(最优) x5'
 START_DATE = '2023-06-01'
 END_DATE = '2026-04-23'  # 本地数据最新日期
 
-# 纳斯达克100成分股 (90/97已存在于本地数据)
-NASDAQ100_SYMBOLS = [
-    'AAPL','MSFT','NVDA','AMZN','META','GOOGL','GOOG','AVGO','TSLA',
-    'COST','NFLX','AMD','PEP','ADBE','CSCO','QCOM','INTU','TXN',
-    'AMGN','HON','AMAT','CMCSA','INTC','BKNG','ISRG','VRTX',
-    'REGN','ADI','LRCX','MU','GILD','MDLZ','SBUX','ADP','KLAC',
-    'PANW','SNPS','CDNS','MELI','ASML','CTAS','MAR','ABNB','ORLY',
-    'CRWD','WDAY','FTNT','ADSK','ROP','PCAR','MNST','KDP','PAYX',
-    'ODFL','CEG','DASH','TEAM','CPRT','NXPI','CHTR','KHC',
-    'IDXX','TTD','PYPL','MCHP','EA','FAST','BKR','EXC',
-    'XEL','CTSH','VRSK','CCEP','DDOG','ON','CDW','FANG',
-    'GEHC','ZS','BIIB','DXCM','TTWO','WBD',
-    'ARM','MSTR','COIN','LIN','PLTR','APP','AXON','MRVL',
+# 七星美股版最优池 (35只, 8类 — 无防御板块)
+POOL_SYMBOLS = [
+    # 大科技/半导体 (10)
+    'NVDA','AVGO','AMD','MU','LRCX','AMAT','ARM','AAPL','TSM','LITE',
+    # 互联网/平台 (4)
+    'META','AMZN','NFLX','GOOGL',
+    # 软件/SaaS (5)
+    'MSFT','CRM','NOW','CRWD','ORCL',
+    # AI/数据 (3)
+    'PLTR','DDOG','SNPS',
+    # 能源 (5)
+    'XOM','CVX','COP','EOG','OKE',
+    # 材料/矿业 (3)
+    'NEM','FCX','LIN',
+    # 工业/基建 (3)
+    'CAT','GE','RTX',
+    # REITs (2)
+    'PLD','AMT',
 ]
 
 PARAMS = {
-    'lookback_days': 25, 'holdings_num': 1, 'min_money': 5000,
-    'enable_profit_protection': True,
+    'lookback_days': 25, 'holdings_num': 5, 'min_money': 500,
+    'enable_profit_protection': False,
     'profit_protection_lookback': 1, 'profit_protection_threshold': 0.05,
-    'enable_volume_check': False,
-    'use_short_momentum_filter': False,
 }
 
 print("=" * 60)
@@ -56,7 +60,7 @@ print(f"\n加载本地美股数据...")
 all_data = {}
 missing = []
 
-for sym in NASDAQ100_SYMBOLS:
+for sym in POOL_SYMBOLS:
     fp = DATA_DIR / f'{sym}.csv'
     if not fp.exists():
         missing.append(sym)
@@ -330,6 +334,42 @@ losses = [t for t in st if t['pnl_pct']<=0]
 wr = len(wins)/len(st)*100 if st else 0
 aw = sum(t['pnl_pct'] for t in wins)/len(wins)*100 if wins else 0
 al = sum(t['pnl_pct'] for t in losses)/len(losses)*100 if losses else 0
+
+# 胜者榜/Top10
+st_sorted = sorted(st, key=lambda x: x['pnl_pct'], reverse=True)
+top10_wins = st_sorted[:10]
+top10_losses = st_sorted[-10:][::-1]
+
+print(f"\n{'='*60}")
+print(f"  Top10 盈利交易")
+print(f"{'='*60}")
+for t in top10_wins:
+    print(f"  {t['name']:6s} {t['date']} {t['pnl_pct']*100:+.2f}%  {t.get('reason','')}")
+
+print(f"\n{'='*60}")
+print(f"  Top10 亏损交易")
+print(f"{'='*60}")
+for t in top10_losses:
+    print(f"  {t['name']:6s} {t['date']} {t['pnl_pct']*100:+.2f}%  {t.get('reason','')}")
+
+# 按标的统计盈亏
+by_symbol = {}
+for t in st:
+    s = t['code']
+    if s not in by_symbol:
+        by_symbol[s] = {'count': 0, 'wins': 0, 'total_pnl': 0}
+    by_symbol[s]['count'] += 1
+    if t['pnl_pct'] > 0:
+        by_symbol[s]['wins'] += 1
+    by_symbol[s]['total_pnl'] += t['pnl_pct'] * 100
+
+print(f"\n{'='*60}")
+print(f"  按标的统计 (交易次数Top15)")
+print(f"{'='*60}")
+for s, d in sorted(by_symbol.items(), key=lambda x: x[1]['count'], reverse=True)[:15]:
+    avg = d['total_pnl'] / d['count'] if d['count'] > 0 else 0
+    wr_s = d['wins'] / d['count'] * 100 if d['count'] > 0 else 0
+    print(f"  {s:6s} {d['count']:3d}笔 胜率{wr_s:5.1f}% 累计{d['total_pnl']:+.1f}% 均{avg:+.2f}%")
 
 results = {
     'strategy': STRATEGY_NAME,

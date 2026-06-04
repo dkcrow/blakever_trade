@@ -1,0 +1,293 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>七星美股版(高成长35无PP) x5</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:920px;margin:0 auto;padding:20px;background:#f8f9fa;}
+h1{font-size:24px;color:#1F4E79;text-align:center;margin:0 0 5px;}
+.subtitle{text-align:center;font-size:13px;color:#888;margin-bottom:25px;}
+.card{background:#fff;padding:15px 20px;border-radius:8px;margin-bottom:15px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.config-box{background:#fff;padding:12px 18px;border-radius:8px;border-left:4px solid #1F4E79;margin-bottom:15px;font-size:13px;}
+.metrics-row{display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.metric-card{flex:1;min-width:175px;background:#fff;padding:15px;border-radius:8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.metric-label{font-size:12px;color:#888;margin-bottom:6px;}
+.metric-value{font-size:20px;font-weight:bold;color:#1F4E79;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:#1F4E79;color:#fff;padding:8px;text-align:left;}
+td{padding:6px 8px;border-bottom:1px solid #eee;}
+.footer{text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;}
+</style></head><body>
+<h1>七星美股版(高成长35无PP) x5 · 回测报告</h1>
+<div class="subtitle">2026-06-04 17:36 | 2023-06-01 ~ 2026-04-23 (726天)</div>
+<div class="config-box">
+    <b>策略:</b> 七星美股版 | <b>成分股:</b> Nasdaq100 (35只有效) | <b>周期:</b> 25日 | <b>佣金:</b> $0.005/股<br>
+    <b>过滤:</b> 盈利保护(开·回撤>5%) | 成交量(关) | 短期动量(关)
+    | 评分公式: exp(slope x 250) x R² (与七星172/QMT完全一致)
+</div>
+<div class="card"><h3 style="font-size:15px;color:#1F4E79;margin:0 0 12px;">回测绩效 (USD)</h3>
+<div class="metrics-row">
+    <div class="metric-card" style="background:#E8F5E9">
+        <div class="metric-label">总收益率</div><div class="metric-value" style="color:#2E7D32">+2.26%</div></div>
+    <div class="metric-card"><div class="metric-label">年化收益</div><div class="metric-value">78.30%</div></div>
+    <div class="metric-card"><div class="metric-label">最大回撤</div><div class="metric-value">30.51%</div></div>
+    <div class="metric-card"><div class="metric-label">夏普比率</div><div class="metric-value">1.5487</div></div>
+</div>
+<div class="metrics-row">
+    <div class="metric-card"><div class="metric-label">初始资金</div><div class="metric-value">$10,000</div></div>
+    <div class="metric-card"><div class="metric-label">最终资产</div><div class="metric-value">$32,559.19</div></div>
+    <div class="metric-card"><div class="metric-label">胜率</div><div class="metric-value">47.4%</div></div>
+    <div class="metric-card"><div class="metric-label">总交易</div><div class="metric-value">539次(买275/卖264)</div></div>
+</div></div>
+<div class="card"><h3 style="font-size:15px;color:#1F4E79;margin:0 0 10px;">交易记录 (最近50条)</h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>日期</th><th>方向</th><th>标的</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th></tr>
+<tr style="background:#FCE4D6;">
+        <td>2026-01-16</td><td style="font-weight:bold;">卖出</td><td>NEM</td>
+        <td style="text-align:right;">113.8900</td><td style="text-align:right;">58</td>
+        <td style="text-align:right;">$6,605.62</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+12.66%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-01-16</td><td style="font-weight:bold;">买入</td><td>AMAT</td>
+        <td style="text-align:right;">326.6027</td><td style="text-align:right;">20</td>
+        <td style="text-align:right;">$6,532.05</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-04</td><td style="font-weight:bold;">卖出</td><td>AMAT</td>
+        <td style="text-align:right;">297.2293</td><td style="text-align:right;">20</td>
+        <td style="text-align:right;">$5,944.59</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-8.99%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-04</td><td style="font-weight:bold;">买入</td><td>XOM</td>
+        <td style="text-align:right;">146.6200</td><td style="text-align:right;">44</td>
+        <td style="text-align:right;">$6,451.28</td>
+        <td style="font-size:11px;color:#555;">排名2</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-05</td><td style="font-weight:bold;">卖出</td><td>FCX</td>
+        <td style="text-align:right;">59.0700</td><td style="text-align:right;">121</td>
+        <td style="text-align:right;">$7,147.47</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+25.10%</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-05</td><td style="font-weight:bold;">卖出</td><td>LRCX</td>
+        <td style="text-align:right;">213.0547</td><td style="text-align:right;">30</td>
+        <td style="text-align:right;">$6,391.64</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+6.15%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-05</td><td style="font-weight:bold;">买入</td><td>LITE</td>
+        <td style="text-align:right;">504.4200</td><td style="text-align:right;">12</td>
+        <td style="text-align:right;">$6,053.04</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-05</td><td style="font-weight:bold;">买入</td><td>CVX</td>
+        <td style="text-align:right;">177.4900</td><td style="text-align:right;">36</td>
+        <td style="text-align:right;">$6,389.64</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-10</td><td style="font-weight:bold;">卖出</td><td>MU</td>
+        <td style="text-align:right;">373.0933</td><td style="text-align:right;">20</td>
+        <td style="text-align:right;">$7,461.87</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+26.80%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-10</td><td style="font-weight:bold;">买入</td><td>CAT</td>
+        <td style="text-align:right;">742.3700</td><td style="text-align:right;">8</td>
+        <td style="text-align:right;">$5,938.96</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-10</td><td style="font-weight:bold;">买入</td><td>OKE</td>
+        <td style="text-align:right;">83.4600</td><td style="text-align:right;">79</td>
+        <td style="text-align:right;">$6,593.34</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-13</td><td style="font-weight:bold;">卖出</td><td>CVX</td>
+        <td style="text-align:right;">181.9600</td><td style="text-align:right;">36</td>
+        <td style="text-align:right;">$6,550.56</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+2.52%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-13</td><td style="font-weight:bold;">买入</td><td>COP</td>
+        <td style="text-align:right;">110.5720</td><td style="text-align:right;">61</td>
+        <td style="text-align:right;">$6,744.89</td>
+        <td style="font-size:11px;color:#555;">排名5</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-20</td><td style="font-weight:bold;">卖出</td><td>XOM</td>
+        <td style="text-align:right;">147.2800</td><td style="text-align:right;">44</td>
+        <td style="text-align:right;">$6,480.32</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+0.45%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-20</td><td style="font-weight:bold;">买入</td><td>CAT</td>
+        <td style="text-align:right;">759.7400</td><td style="text-align:right;">1</td>
+        <td style="text-align:right;">$759.74</td>
+        <td style="font-size:11px;color:#555;">排名2</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-25</td><td style="font-weight:bold;">卖出</td><td>OKE</td>
+        <td style="text-align:right;">82.2800</td><td style="text-align:right;">79</td>
+        <td style="text-align:right;">$6,500.12</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-1.41%</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-25</td><td style="font-weight:bold;">卖出</td><td>COP</td>
+        <td style="text-align:right;">110.0100</td><td style="text-align:right;">61</td>
+        <td style="text-align:right;">$6,710.61</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-0.51%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-25</td><td style="font-weight:bold;">买入</td><td>AMAT</td>
+        <td style="text-align:right;">394.9500</td><td style="text-align:right;">17</td>
+        <td style="text-align:right;">$6,714.15</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-25</td><td style="font-weight:bold;">买入</td><td>EOG</td>
+        <td style="text-align:right;">121.5600</td><td style="text-align:right;">57</td>
+        <td style="text-align:right;">$6,928.92</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-02-26</td><td style="font-weight:bold;">卖出</td><td>EOG</td>
+        <td style="text-align:right;">120.2000</td><td style="text-align:right;">57</td>
+        <td style="text-align:right;">$6,851.40</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-1.12%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-02-26</td><td style="font-weight:bold;">买入</td><td>GE</td>
+        <td style="text-align:right;">340.3300</td><td style="text-align:right;">20</td>
+        <td style="text-align:right;">$6,806.60</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-02</td><td style="font-weight:bold;">卖出</td><td>CAT</td>
+        <td style="text-align:right;">752.3200</td><td style="text-align:right;">9</td>
+        <td style="text-align:right;">$6,770.88</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+1.08%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-02</td><td style="font-weight:bold;">买入</td><td>AMAT</td>
+        <td style="text-align:right;">372.1800</td><td style="text-align:right;">2</td>
+        <td style="text-align:right;">$744.36</td>
+        <td style="font-size:11px;color:#555;">排名2</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-02</td><td style="font-weight:bold;">买入</td><td>EOG</td>
+        <td style="text-align:right;">127.6600</td><td style="text-align:right;">55</td>
+        <td style="text-align:right;">$7,021.30</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-05</td><td style="font-weight:bold;">卖出</td><td>AMAT</td>
+        <td style="text-align:right;">346.5300</td><td style="text-align:right;">19</td>
+        <td style="text-align:right;">$6,584.07</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-11.72%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-05</td><td style="font-weight:bold;">买入</td><td>NFLX</td>
+        <td style="text-align:right;">99.1700</td><td style="text-align:right;">66</td>
+        <td style="text-align:right;">$6,545.22</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-06</td><td style="font-weight:bold;">卖出</td><td>GE</td>
+        <td style="text-align:right;">322.6300</td><td style="text-align:right;">20</td>
+        <td style="text-align:right;">$6,452.60</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-5.20%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-06</td><td style="font-weight:bold;">买入</td><td>COP</td>
+        <td style="text-align:right;">117.0700</td><td style="text-align:right;">54</td>
+        <td style="text-align:right;">$6,321.78</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-12</td><td style="font-weight:bold;">卖出</td><td>LITE</td>
+        <td style="text-align:right;">616.0900</td><td style="text-align:right;">12</td>
+        <td style="text-align:right;">$7,393.08</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+22.14%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-12</td><td style="font-weight:bold;">买入</td><td>PLTR</td>
+        <td style="text-align:right;">153.5000</td><td style="text-align:right;">42</td>
+        <td style="text-align:right;">$6,447.00</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-19</td><td style="font-weight:bold;">买入</td><td>NFLX</td>
+        <td style="text-align:right;">91.7400</td><td style="text-align:right;">6</td>
+        <td style="text-align:right;">$550.44</td>
+        <td style="font-size:11px;color:#555;">排名1</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-24</td><td style="font-weight:bold;">卖出</td><td>NFLX</td>
+        <td style="text-align:right;">90.9200</td><td style="text-align:right;">72</td>
+        <td style="text-align:right;">$6,546.24</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-7.74%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-24</td><td style="font-weight:bold;">买入</td><td>CVX</td>
+        <td style="text-align:right;">206.7900</td><td style="text-align:right;">32</td>
+        <td style="text-align:right;">$6,617.28</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-03-26</td><td style="font-weight:bold;">卖出</td><td>PLTR</td>
+        <td style="text-align:right;">147.5600</td><td style="text-align:right;">42</td>
+        <td style="text-align:right;">$6,197.52</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-3.87%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-03-26</td><td style="font-weight:bold;">买入</td><td>XOM</td>
+        <td style="text-align:right;">165.4300</td><td style="text-align:right;">40</td>
+        <td style="text-align:right;">$6,617.20</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-06</td><td style="font-weight:bold;">卖出</td><td>CVX</td>
+        <td style="text-align:right;">198.8600</td><td style="text-align:right;">32</td>
+        <td style="text-align:right;">$6,363.52</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-3.83%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-06</td><td style="font-weight:bold;">买入</td><td>ARM</td>
+        <td style="text-align:right;">148.7700</td><td style="text-align:right;">44</td>
+        <td style="text-align:right;">$6,545.88</td>
+        <td style="font-size:11px;color:#555;">排名1</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-08</td><td style="font-weight:bold;">卖出</td><td>XOM</td>
+        <td style="text-align:right;">156.2200</td><td style="text-align:right;">40</td>
+        <td style="text-align:right;">$6,248.80</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-5.57%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-08</td><td style="font-weight:bold;">买入</td><td>LITE</td>
+        <td style="text-align:right;">896.0200</td><td style="text-align:right;">7</td>
+        <td style="text-align:right;">$6,272.14</td>
+        <td style="font-size:11px;color:#555;">排名2</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-10</td><td style="font-weight:bold;">卖出</td><td>EOG</td>
+        <td style="text-align:right;">135.1400</td><td style="text-align:right;">55</td>
+        <td style="text-align:right;">$7,432.70</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+5.86%</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-10</td><td style="font-weight:bold;">卖出</td><td>COP</td>
+        <td style="text-align:right;">122.5500</td><td style="text-align:right;">54</td>
+        <td style="text-align:right;">$6,617.70</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+4.68%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-10</td><td style="font-weight:bold;">买入</td><td>AMD</td>
+        <td style="text-align:right;">245.0400</td><td style="text-align:right;">25</td>
+        <td style="text-align:right;">$6,126.00</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-10</td><td style="font-weight:bold;">买入</td><td>LRCX</td>
+        <td style="text-align:right;">263.6600</td><td style="text-align:right;">24</td>
+        <td style="text-align:right;">$6,327.84</td>
+        <td style="font-size:11px;color:#555;">排名4</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-10</td><td style="font-weight:bold;">买入</td><td>CAT</td>
+        <td style="text-align:right;">790.6600</td><td style="text-align:right;">8</td>
+        <td style="text-align:right;">$6,325.28</td>
+        <td style="font-size:11px;color:#555;">排名5</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-13</td><td style="font-weight:bold;">卖出</td><td>CAT</td>
+        <td style="text-align:right;">791.7300</td><td style="text-align:right;">8</td>
+        <td style="text-align:right;">$6,333.84</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#28A745;">+0.14%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-13</td><td style="font-weight:bold;">买入</td><td>FCX</td>
+        <td style="text-align:right;">67.8800</td><td style="text-align:right;">94</td>
+        <td style="text-align:right;">$6,380.72</td>
+        <td style="font-size:11px;color:#555;">排名5</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-16</td><td style="font-weight:bold;">卖出</td><td>LRCX</td>
+        <td style="text-align:right;">260.9600</td><td style="text-align:right;">24</td>
+        <td style="text-align:right;">$6,263.04</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-1.02%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-16</td><td style="font-weight:bold;">买入</td><td>AVGO</td>
+        <td style="text-align:right;">398.4700</td><td style="text-align:right;">16</td>
+        <td style="text-align:right;">$6,375.52</td>
+        <td style="font-size:11px;color:#555;">排名5</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;">
+        <td>2026-04-23</td><td style="font-weight:bold;">卖出</td><td>LITE</td>
+        <td style="text-align:right;">846.8900</td><td style="text-align:right;">7</td>
+        <td style="text-align:right;">$5,928.23</td>
+        <td style="font-size:11px;color:#555;">调出目标</td>
+        <td style="text-align:right;font-weight:bold;color:#DC3545;">-5.48%</td></tr><tr style="background:#E2EFDA;">
+        <td>2026-04-23</td><td style="font-weight:bold;">买入</td><td>FCX</td>
+        <td style="text-align:right;">61.4800</td><td style="text-align:right;">11</td>
+        <td style="text-align:right;">$676.28</td>
+        <td style="font-size:11px;color:#555;">排名3</td>
+        <td style="text-align:right;font-weight:bold;color:#888;">-</td></tr></table></div></div>
+<div class="footer">七星美股版(高成长35无PP) x5 · Blakever Trade · 2026-06-04 17:36<br>本报告仅供研究参考，不构成投资建议。</div>
+</body></html>
