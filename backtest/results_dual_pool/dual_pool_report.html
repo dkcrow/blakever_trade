@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETF双池平滑动量轮动 - 回测报告</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background:#f0f2f5; color:#333; line-height:1.6; }
+.container { max-width:960px; margin:0 auto; padding:20px; }
+
+/* 标题栏 */
+.header { background: linear-gradient(135deg, #1F4E79 0%, #2B7AB8 100%); color:white; padding:30px; border-radius:12px; margin-bottom:20px; text-align:center; }
+.header h1 { font-size:24px; margin-bottom:8px; }
+.header .subtitle { font-size:14px; opacity:0.85; }
+
+/* 卡片 */
+.card { background:white; border-radius:10px; padding:24px; margin-bottom:20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card h2 { font-size:18px; color:#1F4E79; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid #1F4E79; }
+
+/* 概览网格 */
+.overview-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:12px; }
+.overview-item { padding:12px; background:#f8f9fa; border-radius:8px; text-align:center; }
+.overview-item .label { font-size:12px; color:#666; margin-bottom:4px; }
+.overview-item .value { font-size:22px; font-weight:700; }
+
+/* 结果卡片 */
+.result-cards { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+.result-card { padding:16px; border-radius:8px; text-align:center; }
+.result-card.bg-blue { background:#E3F2FD; }
+.result-card.bg-green { background:#E8F5E9; }
+.result-card.bg-red { background:#FFEBEE; }
+.result-card.bg-yellow { background:#FFF8E1; }
+.result-card .label { font-size:12px; color:#666; }
+.result-card .value { font-size:24px; font-weight:700; margin:4px 0; }
+.result-card .sub { font-size:12px; color:#888; }
+
+/* 表格 */
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th { background:#1F4E79; color:white; padding:10px 8px; text-align:left; font-weight:600; }
+td { padding:8px; border-bottom:1px solid #eee; }
+tr:nth-child(even) { background:#f8f9fa; }
+tr:hover { background:#e3f2fd; }
+
+/* 策略概览表格 */
+.info-table td:first-child { width:140px; color:#666; font-weight:600; }
+.info-table td:last-child { color:#333; }
+
+/* 正负色 */
+.positive { color:#DC3545; font-weight:600; }
+.negative { color:#28A745; font-weight:600; }
+
+.footer { text-align:center; padding:20px; color:#999; font-size:12px; }
+.footer p { margin:4px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- 标题 -->
+<div class="header">
+    <h1>ETF双池平滑动量轮动 回测报告</h1>
+    <div class="subtitle">基于聚宽原版策略代码 | 报告时间: 2026-06-03 21:43 | 数据截止: 2026-06-03</div>
+</div>
+
+<!-- 策略概况 -->
+<div class="card">
+    <h2>策略概况</h2>
+    <table class="info-table">
+        <tr><td>ETF池</td><td>静态池133只 + 动态池(top100成交额) → 融合去重, 实际可用134只</td></tr>
+        <tr><td>动量周期</td><td>25日 加权对数回归</td></tr>
+        <tr><td>持仓数量</td><td>1只 (动量最强)</td></tr>
+        <tr><td>佣金费率</td><td>0.01% (万分之一) 双边</td></tr>
+        <tr><td>双均线过滤</td><td>close > MA20 且 MA20 > MA60</td></tr>
+        <tr><td>成交量过滤</td><td>当日量/5日均量 > 2.5 → 过滤 (放量回避)</td></tr>
+        <tr><td>动量得分</td><td>exp(slope × 250) - 1 × R², 范围(0, 5)</td></tr>
+        <tr><td>止损</td><td>现价 ≤ 成本价 × 0.92 → 清仓</td></tr>
+        <tr><td>防御模式</td><td>无动量目标时 → 买入银华日利(511880)</td></tr>
+        <tr><td>其他过滤</td><td>无溢价率/无盈利保护/无行情判断</td></tr>
+    </table>
+</div>
+
+<!-- 回测结果 -->
+<div class="card">
+    <h2>回测结果</h2>
+    <div class="overview-grid">
+        <div class="overview-item"><div class="label">回测区间</div><div class="value" style="font-size:14px">2025-01-02 ~ 2026-06-03</div></div>
+        <div class="overview-item"><div class="label">交易日数</div><div class="value">341</div></div>
+        <div class="overview-item"><div class="label">初始资金</div><div class="value">100,000</div></div>
+        <div class="overview-item"><div class="label">最终资产</div><div class="value">202,372</div></div>
+    </div>
+
+    <div class="result-cards" style="margin-top:16px">
+        <div class="result-card bg-green">
+            <div class="label">总收益率</div>
+            <div class="value" style="color:#DC3545">+102.37%</div>
+            <div class="sub">年化 75.65%</div>
+        </div>
+        <div class="result-card bg-red">
+            <div class="label">最大回撤</div>
+            <div class="value" style="color:#DC3545">29.19%</div>
+            <div class="sub">风险指标</div>
+        </div>
+        <div class="result-card bg-blue">
+            <div class="label">夏普比率</div>
+            <div class="value" style="font-size:20px">1.7410</div>
+            <div class="sub">卡尔马 2.5916</div>
+        </div>
+    </div>
+
+    <div class="result-cards" style="grid-template-columns: repeat(4, 1fr); margin-top:12px">
+        <div class="result-card bg-yellow">
+            <div class="label">总交易次数</div>
+            <div class="value" style="font-size:20px">321</div>
+            <div class="sub">买161 / 卖160</div>
+        </div>
+        <div class="result-card bg-green">
+            <div class="label">胜率</div>
+            <div class="value" style="font-size:20px">50.0%</div>
+            <div class="sub">(不含防御ETF交易)</div>
+        </div>
+        <div class="result-card bg-green">
+            <div class="label">平均盈利</div>
+            <div class="value" style="font-size:20px;color:#DC3545">+2.81%</div>
+            <div class="sub">卖出盈利交易</div>
+        </div>
+        <div class="result-card bg-red">
+            <div class="label">平均亏损</div>
+            <div class="value" style="font-size:20px;color:#28A745">-1.75%</div>
+            <div class="sub">卖出亏损交易</div>
+        </div>
+    </div>
+</div>
+
+<!-- 最近交易记录 -->
+<div class="card">
+    <h2>最近交易记录 (最后20笔)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th>代码</th>
+                <th>名称</th>
+                <th>方向</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>盈亏</th>
+                <th>原因</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td>2026-06-03</td>
+            <td>sh515880</td>
+            <td>sh515880</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.7160</td>
+            <td>117900</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-06-03</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>2.3430</td>
+            <td>86300</td>
+            <td><span style="color:#666">0.00%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-06-02</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>2.3430</td>
+            <td>86300</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-06-02</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>2.3430</td>
+            <td>86400</td>
+            <td><span style="color:#28A745">-0.01%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-06-01</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>2.3650</td>
+            <td>86400</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-06-01</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>2.3650</td>
+            <td>86400</td>
+            <td><span style="color:#DC3545">+0.04%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-29</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>2.2730</td>
+            <td>86400</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-29</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>1.1310</td>
+            <td>173700</td>
+            <td><span style="color:#28A745">-0.04%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-28</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.1720</td>
+            <td>173700</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-28</td>
+            <td>sz159819</td>
+            <td>sz159819</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>2.0400</td>
+            <td>99800</td>
+            <td><span style="color:#DC3545">+0.02%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-27</td>
+            <td>sz159819</td>
+            <td>sz159819</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>2.0060</td>
+            <td>99800</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-27</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>1.1470</td>
+            <td>174600</td>
+            <td><span style="color:#28A745">-0.02%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-26</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.1740</td>
+            <td>174600</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-26</td>
+            <td>sh515880</td>
+            <td>sh515880</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>1.5480</td>
+            <td>132400</td>
+            <td><span style="color:#28A745">-0.01%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-25</td>
+            <td>sh515880</td>
+            <td>sh515880</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.5620</td>
+            <td>132400</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-25</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>1.1740</td>
+            <td>176200</td>
+            <td><span style="color:#DC3545">+0.04%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-22</td>
+            <td>sh515980</td>
+            <td>sh515980</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.1300</td>
+            <td>176200</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-21</td>
+            <td>sz159583</td>
+            <td>sz159583</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>1.7520</td>
+            <td>113700</td>
+            <td><span style="color:#28A745">-0.05%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        <tr>
+            <td>2026-05-20</td>
+            <td>sz159583</td>
+            <td>sz159583</td>
+            <td style="color:#DC3545;font-weight:600">买入</td>
+            <td>1.8450</td>
+            <td>113700</td>
+            <td>-</td>
+            <td style="font-size:12px">排名1</td>
+        </tr>
+        <tr>
+            <td>2026-05-19</td>
+            <td>sh513100</td>
+            <td>纳指ETF国泰</td>
+            <td style="color:#28A745;font-weight:600">卖出</td>
+            <td>2.0470</td>
+            <td>102500</td>
+            <td><span style="color:#28A745">-0.01%</span></td>
+            <td style="font-size:12px">调出目标</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 数据说明 -->
+<div class="card" style="background:#fff3cd; border-left:4px solid #ffc107">
+    <h2 style="border-bottom-color:#ffc107">注意事项</h2>
+    <ul style="font-size:13px; color:#856404; padding-left:20px">
+        <li>数据覆盖率: 134/134只ETF有数据 (100%), 其中124只覆盖完整回测区间 (92.5%)</li>
+        <li>数据源: 新浪财经API (money.finance.sina.com.cn) 批量下载, datalen=2000条/只</li>
+        <li>成交量放量过滤: 回测使用当日完整成交量(非盘中投影), 与实盘逻辑有差异</li>
+        <li>策略原代码来自聚宽平台, 本地回测为近似复现</li>
+    </ul>
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+    <p>ETF双池平滑动量轮动 回测报告 · 生成于 2026-06-03 21:43</p>
+    <p>blakever_trade 量化交易系统 | 免责声明: 回测结果不代表未来表现</p>
+</div>
+
+</div>
+</body>
+</html>

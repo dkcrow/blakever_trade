@@ -1,0 +1,21 @@
+{
+  "strategy": "ETF双池平滑动量轮动",
+  "backtest_period": "2025-01-02 ~ 2026-06-03",
+  "trading_days": 341,
+  "initial_cash": 100000.0,
+  "final_value": 262235.52,
+  "total_return_pct": 162.24,
+  "annualized_return_pct": 119.89,
+  "max_drawdown_pct": 28.04,
+  "sharpe_ratio": 1.8168,
+  "calmar_ratio": 4.2763,
+  "total_trades": 85,
+  "buy_trades": 43,
+  "sell_trades": 42,
+  "win_rate_pct": 52.38,
+  "avg_win_pct": 9.1,
+  "avg_loss_pct": -3.56,
+  "final_holdings": [
+    "sh513310"
+  ]
+}

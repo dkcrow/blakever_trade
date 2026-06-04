@@ -1,0 +1,18 @@
+{
+  "strategy": "ETF双池平滑美股版(Nasdaq100)",
+  "backtest_period": "2025-01-02 ~ 2026-04-23",
+  "trading_days": 327,
+  "initial_cash": 100000,
+  "final_value": 74754.84,
+  "total_return_pct": -25.25,
+  "annualized_return_pct": -19.45,
+  "max_drawdown_pct": 50.64,
+  "sharpe_ratio": -0.1794,
+  "calmar_ratio": 0.3842,
+  "total_trades": 127,
+  "buy_trades": 64,
+  "sell_trades": 63,
+  "win_rate_pct": 46.03,
+  "avg_win_pct": 3.82,
+  "avg_loss_pct": -4.35
+}
