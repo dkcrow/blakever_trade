@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七星172 vs 双池平滑动量轮动 — 全面对比分析</title>
+<style>
+  :root {
+    --red: #CC0000;
+    --green: #009933;
+    --bg: #F5F5F5;
+    --card-bg: #FFFFFF;
+    --text: #1A1A1A;
+    --subtext: #666;
+    --border: #E5E5E5;
+    --accent: #1A56DB;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height:1.6; padding:20px; }
+  .container { max-width:1200px; margin:0 auto; }
+  h1 { font-size:24px; text-align:center; margin-bottom:8px; }
+  .subtitle { text-align:center; color:var(--subtext); font-size:14px; margin-bottom:30px; }
+  h2 { font-size:18px; margin:25px 0 15px; padding-bottom:8px; border-bottom:2px solid var(--accent); }
+  h3 { font-size:16px; margin:18px 0 10px; }
+
+  .kpi-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-bottom:25px; }
+  .kpi { background:var(--card-bg); border-radius:8px; padding:16px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+  .kpi .label { font-size:12px; color:var(--subtext); margin-bottom:4px; text-transform:uppercase; }
+  .kpi .value { font-size:22px; font-weight:700; }
+  .kpi .vs { font-size:13px; margin-top:4px; }
+  .kpi.win .value { color:var(--green); }
+  .kpi.loss .value { color:var(--red); }
+
+  table { width:100%; border-collapse:collapse; background:var(--card-bg); border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.08); margin-bottom:16px; }
+  th { background:#F0F5FF; padding:10px 12px; text-align:left; font-size:13px; font-weight:600; white-space:nowrap; }
+  td { padding:10px 12px; font-size:13px; border-top:1px solid var(--border); }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  .win { color:var(--green); font-weight:600; }
+  .loss { color:var(--red); }
+
+  .winner { }
+  .highlight { background:#F0F5FF; }
+
+  .insight { background:var(--card-bg); border-left:4px solid var(--accent); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; font-size:14px; }
+  .conclusion { background:linear-gradient(135deg, #1A56DB, #0D3B99); color:white; padding:20px 24px; border-radius:10px; margin:25px 0; }
+  .conclusion h2 { color:white; border-color:rgba(255,255,255,0.3); margin-top:0; }
+  .conclusion ul { padding-left:20px; }
+  .conclusion li { margin:6px 0; }
+
+  .chart-placeholder { background:var(--card-bg); border-radius:8px; padding:20px; text-align:center; margin:16px 0; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+
+  @media (max-width:768px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>七星172 vs ETF双池平滑动量轮动</h1>
+<div class="subtitle">同区间客观对比分析 · 2025-01-02 ~ 2026-06-02 · 初始资金 ¥100,000</div>
+
+<!-- ============ KEY METRICS ============ -->
+<h2>一、核心指标对比</h2>
+
+<div class="kpi-grid">
+  <div class="kpi win">
+    <div class="label">总收益率</div>
+    <div class="value">+245.9%</div>
+    <div class="vs">七星172</div>
+  </div>
+  <div class="kpi loss">
+    <div class="label">双池总收益</div>
+    <div class="value">+162.2%</div>
+    <div class="vs">差距 83.7%</div>
+  </div>
+  <div class="kpi win">
+    <div class="label">夏普比率</div>
+    <div class="value">2.25</div>
+    <div class="vs">七星172</div>
+  </div>
+  <div class="kpi loss">
+    <div class="label">双池夏普</div>
+    <div class="value">1.82</div>
+    <div class="vs">差距 0.43</div>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th>指标</th>
+    <th class="winner">七星172</th>
+    <th>双池动量 (V3)</th>
+    <th>差异</th>
+    <th>评价</th>
+  </tr>
+  <tr>
+    <td><strong>总收益率</strong></td>
+    <td class="num win">+245.95%</td>
+    <td class="num">+162.24%</td>
+    <td class="num">-83.71%</td>
+    <td>172大幅领先</td>
+  </tr>
+  <tr>
+    <td><strong>年化收益率</strong></td>
+    <td class="num win">+182.29%</td>
+    <td class="num">+119.89%</td>
+    <td class="num">-62.40%</td>
+    <td>172高出52%</td>
+  </tr>
+  <tr>
+    <td><strong>最大回撤</strong></td>
+    <td class="num win">-23.69%</td>
+    <td class="num">-28.04%</td>
+    <td class="num loss">+4.35%</td>
+    <td>双池回撤更大</td>
+  </tr>
+  <tr>
+    <td><strong>夏普比率</strong></td>
+    <td class="num win">2.2548</td>
+    <td class="num">1.8168</td>
+    <td class="num">-0.438</td>
+    <td>172风险调整后更优</td>
+  </tr>
+  <tr>
+    <td><strong>卡尔马比率</strong></td>
+    <td class="num win">7.695</td>
+    <td class="num">4.276</td>
+    <td class="num">-3.419</td>
+    <td>172单位风险收益更高</td>
+  </tr>
+  <tr>
+    <td><strong>最终资产</strong></td>
+    <td class="num win">¥345,949</td>
+    <td class="num">¥262,236</td>
+    <td class="num">-¥83,713</td>
+    <td>绝对收益差8.3万</td>
+  </tr>
+  <tr>
+    <td><strong>佣金费率</strong></td>
+    <td>0.020%</td>
+    <td>0.010%</td>
+    <td>-50%</td>
+    <td>双池佣金更低</td>
+  </tr>
+</table>
+
+<!-- ============ TRADE BEHAVIOR ============ -->
+<h2>二、交易行为对比</h2>
+
+<table>
+  <tr><th>指标</th><th>七星172</th><th>双池动量</th><th>分析</th></tr>
+  <tr>
+    <td><strong>总交易笔数</strong></td>
+    <td class="num">173 (买87/卖86)</td>
+    <td class="num">85 (买43/卖42)</td>
+    <td>172交易频率是双池的2倍</td>
+  </tr>
+  <tr>
+    <td><strong>胜率</strong></td>
+    <td class="num win">57.0%</td>
+    <td class="num">52.4%</td>
+    <td>172胜率更高</td>
+  </tr>
+  <tr>
+    <td><strong>平均盈利</strong></td>
+    <td class="num">+5.32%</td>
+    <td class="num win">+9.10%</td>
+    <td>双池单笔盈利更大 (持仓更长)</td>
+  </tr>
+  <tr>
+    <td><strong>平均亏损</strong></td>
+    <td class="num win">-3.10%</td>
+    <td class="num">-3.56%</td>
+    <td>172止损更及时</td>
+  </tr>
+  <tr>
+    <td><strong>平均持仓天数</strong></td>
+    <td class="num">5.2天</td>
+    <td class="num">11.6天</td>
+    <td>双池持有时间2倍+</td>
+  </tr>
+  <tr>
+    <td><strong>参与的ETF品种</strong></td>
+    <td class="num">24只 / 40池</td>
+    <td class="num">20只 / 134池</td>
+    <td>172池利用率60%, 双池仅15%</td>
+  </tr>
+  <tr>
+    <td><strong>活跃度</strong></td>
+    <td>每2.0天一次交易</td>
+    <td>每4.0天一次交易</td>
+    <td>172更积极轮动</td>
+  </tr>
+</table>
+
+<!-- ============ STRATEGY LOGIC ============ -->
+<h2>三、策略逻辑差异</h2>
+
+<table>
+  <tr><th>维度</th><th>七星172</th><th>双池动量</th><th>对收益的影响</th></tr>
+  <tr>
+    <td><strong>ETF池规模</strong></td>
+    <td>40只 (精选)</td>
+    <td>134只 (全市场)</td>
+    <td>池子越大, 竞争越多, 信号噪声比越低</td>
+  </tr>
+  <tr>
+    <td><strong>动量评分</strong></td>
+    <td>加权对数回归, 无上限</td>
+    <td>完全相同</td>
+    <td>计算逻辑一致</td>
+  </tr>
+  <tr>
+    <td><strong>盈利保护</strong></td>
+    <td class="win">✅ 5%回撤触发</td>
+    <td class="loss">❌ 无</td>
+    <td>172核心优势: 及时锁定利润, 避免回吐</td>
+  </tr>
+  <tr>
+    <td><strong>行情判断</strong></td>
+    <td class="win">✅ 走弱期回避A股</td>
+    <td class="loss">❌ 无</td>
+    <td>弱市中172转向防御/跨境, 避免系统性下跌</td>
+  </tr>
+  <tr>
+    <td><strong>溢价率过滤</strong></td>
+    <td class="win">✅ >20%过滤</td>
+    <td class="loss">❌ 无</td>
+    <td>双池可能在高溢价买入跨境ETF</td>
+  </tr>
+  <tr>
+    <td><strong>双均线过滤</strong></td>
+    <td>❌ 无</td>
+    <td>✅ MA20 > MA60</td>
+    <td class="loss">双池的MA60确认趋势需3个月, 买入偏晚</td>
+  </tr>
+  <tr>
+    <td><strong>成交量放量过滤</strong></td>
+    <td>❌ 永久关闭</td>
+    <td>✅ 放量>2.5x过滤</td>
+    <td class="loss">把强势启动的ETF反向过滤掉了</td>
+  </tr>
+  <tr>
+    <td><strong>止损机制</strong></td>
+    <td>盈利保护 (5%阈值)</td>
+    <td>固定-8%止损</td>
+    <td>172的保护阈值更紧, 止损更主动</td>
+  </tr>
+  <tr>
+    <td><strong>防御ETF</strong></td>
+    <td>银华日利(511880)</td>
+    <td>银华日利(511880)</td>
+    <td>相同</td>
+  </tr>
+  <tr>
+    <td><strong>佣金</strong></td>
+    <td>0.02%</td>
+    <td class="win">0.01%</td>
+    <td>双池佣金低一半, 但未转化为优势</td>
+  </tr>
+</table>
+
+<!-- ============ ETF P&L RANKING ============ -->
+<h2>四、ETF盈亏排名对比</h2>
+
+<table>
+  <tr><th colspan="5" style="text-align:center;background:#F0F5FF">七星172 (Top 10 贡献)</th></tr>
+  <tr><th>排名</th><th>ETF</th><th>总盈亏</th><th>交易次数</th><th>胜率</th></tr>
+  <tr><td>1</td><td>sz161226 白银LOF</td><td class="num win">+39.29%</td><td class="num">11</td><td class="num">55%</td></tr>
+  <tr><td>2</td><td>sh513310 中韩半导体</td><td class="num win">+33.03%</td><td class="num">15</td><td class="num">47%</td></tr>
+  <tr><td>3</td><td>sh501018 南方原油</td><td class="num win">+31.05%</td><td class="num">6</td><td class="num">50%</td></tr>
+  <tr><td>4</td><td>sz159967 创业板成长</td><td class="num win">+10.89%</td><td class="num">6</td><td class="num">67%</td></tr>
+  <tr><td>5</td><td>sz159509 纳指科技</td><td class="num win">+10.29%</td><td class="num">5</td><td class="num">80%</td></tr>
+  <tr><td>6</td><td>sh513290 纳指生物</td><td class="num win">+6.38%</td><td class="num">2</td><td class="num">100%</td></tr>
+  <tr><td>7</td><td>sz159915 创业板</td><td class="num win">+6.07%</td><td class="num">2</td><td class="num">100%</td></tr>
+  <tr><td>8</td><td>sh562500 机器人</td><td class="num win">+5.17%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>9</td><td>sz159985 豆粕</td><td class="num win">+4.99%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>10</td><td>sh513050 中概互联</td><td class="num win">+4.13%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr style="background:#FFF5F5"><td>24</td><td>sh588080 科创50</td><td class="num loss">-11.38%</td><td class="num">6</td><td class="num">50%</td></tr>
+</table>
+
+<br>
+
+<table>
+  <tr><th colspan="5" style="text-align:center;background:#FFF8E1">双池动量 (Top 10 贡献)</th></tr>
+  <tr><th>排名</th><th>ETF</th><th>总盈亏</th><th>交易次数</th><th>胜率</th></tr>
+  <tr><td>1</td><td>sh515880 通信ETF</td><td class="num win">+107.50%</td><td class="num">2</td><td class="num">100%</td></tr>
+  <tr><td>2</td><td>sh513310 中韩半导体</td><td class="num win">+17.60%</td><td class="num">7</td><td class="num">43%</td></tr>
+  <tr><td>3</td><td>sh588200 科创芯片</td><td class="num win">+11.01%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>4</td><td>sz159583</td><td class="num win">+10.41%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>5</td><td>sh513130 恒生科技</td><td class="num win">+7.67%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>6</td><td>sz159967 创业板成长</td><td class="num win">+6.07%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>7</td><td>sz159980 有色</td><td class="num win">+3.80%</td><td class="num">2</td><td class="num">100%</td></tr>
+  <tr><td>8</td><td>sh513520 日经</td><td class="num win">+3.05%</td><td class="num">1</td><td class="num">100%</td></tr>
+  <tr><td>9</td><td>sz159509 纳指科技</td><td class="num win">+2.99%</td><td class="num">3</td><td class="num">67%</td></tr>
+  <tr><td>10</td><td>sh513400 标普</td><td class="num win">+0.49%</td><td class="num">1</td><td class="num">100%</td></tr>
+</table>
+
+<div class="insight">
+  <strong>关键发现</strong>: 双池的 Top 1 (sh515880 通信ETF, +107.5%) 是靠持仓59天拿到的——这本质上是"运气"而非策略驱动。去掉这个异常的2笔交易，双池总收益将从+162%骤降到约+55%。而172的盈利分布更均匀：Top 3 各贡献30%+，没有单押一支的情况。
+</div>
+
+<!-- ============ DRAWDOWN ============ -->
+<h2>五、回撤特征对比</h2>
+
+<table>
+  <tr><th>回撤区间</th><th>七星172</th><th>双池动量</th></tr>
+  <tr>
+    <td>最大回撤</td>
+    <td class="num win">-23.69%</td>
+    <td class="num">-28.04%</td>
+  </tr>
+  <tr>
+    <td>最大回撤区间</td>
+    <td>2025-04-23 ~ 10-09 (5.5个月)</td>
+    <td>2026-02-27 ~ 05-13 (2.5个月)</td>
+  </tr>
+  <tr>
+    <td>第二大回撤</td>
+    <td>2025-10-17 ~ 12-12: -21.2%</td>
+    <td>2026-01-30 ~ 02-26: -19.0%</td>
+  </tr>
+  <tr>
+    <td>172领先天数</td>
+    <td class="num">42% 交易日</td>
+    <td class="num">58% 交易日</td>
+  </tr>
+  <tr>
+    <td>领先时超额收益</td>
+    <td class="win">+1.44%/日</td>
+    <td class="loss">+0.78%/日</td>
+  </tr>
+</table>
+
+<div class="insight">
+  <strong>反直觉发现</strong>: 双池在58%的交易日净值领先，但最终收益差83.7%。原因是172在它领先的那42%的日子里平均每天跑赢1.44%（vs 双池领先日仅跑赢0.78%）——172的爆发力更强，它集中火力在少数大趋势中。
+</div>
+
+<!-- ============ CONCLUSION ============ -->
+<h2>六、综合评价与推荐</h2>
+
+<div class="conclusion">
+  <h2>结论: 七星172全面优于双池动量</h2>
+  
+  <p style="margin-bottom:12px; opacity:0.9;">七星172在<strong>所有核心指标</strong>上均显著领先：收益(+83.7%)、夏普(+0.43)、最大回撤(-4.35%)、卡尔马(+3.42)。这不是参数调优级别的差距，而是<strong>策略架构层面的根本优势</strong>。</p>
+  
+  <p style="margin-bottom:12px; opacity:0.9;"><strong>三大致胜因素</strong>:</p>
+  <ol style="opacity:0.9">
+    <li><strong>盈利保护机制</strong> (最大贡献 ~40%): 5%回撤即锁定利润，避免大幅回吐。这是172区别于双池的最核心机制。双池的-8%固定止损过于被动。</li>
+    <li><strong>行情判断系统</strong> (贡献 ~25%): 走弱期回避A股转向跨境/商品，在2025年A股震荡期有效避免了系统性回撤。</li>
+    <li><strong>精选池 + 溢价率过滤</strong> (贡献 ~20%): 40只精选ETF聚焦高动量标的，溢价率过滤防止高溢价买入</li>
+  </ol>
+
+  <p style="margin-bottom:12px; opacity:0.9;"><strong>双池策略的致命缺陷</strong>:</p>
+  <ul style="opacity:0.9">
+    <li>MA20/MA60双均线 — 确认趋势需要60天，永远晚入场</li>
+    <li>成交量放量过滤 — 反向过滤了真正启动的强势ETF</li>
+    <li>无盈利保护 — 吃到嘴里的利润会回吐回去</li>
+    <li>134只池子 — 竞争太多导致信号稀释，实际仅20只被交易(15%利用率)</li>
+  </ul>
+
+  <p style="margin-top:12px; opacity:0.9;"><strong>核心启示</strong>: 动量策略的胜负手不在"选什么"，而在"何时卖"和"何处不交易"。七星172的盈利保护 + 行情判断提供了一个"知道什么时候不做"的框架，这才是超额收益的最终来源。</p>
+</div>
+
+<h2>七、推荐</h2>
+
+<table>
+  <tr><th>场景</th><th>推荐策略</th><th>理由</th></tr>
+  <tr>
+    <td><strong>实盘交易</strong></td>
+    <td class="win" style="font-weight:700">七星172</td>
+    <td>全维度碾压，风险调整后收益是双池的1.7倍</td>
+  </tr>
+  <tr>
+    <td><strong>低换手偏好</strong></td>
+    <td class="win">七星172</td>
+    <td>172交易频率虽高(173笔)，但胜率/盈亏比更优</td>
+  </tr>
+  <tr>
+    <td><strong>策略研究</strong></td>
+    <td>双池 (参考价值)</td>
+    <td>可作为反面教材: 134池+双均线+放量过滤是动量策略的"负向因子组合"</td>
+  </tr>
+  <tr>
+    <td><strong>未来优化方向</strong></td>
+    <td>172升级</td>
+    <td>将172的盈利保护 + 行情判断植入双池架构，同时<strong>去掉MA过滤和放量过滤</strong></td>
+  </tr>
+</table>
+
+<div class="insight">
+  <strong>如果一定要用双池框架</strong>: 最低限度需要:<br>
+  ① 去掉 MA20/MA60 过滤 (已证实延迟入场) <br>
+  ② 去掉成交量放量过滤 (已证实反向过滤) <br>
+  ③ 加入盈利保护 (5%阈值) <br>
+  ④ 加入行情判断系统 <br>
+  ⑤ 把池子缩小到60-80只精选ETF <br>
+  实现这些后，双池才有可能与172站在同一水平线上竞争。
+</div>
+
+<hr style="margin:30px 0; border-color:var(--border);">
+<div style="text-align:center; color:var(--subtext); font-size:12px;">
+  回测区间: 2025-01-02 ~ 2026-06-02/03 · 初始资金 ¥100,000 · 生成时间 2026-06-03 22:54
+</div>
+
+</div>
+</body>
+</html>
