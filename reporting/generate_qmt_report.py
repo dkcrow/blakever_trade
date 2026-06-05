@@ -92,13 +92,81 @@ NOW = datetime.now()
 NOW_STR = NOW.strftime('%Y-%m-%d %H:%M')
 
 # ================================================================
-# 实时行情获取
+# 实时行情获取 — 三级兜底 (L1→L2→降级CSV)
+# L1: WeStock Data (腾讯自选股)  L2: 新浪财经 API  L3: 降级到CSV收盘价 + 邮件告警
+# 规则: 全部失败时立即发送告警邮件，严禁静默使用过时数据
 # ================================================================
-def fetch_realtime_prices(codes):
-    realtime = {}
+
+_realtime_source_qmt = None
+
+def is_realtime_valid():
+    return _realtime_source_qmt is not None
+
+def get_realtime_source():
+    return _realtime_source_qmt
+
+def _fetch_realtime_westock(codes):
+    """L1: 通过 westock-data quote 获取A股ETF实时行情"""
+    prices = {}
     a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
     if not a_codes:
-        return realtime
+        return prices
+    try:
+        code_str = ','.join(a_codes)
+        result = subprocess.run(
+            ['node', WESTOCK_SCRIPT, 'quote', code_str],
+            capture_output=True, text=True, timeout=30,
+            cwd=os.path.dirname(WESTOCK_SCRIPT)
+        )
+        if result.returncode != 0:
+            return prices
+        output = result.stdout
+        in_table = False
+        col_idx = {}
+        for line in output.split('\n'):
+            line = line.strip()
+            if not line.startswith('|'):
+                continue
+            parts = [p.strip() for p in line.split('|')[1:-1]]
+            if not in_table:
+                if 'price' in parts or 'code' in parts:
+                    for i, h in enumerate(parts):
+                        if h == 'code': col_idx['code'] = i
+                        elif h == 'price': col_idx['price'] = i
+                        elif h == 'change_percent': col_idx['chg'] = i
+                        elif h == 'prev_close': col_idx['prev_close'] = i
+                    in_table = True
+                continue
+            if all(p.replace('-','').replace(':','') == '' for p in parts):
+                continue
+            if 'code' in col_idx and 'price' in col_idx:
+                code_raw = parts[col_idx['code']]
+                try:
+                    p = float(parts[col_idx['price']])
+                except:
+                    continue
+                if p <= 0:
+                    continue
+                chg = 0.0
+                if 'chg' in col_idx:
+                    try:
+                        chg = float(parts[col_idx['chg']])
+                    except:
+                        pass
+                prices[code_raw] = {
+                    'price': p,
+                    'change_pct': round(chg, 2)
+                }
+    except Exception:
+        pass
+    return prices
+
+def _fetch_realtime_sina(codes):
+    """L2: 新浪财经实时行情"""
+    prices = {}
+    a_codes = [c for c in codes if c.startswith('sh') or c.startswith('sz')]
+    if not a_codes:
+        return prices
     batch_size = 50
     for i in range(0, len(a_codes), batch_size):
         batch = a_codes[i:i + batch_size]
@@ -120,12 +188,79 @@ def fetch_realtime_prices(codes):
                     prev_close = float(fields[2])
                     if cur_price > 0 and prev_close > 0:
                         change_pct = (cur_price - prev_close) / prev_close * 100
-                        realtime[code_key] = {'price': cur_price, 'change_pct': round(change_pct, 2)}
+                        prices[code_key] = {'price': cur_price, 'change_pct': round(change_pct, 2)}
                 except (ValueError, IndexError):
                     continue
         except Exception:
             pass
-    return realtime
+    return prices
+
+def fetch_realtime_prices(codes):
+    """获取A股ETF实时行情，三级兜底: L1 WeStock → L2 新浪 → 降级CSV"""
+    global _realtime_source_qmt
+
+    # L1: WeStock
+    prices = _fetch_realtime_westock(codes)
+    if prices:
+        _realtime_source_qmt = 'westock'
+        n_a = len([c for c in codes if c.startswith('sh') or c.startswith('sz')])
+        print(f"  [RT] L1-WeStock OK: {len(prices)}/{n_a} quotes")
+        return prices
+
+    print(f"  [RT] L1-WeStock failed, trying L2-Sina...")
+
+    # L2: 新浪
+    prices = _fetch_realtime_sina(codes)
+    if prices:
+        _realtime_source_qmt = 'sina'
+        n_a = len([c for c in codes if c.startswith('sh') or c.startswith('sz')])
+        print(f"  [RT] L2-Sina OK: {len(prices)}/{n_a} quotes")
+        return prices
+
+    _realtime_source_qmt = None
+    print(f"  [RT] ⚠️ ALL SOURCES FAILED! Prices will use CSV close data.")
+    return {}
+
+def send_realtime_failure_alert(mode_label):
+    """实时行情获取失败告警邮件"""
+    import smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    now = datetime.now()
+    subject = f"[{mode_label}] ⚠️ 实时行情获取失败 监控已失效 - {now.strftime('%Y-%m-%d %H:%M')}"
+    body = f"""<html><body style="font-family:'Microsoft YaHei',sans-serif;max-width:600px;margin:20px auto;">
+<h2 style="color:#C62828;">⚠️ 实时行情获取失败 — 监控已失效</h2>
+<p>七星QMT监控任务于 <b>{now.strftime('%Y-%m-%d %H:%M')}</b> 执行时，所有实时行情获取渠道均已失败：</p>
+<table style="border-collapse:collapse;width:100%;margin:10px 0;">
+<tr style="background:#FFEBEE;"><td style="padding:8px;border:1px solid #ddd;"><b>渠道</b></td><td style="padding:8px;border:1px solid #ddd;"><b>状态</b></td></tr>
+<tr><td style="padding:8px;border:1px solid #ddd;">L1: WeStock Data (腾讯自选股)</td><td style="padding:8px;border:1px solid #ddd;color:#C62828;">❌ 失败</td></tr>
+<tr><td style="padding:8px;border:1px solid #ddd;">L2: 新浪财经 API</td><td style="padding:8px;border:1px solid #ddd;color:#C62828;">❌ 失败</td></tr>
+</table>
+<div style="background:#FFF3CD;border:1px solid #FFC107;padding:12px;border-radius:4px;margin:15px 0;">
+    <b>⚠️ 当前报告价格均为前一交易日收盘价，非盘中实时价格，监控已失效。</b><br>
+    已尝试全部渠道获取实时价格均失败，请手动检查网络后重新执行。
+</div>
+<hr>
+<p style="color:#888;font-size:11px;">七星QMT · Blakever Trade · 自动告警<br>此邮件由系统自动发送，请勿回复。</p>
+</body></html>"""
+
+    msg = MIMEMultipart("mixed")
+    msg["Subject"] = subject
+    msg["From"] = "848786642@qq.com"
+    msg["To"] = "848786642@qq.com"
+    msg["Date"] = now.strftime("%a, %d %b %Y %H:%M:%S +0800")
+    msg.attach(MIMEText(body, "html", "utf-8"))
+
+    try:
+        with smtplib.SMTP_SSL("smtp.qq.com", 465) as s:
+            s.login("848786642@qq.com", "ljbtvacrctjobfed")
+            s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
+        print(f"  [ALERT] 实时行情失败告警邮件已发送")
+        return True
+    except Exception as e:
+        print(f"  [ALERT] 告警邮件发送失败: {e}")
+        return False
 
 # ================================================================
 # 溢价率获取（三级兜底：neodata → akshare → westock-data）
@@ -339,7 +474,12 @@ def get_current_rankings():
 
     print("  [RT] Fetching realtime prices...")
     realtime = fetch_realtime_prices(QMT_POOL)
-    print(f"  [RT] Got {len(realtime)}/{len(QMT_POOL)} realtime quotes")
+    rt_valid = is_realtime_valid()
+    rt_source = get_realtime_source()
+    if not rt_valid:
+        send_realtime_failure_alert("仅排名")
+    n_a = len([c for c in QMT_POOL if c.startswith('sh') or c.startswith('sz')])
+    print(f"  [RT] Got {len(realtime)}/{n_a} realtime quotes (source: {rt_source or 'CSV降级'})")
 
     current_prices = {}
     prev_prices = {}
@@ -442,7 +582,7 @@ def get_current_rankings():
         })
 
     ranked.sort(key=lambda x: x['score'], reverse=True)
-    return ranked, current_prices, nav_available
+    return ranked, current_prices, nav_available, is_realtime_valid()
 
 def load_previous_rankings():
     if HISTORY_FILE.exists():
@@ -798,7 +938,7 @@ def get_regime_status():
 # ================================================================
 # 生成报告 (HTML)
 # ================================================================
-def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True):
+def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True, realtime_valid=True):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
@@ -879,6 +1019,14 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 <!-- NAV失败警告 -->
 """ + ("""        <div style="background:#FFF3CD;border:1px solid #FFC107;padding:10px;border-radius:6px;margin-bottom:12px;font-weight:bold;color:#856404;">⚠️ 溢价率获取失败，报告中显示为'-'</div>
 """ if not nav_available else "") + f"""
+<!-- 实时行情失效警告 -->
+""" + ("""        <div style="background:#C62828;color:#fff;padding:12px 18px;border-radius:6px;margin-bottom:12px;text-align:center;font-weight:bold;font-size:13px;">
+    ⚠️ 实时行情获取失败 (WeStock + 新浪财经均不可用) — 当前显示价格均为前一交易日收盘价，监控已失效！
+</div>
+""" if not realtime_valid else "") + ("""        <div style="background:#FFF3CD;color:#856404;padding:8px 12px;border-radius:4px;margin-bottom:12px;text-align:center;font-size:12px;">
+    ℹ️ 实时行情来源: 新浪财经 (WeStock 不可用时自动切换)
+</div>
+""" if (realtime_valid and get_realtime_source() == 'sina') else "") + f"""
 <!-- ETF排名 Top10 -->
 <div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
     <h3 style="font-size:15px;color:#1F4E79;margin:0 0 10px 0;">ETF动量排名 Top 10</h3>
@@ -1055,8 +1203,13 @@ def send_report_email(html_content, md_path, time_label):
     PASSWORD = "ljbtvacrctjobfed"
     RECEIVER = "848786642@qq.com"
 
+    rt_ok = is_realtime_valid()
+    subj_prefix = time_label
+    if not rt_ok:
+        subj_prefix = f"{time_label} ⚠️实时行情缺失"
+
     msg = MIMEMultipart("mixed")
-    msg["Subject"] = f"[{time_label}] 七星QMT原版 - {NOW_STR}"
+    msg["Subject"] = f"[{subj_prefix}] 七星QMT原版 - {NOW_STR}"
     msg["From"] = SENDER
     msg["To"] = RECEIVER
     msg["Date"] = NOW.strftime("%a, %d %b %Y %H:%M:%S +0800")
@@ -1105,7 +1258,7 @@ def main():
 
     # 1. 排名
     print("\n[1/4] Computing ETF momentum rankings...")
-    ranked, prices, nav_available = get_current_rankings()
+    ranked, prices, nav_available, realtime_valid = get_current_rankings()
     print(f"  {len(ranked)} valid, Top3:")
     for r in ranked[:3]:
         flag = '[FILT]' if r['filtered'] else '[OK]'
@@ -1158,7 +1311,7 @@ def main():
     # 4. 生成报告 + 发送
     print("\n[4/4] Generating report + sending email...")
     recent_trades = get_recent_trades(ranked)
-    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available)
+    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available, realtime_valid)
 
     output_dir = Path(__file__).parent / 'template'
     output_dir.mkdir(parents=True, exist_ok=True)
