@@ -233,17 +233,18 @@ def calc_score(close_full, lookback=25):
     return ann * r2
 
 def get_ranked(prices, date):
+    """动量排名: 仅使用 date 之前(不含当日)的收盘数据, 防未来函数"""
     ranked = []
     for code, df in all_data.items():
         if code not in prices: continue
-        mask = df.index <= pd.Timestamp(date); hist = df[mask]
+        mask = df.index < pd.Timestamp(date); hist = df[mask]
         if len(hist) < 35: continue
         cp = prices[code]
         if cp <= 0: continue
         # 当日涨跌幅（相对于前一交易日收盘）
         chg_pct = 0.0
-        if len(hist) >= 2:
-            prev_close = hist['close'].iloc[-2]
+        if len(hist) >= 1:
+            prev_close = hist['close'].iloc[-1]
             if prev_close > 0:
                 chg_pct = (cp - prev_close) / prev_close * 100
         score = calc_score(hist['close'].values, 25)
@@ -252,8 +253,9 @@ def get_ranked(prices, date):
     return ranked
 
 class USPortfolio:
-    def __init__(self, cash=100000, comm=0.005):
+    def __init__(self, cash=100000, comm=0.005, slippage=0.0005):
         self.initial_cash = cash; self.cash = cash; self.comm = comm
+        self.slippage = slippage  # 滑点: 0.05%
         self.positions = {}; self.trade_log = []; self.daily_values = []
     @property
     def total_value(self):
@@ -263,6 +265,7 @@ class USPortfolio:
         for c,p in pdict.items():
             if c in self.positions: self.positions[c]['last_price'] = p
     def buy(self, code, shares, price, date, reason=''):
+        price = price * (1 + self.slippage)  # 买入滑点
         tv = shares*price; comm = shares*self.comm; total = tv+comm
         if total > self.cash+0.01: return False
         self.cash -= total
@@ -275,6 +278,7 @@ class USPortfolio:
         return True
     def sell(self, code, shares, price, date, reason=''):
         if code not in self.positions: return False
+        price = price * (1 - self.slippage)  # 卖出滑点
         pos = self.positions[code]; actual = min(shares, pos['shares'])
         if actual <= 0: return False
         tv = actual*price; comm = actual*self.comm; self.cash += tv-comm
@@ -392,6 +396,8 @@ if realtime_valid:
         if rt.get('price', 0) > 0:
             r['price'] = rt['price']
             r['chg_pct'] = rt.get('change_pct', r.get('chg_pct', 0))
+
+# 当前目标: 取前hn只
 current_targets = [r for r in final_ranked if r['score'] > -999][:hn]
 
 # Current portfolio holdings
@@ -517,7 +523,7 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 
 <div class="config-box">
     <b>策略:</b> 七星美股版最优 | <b>股票池:</b> 35只 (8类高成长+能源+工业) | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>佣金:</b> $0.005/股<br>
-    <b>过滤:</b> 无(盈利保护关·成交量关·短期动量关·硬止损关) | <b>评分:</b> exp(slope×250)×R²
+    <b>过滤:</b> 无 (盈利保护关·成交量关·短期动量关·硬止损关) | <b>评分:</b> exp(slope×250)×R²
 </div>
 
 <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">当前持仓 ({len(current_holdings)}只) | 总市值 ${total_holding_val:,.2f}</h3>
