@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>七星美股版 · 策略检测报告</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:1000px;margin:0 auto;padding:20px;background:#f8f9fa;}
+h1{font-size:22px;color:#1F4E79;text-align:center;margin:0 0 5px;}
+.subtitle{text-align:center;font-size:13px;color:#888;margin-bottom:20px;}
+.summary-bar{background:#1F4E79;color:#fff;padding:16px 24px;border-radius:8px;margin-bottom:20px;text-align:center;font-size:22px;font-weight:bold;}
+.risk-high{color:#C62828;}.risk-mid{color:#E65100;}.risk-low{color:#2E7D32;}
+.card{background:#fff;padding:15px 20px;border-radius:8px;margin-bottom:15px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card h2{font-size:16px;color:#1F4E79;margin:0 0 12px;padding-bottom:8px;border-bottom:2px solid #E3F2FD;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:#1F4E79;color:#fff;padding:8px;text-align:left;font-size:12px;}
+td{padding:7px 8px;border-bottom:1px solid #eee;}
+tr:nth-child(even){background:#F8F9FA;}
+.pass{color:#2E7D32;font-weight:bold;}
+.fail{color:#C62828;font-weight:bold;}
+.warn{color:#E65100;font-weight:bold;}
+.na{color:#888;}
+.section-score{display:flex;align-items:center;gap:10px;margin-bottom:15px;}
+.section-score .label{font-size:14px;font-weight:bold;color:#1F4E79;}
+.section-score .bar{flex:1;height:20px;background:#e0e0e0;border-radius:10px;overflow:hidden;}
+.section-score .bar-fill{height:100%;border-radius:10px;transition:width 0.3s;}
+.fix-box{background:#FFF3CD;border:1px solid #FFC107;padding:12px;border-radius:6px;margin:8px 0;}
+.fix-box h4{color:#856404;margin:0 0 6px;}
+.fix-box ul{margin:4px 0;padding-left:20px;}
+.fix-box li{color:#856404;font-size:13px;margin:3px 0;}
+.footer{text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;}
+.conclusion-box{background:#E8F5E9;border:2px solid #4CAF50;padding:16px 20px;border-radius:8px;margin-bottom:15px;}
+.conclusion-box.warn-bg{background:#FFF3CD;border-color:#FFC107;}
+.conclusion-box.danger-bg{background:#FFEBEE;border-color:#F44336;}
+</style></head><body>
+
+<h1>七星美股版 · 策略检测报告</h1>
+<div class="subtitle">2026-06-06 10:38 | 审计对象: us100_backtest.py / us_live_report.py | 参照: 策略检测.md</div>
+
+<div class="summary-bar" style="background:#E65100;">综合风险评级: 中</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>一、未来函数检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr>
+  <td>是否开启 set_option('avoid_future_data', True)</td>
+  <td class="na">N/A</td>
+  <td>非聚宽平台，本地回测引擎。此开关不存在，需要通过代码逻辑保证。</td>
+</tr>
+<tr>
+  <td>是否存在 get_price(..., end_date=today) 且 today 为当日</td>
+  <td class="na">N/A</td>
+  <td>非聚宽 API。本地 CSV 读取操作。</td>
+</tr>
+<tr>
+  <td>动量/均线计算是否使用了当日收盘价</td>
+  <td class="fail">❌ 回测中</td>
+  <td style="font-size:12px;"><b>核心问题</b>：回测 (<code>us100_backtest.py</code>) 中 <code>get_ranked()</code> 使用 <code>df.index <= pd.Timestamp(date)</code> 包含了当日收盘价，然后用当日收盘价决定当日买卖。<br>等同"用今天的收盘价判断今天是否买入"——经典未来函数。<br><b>实盘报告</b> (<code>us_live_report.py</code>) 中 OK：动量计算基于 CSV 最新日期（前一交易日），实时价格仅用于展示。</td>
+</tr>
+<tr>
+  <td>是否存在 get_current_data() 获取的 close 字段用于交易决策</td>
+  <td class="na">N/A</td>
+  <td>非聚宽 API。</td>
+</tr>
+<tr>
+  <td>是否存在 attribute_history 未设置 include_now=False</td>
+  <td class="na">N/A</td>
+  <td>非聚宽 API。</td>
+</tr>
+<tr>
+  <td>财务数据 get_fundamentals 是否指定了 date=context.previous_date</td>
+  <td class="na">N/A</td>
+  <td>策略不使用财务数据。</td>
+</tr>
+<tr>
+  <td>集合竞价 get_call_auction 调用时间是否早于 09:25</td>
+  <td class="na">N/A</td>
+  <td>美股不存在集合竞价问题。</td>
+</tr>
+<tr>
+  <td>是否使用了未来日期的除权除息数据</td>
+  <td class="pass">✅</td>
+  <td>本地 CSV 数据为前复权价格，不会获取未来除权信息。</td>
+</tr>
+<tr>
+  <td>是否在回测中使用了 context.current_dt 作为选股日期，但实际数据需滞后一天</td>
+  <td class="na">N/A</td>
+  <td>非聚宽框架。</td>
+</tr>
+</table>
+
+<div class="section-score">
+  <span class="label">未来函数风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:65%;background:#E65100;"></div></div>
+  <span class="warn" style="font-size:18px;font-weight:bold;">中</span>
+</div>
+
+<div class="fix-box">
+<h4>🔧 修复建议</h4>
+<ul>
+  <li><b>回测引擎 (必须修复):</b> <code>get_ranked()</code> 中将 <code>df.index <= pd.Timestamp(date)</code> 改为 <code>df.index < pd.Timestamp(date)</code>，即动量计算排除当日收盘价。次日开盘或次日收盘时交易。</li>
+  <li>或者明确回测假设为"收盘后拿到当天收盘价立刻调仓"（尾盘竞价交易，美股 16:00 EST），在此假设下使用当日收盘价是合法的。需在代码注释中声明。</li>
+</ul>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>二、前视偏差检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr>
+  <td>静态股票池是否包含回测起始日尚未上市的品种</td>
+  <td class="fail">❌</td>
+  <td style="font-size:12px;"><b>严重</b>：35 只股票池为硬编码常量。ARM 于 2023-09-14 才上市，但回测默认起始日为 2023-06-01，存在 3.5 个月的虚假数据。<br>CRWD 于 2019 上市，AAPL 于 1980 上市 -- 部分老股无问题，但 ARM/PLTR(2020) 等需上市日期过滤。</td>
+</tr>
+<tr>
+  <td>get_index_stocks 是否使用历史日期参数（避免幸存者偏差）</td>
+  <td class="na">N/A</td>
+  <td>未使用动态选股，无幸存者偏差问题。但池子本身是静态的，隐含了"现在知道哪些是好股票"的选择偏差。</td>
+</tr>
+<tr>
+  <td>是否过滤了上市日期（info.start_date <= today）</td>
+  <td class="fail">❌</td>
+  <td>回测中无上市日期检查。对 ARM、PLTR 等较新上市的股票会使用上市前数据。</td>
+</tr>
+<tr>
+  <td>是否过滤了退市/被ST/暂停上市的股票</td>
+  <td class="pass">✅</td>
+  <td>35只核心池中无退市股票。CSV 数据缺失时自动跳过。美股无 ST 机制。</td>
+</tr>
+<tr>
+  <td>财务数据是否使用了未发布的财报</td>
+  <td class="na">N/A</td>
+  <td>策略不使用财务数据。</td>
+</tr>
+<tr>
+  <td>是否使用了未来才发生的重组/分红/送转信息</td>
+  <td class="pass">✅</td>
+  <td>CSV 数据使用前复权价格，不涉及未来分红预测。</td>
+</tr>
+<tr>
+  <td>止损止盈是否使用了当日最高/最低价（假设能按极端价成交）</td>
+  <td class="pass">✅</td>
+  <td>回测中所有交易均按收盘价成交，不假设极端价。盈利保护使用日线 high/low 是标准做法。</td>
+</tr>
+<tr>
+  <td>回测起始点是否避开了极端行情</td>
+  <td class="pass">✅</td>
+  <td>默认起始 2023-06-01，非极端行情起点。</td>
+</tr>
+<tr>
+  <td>是否使用了未来才可获得的行业分类</td>
+  <td class="warn">⚠️</td>
+  <td>池子分类（大科技/半导体/AI等）是基于当前认知的静态分类。但动量策略不依赖行业分类做决策，影响有限。</td>
+</tr>
+</table>
+
+<div class="section-score">
+  <span class="label">前视偏差风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:60%;background:#E65100;"></div></div>
+  <span class="warn" style="font-size:18px;font-weight:bold;">中</span>
+</div>
+
+<div class="fix-box">
+<h4>🔧 修复建议</h4>
+<ul>
+  <li><b>上市日期过滤 (必须修复):</b> 在回测加载数据后，过滤掉上市日晚于回测起始日的股票在起始日前的数据。最简单做法：从 CSV 数据中判断第一条记录的日期，若晚于 START_DATE 则从该日起用。</li>
+  <li>当前 CSV 数据已自动处理（数据不足 25 行的股票被跳过），ARM 回测起始日 2023-06-01 若数据不足会自动被 missing 列表捕获。</li>
+</ul>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>三、过拟合检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">评估</th><th>说明</th></tr>
+<tr><td>参数总数（阈值、周期、比例等）</td><td><b>4</b></td><td>lookback_days(25), holdings_num(7), min_money(500), comm($0.005)。极简。</td></tr>
+<tr><td>是否有多层嵌套条件（if-else 分支 >3层）</td><td class="pass">✅</td><td>核心逻辑仅 2 层：排名→过滤→调仓。无复杂嵌套。</td></tr>
+<tr><td>参数是否经过手工调优（非基于理论或滚动优化）</td><td class="pass">✅</td><td>25 日动量 + 7 只等权 来自七星172/QMT 框架的消融实验结论，非手工试参。</td></tr>
+<tr><td>策略逻辑复杂度</td><td><b>简单</b></td><td>单一动量因子 exp(slope×250)×R²，无多层过滤，无市场择时。</td></tr>
+<tr><td>是否在多市场/多时段测试过</td><td class="warn">⚠️</td><td>仅在美股 2023-2026 测试。已做 2023.1 和 2025.1 两个起点，但未在不同市场（港股/欧股）验证。</td></tr>
+<tr><td>参数平原是否平坦</td><td class="warn">⚠️</td><td>参数敏感性未系统测试。但 25日/7只 参数来自A股 172/QMT 多轮消融实验，有一定泛化基础。</td></tr>
+<tr><td>极端行情鲁棒性</td><td class="warn">⚠️</td><td>无专门的黑天鹅测试。美股 2023-2024 为牛市，2026 有回调但总体偏强。长期熊市表现未知。</td></tr>
+<tr><td>是否使用了未来数据作为参数优化依据</td><td class="pass">✅</td><td>参数来自 A 股 172 框架，非美股数据优化。</td></tr>
+<tr><td>样本内/样本外验证是否严格分离</td><td class="warn">⚠️</td><td>参数未基于美股数据优化，但回测本身是全样本。无独立的样本外验证。</td></tr>
+<tr><td>策略对随机种子/数据起始点是否敏感</td><td class="pass">✅</td><td>无随机性（无随机种子）。起始点敏感性已测试（2023.1 vs 2025.1 均有正收益）。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">过拟合风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:25%;background:#2E7D32;"></div></div>
+  <span class="risk-low" style="font-size:18px;font-weight:bold;">低</span>
+</div>
+
+<p style="color:#888;font-size:12px;margin:8px 0;">策略仅 4 个参数，且均来自跨市场消融实验结论，过拟合风险低。但缺少严格的样本外测试和极端行情压力测试。</p>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>四、买卖位置合理性检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr><td>买入时间是否在开盘瞬间或集合竞价</td><td class="pass">✅</td><td>美股无集合竞价。回测按收盘价成交。实盘报告不自动交易，仅生成信号。</td></tr>
+<tr><td>买入是否基于"上午涨得好，下午买入"的盘中追涨</td><td class="pass">✅</td><td>动量基于 25 日趋势，非盘中追涨。</td></tr>
+<tr><td>卖出是否仅在尾盘</td><td class="pass">✅</td><td>调仓统一在收盘价执行。</td></tr>
+<tr><td>止损触发后是否当日可卖出（T+1限制）</td><td class="na">N/A</td><td>美股 T+0（当日买入可当日卖出），无此限制。</td></tr>
+<tr><td>限价单设置是否可能永远无法成交</td><td class="na">N/A</td><td>回测按收盘价市价成交，未模拟限价单。</td></tr>
+<tr><td>信号衰减（信号产生频率 vs 持仓周期）</td><td class="pass">✅</td><td>日频调仓，信号产生频率 = 持仓周期，不存在过度交易。</td></tr>
+<tr><td>是否使用了未来函数作为买卖条件</td><td class="fail">❌</td><td>同第一节：回测中动量计算含当日收盘价。</td></tr>
+<tr><td>交易时间是否避开涨跌停无法成交时段</td><td class="na">N/A</td><td>美股无涨跌停机制。</td></tr>
+<tr><td>是否考虑了大单冲击（单笔超总市值1%）</td><td class="pass">✅</td><td>35 只均为大盘股（NVDA/AVGO/MSFT 等），$10K 资金无冲击成本问题。若扩容到百万级需考虑。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">买卖位置不合理风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:30%;background:#2E7D32;"></div></div>
+  <span class="risk-low" style="font-size:18px;font-weight:bold;">低</span>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>五、回测与实操一致性检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr><td>滑点设置是否合理</td><td class="fail">❌</td><td style="font-size:12px;">回测中<b>未设置任何滑点</b>。35只成分股含一些中等流动性（LITE/MU/DDOG），实际交易中挂单价与成交价有偏差。建议添加 0.05%-0.1% 滑点。</td></tr>
+<tr><td>交易成本是否正确</td><td class="warn">⚠️</td><td>$0.005/股 佣金合理（美股券商标准），但未包含 SEC 费（~$0.000008/股）和交易所费。</td></tr>
+<tr><td>是否考虑了 T+1 卖出限制</td><td class="na">N/A</td><td>美股 T+0，当日买入当日可卖。</td></tr>
+<tr><td>集合竞价买入是否假设能按开盘价成交</td><td class="na">N/A</td><td>美股无集合竞价。</td></tr>
+<tr><td>涨停/跌停是否无法成交</td><td class="na">N/A</td><td>美股无涨跌停。但存在熔断机制（±7%/13%/20%），概率极低。</td></tr>
+<tr><td>停牌股票是否自动跳过</td><td class="pass">✅</td><td>CSV 无当日数据则自动跳过该标的。</td></tr>
+<tr><td>小市值/低流动性是否考虑了冲击成本</td><td class="pass">✅</td><td>当前 $10K 资金对 35 只大盘股无冲击。若资金规模扩大需关注 LITE/LIN/NEM 等相对小盘标的。</td></tr>
+<tr><td>是否使用 order_target_value 自动处理整股</td><td class="na">N/A</td><td>本地回测，手动用 <code>int(diff/price)</code> 处理整数股。合理。</td></tr>
+<tr><td>资金容量（单笔成交额是否超日成交1%）</td><td class="pass">✅</td><td>$10K 资金，NVDA 日均成交 $30B+，占比极小。</td></tr>
+<tr><td>流动性枯竭应对</td><td class="pass">✅</td><td>大盘股流动性充足，盘中有做市商。极端情况（如 2020.3 熔断）概率低。</td></tr>
+<tr><td>是否考虑了分红/送转对持仓的影响</td><td class="pass">✅</td><td>CSV 数据为前复权价格，自动处理了拆股和分红调整。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">回测一致性风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:50%;background:#E65100;"></div></div>
+  <span class="warn" style="font-size:18px;font-weight:bold;">中</span>
+</div>
+
+<div class="fix-box">
+<h4>🔧 修复建议</h4>
+<ul>
+  <li><b>添加滑点 (强烈建议):</b> 在 <code>buy()</code> 和 <code>sell()</code> 中加入滑点参数，例如成交价 = 收盘价 × (1 - 0.0005)（买入上浮，卖出下浮）。</li>
+</ul>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>六、多次卖出/重复交易检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr><td>是否有多个卖出函数同时运行可能冲突</td><td class="pass">✅</td><td>仅有一个 sell() 函数 + sell_all() 包装。盈利保护已关闭。</td></tr>
+<tr><td>卖出后是否立即从持仓记录中移除</td><td class="pass">✅</td><td><code>sell()</code> 中 <code>pos['shares'] -= actual</code>，<=0 则 <code>del self.positions[code]</code>。不会重复卖出。</td></tr>
+<tr><td>止损和止盈是否可能同时触发</td><td class="pass">✅</td><td>无止损/止盈逻辑，不存在冲突。</td></tr>
+<tr><td>调仓时是否先卖后买</td><td class="warn">⚠️</td><td style="font-size:12px;">当前回测逻辑: 先卖出调出目标 → 再买入新目标。但买入时用 <code>pf.total_value / len(targets)</code> 计算等权，此时卖出已回笼现金，<b>逻辑正确</b>。</td></tr>
+<tr><td>同一股票是否在短时间内被重复调仓</td><td class="pass">✅</td><td>日频调仓，同一股票每天最多买卖各一次。</td></tr>
+<tr><td>是否检查订单状态后再发新订单</td><td class="na">N/A</td><td>非订单驱动，直接操作持仓字典。</td></tr>
+<tr><td>是否使用 order_target_value 但多次调用同一股票</td><td class="na">N/A</td><td>非聚宽 API。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">多次卖出风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:10%;background:#2E7D32;"></div></div>
+  <span class="risk-low" style="font-size:18px;font-weight:bold;">极低</span>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>七、代码 Bug 检测</h2>
+<table>
+<tr><th width="55%">检测项</th><th width="15%">状态</th><th>说明</th></tr>
+<tr><td>变量是否在使用前初始化</td><td class="pass">✅</td><td>所有变量在函数内定义或类初始化中赋值。</td></tr>
+<tr><td>缓存变量是否每日/每月重置</td><td class="na">N/A</td><td>无缓存变量。</td></tr>
+<tr><td>获取数据后是否检查空值</td><td class="pass">✅</td><td>CSV 读取有 try/except，数据不足 25 行跳过，缺失代码加入 missing 列表。</td></tr>
+<tr><td>股票代码格式是否统一</td><td class="pass">✅</td><td>全大写字母（NVDA/AAPL 等），无后缀问题。</td></tr>
+<tr><td>是否有详细日志记录交易原因</td><td class="pass">✅</td><td>买入记录排名号，卖出记录调出原因（调出目标/盈利保护等）。</td></tr>
+<tr><td>是否存在拼写错误</td><td class="pass">✅</td><td>无发现。代码经多次运行验证。</td></tr>
+<tr><td>是否处理了除零错误</td><td class="pass">✅</td><td>在 calc_score 中 sst > 0 检查，成本价 > 0 检查。</td></tr>
+<tr><td>是否使用了未定义的全局变量或函数</td><td class="pass">✅</td><td>无。</td></tr>
+<tr><td>是否对 get_current_data() 返回的 None 进行了保护</td><td class="na">N/A</td><td>非聚宽 API。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">Bug风险:</span>
+  <div class="bar"><div class="bar-fill" style="width:8%;background:#2E7D32;"></div></div>
+  <span class="risk-low" style="font-size:18px;font-weight:bold;">极低</span>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>八、滑点与成本设置</h2>
+<table>
+<tr><th width="55%">设置项</th><th width="15%">当前值</th><th>合理性评估</th></tr>
+<tr><td>滑点模型</td><td>无</td><td class="fail">❌ 缺失。美股大盘股建议 FixedSlippage(0.05%)。</td></tr>
+<tr><td>佣金（买入）</td><td>$0.005/股</td><td class="pass">✅ 合理（Interactive Brokers/TD Ameritrade 标准差）。</td></tr>
+<tr><td>佣金（卖出）</td><td>$0.005/股</td><td class="pass">✅ 同买入。</td></tr>
+<tr><td>SEC 费</td><td>未包含</td><td class="warn">⚠️ 约 $0.000008/股，对大盘股影响极小，可忽略。</td></tr>
+</table>
+
+<div class="section-score">
+  <span class="label">滑点与成本设置:</span>
+  <div class="bar"><div class="bar-fill" style="width:55%;background:#E65100;"></div></div>
+  <span class="warn" style="font-size:18px;font-weight:bold;">偏低</span>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>九、其他问题</h2>
+<table>
+<tr><th width="55%">问题</th><th>评估</th></tr>
+<tr><td>策略是否符合美股交易规则</td><td class="pass">✅ T+0、无涨跌停、无印花税。与回测逻辑一致。</td></tr>
+<tr><td>资金管理是否合理</td><td class="pass">✅ 7 只等权，单只 ~14.3%。最大回撤 25.2%，可接受。</td></tr>
+<tr><td>是否依赖特定市场环境</td><td class="warn">⚠️ 强依赖于高动量科技股行情（2023-2024 AI牛）。若市场转向价值/防御可能表现不佳。无行情判断(regime switch)。</td></tr>
+<tr><td>数据源可靠性</td><td class="pass">✅ 本地 CSV（新浪财经 → WeStock 每日更新），数据质量可靠。</td></tr>
+<tr><td>工程可行性</td><td class="pass">✅ 每日一次，30 秒内完成。无外部 API 依赖（除实时价格展示）。</td></tr>
+<tr><td>可维护性</td><td class="pass">✅ 代码清晰，函数拆分合理，约 600 行。</td></tr>
+<tr><td>策略容量估计</td><td>$500K ~ $1M。超过此规模需考虑 LITE/LIN/NEM 等小盘股的冲击成本。</td></tr>
+<tr><td>极端情况处理</td><td class="warn">⚠️ 无目标股票时清仓。但无行情判断、无防御切换、无黑天鹅熔断应对。</td></tr>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<div class="conclusion-box">
+<h2 style="color:#2E7D32;margin:0 0 10px;">总评估</h2>
+<table>
+<tr><th width="18%">检测项</th><th width="18%">评级</th><th>一句话总结</th></tr>
+<tr><td>未来函数</td><td class="warn">中</td><td>回测含当日收盘价（可修复，不影响实盘报告）</td></tr>
+<tr><td>前视偏差</td><td class="warn">中</td><td>静态池含 ARM 上市前数据，CSV 自动处理了大部分</td></tr>
+<tr><td>过拟合</td><td class="risk-low">低</td><td>4个参数均来自跨市场消融实验，过拟合风险低</td></tr>
+<tr><td>买卖位置</td><td class="risk-low">低</td><td>日频收盘调仓，美股 T+0，逻辑合理</td></tr>
+<tr><td>回测一致性</td><td class="warn">中</td><td>缺少滑点模型</td></tr>
+<tr><td>多次卖出</td><td class="risk-low">极低</td><td>单一卖出路径，无冲突可能</td></tr>
+<tr><td>Bug</td><td class="risk-low">极低</td><td>代码经过多轮运行验证，健壮</td></tr>
+<tr><td>滑点与成本</td><td class="warn">偏低</td><td>缺少滑点设置</td></tr>
+<tr style="background:#E8F5E9;font-weight:bold;">
+  <td>综合风险</td>
+  <td class="warn" style="font-size:18px;">中</td>
+  <td>核心问题 2 个（未来函数 + 滑点），均可低成本修复</td></tr>
+</table>
+</div>
+
+<!-- ============================================================ -->
+<div class="card">
+<h2>改进思路（按优先级）</h2>
+
+<h3 style="color:#C62828;">1. 【必须修复】不修则回测结果不可信</h3>
+<div class="fix-box">
+<ul>
+  <li><b>动量计算排除当日收盘价:</b> <code>get_ranked()</code> 中 <code><= date</code> → <code>< date</code>，次日开盘或次日收盘交易。或者明确声明回测假设为"16:00 收盘后即时调仓"。</li>
+</ul>
+</div>
+
+<h3 style="color:#E65100;">2. 【强烈建议】严重影响真实性</h3>
+<div class="fix-box">
+<ul>
+  <li><b>添加滑点模型:</b> 买入价 = close × (1 + 0.0005)，卖出价 = close × (1 - 0.0005)。</li>
+  <li><b>上市日期过滤:</b> 检查 CSV 第一行日期，过滤起始日早于该日的数据。</li>
+  <li><b>添加行情判断 (regime switch):</b> 监测 SP500/纳斯达克 vs MA50，走弱时切换至防御池或降仓。</li>
+</ul>
+</div>
+
+<h3 style="color:#2E7D32;">3. 【建议优化】提升鲁棒性</h3>
+<div class="fix-box">
+<ul>
+  <li>添加参数敏感性测试（lookback 20/25/30 天对比）</li>
+  <li>添加极端行情压力测试（2020.3 熔断、2022 熊市）</li>
+  <li>样本外测试（2026.4+ 为样本外，与回测对比）</li>
+</ul>
+</div>
+</div>
+
+<div class="footer">
+七星美股版 · 策略检测报告 · 2026-06-06 10:38 · Blakever Trade<br>
+审计依据: prompts/策略检测.md | 本报告仅供策略改进参考
+</div>
+
+</body></html>

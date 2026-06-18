@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>七星美股版 监控报告</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:920px;margin:0 auto;padding:20px;background:#f8f9fa;}
+h1{font-size:22px;color:#1F4E79;text-align:center;margin:0 0 5px;}
+.subtitle{text-align:center;font-size:12px;color:#888;margin-bottom:20px;}
+.card{background:#fff;padding:15px 20px;border-radius:8px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.config-box{background:#fff;padding:12px 18px;border-radius:8px;border-left:4px solid #1F4E79;margin-bottom:12px;font-size:13px;}
+.metrics-row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.metric-card{flex:1;min-width:155px;background:#fff;padding:12px;border-radius:8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.metric-label{font-size:11px;color:#888;margin-bottom:5px;}
+.metric-value{font-size:18px;font-weight:bold;color:#1F4E79;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:#1F4E79;color:#fff;padding:7px;text-align:left;}
+td{padding:5px 7px;border-bottom:1px solid #eee;}
+.footer{text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;}
+</style></head><body>
+<h1>七星美股版(最优) · 实盘监控报告</h1>
+<div class="subtitle">2026-06-15 21:53 | 数据区间: 2025-01-02 ~ 2026-06-10</div>
+
+
+<div class="config-box">
+    <b>策略:</b> 七星美股版 精简 | <b>股票池:</b> 27只 (零后视镜·删13只弱股) | <b>持股:</b> 7只等权 | <b>周期:</b> 25日动量 | <b>佣金:</b> $0.005/股<br>
+    <b>过滤:</b> 无 (盈利保护关·成交量关·短期动量关·硬止损关) | <b>评分:</b> exp(slope×250)×R²
+</div>
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">当前持仓 (5只) | 总市值 $283,007.53</h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>代码</th><th>数量</th><th>成本</th><th>现价</th><th>涨跌</th><th>市值</th><th>持仓盈亏</th><th>买入日</th></tr>
+<tr style="white-space:nowrap;">
+        <td style="padding:4px 8px;">AMD</td>
+        <td style="padding:4px 8px;text-align:right;">137</td>
+        <td style="padding:4px 8px;text-align:right;">$217.61</td>
+        <td style="padding:4px 8px;text-align:right;">$555.53</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+8.59%</td>
+        <td style="padding:4px 8px;text-align:right;">$76,107.61</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+155.29%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">2026-04-02</td></tr><tr style="white-space:nowrap;">
+        <td style="padding:4px 8px;">MU</td>
+        <td style="padding:4px 8px;text-align:right;">61</td>
+        <td style="padding:4px 8px;text-align:right;">$524.82</td>
+        <td style="padding:4px 8px;text-align:right;">$1068.88</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+8.89%</td>
+        <td style="padding:4px 8px;text-align:right;">$65,201.68</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+103.67%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">2026-04-27</td></tr><tr style="white-space:nowrap;">
+        <td style="padding:4px 8px;">DDOG</td>
+        <td style="padding:4px 8px;text-align:right;">189</td>
+        <td style="padding:4px 8px;text-align:right;">$205.54</td>
+        <td style="padding:4px 8px;text-align:right;">$231.14</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.54%</td>
+        <td style="padding:4px 8px;text-align:right;">$43,685.46</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+12.45%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">2026-05-13</td></tr><tr style="white-space:nowrap;">
+        <td style="padding:4px 8px;">CRWD</td>
+        <td style="padding:4px 8px;text-align:right;">64</td>
+        <td style="padding:4px 8px;text-align:right;">$638.61</td>
+        <td style="padding:4px 8px;text-align:right;">$689.90</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+1.04%</td>
+        <td style="padding:4px 8px;text-align:right;">$44,153.60</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+8.03%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">2026-05-19</td></tr><tr style="white-space:nowrap;">
+        <td style="padding:4px 8px;">ARM</td>
+        <td style="padding:4px 8px;text-align:right;">142</td>
+        <td style="padding:4px 8px;text-align:right;">$298.66</td>
+        <td style="padding:4px 8px;text-align:right;">$379.29</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-0.40%</td>
+        <td style="padding:4px 8px;text-align:right;">$53,859.18</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+27.00%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">2026-05-21</td></tr></table></div></div>
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">ETF动量排名 Top 10 (2026-06-10)</h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>排名</th><th>代码</th><th>综合得分</th><th>价格</th><th>涨跌幅</th></tr>
+<tr style="background:#FEF9E7;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">1</td>
+        <td style="padding:4px 6px;">ARM</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">4335.4037</td>
+        <td style="padding:4px 6px;text-align:right;">$379.29</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#DC3545;">-0.40%</td></tr><tr style="background:#F8F9FA;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">2</td>
+        <td style="padding:4px 6px;">MU</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">573.1620</td>
+        <td style="padding:4px 6px;text-align:right;">$1068.88</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+8.89%</td></tr><tr style="background:#FFF;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">3</td>
+        <td style="padding:4px 6px;">DDOG</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">374.1141</td>
+        <td style="padding:4px 6px;text-align:right;">$231.14</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+0.54%</td></tr><tr style="background:#F8F9FA;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">4</td>
+        <td style="padding:4px 6px;">CRWD</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">233.1692</td>
+        <td style="padding:4px 6px;text-align:right;">$689.90</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+1.04%</td></tr><tr style="background:#FFF;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">5</td>
+        <td style="padding:4px 6px;">AMD</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">45.5171</td>
+        <td style="padding:4px 6px;text-align:right;">$555.53</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+8.59%</td></tr><tr style="background:#F8F9FA;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">6</td>
+        <td style="padding:4px 6px;">NOW</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">44.1344</td>
+        <td style="padding:4px 6px;text-align:right;">$104.90</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+2.69%</td></tr><tr style="background:#FFF;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">7</td>
+        <td style="padding:4px 6px;">IONQ</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">19.0471</td>
+        <td style="padding:4px 6px;text-align:right;">$62.88</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+8.69%</td></tr><tr style="background:#F8F9FA;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">8</td>
+        <td style="padding:4px 6px;">ORCL</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">15.4285</td>
+        <td style="padding:4px 6px;text-align:right;">$189.04</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+2.67%</td></tr><tr style="background:#FFF;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">9</td>
+        <td style="padding:4px 6px;">LRCX</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">9.3177</td>
+        <td style="padding:4px 6px;text-align:right;">$390.22</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+6.38%</td></tr><tr style="background:#F8F9FA;white-space:nowrap;">
+        <td style="padding:4px 6px;text-align:center;font-weight:bold;">10</td>
+        <td style="padding:4px 6px;">NET</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">5.0070</td>
+        <td style="padding:4px 6px;text-align:right;">$235.37</td>
+        <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#28A745;">+3.02%</td></tr></table></div></div>
+
+<!-- 3年回测绩效卡片 -->
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">3年回测绩效 (精简27只 · 2023-06-01 ~ 2026-06-10)</h3>
+<div class="metrics-row">
+<div class="metric-card"><div class="metric-label">累计收益</div><div class="metric-value" style="color:#2E7D32;">+735.5%</div></div>
+<div class="metric-card"><div class="metric-label">年化收益</div><div class="metric-value" style="color:#2E7D32;">115.1%</div></div>
+<div class="metric-card"><div class="metric-label">最大回撤</div><div class="metric-value" style="color:#C62828;">-23.5%</div></div>
+<div class="metric-card"><div class="metric-label">夏普比率</div><div class="metric-value" style="color:#1F4E79;">2.27</div></div>
+<div class="metric-card"><div class="metric-label">交易笔数</div><div class="metric-value" style="color:#1F4E79;">904</div></div>
+<div class="metric-card"><div class="metric-label">胜率</div><div class="metric-value" style="color:#2E7D32;">56%</div></div>
+</div></div>
+
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近20条交易记录</h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>日期</th><th>方向</th><th>代码</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th></tr>
+<tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-20</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">RKLB</td>
+        <td style="padding:4px 8px;text-align:right;">$135.42</td>
+        <td style="padding:4px 8px;text-align:right;">695</td>
+        <td style="padding:4px 8px;text-align:right;">$94,115.30</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-20</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">IONQ</td>
+        <td style="padding:4px 8px;text-align:right;">$52.71</td>
+        <td style="padding:4px 8px;text-align:right;">1568</td>
+        <td style="padding:4px 8px;text-align:right;">$82,654.92</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+7.24%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-13</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">CRWD</td>
+        <td style="padding:4px 8px;text-align:right;">$568.65</td>
+        <td style="padding:4px 8px;text-align:right;">160</td>
+        <td style="padding:4px 8px;text-align:right;">$90,984.67</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-13</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">SNPS</td>
+        <td style="padding:4px 8px;text-align:right;">$509.03</td>
+        <td style="padding:4px 8px;text-align:right;">161</td>
+        <td style="padding:4px 8px;text-align:right;">$81,953.09</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+1.25%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-08</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">DDOG</td>
+        <td style="padding:4px 8px;text-align:right;">$200.46</td>
+        <td style="padding:4px 8px;text-align:right;">441</td>
+        <td style="padding:4px 8px;text-align:right;">$88,402.95</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-08</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">AVGO</td>
+        <td style="padding:4px 8px;text-align:right;">$429.79</td>
+        <td style="padding:4px 8px;text-align:right;">182</td>
+        <td style="padding:4px 8px;text-align:right;">$78,220.87</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+5.66%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-05</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">SNPS</td>
+        <td style="padding:4px 8px;text-align:right;">$502.76</td>
+        <td style="padding:4px 8px;text-align:right;">161</td>
+        <td style="padding:4px 8px;text-align:right;">$80,944.57</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-05</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">RKLB</td>
+        <td style="padding:4px 8px;text-align:right;">$82.96</td>
+        <td style="padding:4px 8px;text-align:right;">932</td>
+        <td style="padding:4px 8px;text-align:right;">$77,317.32</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.53%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-28</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">MU</td>
+        <td style="padding:4px 8px;text-align:right;">$504.54</td>
+        <td style="padding:4px 8px;text-align:right;">147</td>
+        <td style="padding:4px 8px;text-align:right;">$74,167.69</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-28</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">FCX</td>
+        <td style="padding:4px 8px;text-align:right;">$58.18</td>
+        <td style="padding:4px 8px;text-align:right;">1072</td>
+        <td style="padding:4px 8px;text-align:right;">$62,369.92</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-14.33%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-27</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">RKLB</td>
+        <td style="padding:4px 8px;text-align:right;">$82.52</td>
+        <td style="padding:4px 8px;text-align:right;">932</td>
+        <td style="padding:4px 8px;text-align:right;">$76,909.76</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-27</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">LITE</td>
+        <td style="padding:4px 8px;text-align:right;">$859.25</td>
+        <td style="padding:4px 8px;text-align:right;">86</td>
+        <td style="padding:4px 8px;text-align:right;">$73,895.52</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+3.86%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-22</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">IONQ</td>
+        <td style="padding:4px 8px;text-align:right;">$49.15</td>
+        <td style="padding:4px 8px;text-align:right;">1568</td>
+        <td style="padding:4px 8px;text-align:right;">$77,074.41</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-22</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">LRCX</td>
+        <td style="padding:4px 8px;text-align:right;">$265.42</td>
+        <td style="padding:4px 8px;text-align:right;">274</td>
+        <td style="padding:4px 8px;text-align:right;">$72,724.31</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.62%</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-20</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">NFLX</td>
+        <td style="padding:4px 8px;text-align:right;">$94.78</td>
+        <td style="padding:4px 8px;text-align:right;">670</td>
+        <td style="padding:4px 8px;text-align:right;">$63,504.34</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-12.05%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-17</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">AVGO</td>
+        <td style="padding:4px 8px;text-align:right;">$406.74</td>
+        <td style="padding:4px 8px;text-align:right;">182</td>
+        <td style="padding:4px 8px;text-align:right;">$74,027.28</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-17</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">CAT</td>
+        <td style="padding:4px 8px;text-align:right;">$794.25</td>
+        <td style="padding:4px 8px;text-align:right;">91</td>
+        <td style="padding:4px 8px;text-align:right;">$72,277.00</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.40%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-15</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">NFLX</td>
+        <td style="padding:4px 8px;text-align:right;">$107.76</td>
+        <td style="padding:4px 8px;text-align:right;">670</td>
+        <td style="padding:4px 8px;text-align:right;">$72,201.81</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr><tr style="background:#FCE4D6;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-15</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">EOG</td>
+        <td style="padding:4px 8px;text-align:right;">$131.30</td>
+        <td style="padding:4px 8px;text-align:right;">612</td>
+        <td style="padding:4px 8px;text-align:right;">$80,358.23</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出Top7</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+9.55%</td></tr><tr style="background:#E2EFDA;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-13</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">FCX</td>
+        <td style="padding:4px 8px;text-align:right;">$67.91</td>
+        <td style="padding:4px 8px;text-align:right;">1072</td>
+        <td style="padding:4px 8px;text-align:right;">$72,803.70</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">动量轮换</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td></tr></table></div></div>
+
+<div class="footer">七星美股版(精简27只) · Blakever Trade · 2026-06-15 21:53<br>本报告仅供研究参考，不构成投资建议。</div>
+</body></html>

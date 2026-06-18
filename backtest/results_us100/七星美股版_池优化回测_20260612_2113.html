@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>七星美股版 池优化</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:20px auto;padding:0 20px;color:#333}
+h1{color:#1F4E79}h2{color:#2E75B6;margin-top:30px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+th{background:#1F4E79;color:#fff;padding:8px;text-align:center}
+td{padding:6px 8px;text-align:center;border:1px solid #ddd}
+tr:nth-child(even){background:#f8f9fa}
+.best{background:#D4EDDA!important;font-weight:bold}
+.card{background:#fff;padding:15px;border-radius:8px;margin:10px 0;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+</style></head><body>
+<h1>七星美股版 成分股池优化回测</h1>
+<p>回测引擎: exp(slope×250)×R², 25日动量, 7只等权, 佣金$0.005/股, 滑点0.05%, 动量计算排除当日价</p>
+<h2>3年 (2023.6~今)</h2><div class="card"><table><tr><th>池</th><th>只数</th><th>累计</th><th>年化</th><th>回撤</th><th>夏普</th><th>交易</th><th>胜率</th></tr><tr class="best"><td>精简 (27只)</td><td>27</td><td style="color:#28A745">+737.9%</td><td>116.2%</td><td style="color:#DC3545">-23.5%</td><td>2.21</td><td>967</td><td>54.2%</td></tr><tr><td>基准 (40只)</td><td>40</td><td style="color:#28A745">+601.0%</td><td>103.6%</td><td style="color:#DC3545">-29.1%</td><td>2.05</td><td>1011</td><td>52.8%</td></tr></table></div><h2>5年 (2021.6~今)</h2><div class="card"><table><tr><th>池</th><th>只数</th><th>累计</th><th>年化</th><th>回撤</th><th>夏普</th><th>交易</th><th>胜率</th></tr><tr class="best"><td>精简 (27只)</td><td>27</td><td style="color:#28A745">+719.8%</td><td>61.0%</td><td style="color:#DC3545">-51.8%</td><td>1.44</td><td>1603</td><td>52.4%</td></tr><tr><td>基准 (40只)</td><td>40</td><td style="color:#28A745">+590.3%</td><td>55.4%</td><td style="color:#DC3545">-47.9%</td><td>1.34</td><td>1745</td><td>51.8%</td></tr></table></div><h2>池方案说明</h2><div class="card">
+<table>
+<tr><th>方案</th><th>说明</th></tr>
+<tr><td>基准 (40只)</td><td>当前实盘池: 半导体+科技+能源+材料+工业+REITs+安全+新赛道</td></tr>
+<tr><td>精简 (27只)</td><td>移除从未买入(MSFT/CRM)及持续亏损(AMAT/AAPL/TSM/META/AMZN/PLTR/XOM/CVX/COP/LIN/PLD)</td></tr>
+<tr><td>全场 (53只)</td><td>基准40只 + 13只候选(MRVL/QCOM/SNOW/MDB/COIN/SQ/ISRG/UBER/ABNB/QBTS/LUNR/CEG/VST)</td></tr>
+<tr><td>精选核心 (27只)</td><td>仅保留历史高贡献股 + 新增高增长候选</td></tr>
+<tr><td>精选+防御 (36只)</td><td>精选核心 + 能源/工业/REITs防御层</td></tr>
+</table>
+<p style="color:#888;font-size:12px">⚠️ 所有回测均使用严格forward-looking: 动量计算排除当日收盘价(&lt; date), 交易含0.05%滑点</p>
+</div></body></html>

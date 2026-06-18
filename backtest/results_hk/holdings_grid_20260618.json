@@ -1,0 +1,57 @@
+[
+  {
+    "holdings": 1,
+    "total_return": 69.94,
+    "annual_return": 45.55,
+    "max_drawdown": -50.22,
+    "sharpe": 0.87,
+    "win_rate": 61.0,
+    "final_value": 1699373.2426148232,
+    "n_trades": 83,
+    "n_trading_days": 357
+  },
+  {
+    "holdings": 2,
+    "total_return": 118.35,
+    "annual_return": 73.81,
+    "max_drawdown": -34.66,
+    "sharpe": 1.25,
+    "win_rate": 53.1,
+    "final_value": 2183480.095673197,
+    "n_trades": 130,
+    "n_trading_days": 357
+  },
+  {
+    "holdings": 3,
+    "total_return": 171.49,
+    "annual_return": 102.79,
+    "max_drawdown": -24.94,
+    "sharpe": 1.68,
+    "win_rate": 57.1,
+    "final_value": 2714932.029940593,
+    "n_trades": 171,
+    "n_trading_days": 357
+  },
+  {
+    "holdings": 4,
+    "total_return": 222.16,
+    "annual_return": 128.9,
+    "max_drawdown": -20.74,
+    "sharpe": 2.03,
+    "win_rate": 56.7,
+    "final_value": 3221599.110944766,
+    "n_trades": 244,
+    "n_trading_days": 357
+  },
+  {
+    "holdings": 5,
+    "total_return": 215.53,
+    "annual_return": 125.55,
+    "max_drawdown": -17.8,
+    "sharpe": 2.14,
+    "win_rate": 51.7,
+    "final_value": 3155287.1165943644,
+    "n_trades": 299,
+    "n_trading_days": 357
+  }
+]

@@ -23,7 +23,8 @@ NOW_TAG = NOW.strftime('%Y%m%d_%H%M')
 START_DATE = '2025-01-01'
 END_DATE = NOW.strftime('%Y-%m-%d')
 
-POOL = 'NVDA,AVGO,AMD,MU,LRCX,AMAT,ARM,AAPL,TSM,LITE,META,AMZN,NFLX,GOOGL,MSFT,CRM,NOW,CRWD,ORCL,PLTR,DDOG,SNPS,XOM,CVX,COP,EOG,OKE,NEM,FCX,LIN,CAT,GE,RTX,PLD,AMT'.split(',')
+# 精简27+SPCX (2026-06-16: 新增SPCX SpaceX, 共28只)
+POOL = 'NVDA,AVGO,AMD,MU,LRCX,ARM,LITE,NFLX,GOOGL,NOW,CRWD,ORCL,DDOG,SNPS,EOG,OKE,NEM,FCX,CAT,GE,RTX,AMT,PANW,ZS,NET,IONQ,RKLB,SPCX'.split(',')
 
 PARAMS = {'lookback_days': 25, 'holdings_num': 7, 'min_money': 500}
 
@@ -350,8 +351,10 @@ sh_val = 0
 if len(vals)>1:
     dr = np.diff(vals)/vals[:-1]
     sh_val = (np.mean(dr)/np.std(dr)*np.sqrt(252)) if np.std(dr)>0 else 0
-n_days = len(trade_dates); ann_ret = tr * 252 / n_days * 100
-cm = abs(tr*252/n_days)/mdd if mdd>0 else 0
+n_days = len(trade_dates)
+# 年化: 几何CAGR = (1+总收益)^(252/交易日) - 1
+ann_ret = ((1 + tr) ** (252 / max(n_days, 1)) - 1) * 100
+cm = ann_ret / abs(mdd) if mdd and mdd > 0 else 0
 
 trades = pf.trade_log
 buys = sum(1 for t in trades if t['action']=='BUY')
@@ -361,6 +364,22 @@ wins = [t for t in st if t['pnl_pct']>0]; losses = [t for t in st if t['pnl_pct'
 wr = len(wins)/len(st)*100 if st else 0
 aw = sum(t['pnl_pct'] for t in wins)/len(wins)*100 if wins else 0
 al = sum(t['pnl_pct'] for t in losses)/len(losses)*100 if losses else 0
+
+# 加载3年历史交易记录 (用于最近20条和新版绩效)
+TRADES_JSON = OUTPUT_DIR / '七星美股版_精简27只_交易记录.json'
+hist_trades = trades  # 兜底
+hist_stats = None
+if TRADES_JSON.exists():
+    try:
+        with open(TRADES_JSON, 'r', encoding='utf-8') as f:
+            bt_data = json.load(f)
+        hist_trades = bt_data.get('trades', trades)
+        hist_stats = bt_data.get('stats', None)
+        # 如果用到了历史数据, 用它的胜率
+        if hist_stats:
+            wr = hist_stats.get('win_rate', wr)
+    except Exception as e:
+        print(f'[交易记录] 加载历史交易JSON失败: {e}')
 
 # ================================================================
 # 当前持仓 (最新7只排名)
@@ -440,15 +459,20 @@ print(f'{"="*60}')
 # ================================================================
 # 生成HTML邮件 (参考七星172模板)
 # ================================================================
-# 近期交易 (最近30条)
-recent_trades = trades[-30:][::-1]
+# 近期交易 (最近20条, 取自3年历史回测)
+recent_trades = hist_trades[-20:][::-1]
 
 # 交易表格
 trade_rows_html = ""
 for t in recent_trades:
     d = '买入' if t['action']=='BUY' else '卖出'
     pnl = t.get('pnl_pct', None)
-    ps = f'{pnl*100:+.2f}%' if pnl is not None else '-'
+    if pnl is not None:
+        ps = f'+{pnl:.2f}%' if pnl > 0 else f'{pnl:.2f}%'
+    else:
+        ps = '-'
+    # 金额 = shares × price
+    amount = t.get('shares', 0) * t.get('price', 0)
     bg = '#E2EFDA' if t['action']=='BUY' else '#FCE4D6'
     pc = '#28A745' if (pnl and pnl>0) else ('#DC3545' if (pnl and pnl<0) else '#888')
     trade_rows_html += f"""<tr style="background:{bg};white-space:nowrap;">
@@ -457,7 +481,7 @@ for t in recent_trades:
         <td style="padding:4px 8px;">{t['code']}</td>
         <td style="padding:4px 8px;text-align:right;">${t['price']:.2f}</td>
         <td style="padding:4px 8px;text-align:right;">{t.get('shares',0)}</td>
-        <td style="padding:4px 8px;text-align:right;">${t.get('amount',0):,.2f}</td>
+        <td style="padding:4px 8px;text-align:right;">${amount:,.2f}</td>
         <td style="padding:4px 8px;font-size:11px;color:#555;">{t.get('reason','')}</td>
         <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{pc};">{ps}</td></tr>"""
 
@@ -522,7 +546,7 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 {rt_warning_banner}
 
 <div class="config-box">
-    <b>策略:</b> 七星美股版最优 | <b>股票池:</b> 35只 (8类高成长+能源+工业) | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>佣金:</b> $0.005/股<br>
+    <b>策略:</b> 七星美股版 精简 | <b>股票池:</b> 27只 (零后视镜·删13只弱股) | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>佣金:</b> $0.005/股<br>
     <b>过滤:</b> 无 (盈利保护关·成交量关·短期动量关·硬止损关) | <b>评分:</b> exp(slope×250)×R²
 </div>
 
@@ -536,12 +560,25 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 <tr><th>排名</th><th>代码</th><th>综合得分</th><th>价格</th><th>涨跌幅</th></tr>
 {rank_rows_html}</table></div></div>
 
-<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近30条交易记录</h3>
+<!-- 3年回测绩效卡片 -->
+""" + (f"""
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">3年回测绩效 (精简27只 · {hist_stats.get('start','')} ~ {hist_stats.get('end','')})</h3>
+<div class="metrics-row">
+<div class="metric-card"><div class="metric-label">累计收益</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('total_return',0):+.1f}%</div></div>
+<div class="metric-card"><div class="metric-label">年化收益</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('annual_return',0):.1f}%</div></div>
+<div class="metric-card"><div class="metric-label">最大回撤</div><div class="metric-value" style="color:#C62828;">{hist_stats.get('max_drawdown',0):.1f}%</div></div>
+<div class="metric-card"><div class="metric-label">夏普比率</div><div class="metric-value" style="color:#1F4E79;">{hist_stats.get('sharpe',0):.2f}</div></div>
+<div class="metric-card"><div class="metric-label">交易笔数</div><div class="metric-value" style="color:#1F4E79;">{hist_stats.get('total_trades',0)}</div></div>
+<div class="metric-card"><div class="metric-label">胜率</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('win_rate',0):.0f}%</div></div>
+</div></div>
+""" if hist_stats else "") + f"""
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近20条交易记录</h3>
 <div style="overflow-x:auto;"><table>
 <tr><th>日期</th><th>方向</th><th>代码</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th></tr>
 {trade_rows_html}</table></div></div>
 
-<div class="footer">七星美股版(最优) · Blakever Trade · {NOW_STR}<br>本报告仅供研究参考，不构成投资建议。</div>
+<div class="footer">七星美股版(精简27只) · Blakever Trade · {NOW_STR}<br>本报告仅供研究参考，不构成投资建议。</div>
 </body></html>"""
 
 # ================================================================
@@ -551,7 +588,7 @@ html_path = OUTPUT_DIR / f'七星美股版_实盘报告_{NOW_TAG}.html'
 with open(html_path, 'w', encoding='utf-8') as f:
     f.write(html)
 
-# 保存交易记录
+# 保存交易记录 (实时PF的交易日志)
 trades_path = OUTPUT_DIR / f'七星美股版_交易记录_2025-{NOW_TAG}.json'
 with open(trades_path, 'w', encoding='utf-8') as f:
     json.dump({'strategy': STRATEGY_NAME, 'period': f'{trade_dates[0]}~{trade_dates[-1]}', 'trades': trades}, f, ensure_ascii=False, indent=2, default=str)

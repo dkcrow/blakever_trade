@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>七星175 vs 172 回测对比</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:20px auto;padding:0 20px;background:#f5f5f5}
+.card{background:#fff;border-radius:8px;padding:20px;margin:15px 0;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+h2{color:#1F4E79;margin-top:0}
+table{border-collapse:collapse;width:100%}
+th{background:#1F4E79;color:#fff;padding:8px 12px;text-align:right}
+th:first-child{text-align:left}
+td{padding:6px 12px;text-align:right;border-bottom:1px solid #eee}
+td:first-child{text-align:left;font-weight:bold}
+.good{color:#28A745;font-weight:bold}
+.bad{color:#DC3545}
+.notes{font-size:12px;color:#888;margin-top:10px}
+</style></head><body>
+<h1>七星175 V3.14 vs 七星172 — 3年期回测对比</h1>
+<div class="card">
+<h2>回测条件</h2>
+<p>区间: 2023-06-01 ~ 2026-06-03 (727天) | 
+   初始资金: ¥100,000 | 佣金: 0.05% | 印花税: 0.1%</p>
+</div>
+
+<div class="card">
+<h2>绩效对比</h2>
+<table>
+<tr><th>策略</th><th>累计收益</th><th>年化</th><th>最大回撤</th><th>夏普</th><th>交易</th><th>胜率</th></tr>
+<tr><td>172 (当前)</td>
+    <td class="good">+232.01%</td>
+    <td>81.4%</td><td>-44.5%</td><td>1.00</td>
+    <td>191</td><td>50.5%</td></tr>
+<tr style="background:#FFF3CD"><td>175 V3.14 (原版, 含未来函数)</td>
+    <td class="good">+429.23%</td>
+    <td>157.3%</td><td>-49.2%</td><td>1.30</td>
+    <td>359</td><td>50.8%</td></tr>
+<tr><td>175 V3.14 (修复, 排除未来函数)</td>
+    <td class="good">+378.85%</td>
+    <td>135.6%</td><td>-46.2%</td><td>1.33</td>
+    <td>379</td><td>51.3%</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>分年收益</h2>
+<table>
+<tr><th>策略</th><th>2023</th><th>2024</th><th>2025</th><th>2026(截至6月)</th></tr>
+<tr><td>172 (当前)</td><td class="good">+8.4%</td><td class="good">+32.2%</td><td class="good">+40.8%</td><td class="good">+55.1%</td></tr>
+<tr><td>175 V3.14 (原版)</td><td class="good">+12.8%</td><td class="good">+14.8%</td><td class="good">+128.1%</td><td class="good">+82.7%</td></tr>
+<tr><td>175 V3.14 (修复)</td><td class="good">+10.3%</td><td class="good">+13.4%</td><td class="good">+127.5%</td><td class="good">+71.6%</td></tr>
+
+</table>
+</div>
+
+<div class="card">
+<h2>策略差异分析</h2>
+<table>
+<tr><th>维度</th><th>172 (当前)</th><th>175 V3.14</th></tr>
+<tr><td>ETF池</td><td>40只</td><td>57只 (海外19+商品7+A股31)</td></tr>
+<tr><td>池切换</td><td>A股弱→海外+商品</td><td>四格矩阵 (A股弱×海外弱)</td></tr>
+<tr><td>行情判断</td><td>4指数 MA10</td><td>A股6指数 + 海外4代理</td></tr>
+<tr><td>得分公式</td><td>exp(slope×250) × R²</td><td>(exp(slope×250)−1) × R²</td></tr>
+<tr><td>回归权重</td><td>等权</td><td>linspace(1→2) 近期加倍</td></tr>
+<tr><td>未来函数</td><td>❌ 无 (排除当日)</td><td>⚠️ 有 (np.append当日价)</td></tr>
+<tr><td>R²过滤</td><td>无</td><td>≥ 0.35</td></tr>
+<tr><td>趋势结构</td><td>无</td><td>价>MA10 且 MA5>MA10</td></tr>
+<tr><td>近3日跌幅</td><td>无</td><td>无单日>3%</td></tr>
+<tr><td>短期动量</td><td>关</td><td>开 (10日≥0)</td></tr>
+<tr><td>Laplace/Gaussian</td><td>无</td><td>有 (未模拟)</td></tr>
+<tr><td>成交量过滤</td><td>关</td><td>开 (未模拟,需分钟级)</td></tr>
+<tr><td>日内回撤守卫</td><td>无</td><td>2%阈值 (未模拟,需分钟级)</td></tr>
+<tr><td>有害卖出冷却</td><td>无</td><td>有 (未模拟)</td></tr>
+</table>
+<div class="notes">⚠️ 175原版含未来函数: np.append(prices["close"], current_price) 将当日收盘价纳入回归计算, 与172修复前的问题一致。<br>
+⚠️ "未模拟"标记的功能依赖分钟级数据(日内回撤/成交量)或交易状态追踪(冷却/守卫), 在日频回测中无法完全复现。</div>
+</div>
+
+<div class="card">
+<h2>结论</h2>
+<p>175 V3.14 的多层过滤器体系在聚宽环境中表现优异, 但在本地日频回测中暴露了两个核心问题:</p>
+<ol>
+<li><b>未来函数</b>: np.append(hist_close, current_price) 将当日收盘价纳入动量回归 — 同七星172修复前的问题。消除后策略真实表现大幅缩水。</li>
+<li><b>(exp-1) × R² 公式缺陷</b>: 当 slope 为负时, exp−1 为负数, 导致所有走平ETF得分转负被淘汰。172的 exp × R² 公式无此问题。</li>
+</ol>
+<p>建议: 若使用175的池+双regime+过滤器体系, 应替换为172的公式 (exp×R²) 并消除未来函数, 然后回测验证。</p>
+</div>
+
+<p style="text-align:center;color:#999;font-size:11px">七星175 vs 172 回测对比 · 20260611_0957 · Blakever Trade</p>
+</body></html>

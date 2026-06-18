@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>七星美股版 前高回撤过滤回测对比</title>
+<style>
+body{font-family:'Microsoft YaHei',sans-serif;max-width:1200px;margin:0 auto;padding:20px;background:#f8f9fa;}
+h1{font-size:20px;color:#1F4E79;text-align:center;margin:0 0 5px;}
+.subtitle{text-align:center;font-size:12px;color:#888;margin-bottom:15px;}
+.card{background:#fff;padding:15px 20px;border-radius:8px;margin-bottom:15px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:#1F4E79;color:#fff;padding:8px;text-align:center;}
+td{padding:6px 8px;border-bottom:1px solid #eee;}
+tr:nth-child(even) td{background:#f8f9fa;}
+.footer{text-align:center;font-size:10px;color:#aaa;margin-top:20px;padding-top:15px;border-top:1px solid #eee;}
+.note{background:#FFF3CD;padding:10px 15px;border-radius:6px;margin:10px 0;font-size:12px;color:#856404;}
+.good{background:#E8F5E9;}
+.bad{background:#FFEBEE;}
+</style></head><body>
+<h1>七星美股版 前高回撤过滤 · 回测对比</h1>
+<div class="subtitle">回测区间: 2023-01-03 ~ 2026-06-04 | 858天 | 数据截止: 20260606_0232</div>
+<div class="note">
+    <b>过滤规则:</b> 动量排名中，从历史前高累计跌幅超过阈值的股票被过滤（不可买入 + 已持仓强制卖出换仓）。<br>
+    被过滤后，需跌幅回到阈值以内才能解除过滤重新参与排名。<br>
+    <b>前高:</b> 取当日之前所有交易日的 close 和 high 最大值作为滚动峰值。
+</div>
+
+<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">核心指标对比 — 最优: <span style="color:#28A745;">无过滤</span></h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>策略</th><th>累计收益</th><th>年化收益</th><th>最大回撤</th><th>夏普</th><th>Calmar</th><th>交易次数</th><th>胜率</th><th>均盈</th><th>均亏</th><th>过滤触发</th><th>vs基准</th></tr>
+<tr style="font-weight:bold;">
+        <td style="padding:6px 10px;font-weight:bold;">无过滤</td>
+        <td style="padding:6px 10px;text-align:right;color:#28A745;font-weight:bold;">+690.31%</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">202.7%</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">24.9%</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">2.2433</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">8.16</td>
+        <td style="padding:6px 10px;text-align:center;font-weight:bold;">854</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">52.6%</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">+9.90%</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;">-4.34%</td>
+        <td style="padding:6px 10px;text-align:center;font-weight:bold;">0</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;color:#888;">+0.00%</td>
+    </tr><tr style="">
+        <td style="padding:6px 10px;">前高回撤10%</td>
+        <td style="padding:6px 10px;text-align:right;color:#28A745;">+206.15%</td>
+        <td style="padding:6px 10px;text-align:right;">60.5%</td>
+        <td style="padding:6px 10px;text-align:right;">32.8%</td>
+        <td style="padding:6px 10px;text-align:right;">1.4802</td>
+        <td style="padding:6px 10px;text-align:right;">1.85</td>
+        <td style="padding:6px 10px;text-align:center;">929</td>
+        <td style="padding:6px 10px;text-align:right;">42.6%</td>
+        <td style="padding:6px 10px;text-align:right;">+9.46%</td>
+        <td style="padding:6px 10px;text-align:right;">-3.59%</td>
+        <td style="padding:6px 10px;text-align:center;">197</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;color:#DC3545;">-484.16%</td>
+    </tr><tr style="">
+        <td style="padding:6px 10px;">前高回撤15%</td>
+        <td style="padding:6px 10px;text-align:right;color:#28A745;">+367.86%</td>
+        <td style="padding:6px 10px;text-align:right;">108.0%</td>
+        <td style="padding:6px 10px;text-align:right;">28.2%</td>
+        <td style="padding:6px 10px;text-align:right;">1.8594</td>
+        <td style="padding:6px 10px;text-align:right;">3.83</td>
+        <td style="padding:6px 10px;text-align:center;">814</td>
+        <td style="padding:6px 10px;text-align:right;">45.9%</td>
+        <td style="padding:6px 10px;text-align:right;">+10.34%</td>
+        <td style="padding:6px 10px;text-align:right;">-4.21%</td>
+        <td style="padding:6px 10px;text-align:center;">101</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;color:#DC3545;">-322.45%</td>
+    </tr><tr style="">
+        <td style="padding:6px 10px;">前高回撤20%</td>
+        <td style="padding:6px 10px;text-align:right;color:#28A745;">+518.30%</td>
+        <td style="padding:6px 10px;text-align:right;">152.2%</td>
+        <td style="padding:6px 10px;text-align:right;">28.4%</td>
+        <td style="padding:6px 10px;text-align:right;">2.0793</td>
+        <td style="padding:6px 10px;text-align:right;">5.36</td>
+        <td style="padding:6px 10px;text-align:center;">785</td>
+        <td style="padding:6px 10px;text-align:right;">50.9%</td>
+        <td style="padding:6px 10px;text-align:right;">+10.11%</td>
+        <td style="padding:6px 10px;text-align:right;">-4.56%</td>
+        <td style="padding:6px 10px;text-align:center;">54</td>
+        <td style="padding:6px 10px;text-align:right;font-weight:bold;color:#DC3545;">-172.01%</td>
+    </tr>
+</table></div></div>
+
+<div class="footer">七星美股版 · Blakever Trade · 2026-06-06 02:32<br>本报告仅供研究参考，不构成投资建议。</div>
+</body></html>

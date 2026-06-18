@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>七星175 V3.15 盘后报告</title></head>
+<body style="font-family:'Microsoft YaHei',sans-serif;max-width:920px;margin:0 auto;padding:20px;background:#f8f9fa;">
+
+<div style="text-align:center;margin-bottom:20px;">
+    <h1 style="font-size:22px;color:#1F4E79;margin:0 0 5px 0;">🌍 七星175 V3.15 · 盘后报告</h1>
+    <p style="font-size:12px;color:#888;margin:0;">2026-06-12 13:11 (Asia/Shanghai) | 数据截止: 2026-06-12</p>
+</div>
+
+
+<div style="background:#fff;padding:12px 18px;border-radius:8px;border-left:4px solid #1F4E79;margin-bottom:12px;font-size:13px;">
+    <b>策略:</b> 七星175 V3.15 (双风险四格池) | <b>ETF池:</b> 57只(海外19+商品7+A股31) | <b>周期:</b> 25日 | <b>佣金:</b> 0.05%
+    <br><b>得分:</b> (exp(slope×250)−1)×R² 加权 | <b>过滤:</b> R²≥0.35+趋势结构+短期动量+近3日跌幅+溢价率>20%
+</div>
+
+<div style="background:#fff;padding:10px 15px;border-radius:8px;margin-bottom:12px;font-size:12px;">
+    📊 <b>A股:</b> 🔴走弱(6/6破MA10, 4/6MA5弱)
+    | 🌐 <b>海外:</b> 🔴走弱(2/4破MA10, 0/4MA5弱)
+    | <b>池:</b> 双弱→仅商品(7只) | <b>行情:</b> WeStock L1 (52只)
+</div>
+
+<!-- 指数MA状态 -->
+<div style="background:#fff;padding:12px 15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📊 A股指数MA状态</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#1F4E79;color:#fff;">
+            <th nowrap style="padding:6px 8px;text-align:left;">指数</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">现价</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">MA5</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">MA10</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">MA5趋势</th>
+            <th nowrap style="padding:6px 8px;text-align:center;">状态</th></tr>
+        <tr style="background:#FFF3CD"><td>沪深300</td><td style="text-align:right;">4.8210</td><td style="text-align:right;">4.9182</td><td style="text-align:right;">4.9041</td><td style="text-align:right;">MA5↑</td><td>⬇破MA10</td></tr><tr style="background:#FFF3CD"><td>上证指数</td><td style="text-align:right;">1.0140</td><td style="text-align:right;">1.0282</td><td style="text-align:right;">1.0321</td><td style="text-align:right;">MA5<MA10 ⚠</td><td>⬇破MA10</td></tr><tr style="background:#FFF3CD"><td>上证50</td><td style="text-align:right;">2.9770</td><td style="text-align:right;">2.9902</td><td style="text-align:right;">3.0054</td><td style="text-align:right;">MA5<MA10 ⚠</td><td>⬇破MA10</td></tr><tr style="background:#FFF3CD"><td>创业板指</td><td style="text-align:right;">3.8700</td><td style="text-align:right;">4.0564</td><td style="text-align:right;">4.0095</td><td style="text-align:right;">MA5↑</td><td>⬇破MA10</td></tr><tr style="background:#FFF3CD"><td>中证1000</td><td style="text-align:right;">3.3310</td><td style="text-align:right;">3.4038</td><td style="text-align:right;">3.4529</td><td style="text-align:right;">MA5<MA10 ⚠</td><td>⬇破MA10</td></tr><tr style="background:#FFF3CD"><td>中证2000</td><td style="text-align:right;">1.5330</td><td style="text-align:right;">1.5696</td><td style="text-align:right;">1.5949</td><td style="text-align:right;">MA5<MA10 ⚠</td><td>⬇破MA10</td></tr>
+    </table>
+</div>
+
+<!-- 排名Top10 -->
+<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:15px;color:#1F4E79;margin:0 0 10px 0;">📊 ETF动量排名 Top10 (仅商品(7只))</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#1F4E79;color:#fff;">
+            <th nowrap style="padding:6px 6px;text-align:center;">排名</th>
+            <th nowrap style="padding:6px 6px;text-align:left;">名称</th>
+            <th nowrap style="padding:6px 6px;text-align:center;">代码</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">综合</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">年化</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">R²</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">价格</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">涨跌幅</th>
+            <th nowrap style="padding:6px 6px;text-align:right;">溢价率</th>
+            <th nowrap style="padding:6px 6px;text-align:center;">变动</th></tr>
+        
+    </table>
+</div>
+
+<!-- 策略说明 -->
+<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📋 过滤规则</h3>
+    <table style="font-size:12px;width:100%;">
+    <tr><td style="width:180px"><b>R² ≥ 0.35</b></td><td>排除拟合度不足的ETF</td></tr>
+    <tr><td><b>趋势结构</b></td><td>现价 > MA10 且 MA5 > MA10</td></tr>
+    <tr><td><b>短期动量</b></td><td>10日年化 ≥ 0</td></tr>
+    <tr><td><b>近3日跌幅</b></td><td>无单日 > 3%</td></tr>
+    <tr><td><b>溢价率 > 20%</b></td><td>排除高溢价ETF（需NAV数据）</td></tr>
+    <tr style="color:#28A745"><td><b>🆕 盈利仓分钟豁免</b></td><td>浮盈≥10%时分钟级回撤不强制卖</td></tr>
+    <tr style="color:#28A745"><td><b>🆕 盈利仓昨收豁免</b></td><td>浮盈≥10%时仅看日内回撤，不用昨收跳空</td></tr>
+    <tr style="color:#28A745"><td><b>🆕 QDII轮动修复</b></td><td>同日轮动卖海外后可买入另一只QDII</td></tr>
+    </table>
+</div>
+
+<div style="background:#fff;padding:12px 15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📈 回测绩效 (2023.1 ~ 今)</h3>
+    <table style="font-size:12px;width:100%;">
+    <tr>
+        <td style="width:25%"><b>累计收益</b><br><span style="color:#28A745;font-size:16px;font-weight:bold;">+263.6%</span></td>
+        <td style="width:25%"><b>年化收益</b><br><span style="color:#28A745;font-size:14px;">78.7%</span></td>
+        <td style="width:25%"><b>最大回撤</b><br><span style="color:#DC3545;font-size:14px;">-61.4%</span></td>
+        <td style="width:25%"><b>夏普比率</b><br><span style="color:#1F4E79;font-size:14px;">0.95</span></td>
+    </tr>
+    <tr>
+        <td style="width:25%;padding-top:8px;"><b>总交易</b><br><span style="color:#333;font-size:14px;">513笔</span></td>
+        <td style="width:25%;padding-top:8px;"><b>胜率</b><br><span style="color:#28A745;font-size:14px;">45.3%</span></td>
+        <td></td><td></td>
+    </tr>
+    </table>
+</div>
+<!-- 最近20条交易记录 -->
+<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:15px;color:#1F4E79;margin:0 0 10px 0;">📋 最近20条交易记录</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#1F4E79;color:#fff;">
+            <th nowrap style="padding:6px 8px;">日期</th>
+            <th nowrap style="padding:6px 8px;">方向</th>
+            <th nowrap style="padding:6px 8px;">ETF</th>
+            <th nowrap style="padding:6px 8px;">代码</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">价格</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">数量</th>
+            <th nowrap style="padding:6px 8px;text-align:left;">理由</th>
+            <th nowrap style="padding:6px 8px;text-align:right;">盈亏</th>
+        </tr>
+        
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-29</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">纳指ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513100</td>
+            <td style="padding:4px 8px;text-align:right;">2.273</td>
+            <td style="padding:4px 8px;text-align:right;">152000</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-29</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">中韩半导体ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513310</td>
+            <td style="padding:4px 8px;text-align:right;">5.978</td>
+            <td style="padding:4px 8px;text-align:right;">57800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-1.52%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-28</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">中韩半导体ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513310</td>
+            <td style="padding:4px 8px;text-align:right;">6.071</td>
+            <td style="padding:4px 8px;text-align:right;">57800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-28</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">纳指科技ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159509</td>
+            <td style="padding:4px 8px;text-align:right;">2.672</td>
+            <td style="padding:4px 8px;text-align:right;">131700</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.39%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-26</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">纳指科技ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159509</td>
+            <td style="padding:4px 8px;text-align:right;">2.661</td>
+            <td style="padding:4px 8px;text-align:right;">131700</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-26</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">国债ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">511010</td>
+            <td style="padding:4px 8px;text-align:right;">141.216</td>
+            <td style="padding:4px 8px;text-align:right;">2400</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-0.03%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-19</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">国债ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">511010</td>
+            <td style="padding:4px 8px;text-align:right;">141.261</td>
+            <td style="padding:4px 8px;text-align:right;">2400</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-19</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">纳指ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513100</td>
+            <td style="padding:4px 8px;text-align:right;">2.047</td>
+            <td style="padding:4px 8px;text-align:right;">171900</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-0.94%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-18</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">纳指ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513100</td>
+            <td style="padding:4px 8px;text-align:right;">2.066</td>
+            <td style="padding:4px 8px;text-align:right;">171900</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-18</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">中韩半导体ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513310</td>
+            <td style="padding:4px 8px;text-align:right;">5.661</td>
+            <td style="padding:4px 8px;text-align:right;">62800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">盈利保护(-9.2%)</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.48%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-11</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">中韩半导体ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">513310</td>
+            <td style="padding:4px 8px;text-align:right;">5.635</td>
+            <td style="padding:4px 8px;text-align:right;">62800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-11</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">TMTETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">512220</td>
+            <td style="padding:4px 8px;text-align:right;">3.881</td>
+            <td style="padding:4px 8px;text-align:right;">91700</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+6.34%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-06</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">TMTETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">512220</td>
+            <td style="padding:4px 8px;text-align:right;">3.649</td>
+            <td style="padding:4px 8px;text-align:right;">91700</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-05-06</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">纳指科技ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159509</td>
+            <td style="padding:4px 8px;text-align:right;">2.542</td>
+            <td style="padding:4px 8px;text-align:right;">132400</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+7.33%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-29</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">纳指科技ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159509</td>
+            <td style="padding:4px 8px;text-align:right;">2.368</td>
+            <td style="padding:4px 8px;text-align:right;">132400</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-29</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">TMTETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">512220</td>
+            <td style="padding:4px 8px;text-align:right;">3.458</td>
+            <td style="padding:4px 8px;text-align:right;">90900</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+0.50%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-28</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">TMTETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">512220</td>
+            <td style="padding:4px 8px;text-align:right;">3.440</td>
+            <td style="padding:4px 8px;text-align:right;">90900</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-28</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">创业板成长ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159967</td>
+            <td style="padding:4px 8px;text-align:right;">0.764</td>
+            <td style="padding:4px 8px;text-align:right;">409800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#DC3545;">-1.57%</td>
+        </tr>
+        <tr style="background:#E2EFDA;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-27</td>
+            <td style="padding:4px 8px;font-weight:bold;">买入</td>
+            <td style="padding:4px 8px;">创业板成长ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">159967</td>
+            <td style="padding:4px 8px;text-align:right;">0.776</td>
+            <td style="padding:4px 8px;text-align:right;">409800</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">175动量</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        </tr>
+        <tr style="background:#FCE4D6;white-space:nowrap;">
+            <td style="padding:4px 8px;">2026-04-27</td>
+            <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+            <td style="padding:4px 8px;">通信ETF</td>
+            <td style="padding:4px 8px;color:#888;font-size:11px;">515880</td>
+            <td style="padding:4px 8px;text-align:right;">1.355</td>
+            <td style="padding:4px 8px;text-align:right;">235300</td>
+            <td style="padding:4px 8px;font-size:11px;color:#555;">轮动</td>
+            <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#28A745;">+1.17%</td>
+        </tr>
+    </table>
+</div>
+<p style="text-align:center;color:#999;font-size:11px;margin-top:20px;">七星175 V3.15 · Blakever Trade · 2026-06-12 13:11 · 本报告仅供研究参考</p>
+</body></html>

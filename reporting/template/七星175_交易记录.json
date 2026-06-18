@@ -1,0 +1,4577 @@
+{
+  "strategy": "七星175 V3.15",
+  "period": "2023-01-03 ~ 2026-06-03",
+  "stats": {
+    "total_return": 350.65,
+    "annual_return": 88.4,
+    "max_drawdown": -60.4,
+    "sharpe": 1.07,
+    "total_trades": 507,
+    "win_rate": 47.0
+  },
+  "trades": [
+    {
+      "date": "2023-01-03",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 47100,
+      "price": 2.0152,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-01-04",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 47100,
+      "price": 1.9738,
+      "pnl_pct": -2.05,
+      "reason": "日内回撤(-2.0%)"
+    },
+    {
+      "date": "2023-01-04",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 61900,
+      "price": 1.5002,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-01-05",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 61900,
+      "price": 1.4829,
+      "pnl_pct": -1.15,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-01-05",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22900,
+      "price": 4.0014,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-01-06",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22900,
+      "price": 3.9716,
+      "pnl_pct": -0.74,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-01-06",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 61000,
+      "price": 1.4901,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-01-09",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 61000,
+      "price": 1.4739,
+      "pnl_pct": -1.09,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-01-09",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22300,
+      "price": 4.0154,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-01-16",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22300,
+      "price": 4.0496,
+      "pnl_pct": 0.85,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-01-16",
+      "action": "BUY",
+      "code": "515790",
+      "shares": 61800,
+      "price": 1.4621,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-02",
+      "action": "SELL",
+      "code": "515790",
+      "shares": 61800,
+      "price": 1.4998,
+      "pnl_pct": 2.58,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-02",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 74100,
+      "price": 1.2461,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-06",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 74100,
+      "price": 1.2039,
+      "pnl_pct": -3.39,
+      "reason": "日内回撤(-3.4%)"
+    },
+    {
+      "date": "2023-02-06",
+      "action": "BUY",
+      "code": "159819",
+      "shares": 114100,
+      "price": 0.7821,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-08",
+      "action": "SELL",
+      "code": "159819",
+      "shares": 114100,
+      "price": 0.7789,
+      "pnl_pct": -0.4,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-08",
+      "action": "BUY",
+      "code": "513080",
+      "shares": 65300,
+      "price": 1.3581,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-09",
+      "action": "SELL",
+      "code": "513080",
+      "shares": 65300,
+      "price": 1.3509,
+      "pnl_pct": -0.54,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-09",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 100900,
+      "price": 0.8731,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-13",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 100900,
+      "price": 0.8589,
+      "pnl_pct": -1.62,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-13",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 66100,
+      "price": 1.3091,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-14",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 66100,
+      "price": 1.3259,
+      "pnl_pct": 1.28,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-14",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 100400,
+      "price": 0.8711,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-16",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 100400,
+      "price": 0.8899,
+      "pnl_pct": 2.16,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-16",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 66600,
+      "price": 1.3381,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-17",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 66600,
+      "price": 1.3159,
+      "pnl_pct": -1.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-02-17",
+      "action": "BUY",
+      "code": "513080",
+      "shares": 62700,
+      "price": 1.3951,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-02-27",
+      "action": "SELL",
+      "code": "513080",
+      "shares": 62700,
+      "price": 1.3769,
+      "pnl_pct": -1.31,
+      "reason": "日内回撤(-2.1%)"
+    },
+    {
+      "date": "2023-02-28",
+      "action": "BUY",
+      "code": "513080",
+      "shares": 61800,
+      "price": 1.3951,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-01",
+      "action": "SELL",
+      "code": "513080",
+      "shares": 61800,
+      "price": 1.3909,
+      "pnl_pct": -0.31,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-03",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 89200,
+      "price": 0.9621,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-07",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 89200,
+      "price": 0.9359,
+      "pnl_pct": -2.72,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-07",
+      "action": "BUY",
+      "code": "512890",
+      "shares": 93600,
+      "price": 0.8921,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-08",
+      "action": "SELL",
+      "code": "512890",
+      "shares": 93600,
+      "price": 0.8899,
+      "pnl_pct": -0.24,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-08",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 105600,
+      "price": 0.7871,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-10",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 105600,
+      "price": 0.7649,
+      "pnl_pct": -2.81,
+      "reason": "日内回撤(-2.8%)"
+    },
+    {
+      "date": "2023-03-10",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 8400,
+      "price": 9.615,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-13",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 8400,
+      "price": 9.616,
+      "pnl_pct": 0.01,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-13",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 19700,
+      "price": 4.0894,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-22",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 19700,
+      "price": 4.2226,
+      "pnl_pct": 3.26,
+      "reason": "日内回撤(-2.4%)"
+    },
+    {
+      "date": "2023-03-22",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 8600,
+      "price": 9.635,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-23",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 8600,
+      "price": 9.643,
+      "pnl_pct": 0.08,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-23",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 19400,
+      "price": 4.2534,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-27",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 19400,
+      "price": 4.2456,
+      "pnl_pct": -0.18,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-27",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 76000,
+      "price": 1.0861,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-03-31",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 76000,
+      "price": 1.0629,
+      "pnl_pct": -2.14,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-03-31",
+      "action": "BUY",
+      "code": "159819",
+      "shares": 86300,
+      "price": 0.9351,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-04-10",
+      "action": "SELL",
+      "code": "159819",
+      "shares": 86300,
+      "price": 0.9639,
+      "pnl_pct": 3.08,
+      "reason": "盈利保护(-5.0%)"
+    },
+    {
+      "date": "2023-04-10",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 73700,
+      "price": 1.1251,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-04-11",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 73700,
+      "price": 1.1269,
+      "pnl_pct": 0.16,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-04-11",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 70400,
+      "price": 1.1771,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-04-18",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 70400,
+      "price": 1.1649,
+      "pnl_pct": -1.04,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-04-18",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 109200,
+      "price": 0.7501,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-04-21",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 109200,
+      "price": 0.7509,
+      "pnl_pct": 0.11,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-04-21",
+      "action": "BUY",
+      "code": "513080",
+      "shares": 55600,
+      "price": 1.4711,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-05-04",
+      "action": "SELL",
+      "code": "513080",
+      "shares": 55600,
+      "price": 1.4759,
+      "pnl_pct": 0.32,
+      "reason": "日内回撤(-2.6%)"
+    },
+    {
+      "date": "2023-05-04",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 68500,
+      "price": 1.1961,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-05-05",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 68500,
+      "price": 1.1929,
+      "pnl_pct": -0.27,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-05-05",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 104600,
+      "price": 0.7801,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-05-11",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 104600,
+      "price": 0.7589,
+      "pnl_pct": -2.71,
+      "reason": "日内回撤(-2.7%)"
+    },
+    {
+      "date": "2023-05-11",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 69400,
+      "price": 1.1421,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-05-22",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 69400,
+      "price": 1.2659,
+      "pnl_pct": 10.84,
+      "reason": "盈利保护(-9.3%)"
+    },
+    {
+      "date": "2023-05-22",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 88700,
+      "price": 0.9841,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-08",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 88700,
+      "price": 1.0299,
+      "pnl_pct": 4.65,
+      "reason": "日内回撤(-2.1%)"
+    },
+    {
+      "date": "2023-06-08",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 63500,
+      "price": 1.4331,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-09",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 63500,
+      "price": 1.4409,
+      "pnl_pct": 0.54,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-06-09",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 87200,
+      "price": 1.0471,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-15",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 87200,
+      "price": 1.0909,
+      "pnl_pct": 4.18,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-06-15",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 77100,
+      "price": 1.2281,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-26",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 77100,
+      "price": 1.2659,
+      "pnl_pct": 3.07,
+      "reason": "盈利保护(-7.9%)"
+    },
+    {
+      "date": "2023-06-26",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 89200,
+      "price": 1.0911,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-27",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 89200,
+      "price": 1.0759,
+      "pnl_pct": -1.39,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-06-27",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 50400,
+      "price": 1.9002,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-28",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 50400,
+      "price": 1.8928,
+      "pnl_pct": -0.39,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-06-28",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 87400,
+      "price": 1.0901,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-06-29",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 87400,
+      "price": 1.0989,
+      "pnl_pct": 0.81,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-06-29",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 50700,
+      "price": 1.8882,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-07-07",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 50700,
+      "price": 2.0058,
+      "pnl_pct": 6.23,
+      "reason": "日内回撤(-2.2%)"
+    },
+    {
+      "date": "2023-07-07",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 67400,
+      "price": 1.5022,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-07-10",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 67400,
+      "price": 1.4919,
+      "pnl_pct": -0.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-07-10",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 50000,
+      "price": 2.0082,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-02",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 50000,
+      "price": 2.1778,
+      "pnl_pct": 8.44,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-08-02",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 86100,
+      "price": 1.2581,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-03",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 86100,
+      "price": 1.2229,
+      "pnl_pct": -2.8,
+      "reason": "日内回撤(-2.8%)"
+    },
+    {
+      "date": "2023-08-03",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 48900,
+      "price": 2.1532,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-04",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 48900,
+      "price": 2.1748,
+      "pnl_pct": 1.0,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-08-04",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 85000,
+      "price": 1.2481,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-16",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 85000,
+      "price": 1.2499,
+      "pnl_pct": 0.14,
+      "reason": "日内回撤(-2.6%)"
+    },
+    {
+      "date": "2023-08-16",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 47400,
+      "price": 2.2342,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-22",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 47400,
+      "price": 2.2718,
+      "pnl_pct": 1.68,
+      "reason": "日内回撤(-3.0%)"
+    },
+    {
+      "date": "2023-08-23",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 65800,
+      "price": 1.6322,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 65800,
+      "price": 1.6218,
+      "pnl_pct": -0.63,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 45200,
+      "price": 2.3572,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-04",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 45200,
+      "price": 2.3038,
+      "pnl_pct": -2.27,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-04",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 62300,
+      "price": 1.6722,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-05",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 62300,
+      "price": 1.6748,
+      "pnl_pct": 0.16,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-05",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 44700,
+      "price": 2.3292,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-08",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 44700,
+      "price": 2.3238,
+      "pnl_pct": -0.23,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-08",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22800,
+      "price": 4.5365,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-11",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22800,
+      "price": 4.5445,
+      "pnl_pct": 0.18,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-11",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 61900,
+      "price": 1.6742,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-12",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 61900,
+      "price": 1.7108,
+      "pnl_pct": 2.19,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-12",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 78700,
+      "price": 1.3421,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-20",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 78700,
+      "price": 1.3619,
+      "pnl_pct": 1.47,
+      "reason": "日内回撤(-2.7%)"
+    },
+    {
+      "date": "2023-09-20",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 62500,
+      "price": 1.7092,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-21",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 62500,
+      "price": 1.6798,
+      "pnl_pct": -1.72,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-21",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22900,
+      "price": 4.5805,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-22",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22900,
+      "price": 4.5605,
+      "pnl_pct": -0.43,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-22",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 76100,
+      "price": 1.3701,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-25",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 76100,
+      "price": 1.3669,
+      "pnl_pct": -0.24,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-09-25",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22600,
+      "price": 4.5815,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-09-27",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22600,
+      "price": 4.5105,
+      "pnl_pct": -1.55,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 10200,
+      "price": 9.964,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-10-20",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 10200,
+      "price": 9.957,
+      "pnl_pct": -0.07,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-10-23",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 10200,
+      "price": 9.962,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-10-24",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 10200,
+      "price": 9.952,
+      "pnl_pct": -0.1,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-11-01",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 10100,
+      "price": 9.97,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-11-07",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 10100,
+      "price": 9.984,
+      "pnl_pct": 0.14,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-11-07",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 81800,
+      "price": 1.2411,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 81800,
+      "price": 1.2259,
+      "pnl_pct": -1.23,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 43100,
+      "price": 2.3222,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-11-17",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 43100,
+      "price": 2.3108,
+      "pnl_pct": -0.49,
+      "reason": "日内回撤(-2.4%)"
+    },
+    {
+      "date": "2023-11-17",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 80200,
+      "price": 1.2411,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-11-20",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 80200,
+      "price": 1.2329,
+      "pnl_pct": -0.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-11-20",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 96400,
+      "price": 1.0241,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-11-27",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 96400,
+      "price": 1.0259,
+      "pnl_pct": 0.18,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-11-27",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 80500,
+      "price": 1.2261,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-12-18",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 80500,
+      "price": 1.2739,
+      "pnl_pct": 3.89,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-12-18",
+      "action": "BUY",
+      "code": "513290",
+      "shares": 92000,
+      "price": 1.1101,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-12-21",
+      "action": "SELL",
+      "code": "513290",
+      "shares": 92000,
+      "price": 1.0799,
+      "pnl_pct": -2.72,
+      "reason": "日内回撤(-2.9%)"
+    },
+    {
+      "date": "2023-12-21",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 76200,
+      "price": 1.3021,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2023-12-22",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 76200,
+      "price": 1.3049,
+      "pnl_pct": 0.21,
+      "reason": "轮动"
+    },
+    {
+      "date": "2023-12-22",
+      "action": "BUY",
+      "code": "513290",
+      "shares": 91400,
+      "price": 1.0861,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-03",
+      "action": "SELL",
+      "code": "513290",
+      "shares": 91400,
+      "price": 1.1629,
+      "pnl_pct": 7.07,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-03",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 68800,
+      "price": 1.5372,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-04",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 68800,
+      "price": 1.5248,
+      "pnl_pct": -0.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-04",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 22500,
+      "price": 4.6515,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-08",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 22500,
+      "price": 4.6495,
+      "pnl_pct": -0.04,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-10",
+      "action": "BUY",
+      "code": "512890",
+      "shares": 111400,
+      "price": 0.9381,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-11",
+      "action": "SELL",
+      "code": "512890",
+      "shares": 111400,
+      "price": 0.9299,
+      "pnl_pct": -0.87,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-12",
+      "action": "BUY",
+      "code": "513290",
+      "shares": 89000,
+      "price": 1.1631,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-16",
+      "action": "SELL",
+      "code": "513290",
+      "shares": 89000,
+      "price": 1.1659,
+      "pnl_pct": 0.24,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-16",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 70900,
+      "price": 1.4591,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-17",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 70900,
+      "price": 1.4439,
+      "pnl_pct": -1.05,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-17",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 10100,
+      "price": 10.106,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-22",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 10100,
+      "price": 10.112,
+      "pnl_pct": 0.06,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-01-22",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 65800,
+      "price": 1.5522,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-24",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 65800,
+      "price": 1.5258,
+      "pnl_pct": -1.69,
+      "reason": "盈利保护(-6.3%)"
+    },
+    {
+      "date": "2024-01-24",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 84900,
+      "price": 1.1811,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-01-31",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 84900,
+      "price": 1.1719,
+      "pnl_pct": -0.78,
+      "reason": "日内回撤(-2.9%)"
+    },
+    {
+      "date": "2024-01-31",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 78600,
+      "price": 1.2641,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-02-01",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 78600,
+      "price": 1.2519,
+      "pnl_pct": -0.97,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-02-01",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 59200,
+      "price": 1.6602,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-02-02",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 59200,
+      "price": 1.6878,
+      "pnl_pct": 1.67,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-02-02",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 83700,
+      "price": 1.1901,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-05",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 83700,
+      "price": 1.3659,
+      "pnl_pct": 14.77,
+      "reason": "盈利保护(-5.1%)"
+    },
+    {
+      "date": "2024-03-05",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 96900,
+      "price": 1.1701,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-14",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 96900,
+      "price": 1.1829,
+      "pnl_pct": 1.09,
+      "reason": "日内回撤(-2.3%)"
+    },
+    {
+      "date": "2024-03-14",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 115500,
+      "price": 0.9901,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-15",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 115500,
+      "price": 1.0049,
+      "pnl_pct": 1.49,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-03-15",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 95600,
+      "price": 1.2111,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-22",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 95600,
+      "price": 1.2029,
+      "pnl_pct": -0.68,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-03-22",
+      "action": "BUY",
+      "code": "563300",
+      "shares": 123000,
+      "price": 0.9331,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-25",
+      "action": "SELL",
+      "code": "563300",
+      "shares": 123000,
+      "price": 0.9109,
+      "pnl_pct": -2.38,
+      "reason": "日内回撤(-2.4%)"
+    },
+    {
+      "date": "2024-03-25",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 89100,
+      "price": 1.2571,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-03-26",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 89100,
+      "price": 1.2749,
+      "pnl_pct": 1.41,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-03-26",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 141400,
+      "price": 0.8011,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-04-02",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 141400,
+      "price": 0.8249,
+      "pnl_pct": 2.98,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-04-02",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 107800,
+      "price": 1.0781,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-04-12",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 107800,
+      "price": 1.1299,
+      "pnl_pct": 4.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-04-12",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 131300,
+      "price": 0.9241,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-04-22",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 131300,
+      "price": 0.8969,
+      "pnl_pct": -2.94,
+      "reason": "日内回撤(-2.9%)"
+    },
+    {
+      "date": "2024-04-22",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 67700,
+      "price": 1.7372,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-04-23",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 67700,
+      "price": 1.6888,
+      "pnl_pct": -2.78,
+      "reason": "日内回撤(-2.8%)"
+    },
+    {
+      "date": "2024-04-23",
+      "action": "BUY",
+      "code": "511010",
+      "shares": 800,
+      "price": 135.9906,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-04-24",
+      "action": "SELL",
+      "code": "511010",
+      "shares": 800,
+      "price": 135.6044,
+      "pnl_pct": -0.28,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-04-24",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 66300,
+      "price": 1.7172,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-08",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 66300,
+      "price": 1.7308,
+      "pnl_pct": 0.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-08",
+      "action": "BUY",
+      "code": "159792",
+      "shares": 186200,
+      "price": 0.6151,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-21",
+      "action": "SELL",
+      "code": "159792",
+      "shares": 186200,
+      "price": 0.6339,
+      "pnl_pct": 3.07,
+      "reason": "日内回撤(-4.1%)"
+    },
+    {
+      "date": "2024-05-21",
+      "action": "BUY",
+      "code": "513050",
+      "shares": 105200,
+      "price": 1.1181,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-23",
+      "action": "SELL",
+      "code": "513050",
+      "shares": 105200,
+      "price": 1.0959,
+      "pnl_pct": -1.99,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-23",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 132400,
+      "price": 0.8701,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-24",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 132400,
+      "price": 0.8569,
+      "pnl_pct": -1.51,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-24",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 80400,
+      "price": 1.4101,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-27",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 80400,
+      "price": 1.4639,
+      "pnl_pct": 3.81,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-27",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 132900,
+      "price": 0.8821,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-29",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 132900,
+      "price": 0.8729,
+      "pnl_pct": -1.04,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-29",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 111500,
+      "price": 1.0391,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-30",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 111500,
+      "price": 1.0039,
+      "pnl_pct": -3.39,
+      "reason": "日内回撤(-3.4%)"
+    },
+    {
+      "date": "2024-05-30",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 77000,
+      "price": 1.4531,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-05-31",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 77000,
+      "price": 1.4479,
+      "pnl_pct": -0.36,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-05-31",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 66000,
+      "price": 1.6862,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-03",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 66000,
+      "price": 1.6538,
+      "pnl_pct": -1.92,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-06-03",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 74000,
+      "price": 1.4741,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-19",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 74000,
+      "price": 1.6748,
+      "pnl_pct": 13.61,
+      "reason": "日内回撤(-3.0%)"
+    },
+    {
+      "date": "2024-06-19",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 88800,
+      "price": 1.3841,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-24",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 88800,
+      "price": 1.3479,
+      "pnl_pct": -2.62,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-06-24",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 82800,
+      "price": 1.4441,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-25",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 82800,
+      "price": 1.4289,
+      "pnl_pct": -1.06,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-06-25",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 62000,
+      "price": 1.9072,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-26",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 62000,
+      "price": 1.9328,
+      "pnl_pct": 1.34,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-06-26",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 82100,
+      "price": 1.4561,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-06-28",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 82100,
+      "price": 1.4749,
+      "pnl_pct": 1.28,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-06-28",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 61200,
+      "price": 1.9712,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-03",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 61200,
+      "price": 1.9988,
+      "pnl_pct": 1.4,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-07-03",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 81300,
+      "price": 1.5012,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-11",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 81300,
+      "price": 1.5548,
+      "pnl_pct": 3.58,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-07-11",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 80000,
+      "price": 1.5742,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-12",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 80000,
+      "price": 1.4939,
+      "pnl_pct": -5.1,
+      "reason": "盈利保护(-5.1%)"
+    },
+    {
+      "date": "2024-07-12",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 107300,
+      "price": 1.1151,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-15",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 107300,
+      "price": 1.1369,
+      "pnl_pct": 1.95,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-07-15",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 123000,
+      "price": 0.9891,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-18",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 123000,
+      "price": 0.9819,
+      "pnl_pct": -0.73,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-07-18",
+      "action": "BUY",
+      "code": "159732",
+      "shares": 172300,
+      "price": 0.7001,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-23",
+      "action": "SELL",
+      "code": "159732",
+      "shares": 172300,
+      "price": 0.6709,
+      "pnl_pct": -4.16,
+      "reason": "日内回撤(-4.1%)"
+    },
+    {
+      "date": "2024-07-24",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 21100,
+      "price": 5.4655,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-07-25",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 21100,
+      "price": 5.3265,
+      "pnl_pct": -2.54,
+      "reason": "日内回撤(-2.5%)"
+    },
+    {
+      "date": "2024-07-30",
+      "action": "BUY",
+      "code": "512660",
+      "shares": 124100,
+      "price": 0.9071,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-08-05",
+      "action": "SELL",
+      "code": "512660",
+      "shares": 124100,
+      "price": 0.8839,
+      "pnl_pct": -2.56,
+      "reason": "日内回撤(-4.1%)"
+    },
+    {
+      "date": "2024-08-26",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 19800,
+      "price": 5.5386,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-08-27",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 19800,
+      "price": 5.5334,
+      "pnl_pct": -0.09,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-08-27",
+      "action": "BUY",
+      "code": "513730",
+      "shares": 91400,
+      "price": 1.1961,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "SELL",
+      "code": "513730",
+      "shares": 91400,
+      "price": 1.1889,
+      "pnl_pct": -0.61,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 76800,
+      "price": 1.4131,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-04",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 76800,
+      "price": 1.3829,
+      "pnl_pct": -2.14,
+      "reason": "日内回撤(-2.8%)"
+    },
+    {
+      "date": "2024-09-10",
+      "action": "BUY",
+      "code": "511010",
+      "shares": 700,
+      "price": 138.6729,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-12",
+      "action": "SELL",
+      "code": "511010",
+      "shares": 700,
+      "price": 138.6371,
+      "pnl_pct": -0.03,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-12",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 93500,
+      "price": 1.1321,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-13",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 93500,
+      "price": 1.1379,
+      "pnl_pct": 0.51,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-13",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 54500,
+      "price": 1.9482,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-18",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 54500,
+      "price": 1.9908,
+      "pnl_pct": 2.19,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-18",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 94800,
+      "price": 1.1411,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-24",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 94800,
+      "price": 1.1509,
+      "pnl_pct": 0.86,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-24",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 55300,
+      "price": 1.9672,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-25",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 55300,
+      "price": 1.9398,
+      "pnl_pct": -1.39,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-25",
+      "action": "BUY",
+      "code": "159792",
+      "shares": 181200,
+      "price": 0.5921,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-27",
+      "action": "SELL",
+      "code": "159792",
+      "shares": 181200,
+      "price": 0.6679,
+      "pnl_pct": 12.82,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-27",
+      "action": "BUY",
+      "code": "513130",
+      "shares": 207100,
+      "price": 0.5801,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-09-30",
+      "action": "SELL",
+      "code": "513130",
+      "shares": 207100,
+      "price": 0.6379,
+      "pnl_pct": 9.98,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-09-30",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 139100,
+      "price": 0.9431,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-08",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 139100,
+      "price": 1.0369,
+      "pnl_pct": 9.95,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-08",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 100400,
+      "price": 1.4271,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-09",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 100400,
+      "price": 1.3669,
+      "pnl_pct": -4.22,
+      "reason": "日内回撤(-4.2%)"
+    },
+    {
+      "date": "2024-10-09",
+      "action": "BUY",
+      "code": "159915",
+      "shares": 61200,
+      "price": 2.2422,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-10",
+      "action": "SELL",
+      "code": "159915",
+      "shares": 61200,
+      "price": 2.1738,
+      "pnl_pct": -3.05,
+      "reason": "日内回撤(-3.0%)"
+    },
+    {
+      "date": "2024-10-10",
+      "action": "BUY",
+      "code": "159819",
+      "shares": 154400,
+      "price": 0.8621,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-11",
+      "action": "SELL",
+      "code": "159819",
+      "shares": 154400,
+      "price": 0.8179,
+      "pnl_pct": -5.12,
+      "reason": "盈利保护(-5.1%)"
+    },
+    {
+      "date": "2024-10-11",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 74000,
+      "price": 1.7082,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-15",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 74000,
+      "price": 1.6958,
+      "pnl_pct": -0.72,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-15",
+      "action": "BUY",
+      "code": "510300",
+      "shares": 31800,
+      "price": 3.9314,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-16",
+      "action": "SELL",
+      "code": "510300",
+      "shares": 31800,
+      "price": 3.9056,
+      "pnl_pct": -0.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-16",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 138500,
+      "price": 0.8971,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 138500,
+      "price": 0.8809,
+      "pnl_pct": -1.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 88900,
+      "price": 1.3711,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-18",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 88900,
+      "price": 1.4659,
+      "pnl_pct": 6.91,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-18",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 137900,
+      "price": 0.9401,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-21",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 137900,
+      "price": 0.9919,
+      "pnl_pct": 5.51,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-21",
+      "action": "BUY",
+      "code": "159995",
+      "shares": 112700,
+      "price": 1.2081,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-22",
+      "action": "SELL",
+      "code": "159995",
+      "shares": 112700,
+      "price": 1.1899,
+      "pnl_pct": -1.51,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-22",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 134900,
+      "price": 0.9931,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-23",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 134900,
+      "price": 0.9909,
+      "pnl_pct": -0.22,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-23",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 91900,
+      "price": 1.4511,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-10-24",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 91900,
+      "price": 1.4409,
+      "pnl_pct": -0.71,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-10-24",
+      "action": "BUY",
+      "code": "159995",
+      "shares": 113000,
+      "price": 1.1711,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-11-01",
+      "action": "SELL",
+      "code": "159995",
+      "shares": 113000,
+      "price": 1.1429,
+      "pnl_pct": -2.41,
+      "reason": "日内回撤(-3.6%)"
+    },
+    {
+      "date": "2024-11-01",
+      "action": "BUY",
+      "code": "515790",
+      "shares": 146900,
+      "price": 0.8781,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-11-07",
+      "action": "SELL",
+      "code": "515790",
+      "shares": 146900,
+      "price": 0.8889,
+      "pnl_pct": 1.23,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-11-07",
+      "action": "BUY",
+      "code": "159995",
+      "shares": 102300,
+      "price": 1.2731,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-11-12",
+      "action": "SELL",
+      "code": "159995",
+      "shares": 102300,
+      "price": 1.3189,
+      "pnl_pct": 3.59,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-11-12",
+      "action": "BUY",
+      "code": "563300",
+      "shares": 124100,
+      "price": 1.0831,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-11-14",
+      "action": "SELL",
+      "code": "563300",
+      "shares": 124100,
+      "price": 1.0519,
+      "pnl_pct": -2.88,
+      "reason": "日内回撤(-3.2%)"
+    },
+    {
+      "date": "2024-11-14",
+      "action": "BUY",
+      "code": "159995",
+      "shares": 102200,
+      "price": 1.2771,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-11-15",
+      "action": "SELL",
+      "code": "159995",
+      "shares": 102200,
+      "price": 1.2209,
+      "pnl_pct": -4.4,
+      "reason": "日内回撤(-4.4%)"
+    },
+    {
+      "date": "2024-11-28",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 82600,
+      "price": 1.5102,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-02",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 82600,
+      "price": 1.3999,
+      "pnl_pct": -7.3,
+      "reason": "盈利保护(-7.3%)"
+    },
+    {
+      "date": "2024-12-02",
+      "action": "BUY",
+      "code": "513400",
+      "shares": 96800,
+      "price": 1.1981,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-05",
+      "action": "SELL",
+      "code": "513400",
+      "shares": 96800,
+      "price": 1.2189,
+      "pnl_pct": 1.73,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-05",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 52700,
+      "price": 2.2332,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-06",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 52700,
+      "price": 2.2278,
+      "pnl_pct": -0.24,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-06",
+      "action": "BUY",
+      "code": "513730",
+      "shares": 82700,
+      "price": 1.4161,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-10",
+      "action": "SELL",
+      "code": "513730",
+      "shares": 82700,
+      "price": 1.4149,
+      "pnl_pct": -0.09,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-10",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 52900,
+      "price": 2.2072,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-12",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 52900,
+      "price": 2.2318,
+      "pnl_pct": 1.11,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-12",
+      "action": "BUY",
+      "code": "563300",
+      "shares": 102300,
+      "price": 1.1521,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-16",
+      "action": "SELL",
+      "code": "563300",
+      "shares": 102300,
+      "price": 1.1219,
+      "pnl_pct": -2.62,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-16",
+      "action": "BUY",
+      "code": "513500",
+      "shares": 50400,
+      "price": 2.2742,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-17",
+      "action": "SELL",
+      "code": "513500",
+      "shares": 50400,
+      "price": 2.2538,
+      "pnl_pct": -0.9,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-17",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 68200,
+      "price": 1.6632,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-18",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 68200,
+      "price": 1.6738,
+      "pnl_pct": 0.64,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-18",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 73400,
+      "price": 1.5522,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-19",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 73400,
+      "price": 1.4439,
+      "pnl_pct": -6.98,
+      "reason": "盈利保护(-7.0%)"
+    },
+    {
+      "date": "2024-12-19",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 65100,
+      "price": 1.6302,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-20",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 65100,
+      "price": 1.5968,
+      "pnl_pct": -2.04,
+      "reason": "日内回撤(-2.0%)"
+    },
+    {
+      "date": "2024-12-20",
+      "action": "BUY",
+      "code": "511010",
+      "shares": 700,
+      "price": 141.4511,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-23",
+      "action": "SELL",
+      "code": "511010",
+      "shares": 700,
+      "price": 141.3469,
+      "pnl_pct": -0.07,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-23",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 62700,
+      "price": 1.6522,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-26",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 62700,
+      "price": 1.6738,
+      "pnl_pct": 1.31,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-26",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 63400,
+      "price": 1.6512,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-27",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 63400,
+      "price": 1.5858,
+      "pnl_pct": -3.96,
+      "reason": "日内回撤(-3.9%)"
+    },
+    {
+      "date": "2024-12-27",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 61400,
+      "price": 1.6382,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-30",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 61400,
+      "price": 1.6138,
+      "pnl_pct": -1.48,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-30",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 68100,
+      "price": 1.4531,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2024-12-31",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 68100,
+      "price": 1.4199,
+      "pnl_pct": -2.29,
+      "reason": "轮动"
+    },
+    {
+      "date": "2024-12-31",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 107100,
+      "price": 0.9031,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-01-02",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 107100,
+      "price": 0.8809,
+      "pnl_pct": -2.46,
+      "reason": "日内回撤(-2.4%)"
+    },
+    {
+      "date": "2025-01-02",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 75200,
+      "price": 1.2531,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-01-09",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 75200,
+      "price": 1.2739,
+      "pnl_pct": 1.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-01-09",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 50300,
+      "price": 1.8992,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-01-13",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 50300,
+      "price": 1.7088,
+      "pnl_pct": -10.02,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2025-01-13",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 64000,
+      "price": 1.3491,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-01-21",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 64000,
+      "price": 1.3239,
+      "pnl_pct": -1.87,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-01-21",
+      "action": "BUY",
+      "code": "159529",
+      "shares": 44400,
+      "price": 1.9062,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-01-27",
+      "action": "SELL",
+      "code": "159529",
+      "shares": 44400,
+      "price": 1.7538,
+      "pnl_pct": -7.99,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2025-01-27",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 47100,
+      "price": 1.6542,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-05",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 47100,
+      "price": 1.6288,
+      "pnl_pct": -1.53,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-02-05",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 38600,
+      "price": 1.9882,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-11",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 38600,
+      "price": 1.9648,
+      "pnl_pct": -1.18,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-02-11",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 63200,
+      "price": 1.1981,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-13",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 63200,
+      "price": 1.1769,
+      "pnl_pct": -1.77,
+      "reason": "日内回撤(-2.6%)"
+    },
+    {
+      "date": "2025-02-13",
+      "action": "BUY",
+      "code": "159732",
+      "shares": 84300,
+      "price": 0.8821,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-14",
+      "action": "SELL",
+      "code": "159732",
+      "shares": 84300,
+      "price": 0.8879,
+      "pnl_pct": 0.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-02-14",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 63000,
+      "price": 1.1851,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-18",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 63000,
+      "price": 1.1899,
+      "pnl_pct": 0.4,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-02-18",
+      "action": "BUY",
+      "code": "159819",
+      "shares": 73700,
+      "price": 1.0151,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-25",
+      "action": "SELL",
+      "code": "159819",
+      "shares": 73700,
+      "price": 1.0799,
+      "pnl_pct": 6.38,
+      "reason": "日内回撤(-2.3%)"
+    },
+    {
+      "date": "2025-02-25",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 59900,
+      "price": 1.3211,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-26",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 59900,
+      "price": 1.3499,
+      "pnl_pct": 2.17,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-02-26",
+      "action": "BUY",
+      "code": "159819",
+      "shares": 73900,
+      "price": 1.0921,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-27",
+      "action": "SELL",
+      "code": "159819",
+      "shares": 73900,
+      "price": 1.0689,
+      "pnl_pct": -2.13,
+      "reason": "日内回撤(-2.1%)"
+    },
+    {
+      "date": "2025-02-27",
+      "action": "BUY",
+      "code": "159559",
+      "shares": 58600,
+      "price": 1.3451,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "SELL",
+      "code": "159559",
+      "shares": 58600,
+      "price": 1.2539,
+      "pnl_pct": -6.78,
+      "reason": "盈利保护(-6.8%)"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "BUY",
+      "code": "588080",
+      "shares": 66700,
+      "price": 1.1041,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-03",
+      "action": "SELL",
+      "code": "588080",
+      "shares": 66700,
+      "price": 1.0879,
+      "pnl_pct": -1.47,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-03",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 35500,
+      "price": 2.0402,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-05",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 35500,
+      "price": 1.9548,
+      "pnl_pct": -4.19,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-05",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 74900,
+      "price": 0.9271,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-06",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 74900,
+      "price": 0.9369,
+      "pnl_pct": 1.06,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-12",
+      "action": "BUY",
+      "code": "159667",
+      "shares": 58000,
+      "price": 1.2071,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-13",
+      "action": "SELL",
+      "code": "159667",
+      "shares": 58000,
+      "price": 1.1599,
+      "pnl_pct": -3.91,
+      "reason": "日内回撤(-3.9%)"
+    },
+    {
+      "date": "2025-03-13",
+      "action": "BUY",
+      "code": "563300",
+      "shares": 59700,
+      "price": 1.1281,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-14",
+      "action": "SELL",
+      "code": "563300",
+      "shares": 59700,
+      "price": 1.1469,
+      "pnl_pct": 1.66,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-14",
+      "action": "BUY",
+      "code": "512660",
+      "shares": 62300,
+      "price": 1.0951,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-19",
+      "action": "SELL",
+      "code": "512660",
+      "shares": 62300,
+      "price": 1.0759,
+      "pnl_pct": -1.75,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-19",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 60300,
+      "price": 1.1101,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-21",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 60300,
+      "price": 1.0809,
+      "pnl_pct": -2.63,
+      "reason": "日内回撤(-2.6%)"
+    },
+    {
+      "date": "2025-03-21",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 37500,
+      "price": 1.7362,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-24",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 37500,
+      "price": 1.7558,
+      "pnl_pct": 1.13,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-24",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 59700,
+      "price": 1.1021,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-26",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 59700,
+      "price": 1.0969,
+      "pnl_pct": -0.47,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-26",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 36400,
+      "price": 1.7952,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 36400,
+      "price": 1.7618,
+      "pnl_pct": -1.86,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "BUY",
+      "code": "159980",
+      "shares": 36400,
+      "price": 1.7572,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-03-28",
+      "action": "SELL",
+      "code": "159980",
+      "shares": 36400,
+      "price": 1.7408,
+      "pnl_pct": -0.93,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-03-28",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 9100,
+      "price": 6.9387,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 9100,
+      "price": 6.8763,
+      "pnl_pct": -0.9,
+      "reason": "日内回撤(-3.1%)"
+    },
+    {
+      "date": "2025-04-10",
+      "action": "BUY",
+      "code": "511010",
+      "shares": 400,
+      "price": 141.3321,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-04-11",
+      "action": "SELL",
+      "code": "511010",
+      "shares": 400,
+      "price": 141.3509,
+      "pnl_pct": 0.01,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-04-11",
+      "action": "BUY",
+      "code": "518880",
+      "shares": 8600,
+      "price": 7.2737,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-04-23",
+      "action": "SELL",
+      "code": "518880",
+      "shares": 8600,
+      "price": 7.4992,
+      "pnl_pct": 3.1,
+      "reason": "盈利保护(-6.0%)"
+    },
+    {
+      "date": "2025-05-08",
+      "action": "BUY",
+      "code": "513030",
+      "shares": 34800,
+      "price": 1.8482,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-05-14",
+      "action": "SELL",
+      "code": "513030",
+      "shares": 34800,
+      "price": 1.8538,
+      "pnl_pct": 0.3,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-05-14",
+      "action": "BUY",
+      "code": "513730",
+      "shares": 52000,
+      "price": 1.2371,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-05-21",
+      "action": "SELL",
+      "code": "513730",
+      "shares": 52000,
+      "price": 1.2149,
+      "pnl_pct": -1.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-05-21",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 42000,
+      "price": 1.5032,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-05-23",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 42000,
+      "price": 1.4929,
+      "pnl_pct": -0.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-05-23",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 58600,
+      "price": 1.0691,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-05-27",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 58600,
+      "price": 1.0479,
+      "pnl_pct": -1.98,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-05-30",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 62700,
+      "price": 0.9791,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-03",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 62700,
+      "price": 0.9859,
+      "pnl_pct": 0.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-06-03",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 39900,
+      "price": 1.5432,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-12",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 39900,
+      "price": 1.5578,
+      "pnl_pct": 0.95,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-06-12",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 60100,
+      "price": 1.0321,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-19",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 60100,
+      "price": 1.0249,
+      "pnl_pct": -0.7,
+      "reason": "日内回撤(-2.2%)"
+    },
+    {
+      "date": "2025-06-19",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 42700,
+      "price": 1.4411,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-20",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 42700,
+      "price": 1.3399,
+      "pnl_pct": -7.03,
+      "reason": "盈利保护(-7.0%)"
+    },
+    {
+      "date": "2025-06-20",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 28800,
+      "price": 1.9892,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-23",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 28800,
+      "price": 1.9698,
+      "pnl_pct": -0.98,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-06-23",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 35700,
+      "price": 1.5872,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-06-25",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 35700,
+      "price": 1.6738,
+      "pnl_pct": 5.46,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-06-25",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 43200,
+      "price": 1.3771,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-01",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 43200,
+      "price": 1.7228,
+      "pnl_pct": 25.1,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-01",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 41500,
+      "price": 1.7732,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-04",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 41500,
+      "price": 1.7558,
+      "pnl_pct": -0.98,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-04",
+      "action": "BUY",
+      "code": "513290",
+      "shares": 61800,
+      "price": 1.1761,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-05",
+      "action": "SELL",
+      "code": "513290",
+      "shares": 61800,
+      "price": 1.1859,
+      "pnl_pct": 0.83,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-05",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 40500,
+      "price": 1.8082,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-11",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 40500,
+      "price": 1.8578,
+      "pnl_pct": 2.74,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-11",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 57400,
+      "price": 1.3051,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-12",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 57400,
+      "price": 1.2989,
+      "pnl_pct": -0.48,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-12",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 40000,
+      "price": 1.8612,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-26",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 40000,
+      "price": 2.2778,
+      "pnl_pct": 22.38,
+      "reason": "日内回撤(-2.1%)"
+    },
+    {
+      "date": "2025-08-26",
+      "action": "BUY",
+      "code": "159381",
+      "shares": 60300,
+      "price": 1.4931,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-08-27",
+      "action": "SELL",
+      "code": "159381",
+      "shares": 60300,
+      "price": 1.5168,
+      "pnl_pct": 1.59,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-08-27",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 39000,
+      "price": 2.3372,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-02",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 39000,
+      "price": 2.5477,
+      "pnl_pct": 9.01,
+      "reason": "盈利保护(-5.8%)"
+    },
+    {
+      "date": "2025-09-02",
+      "action": "BUY",
+      "code": "159381",
+      "shares": 61100,
+      "price": 1.6192,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-03",
+      "action": "SELL",
+      "code": "159381",
+      "shares": 61100,
+      "price": 1.6468,
+      "pnl_pct": 1.71,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-03",
+      "action": "BUY",
+      "code": "159995",
+      "shares": 63000,
+      "price": 1.5922,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-04",
+      "action": "SELL",
+      "code": "159995",
+      "shares": 63000,
+      "price": 1.4749,
+      "pnl_pct": -7.37,
+      "reason": "盈利保护(-7.3%)"
+    },
+    {
+      "date": "2025-09-04",
+      "action": "BUY",
+      "code": "515790",
+      "shares": 110100,
+      "price": 0.8461,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-10",
+      "action": "SELL",
+      "code": "515790",
+      "shares": 110100,
+      "price": 0.8749,
+      "pnl_pct": 3.41,
+      "reason": "日内回撤(-4.2%)"
+    },
+    {
+      "date": "2025-09-10",
+      "action": "BUY",
+      "code": "512400",
+      "shares": 64000,
+      "price": 1.5002,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-11",
+      "action": "SELL",
+      "code": "512400",
+      "shares": 64000,
+      "price": 1.5238,
+      "pnl_pct": 1.58,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-11",
+      "action": "BUY",
+      "code": "513050",
+      "shares": 60200,
+      "price": 1.6152,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-12",
+      "action": "SELL",
+      "code": "513050",
+      "shares": 60200,
+      "price": 1.6418,
+      "pnl_pct": 1.65,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-12",
+      "action": "BUY",
+      "code": "159915",
+      "shares": 32900,
+      "price": 2.9953,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-16",
+      "action": "SELL",
+      "code": "159915",
+      "shares": 32900,
+      "price": 3.0587,
+      "pnl_pct": 2.12,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-16",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 38600,
+      "price": 2.5963,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-17",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 38600,
+      "price": 2.6047,
+      "pnl_pct": 0.33,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-17",
+      "action": "BUY",
+      "code": "159915",
+      "shares": 32200,
+      "price": 3.1193,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-18",
+      "action": "SELL",
+      "code": "159915",
+      "shares": 32200,
+      "price": 3.0667,
+      "pnl_pct": -1.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-18",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 37100,
+      "price": 2.6553,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-19",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 37100,
+      "price": 2.6807,
+      "pnl_pct": 0.96,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-19",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 45900,
+      "price": 2.1652,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-26",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 45900,
+      "price": 2.2388,
+      "pnl_pct": 3.4,
+      "reason": "日内回撤(-3.1%)"
+    },
+    {
+      "date": "2025-09-26",
+      "action": "BUY",
+      "code": "513050",
+      "shares": 60200,
+      "price": 1.7012,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-09-29",
+      "action": "SELL",
+      "code": "513050",
+      "shares": 60200,
+      "price": 1.7318,
+      "pnl_pct": 1.8,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-09-29",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 45500,
+      "price": 2.2822,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-10-13",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 45500,
+      "price": 2.4018,
+      "pnl_pct": 5.24,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-10-13",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 52800,
+      "price": 2.0602,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-10-14",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 52800,
+      "price": 2.0248,
+      "pnl_pct": -1.72,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-10-14",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 78900,
+      "price": 1.3561,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-10-20",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 78900,
+      "price": 1.3669,
+      "pnl_pct": 0.79,
+      "reason": "盈利保护(-6.9%)"
+    },
+    {
+      "date": "2025-10-20",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 45100,
+      "price": 2.3852,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-10-23",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 45100,
+      "price": 2.3858,
+      "pnl_pct": 0.02,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-10-23",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 48700,
+      "price": 2.2032,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-10-28",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 48700,
+      "price": 2.2588,
+      "pnl_pct": 2.52,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-10-28",
+      "action": "BUY",
+      "code": "513520",
+      "shares": 56700,
+      "price": 1.9352,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-04",
+      "action": "SELL",
+      "code": "513520",
+      "shares": 56700,
+      "price": 1.9298,
+      "pnl_pct": -0.28,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-04",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 40700,
+      "price": 2.6843,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-05",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 40700,
+      "price": 2.5997,
+      "pnl_pct": -3.15,
+      "reason": "日内回撤(-3.1%)"
+    },
+    {
+      "date": "2025-11-07",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 53500,
+      "price": 1.9742,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-10",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 53500,
+      "price": 1.9758,
+      "pnl_pct": 0.08,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-10",
+      "action": "BUY",
+      "code": "515790",
+      "shares": 97600,
+      "price": 1.0821,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-12",
+      "action": "SELL",
+      "code": "515790",
+      "shares": 97600,
+      "price": 1.0349,
+      "pnl_pct": -4.36,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-12",
+      "action": "BUY",
+      "code": "513290",
+      "shares": 68400,
+      "price": 1.4781,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-17",
+      "action": "SELL",
+      "code": "513290",
+      "shares": 68400,
+      "price": 1.5018,
+      "pnl_pct": 1.6,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-18",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 50800,
+      "price": 2.0162,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-21",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 50800,
+      "price": 1.9768,
+      "pnl_pct": -1.95,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-24",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 50000,
+      "price": 2.0062,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-11-28",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 50000,
+      "price": 2.0238,
+      "pnl_pct": 0.88,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-11-28",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 66100,
+      "price": 1.5282,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-12-25",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 66100,
+      "price": 2.8037,
+      "pnl_pct": 83.47,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2025-12-25",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 57500,
+      "price": 3.1403,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2025-12-29",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 57500,
+      "price": 3.1127,
+      "pnl_pct": -0.88,
+      "reason": "轮动"
+    },
+    {
+      "date": "2025-12-29",
+      "action": "BUY",
+      "code": "563230",
+      "shares": 131600,
+      "price": 1.3591,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-01-13",
+      "action": "SELL",
+      "code": "563230",
+      "shares": 131600,
+      "price": 1.8198,
+      "pnl_pct": 33.9,
+      "reason": "盈利保护(-6.7%)"
+    },
+    {
+      "date": "2026-01-13",
+      "action": "BUY",
+      "code": "512660",
+      "shares": 152100,
+      "price": 1.5522,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-01-14",
+      "action": "SELL",
+      "code": "512660",
+      "shares": 152100,
+      "price": 1.5628,
+      "pnl_pct": 0.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-01-14",
+      "action": "BUY",
+      "code": "161226",
+      "shares": 79100,
+      "price": 2.9983,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-02-02",
+      "action": "SELL",
+      "code": "161226",
+      "shares": 79100,
+      "price": 4.7215,
+      "pnl_pct": 57.47,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2026-02-02",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 262000,
+      "price": 1.3971,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-02-03",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 262000,
+      "price": 1.2569,
+      "pnl_pct": -10.04,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2026-02-03",
+      "action": "BUY",
+      "code": "515790",
+      "shares": 294500,
+      "price": 1.1221,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-02-04",
+      "action": "SELL",
+      "code": "515790",
+      "shares": 294500,
+      "price": 1.1569,
+      "pnl_pct": 3.1,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-02-11",
+      "action": "BUY",
+      "code": "561380",
+      "shares": 172200,
+      "price": 1.9722,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-02-12",
+      "action": "SELL",
+      "code": "561380",
+      "shares": 172200,
+      "price": 2.0338,
+      "pnl_pct": 3.12,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-02-12",
+      "action": "BUY",
+      "code": "513690",
+      "shares": 296700,
+      "price": 1.1761,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "SELL",
+      "code": "513690",
+      "shares": 296700,
+      "price": 1.1809,
+      "pnl_pct": 0.41,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 90800,
+      "price": 3.8514,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-02",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 90800,
+      "price": 4.1026,
+      "pnl_pct": 6.52,
+      "reason": "盈利保护(-5.0%)"
+    },
+    {
+      "date": "2026-03-02",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 234100,
+      "price": 1.5832,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-04",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 234100,
+      "price": 1.6998,
+      "pnl_pct": 7.37,
+      "reason": "日内回撤(-2.4%)"
+    },
+    {
+      "date": "2026-03-04",
+      "action": "BUY",
+      "code": "159201",
+      "shares": 288500,
+      "price": 1.3721,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-05",
+      "action": "SELL",
+      "code": "159201",
+      "shares": 288500,
+      "price": 1.3859,
+      "pnl_pct": 1.0,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-03-05",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 244200,
+      "price": 1.6332,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-06",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 244200,
+      "price": 1.5788,
+      "pnl_pct": -3.33,
+      "reason": "日内回撤(-3.3%)"
+    },
+    {
+      "date": "2026-03-06",
+      "action": "BUY",
+      "code": "159201",
+      "shares": 277100,
+      "price": 1.3911,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-09",
+      "action": "SELL",
+      "code": "159201",
+      "shares": 277100,
+      "price": 1.3909,
+      "pnl_pct": -0.02,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-03-09",
+      "action": "BUY",
+      "code": "561380",
+      "shares": 170700,
+      "price": 2.2532,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-13",
+      "action": "SELL",
+      "code": "561380",
+      "shares": 170700,
+      "price": 2.1728,
+      "pnl_pct": -3.57,
+      "reason": "日内回撤(-4.4%)"
+    },
+    {
+      "date": "2026-03-13",
+      "action": "BUY",
+      "code": "159985",
+      "shares": 159800,
+      "price": 2.3212,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-16",
+      "action": "SELL",
+      "code": "159985",
+      "shares": 159800,
+      "price": 2.2618,
+      "pnl_pct": -2.56,
+      "reason": "日内回撤(-2.5%)"
+    },
+    {
+      "date": "2026-03-16",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 187100,
+      "price": 1.9302,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-18",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 187100,
+      "price": 2.0118,
+      "pnl_pct": 4.23,
+      "reason": "日内回撤(-2.8%)"
+    },
+    {
+      "date": "2026-03-18",
+      "action": "BUY",
+      "code": "159981",
+      "shares": 229500,
+      "price": 1.6342,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-19",
+      "action": "SELL",
+      "code": "159981",
+      "shares": 229500,
+      "price": 1.7008,
+      "pnl_pct": 4.08,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-03-19",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 175700,
+      "price": 2.2132,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-25",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 175700,
+      "price": 2.3018,
+      "pnl_pct": 4.0,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2026-03-27",
+      "action": "BUY",
+      "code": "159967",
+      "shares": 622600,
+      "price": 0.6471,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-03-30",
+      "action": "SELL",
+      "code": "159967",
+      "shares": 622600,
+      "price": 0.6439,
+      "pnl_pct": -0.48,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-03-31",
+      "action": "BUY",
+      "code": "501018",
+      "shares": 172500,
+      "price": 2.3192,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-04-01",
+      "action": "SELL",
+      "code": "501018",
+      "shares": 172500,
+      "price": 2.0868,
+      "pnl_pct": -10.02,
+      "reason": "盈利保护(-10.0%)"
+    },
+    {
+      "date": "2026-04-08",
+      "action": "BUY",
+      "code": "511220",
+      "shares": 35000,
+      "price": 10.324,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-04-13",
+      "action": "SELL",
+      "code": "511220",
+      "shares": 35000,
+      "price": 10.327,
+      "pnl_pct": 0.03,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-04-13",
+      "action": "BUY",
+      "code": "515880",
+      "shares": 296700,
+      "price": 1.2161,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-04-24",
+      "action": "SELL",
+      "code": "515880",
+      "shares": 296700,
+      "price": 1.3389,
+      "pnl_pct": 10.09,
+      "reason": "盈利保护(-5.2%)"
+    },
+    {
+      "date": "2026-04-24",
+      "action": "BUY",
+      "code": "159967",
+      "shares": 508000,
+      "price": 0.7771,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-04-28",
+      "action": "SELL",
+      "code": "159967",
+      "shares": 508000,
+      "price": 0.7639,
+      "pnl_pct": -1.69,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-04-28",
+      "action": "BUY",
+      "code": "512220",
+      "shares": 112600,
+      "price": 3.4403,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-04-29",
+      "action": "SELL",
+      "code": "512220",
+      "shares": 112600,
+      "price": 3.4577,
+      "pnl_pct": 0.5,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-04-29",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 164100,
+      "price": 2.3682,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-06",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 164100,
+      "price": 2.5417,
+      "pnl_pct": 7.33,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-06",
+      "action": "BUY",
+      "code": "512220",
+      "shares": 113700,
+      "price": 3.6494,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-11",
+      "action": "SELL",
+      "code": "512220",
+      "shares": 113700,
+      "price": 3.8806,
+      "pnl_pct": 6.34,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-11",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 77900,
+      "price": 5.6346,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-18",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 77900,
+      "price": 5.6614,
+      "pnl_pct": 0.48,
+      "reason": "盈利保护(-9.2%)"
+    },
+    {
+      "date": "2026-05-18",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 213100,
+      "price": 2.0662,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-19",
+      "action": "SELL",
+      "code": "513100",
+      "shares": 213100,
+      "price": 2.0468,
+      "pnl_pct": -0.94,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-19",
+      "action": "BUY",
+      "code": "511010",
+      "shares": 3000,
+      "price": 141.2611,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-26",
+      "action": "SELL",
+      "code": "511010",
+      "shares": 3000,
+      "price": 141.2159,
+      "pnl_pct": -0.03,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-26",
+      "action": "BUY",
+      "code": "159509",
+      "shares": 163300,
+      "price": 2.6613,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-28",
+      "action": "SELL",
+      "code": "159509",
+      "shares": 163300,
+      "price": 2.6717,
+      "pnl_pct": 0.39,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-28",
+      "action": "BUY",
+      "code": "513310",
+      "shares": 71700,
+      "price": 6.0706,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    },
+    {
+      "date": "2026-05-29",
+      "action": "SELL",
+      "code": "513310",
+      "shares": 71700,
+      "price": 5.9784,
+      "pnl_pct": -1.52,
+      "reason": "轮动"
+    },
+    {
+      "date": "2026-05-29",
+      "action": "BUY",
+      "code": "513100",
+      "shares": 188400,
+      "price": 2.2732,
+      "pnl_pct": 0,
+      "reason": "175动量"
+    }
+  ]
+}

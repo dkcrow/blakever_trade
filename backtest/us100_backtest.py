@@ -23,23 +23,28 @@ START_DATE = '2023-06-01'
 END_DATE = '2026-04-23'  # 本地数据最新日期
 
 # 七星美股版最优池 (35只, 8类 — 无防御板块)
+# 精简27+SPCX (2026-06-16: +SPCX SpaceX)
 POOL_SYMBOLS = [
-    # 大科技/半导体 (10)
-    'NVDA','AVGO','AMD','MU','LRCX','AMAT','ARM','AAPL','TSM','LITE',
-    # 互联网/平台 (4)
-    'META','AMZN','NFLX','GOOGL',
-    # 软件/SaaS (5)
-    'MSFT','CRM','NOW','CRWD','ORCL',
-    # AI/数据 (3)
-    'PLTR','DDOG','SNPS',
-    # 能源 (5)
-    'XOM','CVX','COP','EOG','OKE',
-    # 材料/矿业 (3)
-    'NEM','FCX','LIN',
-    # 工业/基建 (3)
+    # 半导体 (7)
+    'NVDA','AVGO','AMD','MU','LRCX','ARM','LITE',
+    # 互联网/平台 (2)
+    'NFLX','GOOGL',
+    # 软件/SaaS (3)
+    'NOW','CRWD','ORCL',
+    # AI/数据 (2)
+    'DDOG','SNPS',
+    # 网络安全 (3)
+    'PANW','ZS','NET',
+    # 能源 (2)
+    'EOG','OKE',
+    # 材料/矿业 (2)
+    'NEM','FCX',
+    # 工业/国防 (3)
     'CAT','GE','RTX',
-    # REITs (2)
-    'PLD','AMT',
+    # REITs (1)
+    'AMT',
+    # 新赛道 (3)
+    'IONQ','RKLB','SPCX',
 ]
 
 PARAMS = {
@@ -104,10 +109,11 @@ print(f"  交易日: {len(trade_dates)} 天")
 # Step 3: 回测引擎
 # ============================================================
 class USPortfolio:
-    def __init__(self, cash=10000, comm_per_share=0.005):
+    def __init__(self, cash=10000, comm_per_share=0.005, slippage=0.0005):
         self.initial_cash = cash
         self.cash = cash
         self.comm = comm_per_share
+        self.slippage = slippage  # 滑点: 0.05% 买卖价差
         self.positions = {}
         self.trade_log = []
         self.daily_values = []
@@ -124,6 +130,7 @@ class USPortfolio:
                 self.positions[c]['last_price'] = p
     
     def buy(self, code, shares, price, date, reason=''):
+        price = price * (1 + self.slippage)  # 买入滑点: 实际成交价略高于收盘价
         tv = shares * price
         comm = shares * self.comm
         total = tv + comm
@@ -154,6 +161,7 @@ class USPortfolio:
     def sell(self, code, shares, price, date, reason=''):
         if code not in self.positions:
             return False
+        price = price * (1 - self.slippage)  # 卖出滑点: 实际成交价略低于收盘价
         pos = self.positions[code]
         actual = min(shares, pos['shares'])
         if actual <= 0:
@@ -218,12 +226,14 @@ def check_pp(code, cp, df, date, params):
 
 
 def get_ranked(all_data, prices, date, params):
+    """动量排名：仅使用 date 之前（不含当日）的收盘数据，次日收盘调仓"""
     ranked = []
     lb = params['lookback_days']
     for code, df in all_data.items():
         if code not in prices:
             continue
-        mask = df.index <= pd.Timestamp(date)
+        # 修复: < date (排除当日收盘价) — 用前一日数据计算动量，当日收盘价交易
+        mask = df.index < pd.Timestamp(date)
         hist = df[mask]
         if len(hist) < lb + 10:
             continue
@@ -448,8 +458,8 @@ td{{padding:6px 8px;border-bottom:1px solid #eee;}}
 <h1>{STRATEGY_NAME} · 回测报告</h1>
 <div class="subtitle">{now_str} | {results['backtest_period']} ({results['trading_days']}天)</div>
 <div class="config-box">
-    <b>策略:</b> 七星美股版 | <b>成分股:</b> Nasdaq100 ({len(all_data)}只有效) | <b>周期:</b> 25日 | <b>佣金:</b> $0.005/股<br>
-    <b>过滤:</b> 盈利保护(开·回撤>5%) | 成交量(关) | 短期动量(关)
+    <b>策略:</b> 七星美股版 | <b>成分股:</b> Nasdaq100 ({len(all_data)}只有效) | <b>周期:</b> 25日 | <b>佣金:</b> $0.005/股 | <b>滑点:</b> 0.05%<br>
+    <b>过滤:</b> 盈利保护(开·回撤>5%) | 成交量(关) | 短期动量(关) | 动量计算排除当日收盘价(防未来函数)
     | 评分公式: exp(slope x 250) x R² (与七星172/QMT完全一致)
 </div>
 <div class="card"><h3 style="font-size:15px;color:#1F4E79;margin:0 0 12px;">回测绩效 (USD)</h3>

@@ -1,0 +1,7697 @@
+{
+  "stats": {
+    "total_return": 735.46,
+    "annual_return": 115.1,
+    "max_drawdown": -23.5,
+    "sharpe": 2.27,
+    "total_trades": 904,
+    "win_rate": 55.5,
+    "start": "2023-06-01",
+    "end": "2026-06-10",
+    "trading_days": 759,
+    "pool_size": 27
+  },
+  "trades": [
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1196,
+      "price": 11.3457,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 100,
+      "price": 135.1575,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 142,
+      "price": 95.0375,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 113,
+      "price": 119.5297,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 86,
+      "price": 157.6288,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 341,
+      "price": 39.7459,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-01",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2839,
+      "price": 4.7824,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-02",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2839,
+      "price": 4.9275,
+      "pnl_pct": 3.03,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-02",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 188,
+      "price": 72.036,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-07",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 86,
+      "price": 149.1554,
+      "pnl_pct": -5.38,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-07",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 174,
+      "price": 76.2081,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-08",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 142,
+      "price": 95.972,
+      "pnl_pct": 0.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-08",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 125,
+      "price": 107.1235,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-12",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 125,
+      "price": 109.2154,
+      "pnl_pct": 1.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-12",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2601,
+      "price": 5.3627,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-13",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2601,
+      "price": 6.0969,
+      "pnl_pct": 13.69,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-13",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 327,
+      "price": 43.5948,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-16",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 113,
+      "price": 120.02,
+      "pnl_pct": 0.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-16",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2431,
+      "price": 5.8329,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-20",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1196,
+      "price": 9.7051,
+      "pnl_pct": -14.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-20",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 116,
+      "price": 120.8604,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-22",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 188,
+      "price": 65.5172,
+      "pnl_pct": -9.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-22",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 118,
+      "price": 116.4582,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-27",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 100,
+      "price": 144.5877,
+      "pnl_pct": 6.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-27",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 352,
+      "price": 38.6293,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-29",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 174,
+      "price": 83.2911,
+      "pnl_pct": 9.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-29",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 58,
+      "price": 234.0069,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-06-30",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 341,
+      "price": 42.2389,
+      "pnl_pct": 6.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-06-30",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 246,
+      "price": 56.7584,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-05",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 246,
+      "price": 54.5927,
+      "pnl_pct": -3.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-05",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 918,
+      "price": 15.0775,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-07",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 352,
+      "price": 36.8216,
+      "pnl_pct": -4.68,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-07",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 317,
+      "price": 42.4822,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-10",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 118,
+      "price": 110.3648,
+      "pnl_pct": -5.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-10",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 160,
+      "price": 84.8397,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-14",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 327,
+      "price": 44.1689,
+      "pnl_pct": 1.32,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-14",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 160,
+      "price": 85.8026,
+      "pnl_pct": 1.13,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-14",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 130,
+      "price": 108.5843,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-14",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 163,
+      "price": 86.6733,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-17",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 116,
+      "price": 124.9625,
+      "pnl_pct": 3.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-17",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 261,
+      "price": 55.0175,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-19",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 317,
+      "price": 47.0065,
+      "pnl_pct": 10.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-19",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 135,
+      "price": 110.9755,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-26",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 163,
+      "price": 90.0749,
+      "pnl_pct": 3.92,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-26",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 449.5547,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-07-28",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 450.6745,
+      "pnl_pct": 0.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-07-28",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 325,
+      "price": 46.7264,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-02",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 58,
+      "price": 276.6016,
+      "pnl_pct": 18.2,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-02",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 374,
+      "price": 40.9405,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-03",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 325,
+      "price": 44.4488,
+      "pnl_pct": -4.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-03",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 56,
+      "price": 270.9854,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-04",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 261,
+      "price": 57.3713,
+      "pnl_pct": 4.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-04",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 219,
+      "price": 69.1826,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-07",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 130,
+      "price": 106.2469,
+      "pnl_pct": -2.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-07",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 259,
+      "price": 57.3787,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-08",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 259,
+      "price": 56.4018,
+      "pnl_pct": -1.7,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-08",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 215,
+      "price": 67.8357,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-09",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2431,
+      "price": 7.4863,
+      "pnl_pct": 28.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-09",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 115,
+      "price": 128.6653,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-15",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 374,
+      "price": 38.1809,
+      "pnl_pct": -6.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-15",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 163,
+      "price": 89.4747,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-16",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 219,
+      "price": 63.4883,
+      "pnl_pct": -8.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-16",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 428.4241,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-17",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 918,
+      "price": 14.013,
+      "pnl_pct": -7.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-17",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 127,
+      "price": 111.3456,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-18",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 215,
+      "price": 63.5753,
+      "pnl_pct": -6.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-18",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 163,
+      "price": 87.7661,
+      "pnl_pct": -1.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-18",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 130,
+      "price": 108.3541,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-18",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 177,
+      "price": 79.8241,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-22",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 127,
+      "price": 112.8436,
+      "pnl_pct": 1.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-22",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 89,
+      "price": 159.7899,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-25",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 135,
+      "price": 115.0624,
+      "pnl_pct": 3.68,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-25",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 251,
+      "price": 57.1586,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 56,
+      "price": 264.3078,
+      "pnl_pct": -2.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 115,
+      "price": 129.875,
+      "pnl_pct": 0.94,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 394,
+      "price": 36.6483,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-28",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 141,
+      "price": 102.6613,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-29",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 451.3442,
+      "pnl_pct": 5.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-29",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 130,
+      "price": 115.7121,
+      "pnl_pct": 6.79,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-29",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 162,
+      "price": 90.6453,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-29",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 223,
+      "price": 65.9862,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-30",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 162,
+      "price": 89.7551,
+      "pnl_pct": -0.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-30",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 127,
+      "price": 115.8079,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-08-31",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 177,
+      "price": 89.1156,
+      "pnl_pct": 11.64,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-08-31",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 217,
+      "price": 68.4595,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-01",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 223,
+      "price": 69.5879,
+      "pnl_pct": 5.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-01",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 217,
+      "price": 68.3482,
+      "pnl_pct": -0.16,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-01",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 309,
+      "price": 48.4852,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-01",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 127,
+      "price": 117.2086,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-05",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 251,
+      "price": 57.7311,
+      "pnl_pct": 1.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-05",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 111,
+      "price": 134.7283,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 394,
+      "price": 36.4818,
+      "pnl_pct": -0.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 141,
+      "price": 109.2254,
+      "pnl_pct": 6.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 127,
+      "price": 120.5297,
+      "pnl_pct": 4.08,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 124,
+      "price": 119.7599,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 32,
+      "price": 465.9228,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-06",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 121,
+      "price": 122.6663,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-07",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 89,
+      "price": 165.8171,
+      "pnl_pct": 3.77,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-07",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 92,
+      "price": 161.1005,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-11",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 111,
+      "price": 135.7331,
+      "pnl_pct": 0.75,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-11",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 87,
+      "price": 172.3761,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-12",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 309,
+      "price": 44.8076,
+      "pnl_pct": -7.59,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-12",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 674,
+      "price": 21.6108,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-13",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 127,
+      "price": 108.2858,
+      "pnl_pct": -7.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-13",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 148,
+      "price": 97.5287,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-15",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 124,
+      "price": 115.862,
+      "pnl_pct": -3.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-15",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 202,
+      "price": 69.1529,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-19",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 148,
+      "price": 92.8436,
+      "pnl_pct": -4.8,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-19",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 101,
+      "price": 136.9805,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-22",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 121,
+      "price": 114.1979,
+      "pnl_pct": -6.9,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-22",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 344,
+      "price": 38.6393,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-25",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 674,
+      "price": 13.6432,
+      "pnl_pct": -36.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-25",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 225,
+      "price": 58.5593,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-26",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 101,
+      "price": 127.4562,
+      "pnl_pct": -6.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-26",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 163,
+      "price": 79.3211,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-27",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 32,
+      "price": 446.4866,
+      "pnl_pct": -4.17,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-27",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 216,
+      "price": 60.0166,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-28",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 92,
+      "price": 150.8445,
+      "pnl_pct": -6.37,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-28",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 88,
+      "price": 147.5938,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 202,
+      "price": 67.2548,
+      "pnl_pct": -2.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 344,
+      "price": 35.0125,
+      "pnl_pct": -9.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 225,
+      "price": 55.7721,
+      "pnl_pct": -4.76,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 366,
+      "price": 35.6578,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 127,
+      "price": 102.8714,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-09-29",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 199,
+      "price": 65.6128,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-02",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 127,
+      "price": 103.2184,
+      "pnl_pct": 0.34,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-02",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 199,
+      "price": 63.7481,
+      "pnl_pct": -2.84,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-02",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 49,
+      "price": 261.6207,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-02",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 117,
+      "price": 111.1055,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-03",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 216,
+      "price": 60.3659,
+      "pnl_pct": 0.58,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-03",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 150,
+      "price": 84.7524,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-04",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 87,
+      "price": 163.968,
+      "pnl_pct": -4.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-04",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 88,
+      "price": 143.2284,
+      "pnl_pct": -2.96,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-04",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 95,
+      "price": 134.2021,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-04",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 107,
+      "price": 118.2791,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-05",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 366,
+      "price": 33.7031,
+      "pnl_pct": -5.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-05",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 185,
+      "price": 68.3315,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-06",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 95,
+      "price": 136.3878,
+      "pnl_pct": 1.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-06",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 118,
+      "price": 109.3747,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-09",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 107,
+      "price": 126.3268,
+      "pnl_pct": 6.8,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-09",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 214,
+      "price": 61.3628,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-11",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 163,
+      "price": 84.9088,
+      "pnl_pct": 7.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-11",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 374,
+      "price": 35.5177,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-12",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 185,
+      "price": 69.0703,
+      "pnl_pct": 1.08,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-12",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 214,
+      "price": 63.9647,
+      "pnl_pct": 4.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-12",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 26,
+      "price": 496.4781,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-12",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 70,
+      "price": 187.6538,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-13",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 118,
+      "price": 121.1894,
+      "pnl_pct": 10.8,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-13",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 189,
+      "price": 69.5548,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-16",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 374,
+      "price": 34.3328,
+      "pnl_pct": -3.34,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-16",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 76,
+      "price": 172.2961,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 117,
+      "price": 113.6332,
+      "pnl_pct": 2.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 150,
+      "price": 86.4468,
+      "pnl_pct": 2.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 189,
+      "price": 70.0949,
+      "pnl_pct": 0.78,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 101,
+      "price": 130.9354,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 303,
+      "price": 43.9209,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-17",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 155,
+      "price": 85.95,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-18",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 49,
+      "price": 249.3353,
+      "pnl_pct": -4.7,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-18",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 128,
+      "price": 102.2211,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-20",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 303,
+      "price": 41.3293,
+      "pnl_pct": -5.9,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-20",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 202,
+      "price": 62.6513,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-24",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 128,
+      "price": 101.6192,
+      "pnl_pct": -0.59,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-24",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 202,
+      "price": 61.2394,
+      "pnl_pct": -2.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-24",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 108,
+      "price": 118.5092,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-24",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 92,
+      "price": 137.7448,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-26",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 92,
+      "price": 121.2204,
+      "pnl_pct": -12.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-26",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 160,
+      "price": 75.1576,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-27",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 26,
+      "price": 456.7715,
+      "pnl_pct": -8.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-27",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 210,
+      "price": 57.5888,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 76,
+      "price": 158.6107,
+      "pnl_pct": -7.94,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 101,
+      "price": 121.4492,
+      "pnl_pct": -7.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 155,
+      "price": 81.6864,
+      "pnl_pct": -4.96,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 75,
+      "price": 163.6618,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 298,
+      "price": 41.1896,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-10-31",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 346,
+      "price": 35.5378,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-02",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 108,
+      "price": 117.2114,
+      "pnl_pct": -1.1,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-02",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 375,
+      "price": 33.5268,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-03",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 70,
+      "price": 188.1459,
+      "pnl_pct": 0.26,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-03",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 346,
+      "price": 36.9715,
+      "pnl_pct": 4.03,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-03",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 109,
+      "price": 116.8884,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-03",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 105,
+      "price": 121.4107,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-07",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 109,
+      "price": 111.7341,
+      "pnl_pct": -4.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-07",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 123,
+      "price": 102.2511,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-08",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 210,
+      "price": 56.7716,
+      "pnl_pct": -1.42,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-08",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 123,
+      "price": 99.94,
+      "pnl_pct": -2.26,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-08",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 95,
+      "price": 130.8284,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-08",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 55,
+      "price": 227.2536,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-09",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 55,
+      "price": 226.3768,
+      "pnl_pct": -0.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-09",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 102,
+      "price": 121.3556,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 95,
+      "price": 130.9455,
+      "pnl_pct": 0.09,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 102,
+      "price": 127.7561,
+      "pnl_pct": 5.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 170,
+      "price": 74.1253,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-13",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 218,
+      "price": 57.7489,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-14",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 375,
+      "price": 33.6532,
+      "pnl_pct": 0.38,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-14",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 107,
+      "price": 119.9399,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-15",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 218,
+      "price": 58.9905,
+      "pnl_pct": 2.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-15",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 118,
+      "price": 109.4947,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-20",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 160,
+      "price": 75.6522,
+      "pnl_pct": 0.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-20",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 262,
+      "price": 50.3892,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-22",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 170,
+      "price": 76.3486,
+      "pnl_pct": 3.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-22",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 187,
+      "price": 70.1387,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-24",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 298,
+      "price": 47.932,
+      "pnl_pct": 16.37,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-24",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 178,
+      "price": 73.8769,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-27",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 262,
+      "price": 48.1749,
+      "pnl_pct": -4.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-27",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 68,
+      "price": 192.006,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-28",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 75,
+      "price": 186.4567,
+      "pnl_pct": 13.93,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-28",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 62,
+      "price": 212.4562,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-11-30",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 105,
+      "price": 137.0814,
+      "pnl_pct": 12.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-11-30",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 222,
+      "price": 61.5307,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-04",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 107,
+      "price": 118.5107,
+      "pnl_pct": -1.19,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-04",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 970,
+      "price": 14.097,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-06",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 187,
+      "price": 67.8624,
+      "pnl_pct": -3.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-06",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 94,
+      "price": 143.6718,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-08",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 970,
+      "price": 13.7831,
+      "pnl_pct": -2.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-08",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 72,
+      "price": 189.6148,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-13",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 118,
+      "price": 117.1714,
+      "pnl_pct": 7.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-13",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 72,
+      "price": 193.6331,
+      "pnl_pct": 2.12,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-13",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 370,
+      "price": 38.3191,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-13",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 99,
+      "price": 143.2016,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-15",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 99,
+      "price": 139.5802,
+      "pnl_pct": -2.53,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-15",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 74,
+      "price": 194.8474,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-18",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 74,
+      "price": 193.3133,
+      "pnl_pct": -0.79,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-18",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 963,
+      "price": 15.0375,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-19",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 963,
+      "price": 15.2224,
+      "pnl_pct": 1.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-19",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 104,
+      "price": 140.2201,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-20",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 370,
+      "price": 39.3503,
+      "pnl_pct": 2.69,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-20",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 51,
+      "price": 280.3701,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-26",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 178,
+      "price": 85.907,
+      "pnl_pct": 16.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-26",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 274,
+      "price": 53.5368,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-27",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 94,
+      "price": 148.6756,
+      "pnl_pct": 3.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-27",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 134,
+      "price": 109.9496,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2023-12-29",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 68,
+      "price": 221.4492,
+      "pnl_pct": 15.33,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2023-12-29",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2537,
+      "price": 5.7829,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-02",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 62,
+      "price": 246.7666,
+      "pnl_pct": 16.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-02",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 347,
+      "price": 40.6103,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-08",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 222,
+      "price": 72.8036,
+      "pnl_pct": 18.32,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-08",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 169,
+      "price": 84.3191,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-10",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 134,
+      "price": 105.3921,
+      "pnl_pct": -4.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-10",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 201,
+      "price": 70.8054,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-11",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 201,
+      "price": 69.7351,
+      "pnl_pct": -1.51,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-11",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 138,
+      "price": 102.1711,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-12",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 169,
+      "price": 81.6963,
+      "pnl_pct": -3.11,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-12",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 257,
+      "price": 54.6933,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-16",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 347,
+      "price": 37.5312,
+      "pnl_pct": -7.58,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-16",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 173,
+      "price": 81.7909,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-17",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 51,
+      "price": 269.3752,
+      "pnl_pct": -3.92,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-17",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 50,
+      "price": 276.4081,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-18",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2537,
+      "price": 5.0475,
+      "pnl_pct": -12.72,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-18",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 99,
+      "price": 142.3792,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-19",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 274,
+      "price": 53.7731,
+      "pnl_pct": 0.44,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-19",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 233,
+      "price": 62.5513,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-22",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 233,
+      "price": 61.899,
+      "pnl_pct": -1.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-22",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 84,
+      "price": 172.9114,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-24",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 138,
+      "price": 102.1489,
+      "pnl_pct": -0.02,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-24",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 97,
+      "price": 152.7563,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-29",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 99,
+      "price": 152.1799,
+      "pnl_pct": 6.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-29",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 61,
+      "price": 245.1725,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-30",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 173,
+      "price": 86.5767,
+      "pnl_pct": 5.85,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-30",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 134,
+      "price": 111.4857,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-01-31",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 134,
+      "price": 108.9755,
+      "pnl_pct": -2.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-01-31",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 258,
+      "price": 56.4392,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-01",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 61,
+      "price": 237.941,
+      "pnl_pct": -2.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-01",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 131,
+      "price": 112.8164,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-02",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 131,
+      "price": 112.9635,
+      "pnl_pct": 0.13,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-02",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 126,
+      "price": 119.5341,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-09",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 97,
+      "price": 162.5087,
+      "pnl_pct": 6.38,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-09",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 176,
+      "price": 89.3587,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-13",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 104,
+      "price": 171.4542,
+      "pnl_pct": 22.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-13",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 129,
+      "price": 120.04,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-15",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 84,
+      "price": 183.3483,
+      "pnl_pct": 6.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-15",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 126,
+      "price": 123.3871,
+      "pnl_pct": 3.22,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-15",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 153,
+      "price": 104.5523,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-15",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 51,
+      "price": 314.097,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-21",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 51,
+      "price": 308.0259,
+      "pnl_pct": -1.93,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-21",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 128,
+      "price": 117.3086,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-22",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 50,
+      "price": 310.7545,
+      "pnl_pct": 12.43,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-22",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 50,
+      "price": 313.1465,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-02-28",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 258,
+      "price": 59.6182,
+      "pnl_pct": 5.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-02-28",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 238,
+      "price": 67.3737,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-04",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 50,
+      "price": 328.9155,
+      "pnl_pct": 5.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-04",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 122,
+      "price": 136.9046,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-07",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 122,
+      "price": 137.2311,
+      "pnl_pct": 0.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-07",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 81,
+      "price": 211.4857,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-08",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 153,
+      "price": 103.968,
+      "pnl_pct": -0.56,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-08",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 131,
+      "price": 127.7722,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-11",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 131,
+      "price": 126.123,
+      "pnl_pct": -1.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-11",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 175,
+      "price": 93.8081,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-14",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 176,
+      "price": 90.8453,
+      "pnl_pct": 1.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-14",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 267,
+      "price": 61.3316,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-15",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 129,
+      "price": 126.9065,
+      "pnl_pct": 5.72,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-15",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 48,
+      "price": 337.3386,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-18",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 267,
+      "price": 61.8081,
+      "pnl_pct": 0.78,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-18",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 144,
+      "price": 115.0475,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-19",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 144,
+      "price": 115.922,
+      "pnl_pct": 0.76,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-19",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 386,
+      "price": 43.0015,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-03-20",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 81,
+      "price": 179.6401,
+      "pnl_pct": -15.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-21",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 238,
+      "price": 71.924,
+      "pnl_pct": 6.75,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-03-21",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 137,
+      "price": 125.983,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-02",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 48,
+      "price": 354.3427,
+      "pnl_pct": 5.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-02",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 141,
+      "price": 123.1115,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-03",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 257,
+      "price": 88.8486,
+      "pnl_pct": 62.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-03",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 116,
+      "price": 153.7308,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-03",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 48,
+      "price": 365.3626,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-05",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 137,
+      "price": 121.849,
+      "pnl_pct": -3.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-05",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 182,
+      "price": 97.9089,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-11",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 48,
+      "price": 361.2893,
+      "pnl_pct": -1.11,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-11",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 481,
+      "price": 37.7189,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-24",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 175,
+      "price": 110.9459,
+      "pnl_pct": 18.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-24",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 156,
+      "price": 112.9965,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-04-30",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 156,
+      "price": 111.3243,
+      "pnl_pct": -1.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-04-30",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 142,
+      "price": 125.5627,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-01",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 142,
+      "price": 126.3568,
+      "pnl_pct": 0.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-01",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 123,
+      "price": 143.7418,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-02",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 141,
+      "price": 123.4083,
+      "pnl_pct": 0.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-02",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 159,
+      "price": 112.6263,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-03",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 386,
+      "price": 49.2254,
+      "pnl_pct": 14.47,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-03",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 55,
+      "price": 328.5842,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-09",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 55,
+      "price": 342.9085,
+      "pnl_pct": 4.36,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-09",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 151,
+      "price": 122.3712,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-10",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 159,
+      "price": 114.1829,
+      "pnl_pct": 1.38,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-10",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 151,
+      "price": 121.8191,
+      "pnl_pct": -0.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-10",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 4395,
+      "price": 4.2021,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-10",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1983,
+      "price": 9.3147,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-16",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 128,
+      "price": 159.1204,
+      "pnl_pct": 35.64,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-16",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 102,
+      "price": 182.091,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-17",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 182,
+      "price": 100.8096,
+      "pnl_pct": 2.96,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-17",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 54,
+      "price": 346.103,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-21",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 481,
+      "price": 42.4788,
+      "pnl_pct": 12.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-21",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 197,
+      "price": 95.3577,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-22",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 116,
+      "price": 174.8515,
+      "pnl_pct": 13.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-22",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 123,
+      "price": 154.2128,
+      "pnl_pct": 7.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-22",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 148,
+      "price": 125.4631,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-22",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 166,
+      "price": 112.4862,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-23",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1983,
+      "price": 8.7356,
+      "pnl_pct": -6.22,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-23",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 108,
+      "price": 172.2181,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-24",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 108,
+      "price": 173.4732,
+      "pnl_pct": 0.73,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-24",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 292,
+      "price": 64.7073,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-05-29",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 102,
+      "price": 172.9335,
+      "pnl_pct": -5.03,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-05-29",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 580.5001,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-04",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 54,
+      "price": 305.4272,
+      "pnl_pct": -11.75,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-04",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 33,
+      "price": 561.4491,
+      "pnl_pct": -3.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-04",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 118,
+      "price": 160.07,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-04",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 101,
+      "price": 187.1935,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-06",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 4395,
+      "price": 4.4378,
+      "pnl_pct": 5.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-06",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 187,
+      "price": 104.7824,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-12",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 118,
+      "price": 160.1599,
+      "pnl_pct": 0.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-12",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 197,
+      "price": 101.9339,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-14",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 101,
+      "price": 185.3773,
+      "pnl_pct": -0.97,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-14",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 187,
+      "price": 100.8595,
+      "pnl_pct": -3.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-14",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 151,
+      "price": 135.3276,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-21",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 292,
+      "price": 68.5777,
+      "pnl_pct": 5.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-21",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 125,
+      "price": 162.624,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-06-28",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 148,
+      "price": 130.5485,
+      "pnl_pct": 4.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-06-28",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 52,
+      "price": 383.3816,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-02",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 197,
+      "price": 122.5227,
+      "pnl_pct": 28.49,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-02",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 378,
+      "price": 53.967,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-02",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 239,
+      "price": 85.2226,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-05",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 197,
+      "price": 106.9552,
+      "pnl_pct": 4.93,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-05",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 130,
+      "price": 161.3706,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-08",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 52,
+      "price": 390.5146,
+      "pnl_pct": 1.86,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-10",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 130,
+      "price": 148.5557,
+      "pnl_pct": -7.94,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-10",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 165,
+      "price": 126.3531,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-11",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 151,
+      "price": 140.1099,
+      "pnl_pct": 3.53,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-11",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 125,
+      "price": 165.6028,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-15",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 125,
+      "price": 168.4377,
+      "pnl_pct": 3.57,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-15",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 3637,
+      "price": 5.7729,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-16",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 125,
+      "price": 169.1654,
+      "pnl_pct": 2.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-16",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 450,
+      "price": 46.9335,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-18",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 165,
+      "price": 118.7606,
+      "pnl_pct": -6.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-18",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 104,
+      "price": 190.4652,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-19",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 166,
+      "price": 163.3183,
+      "pnl_pct": 45.19,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-19",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 239,
+      "price": 79.6302,
+      "pnl_pct": -6.56,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-19",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 162,
+      "price": 121.981,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-19",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 2449,
+      "price": 8.074,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-19",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 258,
+      "price": 76.5483,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-22",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 104,
+      "price": 188.3158,
+      "pnl_pct": -1.13,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-22",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 100,
+      "price": 197.1885,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-24",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 162,
+      "price": 117.951,
+      "pnl_pct": -3.3,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-24",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 59,
+      "price": 329.2445,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-26",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 258,
+      "price": 75.1424,
+      "pnl_pct": -1.84,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-26",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 164,
+      "price": 120.0,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-29",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 164,
+      "price": 118.021,
+      "pnl_pct": -1.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-29",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 178,
+      "price": 110.8454,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-07-30",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 378,
+      "price": 49.0255,
+      "pnl_pct": -9.16,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-07-30",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 118,
+      "price": 165.8429,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-05",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 59,
+      "price": 310.0849,
+      "pnl_pct": -5.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-05",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 147,
+      "price": 125.6128,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-06",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 3637,
+      "price": 4.8576,
+      "pnl_pct": -15.86,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-06",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 2449,
+      "price": 7.3463,
+      "pnl_pct": -9.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-06",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 239,
+      "price": 78.7093,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-06",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 308,
+      "price": 60.9875,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-07",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 118,
+      "price": 160.3898,
+      "pnl_pct": -3.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-07",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 120,
+      "price": 155.3376,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-14",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 450,
+      "price": 47.6861,
+      "pnl_pct": 1.6,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-14",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 117,
+      "price": 166.3131,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-15",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 308,
+      "price": 66.2888,
+      "pnl_pct": 8.69,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-15",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 162,
+      "price": 120.9204,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-16",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 239,
+      "price": 82.7986,
+      "pnl_pct": 5.2,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-16",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 402,
+      "price": 48.7744,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-19",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 162,
+      "price": 120.9095,
+      "pnl_pct": -0.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-19",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 240,
+      "price": 82.051,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-20",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 147,
+      "price": 136.5917,
+      "pnl_pct": 8.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-20",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 118,
+      "price": 166.08,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-21",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 118,
+      "price": 164.5937,
+      "pnl_pct": -0.89,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-21",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2713,
+      "price": 7.2736,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-22",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 117,
+      "price": 167.856,
+      "pnl_pct": 0.93,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-22",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 285,
+      "price": 68.9305,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-23",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 100,
+      "price": 213.5732,
+      "pnl_pct": 8.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-23",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 112,
+      "price": 175.4627,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-27",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 120,
+      "price": 166.2668,
+      "pnl_pct": 7.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-27",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 153,
+      "price": 128.2741,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-28",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 178,
+      "price": 117.5512,
+      "pnl_pct": 6.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-28",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 100,
+      "price": 194.067,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 402,
+      "price": 51.8041,
+      "pnl_pct": 6.21,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 240,
+      "price": 85.6372,
+      "pnl_pct": 4.37,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 344,
+      "price": 57.6388,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-08-30",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 71,
+      "price": 277.4186,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-04",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 153,
+      "price": 106.0829,
+      "pnl_pct": -17.3,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-04",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 218,
+      "price": 84.7624,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-05",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 100,
+      "price": 162.1689,
+      "pnl_pct": -16.44,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-05",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 364,
+      "price": 50.6853,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-10",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 71,
+      "price": 247.6161,
+      "pnl_pct": -10.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-10",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 118,
+      "price": 153.1465,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-11",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 112,
+      "price": 170.7996,
+      "pnl_pct": -2.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-11",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 158,
+      "price": 116.138,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-12",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 285,
+      "price": 68.6457,
+      "pnl_pct": -0.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-12",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 83,
+      "price": 223.3416,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-13",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2713,
+      "price": 7.4663,
+      "pnl_pct": 2.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-13",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 108,
+      "price": 175.8779,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-19",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 344,
+      "price": 61.1094,
+      "pnl_pct": 6.02,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-19",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 158,
+      "price": 115.5922,
+      "pnl_pct": -0.47,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-19",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 234,
+      "price": 82.9415,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-19",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 168,
+      "price": 115.5778,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-20",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 234,
+      "price": 83.2983,
+      "pnl_pct": 0.43,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-20",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 168,
+      "price": 114.7026,
+      "pnl_pct": -0.76,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-20",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 105,
+      "price": 185.6028,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-20",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 140,
+      "price": 138.9694,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-24",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 140,
+      "price": 143.2284,
+      "pnl_pct": 3.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-24",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 2383,
+      "price": 8.2741,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-25",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 364,
+      "price": 53.883,
+      "pnl_pct": 6.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-25",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 133,
+      "price": 146.5032,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-26",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 2383,
+      "price": 8.086,
+      "pnl_pct": -2.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-26",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 2149,
+      "price": 8.9845,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-27",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 83,
+      "price": 216.7016,
+      "pnl_pct": -2.97,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-27",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1964,
+      "price": 10.005,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-09-30",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 218,
+      "price": 84.4977,
+      "pnl_pct": -0.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-09-30",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 51,
+      "price": 383.2115,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-01",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 108,
+      "price": 173.3533,
+      "pnl_pct": -1.44,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-01",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 51,
+      "price": 384.0679,
+      "pnl_pct": 0.22,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-01",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 118,
+      "price": 159.8299,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-01",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 309,
+      "price": 61.5207,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-02",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 133,
+      "price": 136.9615,
+      "pnl_pct": -6.51,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-02",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 309,
+      "price": 64.9675,
+      "pnl_pct": 5.6,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-02",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 387,
+      "price": 49.7949,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-02",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 49,
+      "price": 386.0729,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-03",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 105,
+      "price": 182.1889,
+      "pnl_pct": -1.84,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-03",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 290,
+      "price": 66.1931,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-08",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 118,
+      "price": 171.1344,
+      "pnl_pct": 11.75,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-08",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 192,
+      "price": 102.0806,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-11",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 118,
+      "price": 167.8061,
+      "pnl_pct": 4.99,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-11",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 112,
+      "price": 179.0882,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-14",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 112,
+      "price": 179.7274,
+      "pnl_pct": 0.36,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-14",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 65,
+      "price": 310.6753,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-16",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 65,
+      "price": 306.0869,
+      "pnl_pct": -1.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-16",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 165,
+      "price": 126.063,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 387,
+      "price": 47.0265,
+      "pnl_pct": -5.56,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 49,
+      "price": 386.1268,
+      "pnl_pct": 0.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 153,
+      "price": 136.9164,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-17",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 67,
+      "price": 310.4952,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-21",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 67,
+      "price": 309.3952,
+      "pnl_pct": -0.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-21",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 114,
+      "price": 188.054,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-22",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 114,
+      "price": 186.0669,
+      "pnl_pct": -1.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-22",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 114,
+      "price": 188.144,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-23",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 290,
+      "price": 65.6272,
+      "pnl_pct": -0.85,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-28",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 192,
+      "price": 105.8075,
+      "pnl_pct": 3.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-28",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 118,
+      "price": 187.0935,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-10-31",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 118,
+      "price": 180.6996,
+      "pnl_pct": -3.42,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-10-31",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 240,
+      "price": 88.7744,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-04",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 165,
+      "price": 125.4972,
+      "pnl_pct": -0.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-11-04",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 278,
+      "price": 75.5888,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-06",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 114,
+      "price": 192.4937,
+      "pnl_pct": 2.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-11-06",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 240,
+      "price": 92.5737,
+      "pnl_pct": 4.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-11-06",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 113,
+      "price": 198.9994,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-06",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 129,
+      "price": 175.5767,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-13",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 153,
+      "price": 146.1089,
+      "pnl_pct": 6.71,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-11-13",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 282,
+      "price": 101.4307,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-19",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 129,
+      "price": 177.0005,
+      "pnl_pct": 0.81,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-11-19",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 347,
+      "price": 82.5212,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-11-26",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 113,
+      "price": 213.903,
+      "pnl_pct": 7.49,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-05",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 282,
+      "price": 103.1584,
+      "pnl_pct": 1.7,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-05",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 201,
+      "price": 163.4317,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-12-17",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 347,
+      "price": 88.8755,
+      "pnl_pct": 7.7,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-17",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 290,
+      "price": 119.4797,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-12-20",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 278,
+      "price": 90.8595,
+      "pnl_pct": 20.2,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-20",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 160,
+      "price": 217.8801,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-12-24",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 201,
+      "price": 148.3258,
+      "pnl_pct": -9.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-24",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 179,
+      "price": 195.2876,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2024-12-30",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 2149,
+      "price": 26.7966,
+      "pnl_pct": 198.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2024-12-30",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 387,
+      "price": 90.088,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-02",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 387,
+      "price": 88.6287,
+      "pnl_pct": -1.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-02",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 302,
+      "price": 113.5668,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-08",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 290,
+      "price": 115.8421,
+      "pnl_pct": -3.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-08",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 1171,
+      "price": 28.3342,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-14",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 302,
+      "price": 116.8416,
+      "pnl_pct": 2.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-14",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 61,
+      "price": 490.6052,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-14",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 364,
+      "price": 82.8814,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-15",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1964,
+      "price": 40.4798,
+      "pnl_pct": 304.6,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-15",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 159,
+      "price": 210.9354,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-15",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 91,
+      "price": 368.6342,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-16",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 179,
+      "price": 191.909,
+      "pnl_pct": -1.73,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-16",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 61,
+      "price": 515.5521,
+      "pnl_pct": 5.08,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-16",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 188,
+      "price": 178.5392,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-16",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 256,
+      "price": 131.2256,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-17",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 91,
+      "price": 379.2003,
+      "pnl_pct": 2.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-17",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 214,
+      "price": 158.9494,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-21",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 214,
+      "price": 170.1649,
+      "pnl_pct": 7.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-21",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 346,
+      "price": 103.0015,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-22",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 160,
+      "price": 238.1336,
+      "pnl_pct": 9.3,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-22",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 159,
+      "price": 224.9175,
+      "pnl_pct": 6.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-22",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 293,
+      "price": 121.7608,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-22",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 433,
+      "price": 82.437,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-23",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 1171,
+      "price": 31.7341,
+      "pnl_pct": 12.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-23",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 364,
+      "price": 98.4368,
+      "pnl_pct": 18.77,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-23",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 218,
+      "price": 166.6433,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-23",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 882,
+      "price": 41.1906,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-24",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 293,
+      "price": 122.5487,
+      "pnl_pct": 0.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-24",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 375,
+      "price": 95.6978,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-27",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 433,
+      "price": 74.8166,
+      "pnl_pct": -9.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-27",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 372,
+      "price": 90.8196,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-28",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 346,
+      "price": 94.2429,
+      "pnl_pct": -8.5,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-28",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 375,
+      "price": 77.7611,
+      "pnl_pct": -18.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-28",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 459,
+      "price": 73.7823,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-28",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 87,
+      "price": 385.2025,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-29",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 459,
+      "price": 74.3417,
+      "pnl_pct": 0.76,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-29",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 246,
+      "price": 138.1791,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-01-30",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 372,
+      "price": 92.113,
+      "pnl_pct": 1.42,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-01-30",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 273,
+      "price": 126.2631,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-03",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 256,
+      "price": 120.8895,
+      "pnl_pct": -7.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-03",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 87,
+      "price": 356.4817,
+      "pnl_pct": -7.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-03",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 86,
+      "price": 397.7688,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-03",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 171,
+      "price": 200.1,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-06",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 171,
+      "price": 204.1279,
+      "pnl_pct": 2.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-06",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 348,
+      "price": 101.6188,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-11",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 218,
+      "price": 157.6611,
+      "pnl_pct": -5.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-11",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 173,
+      "price": 209.3446,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-13",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 273,
+      "price": 123.0684,
+      "pnl_pct": -2.53,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-13",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 184,
+      "price": 201.9809,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-26",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 173,
+      "price": 195.7221,
+      "pnl_pct": -6.51,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-26",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 419,
+      "price": 80.506,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-27",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 188,
+      "price": 199.88,
+      "pnl_pct": 11.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-27",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 169,
+      "price": 195.2076,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 86,
+      "price": 389.4652,
+      "pnl_pct": -2.09,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 348,
+      "price": 98.007,
+      "pnl_pct": -3.55,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 922,
+      "price": 36.1781,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-02-28",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 350,
+      "price": 95.1475,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-03",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 350,
+      "price": 91.6142,
+      "pnl_pct": -3.71,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-03",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 365,
+      "price": 90.2514,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 882,
+      "price": 41.939,
+      "pnl_pct": 1.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 184,
+      "price": 184.2878,
+      "pnl_pct": -8.76,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 419,
+      "price": 75.6178,
+      "pnl_pct": -6.07,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 922,
+      "price": 34.1329,
+      "pnl_pct": -5.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 101,
+      "price": 322.4912,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 325,
+      "price": 100.8004,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 192,
+      "price": 170.2031,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-04",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 73,
+      "price": 445.6927,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-05",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 246,
+      "price": 143.898,
+      "pnl_pct": 4.14,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-05",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 181,
+      "price": 183.2516,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-06",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 365,
+      "price": 88.8965,
+      "pnl_pct": -1.5,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-06",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 73,
+      "price": 445.5071,
+      "pnl_pct": -0.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-06",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 160,
+      "price": 202.2611,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-06",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 382,
+      "price": 85.0525,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-07",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 192,
+      "price": 172.9575,
+      "pnl_pct": 1.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-07",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 160,
+      "price": 208.6556,
+      "pnl_pct": 3.16,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-07",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 171,
+      "price": 192.5562,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-07",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 215,
+      "price": 153.1565,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-10",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 325,
+      "price": 96.5817,
+      "pnl_pct": -4.19,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-10",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 372,
+      "price": 86.7113,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-11",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 181,
+      "price": 161.5992,
+      "pnl_pct": -11.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-11",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 197,
+      "price": 163.5487,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-12",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 215,
+      "price": 148.7856,
+      "pnl_pct": -2.85,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-12",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 259,
+      "price": 125.9029,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-13",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 372,
+      "price": 88.9725,
+      "pnl_pct": 2.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-13",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 183,
+      "price": 176.4082,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-14",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 183,
+      "price": 182.2488,
+      "pnl_pct": 3.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-14",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 278,
+      "price": 118.6393,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-19",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 382,
+      "price": 94.7326,
+      "pnl_pct": 11.38,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-19",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 179,
+      "price": 187.6338,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-24",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 171,
+      "price": 209.0154,
+      "pnl_pct": 8.55,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-24",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 348,
+      "price": 97.2476,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-25",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 101,
+      "price": 337.811,
+      "pnl_pct": 4.75,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-25",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 348,
+      "price": 99.6781,
+      "pnl_pct": 2.5,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-25",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 807,
+      "price": 42.2811,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-25",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 727,
+      "price": 46.9635,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-26",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 179,
+      "price": 184.8675,
+      "pnl_pct": -1.47,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-26",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 74,
+      "price": 450.1249,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 278,
+      "price": 121.1994,
+      "pnl_pct": 2.16,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 74,
+      "price": 446.0069,
+      "pnl_pct": -0.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 159,
+      "price": 209.5547,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-27",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 358,
+      "price": 93.5267,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-28",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 197,
+      "price": 153.7141,
+      "pnl_pct": -6.01,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-28",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 165,
+      "price": 198.9194,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-03-31",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 165,
+      "price": 198.9905,
+      "pnl_pct": 0.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-03-31",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 319,
+      "price": 102.7914,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-04",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 807,
+      "price": 28.3858,
+      "pnl_pct": -32.86,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-04",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 319,
+      "price": 85.7171,
+      "pnl_pct": -16.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-04",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1265,
+      "price": 22.8814,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-04",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 273,
+      "price": 105.8329,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 259,
+      "price": 115.3123,
+      "pnl_pct": -8.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 159,
+      "price": 179.97,
+      "pnl_pct": -14.12,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 358,
+      "price": 76.6017,
+      "pnl_pct": -18.1,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 273,
+      "price": 104.2778,
+      "pnl_pct": -1.47,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 199,
+      "price": 146.3101,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 232,
+      "price": 125.5127,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 197,
+      "price": 147.1735,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-07",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 190,
+      "price": 152.5162,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-08",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 190,
+      "price": 152.4537,
+      "pnl_pct": -0.04,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-08",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 106,
+      "price": 270.3651,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-09",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 232,
+      "price": 137.7411,
+      "pnl_pct": 9.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-09",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 106,
+      "price": 296.7915,
+      "pnl_pct": 9.77,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-09",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 73,
+      "price": 428.9144,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-09",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 181,
+      "price": 173.1065,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-10",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 181,
+      "price": 168.1859,
+      "pnl_pct": -2.84,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-10",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 233,
+      "price": 132.096,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-11",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 169,
+      "price": 205.5472,
+      "pnl_pct": 5.3,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-11",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 188,
+      "price": 168.4242,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-14",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 188,
+      "price": 169.895,
+      "pnl_pct": 0.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-14",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 1571,
+      "price": 20.4702,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-15",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 233,
+      "price": 132.5537,
+      "pnl_pct": 0.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-15",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 185,
+      "price": 173.6368,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-16",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 185,
+      "price": 169.6751,
+      "pnl_pct": -2.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-16",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 149,
+      "price": 210.3651,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-17",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 149,
+      "price": 214.6426,
+      "pnl_pct": 2.03,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-17",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 246,
+      "price": 126.8134,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-23",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 73,
+      "price": 422.0189,
+      "pnl_pct": -1.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-23",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 154,
+      "price": 205.1525,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-24",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 197,
+      "price": 187.6161,
+      "pnl_pct": 27.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-24",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 75,
+      "price": 439.1194,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-25",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 154,
+      "price": 203.2283,
+      "pnl_pct": -0.94,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-25",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 75,
+      "price": 446.3967,
+      "pnl_pct": 1.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-25",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 307,
+      "price": 110.2081,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-25",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 79,
+      "price": 425.0924,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-28",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 199,
+      "price": 159.969,
+      "pnl_pct": 9.34,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-28",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 243,
+      "price": 138.8294,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-30",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 246,
+      "price": 123.978,
+      "pnl_pct": -2.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-30",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 243,
+      "price": 139.2603,
+      "pnl_pct": 0.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-04-30",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 172,
+      "price": 191.0185,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-04-30",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 172,
+      "price": 191.0955,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-05",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 727,
+      "price": 52.3338,
+      "pnl_pct": 11.44,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-05",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 147,
+      "price": 233.0965,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-08",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 1571,
+      "price": 23.1884,
+      "pnl_pct": 13.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-08",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 298,
+      "price": 116.5783,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-12",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1265,
+      "price": 33.913,
+      "pnl_pct": 48.21,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-12",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 498,
+      "price": 71.7659,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-13",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 79,
+      "price": 439.9799,
+      "pnl_pct": 3.5,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-13",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1075,
+      "price": 34.117,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-14",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1075,
+      "price": 35.2724,
+      "pnl_pct": 3.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-14",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 392,
+      "price": 95.1399,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 307,
+      "price": 117.7391,
+      "pnl_pct": 6.83,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 147,
+      "price": 245.797,
+      "pnl_pct": 5.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 298,
+      "price": 133.0035,
+      "pnl_pct": 14.09,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 242,
+      "price": 154.5472,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1090,
+      "price": 34.4072,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-15",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 320,
+      "price": 117.1986,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-16",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1090,
+      "price": 35.1324,
+      "pnl_pct": 2.11,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-16",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 277,
+      "price": 136.028,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-19",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 277,
+      "price": 131.984,
+      "pnl_pct": -2.97,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-19",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1070,
+      "price": 35.1576,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-20",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 320,
+      "price": 116.2319,
+      "pnl_pct": -0.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-20",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 287,
+      "price": 131.1055,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-21",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 172,
+      "price": 202.8485,
+      "pnl_pct": 6.15,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-21",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 284,
+      "price": 131.8129,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-22",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 287,
+      "price": 129.2154,
+      "pnl_pct": -1.44,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-22",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 354,
+      "price": 110.7654,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-23",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 354,
+      "price": 110.2548,
+      "pnl_pct": -0.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-23",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 482,
+      "price": 80.5106,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-27",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 482,
+      "price": 83.2878,
+      "pnl_pct": 3.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-27",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 347,
+      "price": 114.6173,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-29",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 347,
+      "price": 112.9735,
+      "pnl_pct": -1.43,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-29",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 164,
+      "price": 242.9914,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-05-30",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 164,
+      "price": 244.4877,
+      "pnl_pct": 0.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-05-30",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 1417,
+      "price": 27.2336,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-06",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 498,
+      "price": 81.4193,
+      "pnl_pct": 13.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-06",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 284,
+      "price": 141.5922,
+      "pnl_pct": 7.42,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-06",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 135,
+      "price": 303.1815,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-06",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 160,
+      "price": 254.4071,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-13",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 160,
+      "price": 235.2323,
+      "pnl_pct": -7.54,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-13",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 188,
+      "price": 213.2065,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-17",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1070,
+      "price": 38.6407,
+      "pnl_pct": 9.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-17",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 699,
+      "price": 58.069,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-18",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 172,
+      "price": 249.1159,
+      "pnl_pct": 30.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-18",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 1417,
+      "price": 28.056,
+      "pnl_pct": 3.02,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-18",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 84,
+      "price": 485.4026,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-18",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 283,
+      "price": 144.2621,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-20",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 283,
+      "price": 144.8775,
+      "pnl_pct": 0.43,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-20",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 454,
+      "price": 89.7048,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-23",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 84,
+      "price": 491.5641,
+      "pnl_pct": 1.27,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-23",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 450,
+      "price": 91.2155,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-25",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 699,
+      "price": 57.5612,
+      "pnl_pct": -0.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-25",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 293,
+      "price": 143.4717,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-26",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 450,
+      "price": 96.3266,
+      "pnl_pct": 5.6,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-26",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 267,
+      "price": 158.2291,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-06-30",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 242,
+      "price": 196.1019,
+      "pnl_pct": 26.89,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-06-30",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 438,
+      "price": 96.9209,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-01",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 135,
+      "price": 307.1663,
+      "pnl_pct": 1.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-01",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 1086,
+      "price": 38.2791,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-08",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 438,
+      "price": 99.3008,
+      "pnl_pct": 2.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-08",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 290,
+      "price": 146.013,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-09",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 392,
+      "price": 122.0019,
+      "pnl_pct": 28.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-09",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 423,
+      "price": 99.3802,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-11",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 454,
+      "price": 92.9435,
+      "pnl_pct": 3.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-11",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 267,
+      "price": 145.867,
+      "pnl_pct": -7.81,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-11",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 256,
+      "price": 164.9534,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-11",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 105,
+      "price": 402.5612,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-16",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 423,
+      "price": 99.8379,
+      "pnl_pct": 0.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-16",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 78,
+      "price": 571.4856,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-22",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 290,
+      "price": 144.8176,
+      "pnl_pct": -0.82,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-22",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 162,
+      "price": 277.1398,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-25",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 162,
+      "price": 288.3809,
+      "pnl_pct": 4.06,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-25",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 239,
+      "price": 192.8324,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-07-30",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 239,
+      "price": 195.98,
+      "pnl_pct": 1.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-07-30",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 430,
+      "price": 109.9049,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-05",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 188,
+      "price": 253.5532,
+      "pnl_pct": 18.92,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-05",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 240,
+      "price": 194.3201,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-08",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 1086,
+      "price": 49.895,
+      "pnl_pct": 30.35,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-08",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 105,
+      "price": 414.1528,
+      "pnl_pct": 2.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-08",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 699,
+      "price": 68.4542,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-08",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 225,
+      "price": 211.8959,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-13",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 256,
+      "price": 181.4452,
+      "pnl_pct": 10.0,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-13",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 156,
+      "price": 307.481,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-14",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 78,
+      "price": 616.0518,
+      "pnl_pct": 7.8,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-14",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 261,
+      "price": 182.056,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-20",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 225,
+      "price": 195.4023,
+      "pnl_pct": -7.78,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-20",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 395,
+      "price": 117.0987,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-25",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 293,
+      "price": 163.2783,
+      "pnl_pct": 13.81,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-25",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 388,
+      "price": 121.8679,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-26",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 156,
+      "price": 296.1624,
+      "pnl_pct": -3.68,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-26",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 461,
+      "price": 103.1838,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-08-27",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 261,
+      "price": 181.4552,
+      "pnl_pct": -0.33,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-08-27",
+      "action": "BUY",
+      "code": "ZS",
+      "shares": 174,
+      "price": 273.2065,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-02",
+      "action": "SELL",
+      "code": "ZS",
+      "shares": 174,
+      "price": 274.4327,
+      "pnl_pct": 0.45,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-02",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 1083,
+      "price": 44.5122,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-03",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 461,
+      "price": 97.2219,
+      "pnl_pct": -5.78,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-03",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 256,
+      "price": 191.6258,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-04",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 395,
+      "price": 123.968,
+      "pnl_pct": 5.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-04",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 423,
+      "price": 118.4492,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-09",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 423,
+      "price": 114.1629,
+      "pnl_pct": -3.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-09",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 375,
+      "price": 135.1116,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-11",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 388,
+      "price": 120.2898,
+      "pnl_pct": -1.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-12",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 375,
+      "price": 156.9237,
+      "pnl_pct": 16.14,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-12",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 282,
+      "price": 185.8829,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-12",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 146,
+      "price": 357.9967,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-16",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 1083,
+      "price": 44.8276,
+      "pnl_pct": 0.71,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-16",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 282,
+      "price": 186.3068,
+      "pnl_pct": 0.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-16",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 338,
+      "price": 158.6692,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-18",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 256,
+      "price": 205.5772,
+      "pnl_pct": 7.28,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-18",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 765,
+      "price": 70.4652,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-22",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 699,
+      "price": 83.2683,
+      "pnl_pct": 21.64,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-22",
+      "action": "BUY",
+      "code": "ORCL",
+      "shares": 165,
+      "price": 325.7628,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-09-26",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 146,
+      "price": 333.0256,
+      "pnl_pct": -6.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-09-26",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 405,
+      "price": 128.0297,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-01",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 240,
+      "price": 244.4347,
+      "pnl_pct": 25.79,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-01",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 107,
+      "price": 500.21,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-01",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 630,
+      "price": 85.5728,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-06",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 430,
+      "price": 160.5197,
+      "pnl_pct": 46.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-06",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 113,
+      "price": 493.0564,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-08",
+      "action": "SELL",
+      "code": "ORCL",
+      "shares": 165,
+      "price": 286.2368,
+      "pnl_pct": -12.13,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-08",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 342,
+      "price": 164.2021,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-09",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 342,
+      "price": 163.988,
+      "pnl_pct": -0.13,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-09",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 236,
+      "price": 233.0064,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-10",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 630,
+      "price": 84.6776,
+      "pnl_pct": -1.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-10",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 722,
+      "price": 73.5367,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-13",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 107,
+      "price": 508.3557,
+      "pnl_pct": 1.63,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-13",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 334,
+      "price": 164.2821,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-20",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 765,
+      "price": 65.4673,
+      "pnl_pct": -7.09,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-20",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 581,
+      "price": 94.4772,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-21",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 405,
+      "price": 144.556,
+      "pnl_pct": 12.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-21",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 315,
+      "price": 169.4647,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-10-24",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 581,
+      "price": 82.9185,
+      "pnl_pct": -12.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-29",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 334,
+      "price": 155.922,
+      "pnl_pct": -5.09,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-10-29",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 349,
+      "price": 160.2941,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-03",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 349,
+      "price": 160.702,
+      "pnl_pct": 0.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-03",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 278,
+      "price": 199.6798,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-04",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 722,
+      "price": 59.4603,
+      "pnl_pct": -19.14,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-04",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 191,
+      "price": 277.2896,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-05",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 315,
+      "price": 160.1099,
+      "pnl_pct": -5.52,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-05",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 105,
+      "price": 534.4071,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-12",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 236,
+      "price": 258.7606,
+      "pnl_pct": 11.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-12",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 358,
+      "price": 161.0423,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-18",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 113,
+      "price": 545.3472,
+      "pnl_pct": 10.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-18",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 311,
+      "price": 176.5482,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-19",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 358,
+      "price": 148.3035,
+      "pnl_pct": -7.91,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-19",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 101,
+      "price": 552.1159,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-21",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 105,
+      "price": 490.4247,
+      "pnl_pct": -8.23,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-21",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 773,
+      "price": 69.6148,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-26",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 338,
+      "price": 229.9553,
+      "pnl_pct": 44.93,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-26",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 101,
+      "price": 572.1238,
+      "pnl_pct": 3.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-11-26",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 334,
+      "price": 172.7063,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-26",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 639,
+      "price": 90.3852,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-26",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 195,
+      "price": 295.9979,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-11-28",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 311,
+      "price": 159.93,
+      "pnl_pct": -9.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-05",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 334,
+      "price": 170.4447,
+      "pnl_pct": -1.31,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-05",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 195,
+      "price": 283.0584,
+      "pnl_pct": -4.37,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-05",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 1308,
+      "price": 44.9224,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-05",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 532,
+      "price": 110.3151,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-09",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 532,
+      "price": 107.4762,
+      "pnl_pct": -2.57,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-09",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 147,
+      "price": 404.8676,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-11",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 639,
+      "price": 99.1704,
+      "pnl_pct": 9.72,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-11",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 127,
+      "price": 477.4986,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-17",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 773,
+      "price": 72.024,
+      "pnl_pct": 3.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-17",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 147,
+      "price": 324.5539,
+      "pnl_pct": -19.84,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-17",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 991,
+      "price": 56.9385,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-17",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 100,
+      "price": 560.8803,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-18",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 191,
+      "price": 302.0969,
+      "pnl_pct": 8.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-18",
+      "action": "BUY",
+      "code": "NEM",
+      "shares": 583,
+      "price": 99.1896,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2025-12-23",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 100,
+      "price": 580.7895,
+      "pnl_pct": 3.55,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2025-12-23",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 365,
+      "price": 175.0379,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-01-02",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 127,
+      "price": 480.1798,
+      "pnl_pct": 0.56,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-01-02",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 202,
+      "price": 315.4452,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-01-09",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 278,
+      "price": 351.2443,
+      "pnl_pct": 75.9,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-01-09",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 211,
+      "price": 321.2706,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-01-20",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 211,
+      "price": 311.7141,
+      "pnl_pct": -2.97,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-01-20",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 139,
+      "price": 511.2255,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-01-26",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 139,
+      "price": 502.7585,
+      "pnl_pct": -1.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-01-26",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 111,
+      "price": 636.238,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-04",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 991,
+      "price": 81.3093,
+      "pnl_pct": 42.8,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-04",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 347,
+      "price": 200.2901,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-05",
+      "action": "SELL",
+      "code": "AMD",
+      "shares": 347,
+      "price": 192.4038,
+      "pnl_pct": -3.94,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-05",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 846,
+      "price": 80.5002,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-09",
+      "action": "SELL",
+      "code": "NEM",
+      "shares": 583,
+      "price": 120.4298,
+      "pnl_pct": 21.41,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-09",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 124,
+      "price": 577.4386,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-13",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 365,
+      "price": 235.1305,
+      "pnl_pct": 34.33,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-13",
+      "action": "BUY",
+      "code": "EOG",
+      "shares": 612,
+      "price": 119.8599,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-13",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 585,
+      "price": 125.3426,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-19",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 1308,
+      "price": 62.3888,
+      "pnl_pct": 38.88,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-19",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 316,
+      "price": 237.2245,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-23",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 316,
+      "price": 241.8591,
+      "pnl_pct": 1.95,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-23",
+      "action": "BUY",
+      "code": "GE",
+      "shares": 223,
+      "price": 338.6492,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "SELL",
+      "code": "MU",
+      "shares": 202,
+      "price": 417.6256,
+      "pnl_pct": 32.39,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-24",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 1122,
+      "price": 67.7639,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-25",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 1122,
+      "price": 68.6357,
+      "pnl_pct": 1.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-25",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 424,
+      "price": 180.7603,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-02-26",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 424,
+      "price": 183.0884,
+      "pnl_pct": 1.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-02-26",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 1110,
+      "price": 68.2641,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-04",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 1110,
+      "price": 65.7471,
+      "pnl_pct": -3.69,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-04",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 398,
+      "price": 189.0045,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-06",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 111,
+      "price": 680.5596,
+      "pnl_pct": 6.97,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-06",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 723,
+      "price": 99.0695,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-10",
+      "action": "SELL",
+      "code": "ARM",
+      "shares": 585,
+      "price": 120.4897,
+      "pnl_pct": -3.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-10",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 353,
+      "price": 207.1035,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-11",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 846,
+      "price": 85.7171,
+      "pnl_pct": 6.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-11",
+      "action": "BUY",
+      "code": "NOW",
+      "shares": 634,
+      "price": 115.6878,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-13",
+      "action": "SELL",
+      "code": "GE",
+      "shares": 223,
+      "price": 299.5402,
+      "pnl_pct": -11.55,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-13",
+      "action": "BUY",
+      "code": "NET",
+      "shares": 328,
+      "price": 217.8389,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-16",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 398,
+      "price": 182.7886,
+      "pnl_pct": -3.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-16",
+      "action": "BUY",
+      "code": "GOOGL",
+      "shares": 234,
+      "price": 305.7128,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "SELL",
+      "code": "GOOGL",
+      "shares": 234,
+      "price": 310.7645,
+      "pnl_pct": 1.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 103,
+      "price": 702.351,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-18",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 103,
+      "price": 693.2732,
+      "pnl_pct": -1.29,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-18",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 169,
+      "price": 436.0279,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-19",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 124,
+      "price": 771.7439,
+      "pnl_pct": 33.65,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-19",
+      "action": "BUY",
+      "code": "PANW",
+      "shares": 437,
+      "price": 169.8249,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-20",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 353,
+      "price": 198.0609,
+      "pnl_pct": -4.37,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-20",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 583,
+      "price": 125.1425,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-26",
+      "action": "SELL",
+      "code": "NOW",
+      "shares": 634,
+      "price": 103.5882,
+      "pnl_pct": -10.46,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-26",
+      "action": "BUY",
+      "code": "OKE",
+      "shares": 771,
+      "price": 93.6168,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-27",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 723,
+      "price": 93.3833,
+      "pnl_pct": -5.74,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-27",
+      "action": "BUY",
+      "code": "ARM",
+      "shares": 485,
+      "price": 144.2021,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-31",
+      "action": "SELL",
+      "code": "CRWD",
+      "shares": 169,
+      "price": 390.2148,
+      "pnl_pct": -10.51,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-31",
+      "action": "SELL",
+      "code": "PANW",
+      "shares": 437,
+      "price": 160.2398,
+      "pnl_pct": -5.64,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-03-31",
+      "action": "BUY",
+      "code": "NVDA",
+      "shares": 408,
+      "price": 174.4872,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-03-31",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 100,
+      "price": 708.8142,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-01",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 100,
+      "price": 729.9548,
+      "pnl_pct": 2.98,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-01",
+      "action": "BUY",
+      "code": "AMT",
+      "shares": 421,
+      "price": 169.4147,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "SELL",
+      "code": "DDOG",
+      "shares": 583,
+      "price": 120.2998,
+      "pnl_pct": -3.87,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "SELL",
+      "code": "NVDA",
+      "shares": 408,
+      "price": 177.3013,
+      "pnl_pct": 1.61,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "SELL",
+      "code": "AMT",
+      "shares": 421,
+      "price": 171.924,
+      "pnl_pct": 1.48,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "BUY",
+      "code": "LITE",
+      "shares": 86,
+      "price": 827.2934,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "BUY",
+      "code": "RTX",
+      "shares": 365,
+      "price": 196.3081,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-02",
+      "action": "BUY",
+      "code": "AMD",
+      "shares": 329,
+      "price": 217.6087,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-10",
+      "action": "SELL",
+      "code": "NET",
+      "shares": 328,
+      "price": 193.5032,
+      "pnl_pct": -11.17,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-10",
+      "action": "SELL",
+      "code": "RTX",
+      "shares": 365,
+      "price": 201.4592,
+      "pnl_pct": 2.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-10",
+      "action": "BUY",
+      "code": "CAT",
+      "shares": 91,
+      "price": 791.0553,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-10",
+      "action": "BUY",
+      "code": "LRCX",
+      "shares": 274,
+      "price": 263.7918,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-13",
+      "action": "SELL",
+      "code": "OKE",
+      "shares": 771,
+      "price": 85.2873,
+      "pnl_pct": -8.9,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-13",
+      "action": "BUY",
+      "code": "FCX",
+      "shares": 1072,
+      "price": 67.9139,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-15",
+      "action": "SELL",
+      "code": "EOG",
+      "shares": 612,
+      "price": 131.3043,
+      "pnl_pct": 9.55,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-15",
+      "action": "BUY",
+      "code": "NFLX",
+      "shares": 670,
+      "price": 107.7639,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-17",
+      "action": "SELL",
+      "code": "CAT",
+      "shares": 91,
+      "price": 794.2527,
+      "pnl_pct": 0.4,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-17",
+      "action": "BUY",
+      "code": "AVGO",
+      "shares": 182,
+      "price": 406.7433,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-20",
+      "action": "SELL",
+      "code": "NFLX",
+      "shares": 670,
+      "price": 94.7826,
+      "pnl_pct": -12.05,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-22",
+      "action": "SELL",
+      "code": "LRCX",
+      "shares": 274,
+      "price": 265.4172,
+      "pnl_pct": 0.62,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-22",
+      "action": "BUY",
+      "code": "IONQ",
+      "shares": 1568,
+      "price": 49.1546,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-27",
+      "action": "SELL",
+      "code": "LITE",
+      "shares": 86,
+      "price": 859.2502,
+      "pnl_pct": 3.86,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-27",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 932,
+      "price": 82.5212,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-04-28",
+      "action": "SELL",
+      "code": "FCX",
+      "shares": 1072,
+      "price": 58.1809,
+      "pnl_pct": -14.33,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-04-28",
+      "action": "BUY",
+      "code": "MU",
+      "shares": 147,
+      "price": 504.5421,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-05-05",
+      "action": "SELL",
+      "code": "RKLB",
+      "shares": 932,
+      "price": 82.9585,
+      "pnl_pct": 0.53,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-05-05",
+      "action": "BUY",
+      "code": "SNPS",
+      "shares": 161,
+      "price": 502.7613,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-05-08",
+      "action": "SELL",
+      "code": "AVGO",
+      "shares": 182,
+      "price": 429.785,
+      "pnl_pct": 5.66,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-05-08",
+      "action": "BUY",
+      "code": "DDOG",
+      "shares": 441,
+      "price": 200.4602,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-05-13",
+      "action": "SELL",
+      "code": "SNPS",
+      "shares": 161,
+      "price": 509.0254,
+      "pnl_pct": 1.25,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-05-13",
+      "action": "BUY",
+      "code": "CRWD",
+      "shares": 160,
+      "price": 568.6542,
+      "reason": "动量轮换"
+    },
+    {
+      "date": "2026-05-20",
+      "action": "SELL",
+      "code": "IONQ",
+      "shares": 1568,
+      "price": 52.7136,
+      "pnl_pct": 7.24,
+      "reason": "调出Top7"
+    },
+    {
+      "date": "2026-05-20",
+      "action": "BUY",
+      "code": "RKLB",
+      "shares": 695,
+      "price": 135.4177,
+      "reason": "动量轮换"
+    }
+  ]
+}
