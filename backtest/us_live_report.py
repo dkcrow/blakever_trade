@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""七星美股版(最优) x7 实盘报告生成 (2025-01-01至今)"""
+"""七星美股版(优化) x7 实盘报告生成 (2025-01-01至今)"""
 import sys, os, math, json, warnings, urllib.request, re, subprocess
 from pathlib import Path
 from datetime import datetime
@@ -20,13 +20,14 @@ NOW = datetime.now()
 NOW_STR = NOW.strftime('%Y-%m-%d %H:%M')
 NOW_TAG = NOW.strftime('%Y%m%d_%H%M')
 
-START_DATE = '2025-01-01'
+START_DATE = '2023-06-18'
 END_DATE = NOW.strftime('%Y-%m-%d')
 
-# 精简27+SPCX (2026-06-16: 新增SPCX SpaceX, 共28只)
-POOL = 'NVDA,AVGO,AMD,MU,LRCX,ARM,LITE,NFLX,GOOGL,NOW,CRWD,ORCL,DDOG,SNPS,EOG,OKE,NEM,FCX,CAT,GE,RTX,AMT,PANW,ZS,NET,IONQ,RKLB,SPCX'.split(',')
+# 优化26只 (2026-06-18: 删AVGO/CSCO, 加WDC/ARM/STX)
+POOL = 'NVDA,AMD,MU,LRCX,LITE,NFLX,GOOGL,NOW,ORCL,SNPS,EOG,NEM,CAT,GE,AMT,PANW,ZS,NET,IONQ,RKLB,SPCX,COHR,HOOD,WDC,ARM,STX'.split(',')
 
 PARAMS = {'lookback_days': 25, 'holdings_num': 7, 'min_money': 500}
+SCORE_THRESHOLD = 0.5  # 得分<0.5禁止买入, 已持有强制卖出
 
 # ================================================================
 # 实时行情获取 — 三级兜底 (L1→L2→失败告警)
@@ -207,8 +208,10 @@ for sym in POOL:
     if not fp.exists(): continue
     try:
         df = pd.read_csv(fp)
-        df = df.rename(columns={'Date':'date','Open':'open','High':'high','Low':'low','Close':'close','Volume':'volume'})
+        df = df.rename(columns={'Date':'date','Open':'open','High':'high','Low':'low','Close':'close','Last':'close','Volume':'volume'})
         df['date'] = pd.to_datetime(df['date']); df = df.set_index('date').sort_index()
+        df = df[~df.index.duplicated(keep='last')]  # 去重: 合并新旧数据可能产生重复日期
+        df = df[df['close'] > 0]  # 过滤零价/无效数据
         pre_start = pd.Timestamp(START_DATE) - pd.Timedelta(days=100)
         mask = (df.index >= pre_start) & (df.index <= END_DATE)
         df = df[mask]
@@ -275,7 +278,7 @@ class USPortfolio:
             self.positions[code] = {'shares':ts,'cost_price':(o['shares']*o['cost_price']+shares*price)/ts,'last_price':price,'buy_date':o.get('buy_date',date)}
         else:
             self.positions[code] = {'shares':shares,'cost_price':price,'last_price':price,'buy_date':date}
-        self.trade_log.append({'date':str(date)[:10],'code':code,'action':'BUY','price':round(price,4),'shares':int(shares),'amount':round(tv,2),'commission':round(comm,2),'reason':reason})
+        self.trade_log.append({'date':str(date)[:10],'code':code,'action':'BUY','price':round(price,4),'shares':int(shares),'amount':round(tv,2),'commission':round(comm,2),'reason':reason,'total_value':round(self.total_value,2)})
         return True
     def sell(self, code, shares, price, date, reason=''):
         if code not in self.positions: return False
@@ -284,9 +287,9 @@ class USPortfolio:
         if actual <= 0: return False
         tv = actual*price; comm = actual*self.comm; self.cash += tv-comm
         pos['shares'] -= actual
-        pnl = (price-pos['cost_price'])/pos['cost_price'] if pos['cost_price']>0 else 0
+        pnl = (price-pos['cost_price'])/pos['cost_price']*100 if pos['cost_price']>0 else 0
         if pos['shares'] <= 0: del self.positions[code]
-        self.trade_log.append({'date':str(date)[:10],'code':code,'action':'SELL','price':round(price,4),'shares':int(actual),'amount':round(tv,2),'commission':round(comm,2),'pnl_pct':round(pnl,4),'reason':reason})
+        self.trade_log.append({'date':str(date)[:10],'code':code,'action':'SELL','price':round(price,4),'shares':int(actual),'amount':round(tv,2),'commission':round(comm,2),'pnl_pct':round(pnl,4),'reason':reason,'total_value':round(self.total_value,2)})
         return True
     def sell_all(self, code, price, date, reason=''):
         if code not in self.positions: return False
@@ -296,7 +299,7 @@ class USPortfolio:
         v = self.total_value
         self.daily_values.append({'date':str(date)[:10],'value':round(v,2),'returns':round((v-self.initial_cash)/self.initial_cash,6)})
 
-INITIAL_CASH = 100000
+INITIAL_CASH = 1000000
 pf = USPortfolio(cash=INITIAL_CASH)
 hn = PARAMS['holdings_num']
 
@@ -311,26 +314,29 @@ for i, td in enumerate(trade_dates):
     pf.update_prices(prices)
     ranked = get_ranked(prices, td)
     if not ranked: pf.record_daily_value(td); continue
-    targets = [r['code'] for r in ranked if r['score'] > -999][:hn]
+    # score>=0.5 阈值过滤: 仅买入高置信度动量股
+    targets = [r['code'] for r in ranked if r['score'] >= SCORE_THRESHOLD][:hn]
     if not targets:
         for code in list(pf.get_position_codes()):
             if code in prices: pf.sell_all(code, prices[code], td, reason='调出(无目标)')
         pf.record_daily_value(td); continue
+    # 卖出不在目标中 + 得分跌破阈值的持仓
     for code in list(pf.get_position_codes()):
-        if code not in targets and code in prices:
-            pf.sell_all(code, prices[code], td, reason='调出目标')
-    tv = pf.total_value; each = tv / len(targets)
-    for idx, code in enumerate(targets):
-        if code not in prices: continue
-        price = prices[code]; cv = 0
-        if code in pf.positions:
-            cv = pf.positions[code]['shares'] * pf.positions[code]['last_price']
-        diff = each - cv
-        if abs(diff) < each * 0.05 and cv > 0: continue
-        if diff > 0:
-            sh = int(diff / price)
-            if sh > 0 and sh * price >= PARAMS['min_money']:
-                pf.buy(code, sh, price, td, reason=f'排名{idx+1}')
+        found = next((r for r in ranked if r['code'] == code), None)
+        if (code not in targets) or (found and found['score'] < SCORE_THRESHOLD):
+            if code in prices:
+                pf.sell_all(code, prices[code], td, reason='调出目标' if code not in targets else '得分不足')
+    pf.update_prices(prices)
+    # 买入: 新目标用可用现金等权分配
+    new_targets = [code for code in targets if code not in pf.positions and code in prices]
+    if new_targets:
+        available = pf.cash * 0.95
+        per_new = available / len(new_targets)
+        for idx, code in enumerate(new_targets):
+            price = prices[code]
+            sh = int(per_new / price)
+            if sh > 0:
+                pf.buy(code, sh, price, td, reason=f'排名{targets.index(code)+1}')
     pf.record_daily_value(td)
     if i % 20 == 0:
         top3 = ', '.join([f"{r['code']}({r['score']:.4f})" for r in ranked[:3]])
@@ -362,24 +368,17 @@ sells = sum(1 for t in trades if t['action']=='SELL')
 st = [t for t in trades if t['action']=='SELL' and 'pnl_pct' in t]
 wins = [t for t in st if t['pnl_pct']>0]; losses = [t for t in st if t['pnl_pct']<=0]
 wr = len(wins)/len(st)*100 if st else 0
-aw = sum(t['pnl_pct'] for t in wins)/len(wins)*100 if wins else 0
-al = sum(t['pnl_pct'] for t in losses)/len(losses)*100 if losses else 0
+aw = sum(t['pnl_pct'] for t in wins)/len(wins) if wins else 0
+al = sum(t['pnl_pct'] for t in losses)/len(losses) if losses else 0
 
-# 加载3年历史交易记录 (用于最近20条和新版绩效)
-TRADES_JSON = OUTPUT_DIR / '七星美股版_精简27只_交易记录.json'
-hist_trades = trades  # 兜底
-hist_stats = None
-if TRADES_JSON.exists():
-    try:
-        with open(TRADES_JSON, 'r', encoding='utf-8') as f:
-            bt_data = json.load(f)
-        hist_trades = bt_data.get('trades', trades)
-        hist_stats = bt_data.get('stats', None)
-        # 如果用到了历史数据, 用它的胜率
-        if hist_stats:
-            wr = hist_stats.get('win_rate', wr)
-    except Exception as e:
-        print(f'[交易记录] 加载历史交易JSON失败: {e}')
+# 使用当前回测的完整交易记录 (含 total_value 列)
+hist_trades = trades  # pf.trade_log 已包含 3 年数据 + total_value
+hist_stats = {
+    'start': START_DATE, 'end': str(trade_dates[-1])[:10],
+    'total_return': tr * 100, 'annual_return': ann_ret,
+    'max_drawdown': mdd * 100, 'sharpe': sh_val,
+    'total_trades': len(trades), 'win_rate': wr,
+}
 
 # ================================================================
 # 当前持仓 (最新7只排名)
@@ -481,9 +480,10 @@ for t in recent_trades:
         <td style="padding:4px 8px;">{t['code']}</td>
         <td style="padding:4px 8px;text-align:right;">${t['price']:.2f}</td>
         <td style="padding:4px 8px;text-align:right;">{t.get('shares',0)}</td>
-        <td style="padding:4px 8px;text-align:right;">${amount:,.2f}</td>
+        <td style="padding:4px 8px;text-align:right;">${amount:,.0f}</td>
         <td style="padding:4px 8px;font-size:11px;color:#555;">{t.get('reason','')}</td>
-        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{pc};">{ps}</td></tr>"""
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{pc};">{ps}</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#1F4E79;">${t.get('total_value',0):,.0f}</td></tr>"""
 
 # 排名表格
 rank_rows_html = ""
@@ -575,7 +575,7 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 
 <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近20条交易记录</h3>
 <div style="overflow-x:auto;"><table>
-<tr><th>日期</th><th>方向</th><th>代码</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th></tr>
+<tr><th>日期</th><th>方向</th><th>代码</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th><th>总资产</th></tr>
 {trade_rows_html}</table></div></div>
 
 <div class="footer">七星美股版(精简27只) · Blakever Trade · {NOW_STR}<br>本报告仅供研究参考，不构成投资建议。</div>

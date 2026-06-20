@@ -66,7 +66,7 @@ from strategies.etf.seven_star_base import (
 DEFAULT_PARAMS = {
     # ---- 核心参数 ----
     'lookback_days': 25,
-    'holdings_num': 1,
+    'holdings_num': 1,  # 临时回退到1只, 对照验证
     'min_money': 5000,
 
     # ---- 盈利保护参数 ----
@@ -85,7 +85,7 @@ DEFAULT_PARAMS = {
 
     # ---- 短期动量过滤 ----
     'use_short_momentum_filter': False,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-313%)
-    'short_lookback_days': 10,           # 短期动量回看天数 (get_ranked_etfs需要, 即使过滤关闭)
+    'short_lookback_days': 10,           # get_ranked_etfs需要此参数
 
     # ---- 溢价率过滤 ----
     'enable_premium_filter': True,   # 仅保留此项, 防高溢价买入
@@ -707,7 +707,7 @@ class BacktestEngine172:
             target_etfs = [DEFENSIVE_ETF]
             print(f"  [{date}] 🛡️ DEFENSE -> {DEFENSIVE_ETF} {ETF_NAMES.get(DEFENSIVE_ETF,'')}")
 
-        # 等权分配
+        # 等权分配 (原版逻辑)
         total_val = self.portfolio.total_value
         target_per_etf = total_val / len(target_etfs)
         min_money = self.engine.params['min_money']
@@ -847,6 +847,10 @@ def main():
     parser.add_argument('--no-volume', action='store_true', help='关闭成交量过滤')
     parser.add_argument('--no-short-momentum', action='store_true', help='关闭短期动量过滤')
     parser.add_argument('--no-premium', action='store_true', help='关闭溢价率过滤')
+    parser.add_argument('--no-regime', action='store_true', help='关闭行情判断(regime_switch)')
+    parser.add_argument('--no-avoid-a', action='store_true', help='关闭避A股走弱(avoid_a_share)')
+    parser.add_argument('--no-intraday-dd', action='store_true', help='关闭日内回撤检查(intraday_drawdown)')
+    parser.add_argument('--premium-only', action='store_true', help='仅保留溢价率过滤,关闭其他所有过滤器')
     parser.add_argument('--commission', type=float, default=0.0002, help='佣金费率')
 
     args = parser.parse_args()
@@ -862,6 +866,13 @@ def main():
     ds = LocalDataSource(data_dir)
 
     # 参数
+    # --premium-only: 只保留溢价率过滤,关闭所有其他过滤器
+    if args.premium_only:
+        args.no_protection = True
+        args.no_regime = True
+        args.no_avoid_a = True
+        args.no_intraday_dd = True
+
     params = {
         'lookback_days': args.lookback,
         'holdings_num': args.holdings,
@@ -869,6 +880,9 @@ def main():
         'enable_volume_check': not args.no_volume,
         'use_short_momentum_filter': not args.no_short_momentum,
         'enable_premium_filter': not args.no_premium,
+        'enable_regime_switch': not getattr(args, 'no_regime', False),
+        'enable_avoid_a_share': not getattr(args, 'no_avoid_a', False),
+        'enable_intraday_drawdown': not getattr(args, 'no_intraday_dd', False),
     }
 
     # 回测
@@ -892,9 +906,109 @@ def main():
     trades_path = RESULTS_DIR / f'七星172_{args.start}_{args.end}_trades.json'
     with open(trades_path, 'w', encoding='utf-8') as f:
         json.dump(results['trade_log'], f, ensure_ascii=False, indent=2, default=str)
-    print(f"📄 交易记录已保存: {trades_path}")
+    print(f"\n📄 交易记录已保存: {trades_path}")
+
+    # 生成HTML报告并发送邮件
+    _generate_html_and_email(results, args.start, args.end, args.cash)
 
     return results
+
+
+def _generate_html_and_email(results, start, end, initial_cash):
+    """生成172回测HTML报告并邮件发送"""
+    import json, smtplib
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+    from datetime import datetime
+
+    trades = results.get('trade_log', [])
+    r = results
+    now_str = datetime.now().strftime('%Y%m%d_%H%M')
+
+    # 最近20条交易
+    recent = trades[-20:][::-1] if trades else []
+    trade_rows = ""
+    for t in recent:
+        d = '买入' if t['action']=='BUY' else '卖出'
+        bg = '#E2EFDA' if t['action']=='BUY' else '#FCE4D6'
+        pnl = t.get('pnl_pct')
+        if pnl is not None and pnl != 0:
+            ps = f'+{pnl*100:.2f}%' if pnl > 0 else f'{pnl*100:.2f}%'
+            pc = '#28A745' if pnl > 0 else '#DC3545'
+        else:
+            ps = '-'; pc = '#888'
+        tv = t.get('total_value', 0)
+        trade_rows += f"""<tr style="background:{bg};white-space:nowrap;">
+            <td style="padding:4px 6px;">{t['date']}</td>
+            <td style="padding:4px 6px;font-weight:bold;">{d}</td>
+            <td style="padding:4px 6px;">{t.get('name','')}</td>
+            <td style="padding:4px 6px;color:#888;font-size:11px;">{t['code']}</td>
+            <td style="padding:4px 6px;text-align:right;">{t['price']:.3f}</td>
+            <td style="padding:4px 6px;text-align:right;">{t.get('shares',0)}</td>
+            <td style="padding:4px 6px;text-align:right;">¥{t.get('amount',0):,.0f}</td>
+            <td style="padding:4px 6px;font-size:11px;color:#555;">{t.get('reason','')}</td>
+            <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{pc};">{ps}</td>
+            <td style="padding:4px 6px;text-align:right;font-weight:bold;color:#1F4E79;">¥{tv:,.0f}</td></tr>"""
+
+    html = f"""<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+body{{font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:0 auto;padding:15px;background:#F0F2F5;}}
+.card{{background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;}}
+table{{width:100%;border-collapse:collapse;font-size:12px;}}
+th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
+td{{padding:4px 6px;border-bottom:1px solid #eee;}}
+</style></head><body>
+<div class="card">
+<h1 style="font-size:18px;color:#1F4E79;margin:0;">七星172策略 3年回测报告</h1>
+<p style="font-size:12px;color:#888;margin:5px 0;">{start} ~ {end} | 初始资金: ¥{initial_cash:,.0f} | 佣金: 0.02%</p>
+</div>
+<div class="card">
+<div style="display:flex;flex-wrap:wrap;gap:10px;">
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;">
+<div style="font-size:11px;color:#888;">累计收益</div>
+<div style="font-size:20px;font-weight:bold;color:{'#28A745' if r['total_return_pct']>0 else '#DC3545'};">{r['total_return_pct']:+.2f}%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;">
+<div style="font-size:11px;color:#888;">年化收益</div>
+<div style="font-size:20px;font-weight:bold;">{r['annualized_return_pct']:.1f}%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;">
+<div style="font-size:11px;color:#888;">最大回撤</div>
+<div style="font-size:20px;font-weight:bold;color:#DC3545;">-{r['max_drawdown_pct']:.1f}%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;">
+<div style="font-size:11px;color:#888;">夏普比率</div>
+<div style="font-size:20px;font-weight:bold;">{r['sharpe_ratio']:.2f}</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;">
+<div style="font-size:11px;color:#888;">终值</div>
+<div style="font-size:20px;font-weight:bold;">¥{r['final_value']:,.0f}</div></div>
+</div></div>
+<div class="card">
+<h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近20条交易记录 (共{r['total_trades']}笔)</h3>
+<div style="overflow-x:auto;"><table>
+<tr><th>日期</th><th>方向</th><th>ETF</th><th>代码</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th><th>总资产</th></tr>
+{trade_rows}
+</table></div></div>
+<div style="font-size:11px;color:#888;text-align:center;margin-top:15px;">
+七星172策略 (GLM5修复版) | Blakever Trade | {now_str}</div>
+</body></html>"""
+
+    # 保存HTML
+    html_path = RESULTS_DIR / f'七星172_回测报告_{now_str}.html'
+    with open(html_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print(f"📄 HTML报告: {html_path}")
+
+    # 发送邮件
+    try:
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f'七星172 回测报告 {start}~{end} | 收益{r["total_return_pct"]:+.1f}%'
+        msg['From'] = '848786642@qq.com'
+        msg['To'] = '848786642@qq.com'
+        msg.attach(MIMEText(html, 'html', 'utf-8'))
+        with smtplib.SMTP_SSL('smtp.qq.com', 465) as s:
+            s.login('848786642@qq.com', 'ljbtvacrctjobfed')
+            s.sendmail('848786642@qq.com', '848786642@qq.com', msg.as_string())
+        print('[OK] 邮件已发送')
+    except Exception as e:
+        print(f'[WARN] 邮件发送失败: {e}')
 
 
 if __name__ == '__main__':

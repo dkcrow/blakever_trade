@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""七星港股版 实盘报告 (44只, 2025-01-01至今)
-Pool: 44只港股, 动量排名, 5只等权, 日频调仓
+"""七星港股版 实盘报告 (37只, 2025-01-01至今)
+Pool: 37只港股, 动量排名, 5只等权, score>=0.5, 日频调仓
 佣金0.1%+印花税0.13%+交易费0.00565%, 滑点0.1%
 """
 import sys, os, math, json, warnings, urllib.request, re, subprocess
@@ -21,7 +21,7 @@ STRATEGY_NAME = "七星港股版"
 # ================================================================
 # 港股池: 44只 (2026-06-18: 持股5只, 年化+125.5%, 回撤-17.8%, 夏普2.14)
 # ================================================================
-# 优化44只 (2026-06-17终版: 33底仓+11只HSI正向, 3年+442%)
+# 37只 (2026-06-18精简: 删7只低贡献+负向股)
 HK_POOL = [
     # 互联网/平台 (5)
     '00700',  # 腾讯控股
@@ -32,24 +32,20 @@ HK_POOL = [
     # AI大模型 (2)
     '02513',  # 智谱
     '00100',  # MiniMax-W
-    # AI/生物科技 (4)
+    # AI/生物科技 (3)
     '02162',  # 康诺亚-B
     '02616',  # 基石药业-B
-    '09688',  # 再鼎医药
     '09969',  # 诺诚健华
-    # AI应用/硬件 (3)
+    # AI应用/硬件 (2)
     '02418',  # 德银天下
-    '00992',  # 联想集团
     '01357',  # 美图公司
     # 半导体 (3)
     '00981',  # 中芯国际
     '01347',  # 华虹半导体
     '00522',  # ASMPT
-    # 新能源车 (2)
+    # 新能源车 (1)
     '01211',  # 比亚迪
-    '00175',  # 吉利汽车
-    # 制药 (3)
-    '03692',  # 翰森制药
+    # 制药 (2)
     '01093',  # 石药集团
     '01177',  # 中国生物制药
     # 工业/制造 (3)
@@ -70,13 +66,10 @@ HK_POOL = [
     '00883',  # 中海油
     '02899',  # 紫金矿业
     '03993',  # 洛阳钼业
-    # 物流 (2)
+    # 物流 (1)
     '02618',  # 京东物流
-    '02057',  # 中通快递
-    # 消费/家电 (3)
-    '09633',  # 农夫山泉
+    # 消费 (1)
     '01929',  # 周大福
-    '06690',  # 海尔智家
     # 房地产/珠宝 (2)
     '01113',  # 长实集团
     '06181',  # 老铺黄金
@@ -114,7 +107,7 @@ DATA_DIR = Path('data/storage/stock_data/hk')
 OUTPUT_DIR = Path('backtest/results_hk')
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-START_DATE = '2025-01-01'
+START_DATE = '2023-06-18'
 END_DATE = NOW.strftime('%Y-%m-%d')
 
 # ================================================================
@@ -233,7 +226,7 @@ class HKPortfolio:
         else:
             s.positions[code] = {'shares':shares,'cost_price':p,'last_price':p,'buy_date':date}
         s.trade_log.append({'date':date,'action':'BUY','code':code,'shares':int(shares),'price':round(p,4),'reason':reason,
-                            'comm':round(comm,2),'stamp':round(stamp,2),'fee':round(trade_fee,2)})
+                            'comm':round(comm,2),'stamp':round(stamp,2),'fee':round(trade_fee,2),'total_value':round(s.total_value,2)})
         return True
     def sell(s, code, shares, price, date, reason=''):
         if code not in s.positions: return False
@@ -246,7 +239,7 @@ class HKPortfolio:
         s.cash += tv - comm - stamp - trade_fee
         pnl = (p - pos['cost_price']) / pos['cost_price'] * 100
         s.trade_log.append({'date':date,'action':'SELL','code':code,'shares':int(a),'price':round(p,4),'pnl_pct':round(pnl,2),'reason':reason,
-                            'comm':round(comm,2),'stamp':round(stamp,2),'fee':round(trade_fee,2)})
+                            'comm':round(comm,2),'stamp':round(stamp,2),'fee':round(trade_fee,2),'total_value':round(s.total_value,2)})
         if a >= pos['shares']: del s.positions[code]
         else: s.positions[code]['shares'] -= a
         return True
@@ -296,16 +289,16 @@ for i, date in enumerate(trade_dates):
         elif code not in prices:
             pf.sell(code, pf.positions[code]['shares'], pf.positions[code].get('cost_price', 1), d_str, '数据缺失_按成本清仓')
 
-    total_val = pf.total_value
     pf.update_prices(prices)
-    n_qual = max(len(current_targets), 1)
-    for r in current_targets:
-        if r['code'] in pf.positions: continue
-        if r['code'] not in prices: continue
-        per_stock = total_val * 0.95 / n_qual
-        shares = int(per_stock / r['price'] / 100) * 100  # 港股整手100股
-        if shares >= 100:
-            pf.buy(r['code'], shares, r['price'], d_str, '动量轮换')
+    # 方案B: 纯可用现金分配 — 仅新标的获得现金，已持有不动
+    new_targets = [r for r in current_targets if r['code'] not in pf.positions and r['code'] in prices]
+    if new_targets:
+        available = pf.cash * 0.95
+        per_stock = available / len(new_targets)
+        for r in new_targets:
+            shares = int(per_stock / r['price'] / 100) * 100  # 港股整手100股
+            if shares >= 100:
+                pf.buy(r['code'], shares, r['price'], d_str, '动量轮换')
 
     pf.daily_values.append({'date': d_str, 'value': pf.total_value})
 
@@ -409,7 +402,8 @@ for t in recent:
         <td style="padding:3px 6px;text-align:right;">{t.get('shares',0)}</td>
         <td style="padding:3px 6px;text-align:right;">HK$ {amt:,.0f}</td>
         <td style="padding:3px 6px;font-size:10px;color:#555;">{t.get('reason','')}</td>
-        <td style="padding:3px 6px;text-align:right;font-weight:bold;color:{'#28A745' if (pnl and pnl>0) else ('#DC3545' if (pnl and pnl<0) else '#888')};">{ps}</td></tr>"""
+        <td style="padding:3px 6px;text-align:right;font-weight:bold;color:{'#28A745' if (pnl and pnl>0) else ('#DC3545' if (pnl and pnl<0) else '#888')};">{ps}</td>
+        <td style="padding:3px 6px;text-align:right;font-weight:bold;color:#1F4E79;">HK$ {t.get('total_value',0):,.0f}</td></tr>"""
 
 html = f"""<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
@@ -430,7 +424,7 @@ th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
 <div class="subtitle">{NOW_STR} | 数据区间: {trade_dates[0].strftime('%Y-%m-%d')} ~ {trade_dates[-1].strftime('%Y-%m-%d')}</div>
 
 <div class="config-box">
-    <b>策略:</b> 七星港股版 | <b>股票池:</b> 44只 | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>得分阈值:</b> >=0.5<br>
+    <b>策略:</b> 七星港股版 | <b>股票池:</b> 37只 | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>得分阈值:</b> >=0.5<br>
     <b>佣金:</b> 0.1% | <b>印花税:</b> 0.13%(卖) | <b>滑点:</b> 0.1% | <b>评分:</b> exp(slope×250)×R² | <b>约束:</b> 得分<0.5禁止买入,已持强制卖出<br>
     <b>实时行情:</b> {'L1-WeStock' if realtime_valid else '⚠️实时行情缺失'}
 </div>
@@ -457,7 +451,7 @@ th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
 
 <div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">📋 最近20条交易记录</h2>
 <div style="overflow-x:auto;"><table>
-<tr><th>日期</th><th>方向</th><th>代码/名称</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th></tr>
+<tr><th>日期</th><th>方向</th><th>代码/名称</th><th>价格</th><th>数量</th><th>金额</th><th>理由</th><th>盈亏</th><th>总资产</th></tr>
 {trade_html}</table></div></div>
 
 <div class="footer">七星港股版 · Blakever Trade · {NOW_STR}<br>本报告仅供研究参考，不构成投资建议。</div>

@@ -573,6 +573,7 @@ class Portfolio:
             'amount': round(trade_val, 2),
             'commission': round(commission, 2),
             'reason': reason,
+            'total_value': round(self.total_value, 2),
         }
         self.trade_log.append(record)
         return True
@@ -609,6 +610,7 @@ class Portfolio:
             'commission': round(commission, 2),
             'pnl_pct': round(pnl_pct, 4),
             'reason': reason,
+            'total_value': round(self.total_value, 2),
         }
         self.trade_log.append(record)
         return True
