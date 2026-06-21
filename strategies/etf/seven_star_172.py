@@ -437,7 +437,8 @@ class SevenStar172Engine:
 
             # ===== 可插拔过滤器 (策略独立) =====
             nav_s = self.nav_data.get(etf_code)
-            is_filtered, reasons = self.filter.check(etf_code, current_price, df, check_date, self.params, nav_s)
+            # 【修复】传入hist(截止到当天)而非df(全量数据), 防止过滤器使用未来数据
+            is_filtered, reasons = self.filter.check(etf_code, current_price, hist, check_date, self.params, nav_s)
             if is_filtered:
                 continue
 
@@ -707,8 +708,8 @@ class BacktestEngine172:
             target_etfs = [DEFENSIVE_ETF]
             print(f"  [{date}] 🛡️ DEFENSE -> {DEFENSIVE_ETF} {ETF_NAMES.get(DEFENSIVE_ETF,'')}")
 
-        # 等权分配 (原版逻辑)
-        total_val = self.portfolio.total_value
+        # 等权分配 (原版逻辑, 预留佣金空间防止余额不足)
+        total_val = self.portfolio.total_value * 0.998  # 预留0.2%给佣金+取整误差
         target_per_etf = total_val / len(target_etfs)
         min_money = self.engine.params['min_money']
 
@@ -851,6 +852,7 @@ def main():
     parser.add_argument('--no-avoid-a', action='store_true', help='关闭避A股走弱(avoid_a_share)')
     parser.add_argument('--no-intraday-dd', action='store_true', help='关闭日内回撤检查(intraday_drawdown)')
     parser.add_argument('--premium-only', action='store_true', help='仅保留溢价率过滤,关闭其他所有过滤器')
+    parser.add_argument('--original', action='store_true', help='使用聚宽原版172参数(启用原版4过滤器+关闭QMT V3)')
     parser.add_argument('--commission', type=float, default=0.0002, help='佣金费率')
 
     args = parser.parse_args()
@@ -873,17 +875,31 @@ def main():
         args.no_avoid_a = True
         args.no_intraday_dd = True
 
+    # --original: 恢复聚宽原版172参数 (启用原版4过滤器 + 关闭QMT V3)
+    if args.original:
+        args.no_regime = True       # 原版没有行情判断
+        args.no_avoid_a = True      # 原版没有回避A股
+        args.no_intraday_dd = True  # 原版没有日内回撤
+
     params = {
         'lookback_days': args.lookback,
         'holdings_num': args.holdings,
         'enable_profit_protection': not args.no_protection,
-        'enable_volume_check': not args.no_volume,
-        'use_short_momentum_filter': not args.no_short_momentum,
+        'enable_volume_check': True if args.original else (not args.no_volume),
+        'use_short_momentum_filter': True if args.original else (not args.no_short_momentum),
         'enable_premium_filter': not args.no_premium,
         'enable_regime_switch': not getattr(args, 'no_regime', False),
         'enable_avoid_a_share': not getattr(args, 'no_avoid_a', False),
         'enable_intraday_drawdown': not getattr(args, 'no_intraday_dd', False),
     }
+
+    # --original: 额外恢复原版参数值
+    if args.original:
+        params['loss'] = 0.97                    # 原版: 近3日单日跌幅>3%过滤
+        params['min_score_threshold'] = 0        # 原版: 得分<0过滤
+        params['max_score_threshold'] = 100.0    # 原版: 得分>100过滤
+        params['volume_return_limit'] = 1        # 原版: 年化>100%时启用放量过滤
+        params['short_momentum_threshold'] = 0.0 # 原版: 短期动量<0过滤
 
     # 回测
     engine = BacktestEngine172(ds, engine_params=params)
