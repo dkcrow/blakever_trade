@@ -255,8 +255,9 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 # ================================================================
 
 PYTHON = str(Path.home() / '.workbuddy' / 'binaries' / 'python' / 'envs' / 'default' / 'Scripts' / 'python.exe')
-NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
+# 2026-06-22修复: 插件已迁移, 旧cb_teams_marketplace路径失效
+NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'skills-marketplace' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' / 'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
 
 
 def _fetch_navs_tier1_neodata(raw_codes):
@@ -332,9 +333,10 @@ def _fetch_navs_tier2_akshare(raw_codes, date_str):
     navs = {}
     for code in raw_codes:
         try:
-            # 查询最近3天以确保能获取到昨日NAV（今日可能尚未发布）
+            # 2026-06-22修复: 窗口-2天太窄, 周末/节假日空区间会触发akshare异常→全失败
+            # 改为-12天确保覆盖最近有效净值(取最后一条), 跳过周末/长假
             end_dt = pd.Timestamp(date_str)
-            start_dt = end_dt - pd.Timedelta(days=2)
+            start_dt = end_dt - pd.Timedelta(days=12)
             df_nav = ak.fund_etf_fund_info_em(
                 fund=code,
                 start_date=start_dt.strftime('%Y%m%d'),
@@ -1072,8 +1074,11 @@ def generate_report(ranked, recent_trades, trade_info, nav_failed=False, realtim
     for r in top10:
         is_hold = r['code'] == holding_code
         bg = '#FEF9E7' if is_hold else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA')
-        chg = fmt_change_pct(r['change_pct'])
-        chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
+        if realtime_valid:
+            chg = fmt_change_pct(r['change_pct'])
+            chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
+        else:
+            chg = '—'; chg_c = '#888'  # 实时失败, 不冒充历史涨跌
         rc = r['rchange']
         # 变动列颜色：过滤原因显示为红色，正常变动按方向着色
         if '保护' in rc or '溢价' in rc or '跌' in rc or '动量负' in rc or '过滤' in rc:

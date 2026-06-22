@@ -1,0 +1,21 @@
+{
+  "strategy": "七星172 (GLM5修复版)",
+  "backtest_period": "2021-06-21 ~ 2026-06-02",
+  "trading_days": 1199,
+  "initial_cash": 1000000.0,
+  "final_value": 11427301.43,
+  "total_return_pct": 1042.73,
+  "annualized_return_pct": 219.16,
+  "max_drawdown_pct": 34.05,
+  "sharpe_ratio": 1.3797,
+  "calmar_ratio": 6.4355,
+  "total_trades": 427,
+  "buy_trades": 214,
+  "sell_trades": 213,
+  "win_rate_pct": 48.83,
+  "avg_win_pct": 6.23,
+  "avg_loss_pct": -3.15,
+  "final_holdings": [
+    "sh513310"
+  ]
+}

@@ -60,41 +60,43 @@ from strategies.etf.seven_star_base import (
 )
 
 # ================================================================
-# 🔧 默认参数 (与聚宽七星172原版完全一致)
+# 🔧 默认参数 (与聚宽七星172原版完全一致 — 禁止修改!)
 # ================================================================
+# ⚠️ RULE: 以下参数必须与七星172原版.py完全一致, 任何修改都需要克总明确授权
+# ⚠️ RULE: 如需实验, 请在七星QMT(generate_qmt_report.py)中进行
 
 DEFAULT_PARAMS = {
     # ---- 核心参数 ----
     'lookback_days': 25,
-    'holdings_num': 1,  # 临时回退到1只, 对照验证
+    'holdings_num': 1,                 # 原版: 仅持1只
     'min_money': 5000,
 
     # ---- 盈利保护参数 ----
-    'enable_profit_protection': True,   # 2026-06-03: 重新启用 (独立测试: +35%收益 -2.2%回撤)
+    'enable_profit_protection': True,
     'profit_protection_lookback': 1,
     'profit_protection_threshold': 0.05,
     'profit_protection_check_times': ['11:00'],
 
-    # ---- 过滤器参数 ----
-    'loss': 0.01,                    # 2026-06-03: 永久关闭 (消融实验证实破坏力-292%)
-    'min_score_threshold': -999999,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-102%)
-    'max_score_threshold': 999999,   # 2026-06-03: 永久关闭
+    # ---- 过滤器参数 (原版值) ----
+    'loss': 0.97,                    # 原版: 近3日单日跌幅>3%过滤
+    'min_score_threshold': 0,        # 原版: 得分<0过滤
+    'max_score_threshold': 100.0,    # 原版: 得分>100过滤
 
-    # ---- 成交量过滤 ----
-    'enable_volume_check': False,   # 2026-06-02: 永久关闭
+    # ---- 成交量过滤 (原版: 启用) ----
+    'enable_volume_check': True,
 
-    # ---- 短期动量过滤 ----
-    'use_short_momentum_filter': False,  # 2026-06-03: 永久关闭 (消融实验证实破坏力-313%)
-    'short_lookback_days': 10,           # get_ranked_etfs需要此参数
+    # ---- 短期动量过滤 (原版: 启用) ----
+    'use_short_momentum_filter': True,
+    'short_lookback_days': 10,
 
     # ---- 溢价率过滤 ----
-    'enable_premium_filter': True,   # 仅保留此项, 防高溢价买入
+    'enable_premium_filter': True,
     'premium_threshold': 0.20,
 
-    # ---- 行情判断 & 走弱期防御 (QMT V3) ----
-    'enable_regime_switch': True,
-    'enable_avoid_a_share': True,
-    'enable_intraday_drawdown': True,
+    # ---- 行情判断 & 走弱期防御 (QMT V3, 原版无此功能) ----
+    'enable_regime_switch': False,     # 原版无, 默认关闭
+    'enable_avoid_a_share': False,     # 原版无, 默认关闭
+    'enable_intraday_drawdown': False, # 原版无, 默认关闭
     'intraday_drawdown_threshold': 0.02,
     'weak_period_ma_lookback': 10,
     'weak_period_max_days': 20,

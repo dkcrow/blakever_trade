@@ -113,30 +113,33 @@ END_DATE = NOW.strftime('%Y-%m-%d')
 # ================================================================
 # 实时行情 (WeStock Data)
 # ================================================================
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
+# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效→实时行情失败→涨跌回退历史值(不是最新)
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
 
-def fetch_realtime_prices():
-    """获取港股实时行情"""
-    codes = ','.join([f'hk{c}' for c in HK_POOL])
+def _fetch_realtime_hk_westock(codes_list):
+    """L1: WeStock Data (腾讯自选股) 港股实时行情 → {code: {price, change_pct}}"""
     prices = {}
-    source = 'failed'
+    if not codes_list: return prices
+    codes = ','.join([f'hk{c}' for c in codes_list])
     try:
         result = subprocess.run(
             ['node', WESTOCK_SCRIPT, 'quote', codes],
             capture_output=True, text=True, timeout=30,
             cwd=os.path.dirname(WESTOCK_SCRIPT))
-        if result.returncode != 0: return prices, source
+        if result.returncode != 0: return prices
         in_table = False; col_idx = {}
         for line in result.stdout.split('\n'):
             line = line.strip()
             if not line.startswith('|'): continue
             parts = [p.strip() for p in line.split('|')[1:-1]]
             if not in_table:
-                for i, h in enumerate(parts):
-                    if h == 'code': col_idx['code'] = i
-                    elif h == 'price': col_idx['price'] = i
-                    elif h == 'change_percent': col_idx['chg'] = i
-                in_table = True; continue
+                if 'code' in parts or 'price' in parts:
+                    for i, h in enumerate(parts):
+                        if h == 'code': col_idx['code'] = i
+                        elif h == 'price': col_idx['price'] = i
+                        elif h == 'change_percent': col_idx['chg'] = i
+                    in_table = True
+                continue
             if all(p.replace('-','').replace(':','') == '' for p in parts): continue
             if 'code' in col_idx and 'price' in col_idx:
                 try:
@@ -145,9 +148,50 @@ def fetch_realtime_prices():
                     chg = float(parts[col_idx.get('chg', 0)]) if col_idx.get('chg') else 0
                     if p > 0: prices[code] = {'price': p, 'change_pct': chg}
                 except: pass
-        source = 'westock' if prices else 'failed'
     except: pass
-    return prices, source
+    return prices
+
+def _fetch_realtime_hk_sina(codes_list):
+    """L2: 新浪财经 (hq.sinajs.cn) 港股实时行情 → {code: {price, change_pct}}
+    港股格式: rt_hk<5位代码>; 字段: [3]昨收 [6]现价 [8]涨跌幅%"""
+    prices = {}
+    if not codes_list: return prices
+    try:
+        codes = ','.join([f'rt_hk{c}' for c in codes_list])
+        url = f'https://hq.sinajs.cn/list={codes}'
+        req = urllib.request.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'Referer': 'https://finance.sina.com.cn/'})
+        text = urllib.request.urlopen(req, timeout=15).read().decode('gbk', errors='replace')
+        for line in text.strip().split('\n'):
+            m = re.match(r'var hq_str_rt_hk(\d+)="(.+)"', line)
+            if not m: continue
+            code = m.group(1); f = m.group(2).split(',')
+            if len(f) < 9: continue
+            try:
+                price = float(f[6]); chg = float(f[8])
+                if price > 0: prices[code] = {'price': price, 'change_pct': chg}
+            except (ValueError, IndexError): continue
+    except: pass
+    return prices
+
+def fetch_realtime_prices():
+    """获取港股实时行情, 两级兜底逐个尝试: L1 WeStock → L2 新浪财经 → failed
+    返回 (prices_dict, source). source: 'westock'|'sina'|'failed'
+    铁律: 全部失败时返回 'failed', 严禁用历史数据冒充实时"""
+    # L1: WeStock Data
+    prices = _fetch_realtime_hk_westock(HK_POOL)
+    if prices:
+        print(f'[实时行情] L1-WeStock 成功: {len(prices)}/{len(HK_POOL)} 只')
+        return prices, 'westock'
+    print('[实时行情] L1-WeStock 失败, 尝试 L2-新浪财经...')
+    # L2: 新浪财经
+    prices = _fetch_realtime_hk_sina(HK_POOL)
+    if prices:
+        print(f'[实时行情] L2-新浪财经 成功: {len(prices)}/{len(HK_POOL)} 只')
+        return prices, 'sina'
+    print('[实时行情] ⚠️ 所有渠道均失败! 严禁使用历史数据冒充实时')
+    return {}, 'failed'
 
 # ================================================================
 # 数据加载
@@ -339,7 +383,11 @@ for code in pf.get_position_codes():
     cur_price = rt_price if (realtime_valid and rt_price > 0) else prices.get(code, pos['cost_price'])
     cost = pos['cost_price']
     pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
-    chg = rt.get('change_pct', 0) if realtime_valid else 0
+    # 2026-06-22: 实时失败时day_chg=None(显示"—"), 严禁用历史涨跌冒充实时
+    if realtime_valid and rt.get('change_pct') is not None and rt.get('price', 0) > 0:
+        chg = rt.get('change_pct', 0)
+    else:
+        chg = None
     current_holdings.append({'code': code, 'shares': pos['shares'], 'cost': cost, 'price': cur_price,
                               'pnl_pct': pnl, 'day_chg': chg, 'buy_date': pos.get('buy_date','')})
 
@@ -347,13 +395,26 @@ for code in pf.get_position_codes():
 # HTML报告
 # ================================================================
 hn = PARAMS['holdings_num']
+# 实时行情来源标签 + 失败告警横幅
+rt_label = {'westock': 'L1-WeStock(腾讯自选股)', 'sina': 'L2-新浪财经', 'failed': '⚠️ 全部渠道失败'}.get(rt_source, rt_source)
+if realtime_valid:
+    warning_banner = ''
+else:
+    warning_banner = ('<div style="background:#C62828;color:#fff;padding:12px 15px;border-radius:6px;'
+                      'margin-bottom:12px;font-weight:bold;font-size:13px;line-height:1.6;">'
+                      '⚠️ 实时行情获取失败（WeStock + 新浪财经均不可用）<br>'
+                      '下方"现价"为最近交易日收盘价，"涨跌"列显示 — 表示无实时数据。'
+                      '<b>请勿据此做盘中交易决策！</b></div>')
 # 排名表
 rank_rows = ""
 for i, r in enumerate(final_ranked[:10]):
     bg = '#FEF9E7' if i==0 else ('#FFF' if i%2==0 else '#F8F9FA')
     sc = '#28A745' if r['score']>0 else '#DC3545'
-    cc = '#28A745' if r.get('chg_pct',0)>0 else ('#DC3545' if r.get('chg_pct',0)<0 else '#888')
-    cs = f'+{r["chg_pct"]:.2f}%' if r.get('chg_pct',0)>0 else (f'{r["chg_pct"]:.2f}%' if r.get('chg_pct',0)<0 else '0.00%')
+    if realtime_valid:
+        cc = '#28A745' if r.get('chg_pct',0)>0 else ('#DC3545' if r.get('chg_pct',0)<0 else '#888')
+        cs = f'+{r["chg_pct"]:.2f}%' if r.get('chg_pct',0)>0 else (f'{r["chg_pct"]:.2f}%' if r.get('chg_pct',0)<0 else '0.00%')
+    else:
+        cc = '#888'; cs = '—'  # 实时失败, 不冒充历史涨跌
     name = HK_NAME.get(r['code'], r['code'])
     rank_rows += f"""<tr style="background:{bg};white-space:nowrap;">
         <td style="padding:4px 8px;text-align:center;font-weight:bold;">{i+1}</td>
@@ -369,9 +430,12 @@ total_val = 0
 for h in current_holdings:
     val = h['shares'] * h['price']; total_val += val
     pc = '#28A745' if h['pnl_pct']>0 else '#DC3545'
-    dchg = h.get('day_chg', 0)
-    dc = '#28A745' if dchg > 0 else ('#DC3545' if dchg < 0 else '#888')
-    ds = f'+{dchg:.2f}%' if dchg > 0 else (f'{dchg:.2f}%' if dchg < 0 else '0.00%')
+    dchg = h.get('day_chg')
+    if dchg is None:
+        dc = '#888'; ds = '—'  # 实时失败, 不冒充历史涨跌
+    else:
+        dc = '#28A745' if dchg > 0 else ('#DC3545' if dchg < 0 else '#888')
+        ds = f'+{dchg:.2f}%' if dchg > 0 else (f'{dchg:.2f}%' if dchg < 0 else '0.00%')
     name = HK_NAME.get(h['code'], h['code'])
     hold_rows += f"""<tr style="white-space:nowrap;">
         <td style="padding:4px 8px;">{h['code']}</td>
@@ -423,10 +487,11 @@ th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
 <h1>🇭🇰 七星港股版</h1>
 <div class="subtitle">{NOW_STR} | 数据区间: {trade_dates[0].strftime('%Y-%m-%d')} ~ {trade_dates[-1].strftime('%Y-%m-%d')}</div>
 
+{warning_banner}
 <div class="config-box">
     <b>策略:</b> 七星港股版 | <b>股票池:</b> 37只 | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>得分阈值:</b> >=0.5<br>
     <b>佣金:</b> 0.1% | <b>印花税:</b> 0.13%(卖) | <b>滑点:</b> 0.1% | <b>评分:</b> exp(slope×250)×R² | <b>约束:</b> 得分<0.5禁止买入,已持强制卖出<br>
-    <b>实时行情:</b> {'L1-WeStock' if realtime_valid else '⚠️实时行情缺失'}
+    <b>实时行情:</b> {rt_label}
 </div>
 
 <div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📈 回测绩效</h2>
@@ -466,7 +531,8 @@ with open(trades_path, 'w', encoding='utf-8') as f:
 
 # 邮件
 msg = MIMEMultipart("mixed")
-msg["Subject"] = f"[七星港股版] 实盘监控报告 - {NOW_STR}"
+msg["Subject"] = (f"⚠️[七星港股版] 实时行情获取失败 - {NOW_STR}" if not realtime_valid
+                  else f"[七星港股版] 实盘监控报告 - {NOW_STR}")
 msg["From"] = "848786642@qq.com"
 msg["To"] = "848786642@qq.com"
 msg.attach(MIMEText(html, "html", "utf-8"))

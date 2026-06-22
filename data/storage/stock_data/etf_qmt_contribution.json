@@ -1,0 +1,789 @@
+{
+  "period": "2023-06-20 ~ 2026-06-20",
+  "total_etfs": 173,
+  "selected_etfs": 68,
+  "total_trades": 324,
+  "pool_positive": 10,
+  "pool_negative": 7,
+  "pool_never": 23,
+  "outside_positive": 19,
+  "rankings": [
+    {
+      "code": "515880",
+      "buys": 8,
+      "pnl_total": 58.771361431863255,
+      "wins": 4,
+      "losses": 3,
+      "first_date": "2023-06-20",
+      "last_date": "2026-06-18",
+      "hold_days": 84
+    },
+    {
+      "code": "159851",
+      "buys": 3,
+      "pnl_total": 31.467888432258878,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2024-09-25",
+      "last_date": "2025-07-03",
+      "hold_days": 42
+    },
+    {
+      "code": "159218",
+      "buys": 4,
+      "pnl_total": 24.12159119178283,
+      "wins": 3,
+      "losses": 1,
+      "first_date": "2025-12-24",
+      "last_date": "2026-01-14",
+      "hold_days": 11
+    },
+    {
+      "code": "501018",
+      "buys": 5,
+      "pnl_total": 22.288188178206564,
+      "wins": 4,
+      "losses": 1,
+      "first_date": "2023-08-01",
+      "last_date": "2026-04-02",
+      "hold_days": 17
+    },
+    {
+      "code": "513090",
+      "buys": 1,
+      "pnl_total": 19.760239760239777,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2025-07-03",
+      "last_date": "2025-07-31",
+      "hold_days": 28
+    },
+    {
+      "code": "159509",
+      "buys": 10,
+      "pnl_total": 14.424264396706134,
+      "wins": 4,
+      "losses": 3,
+      "first_date": "2024-01-23",
+      "last_date": "2025-06-04",
+      "hold_days": 40
+    },
+    {
+      "code": "161226",
+      "buys": 6,
+      "pnl_total": 12.609685504742842,
+      "wins": 3,
+      "losses": 2,
+      "first_date": "2024-05-30",
+      "last_date": "2026-01-06",
+      "hold_days": 25
+    },
+    {
+      "code": "513290",
+      "buys": 2,
+      "pnl_total": 9.888682313793304,
+      "wins": 2,
+      "losses": 0,
+      "first_date": "2023-12-25",
+      "last_date": "2025-12-01",
+      "hold_days": 28
+    },
+    {
+      "code": "513310",
+      "buys": 8,
+      "pnl_total": 7.657609541885072,
+      "wins": 5,
+      "losses": 3,
+      "first_date": "2025-11-03",
+      "last_date": "2026-06-02",
+      "hold_days": 29
+    },
+    {
+      "code": "XLK",
+      "buys": 5,
+      "pnl_total": 7.2363069918752245,
+      "wins": 2,
+      "losses": 1,
+      "first_date": "2023-11-22",
+      "last_date": "2025-05-29",
+      "hold_days": 15
+    },
+    {
+      "code": "159985",
+      "buys": 2,
+      "pnl_total": 6.160841068280287,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2023-07-05",
+      "last_date": "2023-09-11",
+      "hold_days": 40
+    },
+    {
+      "code": "159529",
+      "buys": 3,
+      "pnl_total": 5.437820418306192,
+      "wins": 2,
+      "losses": 1,
+      "first_date": "2024-11-26",
+      "last_date": "2025-01-06",
+      "hold_days": 24
+    },
+    {
+      "code": "GLD",
+      "buys": 5,
+      "pnl_total": 4.6024023621031525,
+      "wins": 3,
+      "losses": 2,
+      "first_date": "2023-10-31",
+      "last_date": "2025-10-09",
+      "hold_days": 27
+    },
+    {
+      "code": "159981",
+      "buys": 2,
+      "pnl_total": 3.522910500262449,
+      "wins": 2,
+      "losses": 0,
+      "first_date": "2026-03-19",
+      "last_date": "2026-04-09",
+      "hold_days": 9
+    },
+    {
+      "code": "159583",
+      "buys": 2,
+      "pnl_total": 3.011187201240019,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2025-12-11",
+      "last_date": "2025-12-18",
+      "hold_days": 6
+    },
+    {
+      "code": "588200",
+      "buys": 2,
+      "pnl_total": 2.954170642472999,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2026-05-06",
+      "last_date": "2026-05-18",
+      "hold_days": 11
+    },
+    {
+      "code": "159792",
+      "buys": 2,
+      "pnl_total": 2.807677614915675,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2024-05-07",
+      "last_date": "2025-03-12",
+      "hold_days": 26
+    },
+    {
+      "code": "512880",
+      "buys": 1,
+      "pnl_total": 2.735499794323347,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2023-08-02",
+      "last_date": "2023-08-03",
+      "hold_days": 1
+    },
+    {
+      "code": "159206",
+      "buys": 1,
+      "pnl_total": 2.651634080205515,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2025-12-18",
+      "last_date": "2025-12-24",
+      "hold_days": 6
+    },
+    {
+      "code": "159852",
+      "buys": 1,
+      "pnl_total": 2.0610457503661452,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2025-02-12",
+      "last_date": "2025-02-14",
+      "hold_days": 2
+    },
+    {
+      "code": "159502",
+      "buys": 1,
+      "pnl_total": 1.5208929002032654,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2025-10-27",
+      "last_date": "2025-10-29",
+      "hold_days": 2
+    },
+    {
+      "code": "XLE",
+      "buys": 4,
+      "pnl_total": 1.3883313586063992,
+      "wins": 4,
+      "losses": 0,
+      "first_date": "2024-04-04",
+      "last_date": "2026-04-07",
+      "hold_days": 20
+    },
+    {
+      "code": "VNQ",
+      "buys": 2,
+      "pnl_total": 1.3366327966407057,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2023-12-01",
+      "last_date": "2024-09-24",
+      "hold_days": 14
+    },
+    {
+      "code": "QQQ",
+      "buys": 2,
+      "pnl_total": 1.0654347239287272,
+      "wins": 2,
+      "losses": 0,
+      "first_date": "2024-06-10",
+      "last_date": "2025-06-03",
+      "hold_days": 2
+    },
+    {
+      "code": "562500",
+      "buys": 1,
+      "pnl_total": 1.0119020052795125,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2025-02-11",
+      "last_date": "2025-02-12",
+      "hold_days": 1
+    },
+    {
+      "code": "XLU",
+      "buys": 3,
+      "pnl_total": 0.9400702068458137,
+      "wins": 3,
+      "losses": 0,
+      "first_date": "2024-05-03",
+      "last_date": "2024-09-25",
+      "hold_days": 12
+    },
+    {
+      "code": "513300",
+      "buys": 4,
+      "pnl_total": 0.41663848263125003,
+      "wins": 2,
+      "losses": 2,
+      "first_date": "2024-07-01",
+      "last_date": "2024-12-27",
+      "hold_days": 10
+    },
+    {
+      "code": "XLP",
+      "buys": 2,
+      "pnl_total": 0.2690463016919769,
+      "wins": 1,
+      "losses": 0,
+      "first_date": "2024-08-27",
+      "last_date": "2024-09-04",
+      "hold_days": 1
+    },
+    {
+      "code": "VEA",
+      "buys": 2,
+      "pnl_total": 0.07813156463897974,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2025-05-05",
+      "last_date": "2026-01-05",
+      "hold_days": 6
+    },
+    {
+      "code": "XLC",
+      "buys": 1,
+      "pnl_total": 0.0,
+      "wins": 0,
+      "losses": 0,
+      "first_date": "2024-02-09",
+      "last_date": "",
+      "hold_days": 0
+    },
+    {
+      "code": "159755",
+      "buys": 1,
+      "pnl_total": 0.0,
+      "wins": 0,
+      "losses": 0,
+      "first_date": "2025-09-15",
+      "last_date": "",
+      "hold_days": 0
+    },
+    {
+      "code": "513730",
+      "buys": 2,
+      "pnl_total": -0.16281563268388138,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2024-09-02",
+      "last_date": "2025-05-16",
+      "hold_days": 3
+    },
+    {
+      "code": "159766",
+      "buys": 1,
+      "pnl_total": -0.19980019980018635,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-11-18",
+      "last_date": "2025-11-19",
+      "hold_days": 1
+    },
+    {
+      "code": "515980",
+      "buys": 1,
+      "pnl_total": -0.1998001998001884,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-09-02",
+      "last_date": "2025-09-03",
+      "hold_days": 1
+    },
+    {
+      "code": "516010",
+      "buys": 1,
+      "pnl_total": -0.5647003818850224,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2023-11-17",
+      "last_date": "2023-11-22",
+      "hold_days": 5
+    },
+    {
+      "code": "518880",
+      "buys": 2,
+      "pnl_total": -0.6012311710635625,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-04-07",
+      "last_date": "2025-10-27",
+      "hold_days": 3
+    },
+    {
+      "code": "513030",
+      "buys": 1,
+      "pnl_total": -0.6839733947071608,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-02-06",
+      "last_date": "2025-02-11",
+      "hold_days": 5
+    },
+    {
+      "code": "159892",
+      "buys": 1,
+      "pnl_total": -0.8457561855619954,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2023-11-14",
+      "last_date": "2023-11-17",
+      "hold_days": 3
+    },
+    {
+      "code": "159980",
+      "buys": 2,
+      "pnl_total": -1.1024588752118327,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-04-29",
+      "last_date": "2024-05-07",
+      "hold_days": 1
+    },
+    {
+      "code": "513750",
+      "buys": 1,
+      "pnl_total": -1.2078830260648368,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-05-14",
+      "last_date": "2024-05-29",
+      "hold_days": 15
+    },
+    {
+      "code": "560090",
+      "buys": 1,
+      "pnl_total": -1.3592305817506734,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2023-08-11",
+      "last_date": "2023-08-14",
+      "hold_days": 3
+    },
+    {
+      "code": "513120",
+      "buys": 5,
+      "pnl_total": -1.3758926684271962,
+      "wins": 1,
+      "losses": 3,
+      "first_date": "2023-11-06",
+      "last_date": "2026-04-13",
+      "hold_days": 39
+    },
+    {
+      "code": "512980",
+      "buys": 1,
+      "pnl_total": -1.4630938681571555,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2023-11-23",
+      "last_date": "2023-11-24",
+      "hold_days": 1
+    },
+    {
+      "code": "159869",
+      "buys": 1,
+      "pnl_total": -2.159622854486897,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-02-14",
+      "last_date": "2025-02-21",
+      "hold_days": 7
+    },
+    {
+      "code": "SH",
+      "buys": 1,
+      "pnl_total": -2.2765496166361876,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-05-01",
+      "last_date": "2024-05-03",
+      "hold_days": 2
+    },
+    {
+      "code": "512000",
+      "buys": 2,
+      "pnl_total": -2.2765949536657497,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2023-08-04",
+      "last_date": "2023-08-16",
+      "hold_days": 9
+    },
+    {
+      "code": "XLF",
+      "buys": 1,
+      "pnl_total": -2.308763423892473,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-09-04",
+      "last_date": "2024-09-10",
+      "hold_days": 6
+    },
+    {
+      "code": "VWO",
+      "buys": 1,
+      "pnl_total": -2.5743669959200863,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-10-02",
+      "last_date": "2024-10-08",
+      "hold_days": 6
+    },
+    {
+      "code": "515050",
+      "buys": 2,
+      "pnl_total": -2.7386675824175692,
+      "wins": 0,
+      "losses": 2,
+      "first_date": "2026-04-27",
+      "last_date": "2026-06-09",
+      "hold_days": 14
+    },
+    {
+      "code": "159323",
+      "buys": 2,
+      "pnl_total": -2.763818842447874,
+      "wins": 0,
+      "losses": 2,
+      "first_date": "2025-03-12",
+      "last_date": "2025-05-27",
+      "hold_days": 10
+    },
+    {
+      "code": "516190",
+      "buys": 1,
+      "pnl_total": -2.972027972027971,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-12-16",
+      "last_date": "2024-12-17",
+      "hold_days": 1
+    },
+    {
+      "code": "513400",
+      "buys": 1,
+      "pnl_total": -3.486906506119673,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-07-19",
+      "last_date": "2024-07-22",
+      "hold_days": 3
+    },
+    {
+      "code": "515220",
+      "buys": 2,
+      "pnl_total": -3.9379711197892755,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2023-09-11",
+      "last_date": "2026-06-15",
+      "hold_days": 19
+    },
+    {
+      "code": "512200",
+      "buys": 2,
+      "pnl_total": -4.244071493538402,
+      "wins": 0,
+      "losses": 2,
+      "first_date": "2023-08-03",
+      "last_date": "2024-05-30",
+      "hold_days": 2
+    },
+    {
+      "code": "516150",
+      "buys": 1,
+      "pnl_total": -4.4286222252324015,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-11-13",
+      "last_date": "2024-11-14",
+      "hold_days": 1
+    },
+    {
+      "code": "515790",
+      "buys": 1,
+      "pnl_total": -5.848868113019047,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-11-13",
+      "last_date": "2025-11-18",
+      "hold_days": 5
+    },
+    {
+      "code": "513520",
+      "buys": 4,
+      "pnl_total": -5.920942032027902,
+      "wins": 2,
+      "losses": 2,
+      "first_date": "2024-01-15",
+      "last_date": "2025-11-03",
+      "hold_days": 26
+    },
+    {
+      "code": "159870",
+      "buys": 1,
+      "pnl_total": -6.526074184547652,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-11-19",
+      "last_date": "2025-11-24",
+      "hold_days": 5
+    },
+    {
+      "code": "520830",
+      "buys": 2,
+      "pnl_total": -6.707033424590686,
+      "wins": 1,
+      "losses": 1,
+      "first_date": "2025-01-24",
+      "last_date": "2025-02-06",
+      "hold_days": 4
+    },
+    {
+      "code": "515400",
+      "buys": 1,
+      "pnl_total": -6.78003315365952,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2024-11-14",
+      "last_date": "2024-11-22",
+      "hold_days": 8
+    },
+    {
+      "code": "XLY",
+      "buys": 3,
+      "pnl_total": -8.36257808957009,
+      "wins": 0,
+      "losses": 3,
+      "first_date": "2023-06-22",
+      "last_date": "2024-12-18",
+      "hold_days": 6
+    },
+    {
+      "code": "588170",
+      "buys": 4,
+      "pnl_total": -10.846039230045431,
+      "wins": 1,
+      "losses": 2,
+      "first_date": "2026-05-18",
+      "last_date": "2026-05-29",
+      "hold_days": 7
+    },
+    {
+      "code": "563230",
+      "buys": 4,
+      "pnl_total": -11.428026728357697,
+      "wins": 1,
+      "losses": 3,
+      "first_date": "2026-01-06",
+      "last_date": "2026-01-27",
+      "hold_days": 16
+    },
+    {
+      "code": "562590",
+      "buys": 1,
+      "pnl_total": -12.593674805383849,
+      "wins": 0,
+      "losses": 1,
+      "first_date": "2025-10-09",
+      "last_date": "2025-10-17",
+      "hold_days": 8
+    },
+    {
+      "code": "159518",
+      "buys": 7,
+      "pnl_total": -13.811427304551803,
+      "wins": 0,
+      "losses": 3,
+      "first_date": "2024-11-22",
+      "last_date": "2026-04-08",
+      "hold_days": 6
+    },
+    {
+      "code": "517520",
+      "buys": 4,
+      "pnl_total": -16.050648218313277,
+      "wins": 1,
+      "losses": 2,
+      "first_date": "2024-03-22",
+      "last_date": "2026-02-06",
+      "hold_days": 31
+    },
+    {
+      "code": "513350",
+      "buys": 4,
+      "pnl_total": -29.961722969423384,
+      "wins": 1,
+      "losses": 3,
+      "first_date": "2025-01-16",
+      "last_date": "2026-04-01",
+      "hold_days": 22
+    },
+    {
+      "code": "VIX",
+      "buys": 6,
+      "pnl_total": -37.06678427037537,
+      "wins": 0,
+      "losses": 4,
+      "first_date": "2023-08-16",
+      "last_date": "2024-08-19",
+      "hold_days": 88
+    }
+  ],
+  "candidates": [
+    {
+      "code": "515880",
+      "pnl": 58.771361431863255,
+      "buys": 8
+    },
+    {
+      "code": "159851",
+      "pnl": 31.467888432258878,
+      "buys": 3
+    },
+    {
+      "code": "159218",
+      "pnl": 24.12159119178283,
+      "buys": 4
+    },
+    {
+      "code": "513090",
+      "pnl": 19.760239760239777,
+      "buys": 1
+    },
+    {
+      "code": "XLK",
+      "pnl": 7.2363069918752245,
+      "buys": 5
+    },
+    {
+      "code": "GLD",
+      "pnl": 4.6024023621031525,
+      "buys": 5
+    },
+    {
+      "code": "159583",
+      "pnl": 3.011187201240019,
+      "buys": 2
+    },
+    {
+      "code": "588200",
+      "pnl": 2.954170642472999,
+      "buys": 2
+    },
+    {
+      "code": "512880",
+      "pnl": 2.735499794323347,
+      "buys": 1
+    },
+    {
+      "code": "159206",
+      "pnl": 2.651634080205515,
+      "buys": 1
+    },
+    {
+      "code": "159852",
+      "pnl": 2.0610457503661452,
+      "buys": 1
+    },
+    {
+      "code": "159502",
+      "pnl": 1.5208929002032654,
+      "buys": 1
+    },
+    {
+      "code": "XLE",
+      "pnl": 1.3883313586063992,
+      "buys": 4
+    },
+    {
+      "code": "VNQ",
+      "pnl": 1.3366327966407057,
+      "buys": 2
+    },
+    {
+      "code": "QQQ",
+      "pnl": 1.0654347239287272,
+      "buys": 2
+    },
+    {
+      "code": "XLU",
+      "pnl": 0.9400702068458137,
+      "buys": 3
+    },
+    {
+      "code": "513300",
+      "pnl": 0.41663848263125003,
+      "buys": 4
+    },
+    {
+      "code": "XLP",
+      "pnl": 0.2690463016919769,
+      "buys": 2
+    },
+    {
+      "code": "VEA",
+      "pnl": 0.07813156463897974,
+      "buys": 2
+    }
+  ]
+}

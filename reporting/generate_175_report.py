@@ -68,7 +68,8 @@ HOLDING_PROFIT_SKIP_PREV_CLOSE_PCT = 0.10
 OVERSEAS_ROTATION_COOLDOWN_DAYS = 1
 
 # ============ 实时行情 ============
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
+# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
 
 def _fetch_westock(codes):
     prices = {}

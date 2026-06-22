@@ -34,7 +34,8 @@ SCORE_THRESHOLD = 0.5  # 得分<0.5禁止买入, 已持有强制卖出
 # L1: WeStock Data (腾讯自选股)  L2: 新浪财经 API  L3: 全部失败→邮件告警
 # 规则: 严禁在实时行情获取失败时使用过时数据，必须告警通知
 # ================================================================
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
+# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
 
 def _fetch_realtime_westock(symbols):
     """L1: 通过 westock-data quote 获取美股实时行情"""
@@ -428,10 +429,10 @@ for code in pf.get_position_codes():
     close_price = last_prices.get(code, 0)
     # 仅当实时行情有效时才使用实时价格，否则用日线收盘价
     cur_price = rt_price if (realtime_valid and rt_price > 0) else close_price
-    # 当日涨跌幅：优先实时，否则从日线计算
+    # 当日涨跌幅: 实时有效才用; 失败时=None(显示"—"), 严禁用历史收盘冒充实时
     if realtime_valid and rt_chg != 0:
         day_chg = rt_chg
-    elif code in all_data:
+    elif realtime_valid and code in all_data:
         h = all_data[code]
         if len(h) >= 2:
             prev = h['close'].iloc[-2]
@@ -439,13 +440,13 @@ for code in pf.get_position_codes():
         else:
             day_chg = 0
     else:
-        day_chg = 0
+        day_chg = None
     cost = pos.get('cost_price', cur_price)
     pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
     current_holdings.append({
         'code': code, 'shares': pos['shares'],
         'cost': cost, 'price': cur_price,
-        'pnl_pct': pnl, 'day_chg': round(day_chg, 2),
+        'pnl_pct': pnl, 'day_chg': (round(day_chg, 2) if day_chg is not None else None),
         'buy_date': pos.get('buy_date', ''),
     })
 
@@ -490,9 +491,12 @@ rank_rows_html = ""
 for i, r in enumerate(final_ranked[:10]):
     bg = '#FEF9E7' if i==0 else ('#FFF' if i%2==0 else '#F8F9FA')
     score_color = '#28A745' if r['score']>0 else '#DC3545'
-    chg = r.get('chg_pct', 0)
-    chg_color = '#28A745' if chg > 0 else ('#DC3545' if chg < 0 else '#888')
-    chg_str = f'+{chg:.2f}%' if chg > 0 else (f'{chg:.2f}%' if chg < 0 else '0.00%')
+    if realtime_valid:
+        chg = r.get('chg_pct', 0)
+        chg_color = '#28A745' if chg > 0 else ('#DC3545' if chg < 0 else '#888')
+        chg_str = f'+{chg:.2f}%' if chg > 0 else (f'{chg:.2f}%' if chg < 0 else '0.00%')
+    else:
+        chg_color = '#888'; chg_str = '—'  # 实时失败, 不冒充历史涨跌
     rank_rows_html += f"""<tr style="background:{bg};white-space:nowrap;">
         <td style="padding:4px 6px;text-align:center;font-weight:bold;">{i+1}</td>
         <td style="padding:4px 6px;">{r['code']}</td>
@@ -507,9 +511,12 @@ for h in current_holdings:
     val = h['shares'] * h['price']
     total_holding_val += val
     pnl_c = '#28A745' if h['pnl_pct'] > 0 else '#DC3545'
-    dchg = h.get('day_chg', 0)
-    dchg_c = '#28A745' if dchg > 0 else ('#DC3545' if dchg < 0 else '#888')
-    dchg_str = f'+{dchg:.2f}%' if dchg > 0 else (f'{dchg:.2f}%' if dchg < 0 else '0.00%')
+    dchg = h.get('day_chg')
+    if dchg is None:
+        dchg_c = '#888'; dchg_str = '—'  # 实时失败, 不冒充历史涨跌
+    else:
+        dchg_c = '#28A745' if dchg > 0 else ('#DC3545' if dchg < 0 else '#888')
+        dchg_str = f'+{dchg:.2f}%' if dchg > 0 else (f'{dchg:.2f}%' if dchg < 0 else '0.00%')
     holding_rows_html += f"""<tr style="white-space:nowrap;">
         <td style="padding:4px 8px;">{h['code']}</td>
         <td style="padding:4px 8px;text-align:right;">{h['shares']}</td>

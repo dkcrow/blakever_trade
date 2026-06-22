@@ -29,21 +29,22 @@ from strategies.etf.seven_star_base import LocalDataSource, DEFENSIVE_ETF
 
 # 溢价率获取工具（复用172报告三级兜底）
 PYTHON_EXE = str(Path.home() / '.workbuddy' / 'binaries' / 'python' / 'envs' / 'default' / 'Scripts' / 'python.exe')
-NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'cb_teams_marketplace' / 'plugins' / 'finance-data' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
+# 2026-06-22修复: 插件已迁移, 旧cb_teams_marketplace路径失效
+NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'skills-marketplace' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
+WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' / 'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
 
 # ================================================================
-# QMT 51只ETF池 (聚宽格式 → 本地格式映射)
+# QMT ETF池 (2026-06-21: 移除德国30/东南亚, 加入科创芯片)
 # ================================================================
 QMT_RAW_CODES = [
-    # 海外ETF (15) + 债券ETF (3)
-    '513100','513290','513500','159529','513400','513520','513030','513080',
-    '513310','513730','159792','513130','513050','159920','513690',
+    # 海外ETF (13) + 债券ETF (3)
+    '513100','513290','513500','159529','513400','513520','513080',
+    '513310','159792','513130','513050','159920','513690',
     '511380','511010','511220',
     # 商品ETF (7)
     '518880','159980','159985','501018','161226','159981','512400',
-    # A股指数ETF (9)
-    '510300','510500','510050','510210','159915','588080','512100','563360','563300',
+    # A股指数ETF (10)
+    '510300','510500','510050','510210','159915','588080','588200','512100','563360','563300',
     # A股风格ETF (5)
     '512890','159967','588020','512040','159201',
     # A股行业板块ETF (12)
@@ -58,8 +59,8 @@ QMT_POOL = ['sh' + c if c.startswith('5') else 'sz' + c for c in QMT_RAW_CODES]
 QMT_NAMES = {
     'sh513100': '纳指ETF国泰', 'sh513290': '纳指生物科技ETF汇添富', 'sh513500': '标普500ETF博时',
     'sz159529': '标普消费ETF景顺', 'sh513400': '道琼斯ETF鹏华', 'sh513520': '日经ETF华夏',
-    'sh513030': '德国ETF华安', 'sh513080': '法国ETF华安', 'sh513310': '中韩半导体ETF华泰柏瑞',
-    'sh513730': '东南亚科技ETF华泰柏瑞', 'sz159792': '港股通互联网ETF富国', 'sh513130': '恒生科技ETF华泰柏瑞',
+    'sh513080': '法国ETF华安', 'sh513310': '中韩半导体ETF华泰柏瑞',
+    'sz159792': '港股通互联网ETF富国', 'sh513130': '恒生科技ETF华泰柏瑞',
     'sh513050': '中概互联网ETF易方达', 'sz159920': '恒生ETF华夏', 'sh513690': '港股红利ETF博时',
     'sh511380': '可转债ETF博时', 'sh511010': '国债ETF国泰', 'sh511220': '城投债ETF海富通',
     'sh518880': '黄金ETF华安', 'sz159980': '有色ETF大成', 'sz159985': '豆粕ETF华夏',
@@ -67,6 +68,7 @@ QMT_NAMES = {
     'sh512400': '有色金属ETF南方',
     'sh510300': '沪深300ETF华泰柏瑞', 'sh510500': '中证500ETF南方', 'sh510050': '上证50ETF华夏',
     'sh510210': '上证指数ETF富国', 'sz159915': '创业板ETF易方达', 'sh588080': '科创50ETF易方达',
+    'sh588200': '科创芯片ETF嘉实',
     'sh512100': '中证1000ETF南方', 'sh563360': 'A500ETF华泰柏瑞', 'sh563300': '中证2000ETF华泰柏瑞',
     'sh512890': '红利低波ETF华泰柏瑞', 'sz159967': '创业板成长ETF华夏', 'sh588020': '科创成长ETF易方达',
     'sh512040': '价值100ETF富国', 'sz159201': '自由现金流ETF华夏',
@@ -337,8 +339,9 @@ def _fetch_navs_tier2_akshare(raw_codes, date_str):
     navs = {}
     for code in raw_codes:
         try:
+            # 2026-06-22修复: 窗口-2天太窄, 周末/节假日空区间会触发akshare异常→全失败
             end_dt = pd.Timestamp(date_str)
-            start_dt = end_dt - pd.Timedelta(days=2)
+            start_dt = end_dt - pd.Timedelta(days=12)
             df_nav = ak.fund_etf_fund_info_em(
                 fund=code,
                 start_date=start_dt.strftime('%Y%m%d'),
@@ -1049,8 +1052,11 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
         is_filtered = r['filtered']
         # 被过滤的ETF排到11+后用浅红背景
         bg = '#FCE4D6' if is_filtered else ('#FEF9E7' if is_hold else ('#FFF' if r['rank'] % 2 == 0 else '#F8F9FA'))
-        chg = fmt_change_pct(r['change_pct'])
-        chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
+        if realtime_valid:
+            chg = fmt_change_pct(r['change_pct'])
+            chg_c = '#DC3545' if r['change_pct'] < -0.005 else ('#28A745' if r['change_pct'] > 0.005 else '#888')
+        else:
+            chg = '—'; chg_c = '#888'  # 实时失败, 不冒充历史涨跌
         rc = r['rchange']
         # 过滤原因标红，正常变动按方向着色
         if is_filtered:
