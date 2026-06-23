@@ -217,13 +217,17 @@ def calc_score(closes):
     x = np.arange(len(closes)); y = np.log(closes)
     mask = ~np.isnan(y) & ~np.isinf(y); x_m = x[mask]; y_m = y[mask]
     if len(x_m) < 5: return -999
-    slope = np.polyfit(x_m, y_m, 1)[0]
+    # 2026-06-23: 改无加权OLS→线性加权linspace(1,2)(近期权重高), 对齐美股/QMT
+    # 2026-06-23: exp×R² → (exp-1)×R², 与172/QMT/美股统一为"超额年化×拟合优度"
+    #   3年回测对比: 累计+353.1%→+415.5%, 回撤-37.9%→-26.8%, 夏普1.40→1.55(全面占优)
+    w = np.linspace(1, 2, len(x_m))
+    slope, intercept = np.polyfit(x_m, y_m, 1, w=w)
     ann = np.exp(slope * 250)
-    fitted = slope * x_m + np.polyfit(x_m, y_m, 1)[1]
+    fitted = slope * x_m + intercept
     res = y_m - fitted
-    ss_res = np.sum(res**2); ss_tot = np.sum((y_m - np.mean(y_m))**2)
+    ss_res = np.sum(w * res**2); ss_tot = np.sum(w * (y_m - np.mean(y_m))**2)
     r2 = 1 - ss_res/ss_tot if ss_tot > 0 else 0
-    return ann * r2
+    return (ann - 1) * r2
 
 def get_ranked(prices, date):
     ranked = []
@@ -490,7 +494,7 @@ th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
 {warning_banner}
 <div class="config-box">
     <b>策略:</b> 七星港股版 | <b>股票池:</b> 37只 | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>得分阈值:</b> >=0.5<br>
-    <b>佣金:</b> 0.1% | <b>印花税:</b> 0.13%(卖) | <b>滑点:</b> 0.1% | <b>评分:</b> exp(slope×250)×R² | <b>约束:</b> 得分<0.5禁止买入,已持强制卖出<br>
+    <b>佣金:</b> 0.1% | <b>印花税:</b> 0.13%(卖) | <b>滑点:</b> 0.1% | <b>评分:</b> (exp(slope×250)-1)×R² | <b>约束:</b> 得分<0.5禁止买入,已持强制卖出<br>
     <b>实时行情:</b> {rt_label}
 </div>
 
