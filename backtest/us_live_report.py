@@ -28,6 +28,8 @@ POOL = 'NVDA,AMD,MU,LRCX,LITE,NFLX,GOOGL,NOW,ORCL,SNPS,EOG,NEM,CAT,GE,AMT,PANW,Z
 
 PARAMS = {'lookback_days': 25, 'holdings_num': 7, 'min_money': 500}
 SCORE_THRESHOLD = 0.5  # 得分<0.5禁止买入, 已持有强制卖出
+ENABLE_PANIC_NDX5 = True  # 纳指100跌破5日线→空仓防守 (克总2026-06-26落地)
+MIN_HISTORY_DAYS = 126  # 最小历史天数(约半年), 过滤IPO初期噪声 (2026-07-01落地, 屏蔽SPCX等新股爆分)
 
 # ================================================================
 # 实时行情获取 — 三级兜底 (L1→L2→失败告警)
@@ -200,6 +202,19 @@ def send_monitor_failure_alert(failed_sources):
         return False
 
 # ================================================================
+# 数据同步 + 新鲜度校验 (克总2026-06-24: 严禁静默用旧数据)
+# ================================================================
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from data_freshness import sync_us_data, check_freshness, build_stale_banner
+print('[数据同步] 尝试更新美股CSV到最新...')
+try:
+    _upd, _src = sync_us_data(POOL, str(DATA_DIR))
+    print(f'[数据同步] 更新 {_upd} 只 (源: {_src})')
+except Exception as _e:
+    print(f'[数据同步] 失败: {_e}')
+
+# ================================================================
 # 加载数据
 # ================================================================
 print(f'加载 {len(POOL)} 只美股数据...')
@@ -221,11 +236,53 @@ for sym in POOL:
 
 trade_dates = sorted(set().union(*[df.index.strftime('%Y-%m-%d').tolist() for df in all_data.values()]))
 trade_dates = [d for d in trade_dates if START_DATE <= d <= END_DATE]
+
+# 新鲜度校验: 检查CSV滞后, 滞后则后续报告/邮件告警
+DATA_STALE, DATA_MAX_GAP, DATA_STALE_DETAIL, _chk = check_freshness(POOL, str(DATA_DIR), '{code}.csv', max_gap=3)
+stale_banner = build_stale_banner(DATA_STALE, DATA_MAX_GAP, DATA_STALE_DETAIL, '美股')
+if DATA_STALE:
+    print(f'[数据告警] ⚠️ 美股历史数据滞后 {DATA_MAX_GAP} 个交易日, {len(DATA_STALE_DETAIL)} 只超阈值')
+else:
+    print(f'[数据校验] 美股数据新鲜 (最大滞后 {DATA_MAX_GAP} 交易日, 已校验 {_chk} 只)')
 print(f'有效: {len(all_data)}只 | 交易日: {len(trade_dates)}天')
 
 # ================================================================
 # 回测引擎
 # ================================================================
+# ================================================================
+# 纳指100·5日恐慌过滤 (克总2026-06-26落地)
+# ================================================================
+import akshare as ak
+_ndx_cache = None
+def _get_ndx_data():
+    global _ndx_cache
+    if _ndx_cache is None:
+        try:
+            df = ak.index_us_stock_sina(symbol='.NDX')
+            df['date'] = pd.to_datetime(df['date'])
+            df = df.set_index('date').sort_index()
+            _ndx_cache = df['close']
+        except Exception:
+            _ndx_cache = pd.Series(dtype=float)
+    return _ndx_cache
+
+def check_ndx5_panic(dt):
+    """纳指100当天收盘价 < MA5 → 恐慌空仓"""
+    ndx = _get_ndx_data()
+    if len(ndx) < 10: return False
+    mask = ndx.index <= dt
+    hist = ndx.loc[mask]
+    if len(hist) < 6: return False
+    return float(hist.iloc[-1]) < float(hist.iloc[-5:].mean())
+
+def get_ndx5_status():
+    """获取纳指100 5日线当前状态 (用于报告展示)"""
+    ndx = _get_ndx_data()
+    if len(ndx) < 6: return None
+    cur = float(ndx.iloc[-1])
+    ma5 = float(ndx.iloc[-5:].mean())
+    return {'cur': cur, 'ma5': ma5, 'panic': cur < ma5, 'date': str(ndx.index[-1].date())}
+
 def calc_score(close_full, lookback=25):
     recent = close_full[-(lookback+1):]
     y = np.log(np.maximum(recent, 1e-10))
@@ -239,11 +296,12 @@ def calc_score(close_full, lookback=25):
 
 def get_ranked(prices, date):
     """动量排名: 仅使用 date 之前(不含当日)的收盘数据, 防未来函数"""
+    import math as _m
     ranked = []
     for code, df in all_data.items():
         if code not in prices: continue
         mask = df.index < pd.Timestamp(date); hist = df[mask]
-        if len(hist) < 35: continue
+        if len(hist) < MIN_HISTORY_DAYS: continue
         cp = prices[code]
         if cp <= 0: continue
         # 当日涨跌幅（相对于前一交易日收盘）
@@ -252,8 +310,9 @@ def get_ranked(prices, date):
             prev_close = hist['close'].iloc[-1]
             if prev_close > 0:
                 chg_pct = (cp - prev_close) / prev_close * 100
-        score = calc_score(hist['close'].values, 25)
-        ranked.append({'code':code,'score':score,'price':cp,'chg_pct':round(chg_pct,2)})
+        long_score = calc_score(hist['close'].values, 25)
+        short_score = calc_score(hist['close'].values, 10) if len(hist) >= 11 else 0
+        ranked.append({'code':code,'score':long_score,'short_score':round(short_score,4),'long_score':round(long_score,4),'price':cp,'chg_pct':round(chg_pct,2)})
     ranked.sort(key=lambda x: x['score'], reverse=True)
     return ranked
 
@@ -306,6 +365,7 @@ hn = PARAMS['holdings_num']
 
 print(f'回测中: ${INITIAL_CASH:,.0f} | 持股{hn}只')
 print('-' * 60)
+panic_days = 0
 for i, td in enumerate(trade_dates):
     tds = pd.Timestamp(td)
     prices = {}
@@ -313,6 +373,14 @@ for i, td in enumerate(trade_dates):
         m = df.index <= tds
         if m.any(): prices[code] = float(df.loc[m,'close'].iloc[-1])
     pf.update_prices(prices)
+    
+    # 纳指100·5日恐慌过滤
+    if ENABLE_PANIC_NDX5 and check_ndx5_panic(tds):
+        panic_days += 1
+        for code in list(pf.get_position_codes()):
+            if code in prices: pf.sell_all(code, prices[code], td, reason='NDX5恐慌空仓')
+        pf.record_daily_value(td); continue
+    
     ranked = get_ranked(prices, td)
     if not ranked: pf.record_daily_value(td); continue
     # score>=0.5 阈值过滤: 仅买入高置信度动量股
@@ -501,15 +569,19 @@ for i, r in enumerate(final_ranked[:10]):
         <td style="padding:4px 6px;text-align:center;font-weight:bold;">{i+1}</td>
         <td style="padding:4px 6px;">{r['code']}</td>
         <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{score_color};">{r['score']:.4f}</td>
+        <td style="padding:4px 6px;text-align:right;color:{'#28A745' if r.get('short_score',0)>0 else '#DC3545' if r.get('short_score',0)<0 else '#888'};">{r.get('short_score',0):.4f}</td>
+        <td style="padding:4px 6px;text-align:right;color:{'#28A745' if r.get('long_score',0)>0 else '#DC3545' if r.get('long_score',0)<0 else '#888'};">{r.get('long_score',0):.4f}</td>
         <td style="padding:4px 6px;text-align:right;">${r['price']:.2f}</td>
         <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{chg_color};">{chg_str}</td></tr>"""
 
 # 当前持仓表格
 holding_rows_html = ""
 total_holding_val = 0
+total_cost = 0
 for h in current_holdings:
     val = h['shares'] * h['price']
     total_holding_val += val
+    total_cost += h['shares'] * h['cost']
     pnl_c = '#28A745' if h['pnl_pct'] > 0 else '#DC3545'
     dchg = h.get('day_chg')
     if dchg is None:
@@ -529,6 +601,42 @@ for h in current_holdings:
 
 ret_color = '#2E7D32' if tr>0 else '#C62828'
 ret_bg = '#E8F5E9' if tr>0 else '#FFEBEE'
+
+# ================================================================
+# 行情判断: 纳指100·5日线 (克总2026-06-26: 跌破→空仓防守)
+# ================================================================
+ndx5 = get_ndx5_status()
+ndx5_card = ""
+if ndx5:
+    is_panic = ndx5['panic']
+    pcolor = '#DC3545' if is_panic else '#28A745'
+    ptext = '🔴恐慌期(空仓防守)' if is_panic else '🟢正常期'
+    ndx5_card = f"""<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">📊 行情判断 (纳指100·5日线) <br><span style="font-size:12px;color:#888;">(跌破则空仓防守 · 数据截止{ndx5['date']})</span></h3>
+<div style="background:#FFF8E1;padding:6px 10px;border-radius:6px;margin-bottom:10px;border-left:4px solid {pcolor};">
+<div style="font-size:11px;white-space:nowrap;"><b>纳指100:</b> <span style="color:{pcolor};font-weight:bold;">{ndx5['cur']:,.0f}</span> {'<' if is_panic else '>'} MA5=<b>{ndx5['ma5']:,.0f}</b></div>
+<div style="font-size:14px;font-weight:bold;color:{pcolor};margin-top:4px;">{ptext}</div>
+</div></div>"""
+# 保留成分股监控表但折叠为精简行
+comp_below = 0; comp_total = 0
+for sym in POOL:
+    df = all_data.get(sym)
+    if df is not None and len(df) >= 5:
+        cur = float(df['close'].iloc[-1])
+        ma5 = float(df['close'].iloc[-5:].mean())
+        comp_total += 1
+        if cur < ma5: comp_below += 1
+comp_pct = comp_below / comp_total * 100 if comp_total > 0 else 0
+comp_color = '#DC3545' if comp_pct > 50 else '#F9A825' if comp_pct > 30 else '#28A745'
+ndx5_card += f"""
+<div style="background:#fff;padding:6px 10px;border-radius:4px;font-size:11px;color:#888;white-space:nowrap;">
+成分股5日跌破: <span style="color:{comp_color};font-weight:bold;">{comp_below}/{comp_total} ({comp_pct:.0f}%)</span>
+</div>"""
+
+# 计算总盈亏
+total_pnl = total_holding_val - total_cost
+total_pnl_pct = (total_holding_val / total_cost - 1) * 100 if total_cost > 0 else 0
+pnl_sign = '+' if total_pnl >= 0 else ''
+pnl_color = '#28A745' if total_pnl >= 0 else '#DC3545'
 
 html = f"""<!DOCTYPE html>
 <html>
@@ -550,12 +658,10 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 </style></head><body>
 <h1>七星美股版(最优) · 实盘监控报告</h1>
 <div class="subtitle">{NOW_STR} | 数据区间: {trade_dates[0]} ~ {trade_dates[-1]}</div>
+{stale_banner}
 {rt_warning_banner}
 
-<div class="config-box">
-    <b>策略:</b> 七星美股版 精简 | <b>股票池:</b> 27只 (零后视镜·删13只弱股) | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>佣金:</b> $0.005/股<br>
-    <b>过滤:</b> 无 (盈利保护关·成交量关·短期动量关·硬止损关) | <b>评分:</b> exp(slope×250)×R²
-</div>
+{ndx5_card}
 
 <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">当前持仓 ({len(current_holdings)}只) | 总市值 ${total_holding_val:,.2f}</h3>
 <div style="overflow-x:auto;"><table>
@@ -564,21 +670,8 @@ td{{padding:5px 7px;border-bottom:1px solid #eee;}}
 
 <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">ETF动量排名 Top 10 ({trade_dates[-1]})</h3>
 <div style="overflow-x:auto;"><table>
-<tr><th>排名</th><th>代码</th><th>综合得分</th><th>价格</th><th>涨跌幅</th></tr>
+<tr><th>排名</th><th>代码</th><th>综合</th><th>短期</th><th>长期</th><th>价格</th><th>涨跌幅</th></tr>
 {rank_rows_html}</table></div></div>
-
-<!-- 3年回测绩效卡片 -->
-""" + (f"""
-<div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">3年回测绩效 (精简27只 · {hist_stats.get('start','')} ~ {hist_stats.get('end','')})</h3>
-<div class="metrics-row">
-<div class="metric-card"><div class="metric-label">累计收益</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('total_return',0):+.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">年化收益</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('annual_return',0):.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">最大回撤</div><div class="metric-value" style="color:#C62828;">{hist_stats.get('max_drawdown',0):.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">夏普比率</div><div class="metric-value" style="color:#1F4E79;">{hist_stats.get('sharpe',0):.2f}</div></div>
-<div class="metric-card"><div class="metric-label">交易笔数</div><div class="metric-value" style="color:#1F4E79;">{hist_stats.get('total_trades',0)}</div></div>
-<div class="metric-card"><div class="metric-label">胜率</div><div class="metric-value" style="color:#2E7D32;">{hist_stats.get('win_rate',0):.0f}%</div></div>
-</div></div>
-""" if hist_stats else "") + f"""
 
 <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">最近20条交易记录</h3>
 <div style="overflow-x:auto;"><table>
@@ -601,10 +694,12 @@ with open(trades_path, 'w', encoding='utf-8') as f:
     json.dump({'strategy': STRATEGY_NAME, 'period': f'{trade_dates[0]}~{trade_dates[-1]}', 'trades': trades}, f, ensure_ascii=False, indent=2, default=str)
 
 # 邮件
-if realtime_valid:
-    msg_subject = f"[七星美股版] 实盘监控报告 - {NOW_STR}"
-else:
+if not realtime_valid:
     msg_subject = f"[七星美股版] ⚠️ 监控失效(实时行情缺失) - {NOW_STR}"
+elif DATA_STALE:
+    msg_subject = f"⚠️[七星美股版] 历史数据滞后{DATA_MAX_GAP}个交易日 - {NOW_STR}"
+else:
+    msg_subject = f"[七星美股版] 实盘监控报告 - {NOW_STR}"
 
 msg = MIMEMultipart("mixed")
 msg["Subject"] = msg_subject

@@ -43,8 +43,8 @@ HK_POOL = [
     '00981',  # 中芯国际
     '01347',  # 华虹半导体
     '00522',  # ASMPT
-    # 新能源车 (1)
-    '01211',  # 比亚迪
+    # 新能源车 (0)
+    # (01211 比亚迪 已删除: 策略大亏 -33.1%, 不符合动量策略股性)
     # 制药 (2)
     '01093',  # 石药集团
     '01177',  # 中国生物制药
@@ -52,18 +52,16 @@ HK_POOL = [
     '02338',  # 潍柴动力
     '02038',  # 富智康集团
     '01378',  # 中国宏桥
-    # 金融 (7)
+    # 金融 (6)
     '00388',  # 港交所
     '02388',  # 中银香港
-    '00005',  # 汇丰控股
     '02318',  # 中国平安
     '00939',  # 建设银行
     '02628',  # 中国人寿
     '03988',  # 中国银行
     # 科技/AI平台 (1)
     '09888',  # 百度
-    # 能源/材料 (3)
-    '00883',  # 中海油
+    # 能源/材料 (2)
     '02899',  # 紫金矿业
     '03993',  # 洛阳钼业
     # 物流 (1)
@@ -75,6 +73,8 @@ HK_POOL = [
     '06181',  # 老铺黄金
     # 工业 (1)
     '00669',  # 创科实业
+    # 自动驾驶 (1)
+    '09660',  # 地平线机器人 (2026-06-29加入)
 ]
 
 HK_NAME = {
@@ -84,20 +84,24 @@ HK_NAME = {
     '02162': '康诺亚-B', '02616': '基石药业-B', '09688': '再鼎医药', '09969': '诺诚健华',
     '02418': '德银天下', '00992': '联想集团', '01357': '美图公司',
     '00981': '中芯国际', '01347': '华虹半导体', '00522': 'ASMPT',
-    '01211': '比亚迪', '00175': '吉利汽车',
+    '01211': '比亚迪(已删)', '00175': '吉利汽车',
     '03692': '翰森制药', '01093': '石药集团', '01177': '中国生物制药',
     '02338': '潍柴动力', '02038': '富智康集团', '01378': '中国宏桥',
-    '00388': '港交所', '02388': '中银香港', '00005': '汇丰控股', '02318': '中国平安', '00939': '建设银行', '02628': '中国人寿', '03988': '中国银行',
+    '00388': '港交所', '02388': '中银香港', '00005': '汇丰(已删)', '02318': '中国平安', '00939': '建设银行', '02628': '中国人寿', '03988': '中国银行',
     '09888': '百度',
     '00883': '中海油', '02899': '紫金矿业', '03993': '洛阳钼业',
     '02618': '京东物流', '02057': '中通快递',
     '09633': '农夫山泉', '01929': '周大福', '06690': '海尔智家',
     '01113': '长实集团', '06181': '老铺黄金',
     '00669': '创科实业',
+    '09660': '地平线机器人',
 }
 
 PARAMS = {'lookback_days': 25, 'holdings_num': 5, 'min_money': 500}
 SCORE_THRESHOLD = 0.5  # 动量得分<0.5禁止买入, 已持有强制卖出
+ENABLE_HKTECH_PANIC = True  # 恒生科技指数·25日恐慌过滤(克总2026-06-26落地)
+PANIC_MA = 25
+MM_RATE = 0.03  # 恐慌期现金买货基年化3%计息 (克总2026-06-30落地)
 HK_COMM_RATE = 0.001       # 佣金0.1%
 HK_STAMP_DUTY = 0.0013     # 印花税0.13%
 HK_TRADE_FEE = 0.0000565   # 交易费0.00565%
@@ -210,6 +214,27 @@ trade_dates = sorted(set().union(*[set(df.index) for df in all_data.values()]))
 trade_dates = [d for d in trade_dates if START_DATE <= d.strftime('%Y-%m-%d') <= END_DATE]
 
 # ================================================================
+# 恒生科技指数恐慌过滤 (2026-06-26)
+# ================================================================
+import akshare as ak
+_hktech_cache = None
+def _get_hktech():
+    global _hktech_cache
+    if _hktech_cache is None:
+        _hktech_cache = ak.stock_hk_index_daily_sina(symbol='HSTECH')
+        _hktech_cache['date'] = pd.to_datetime(_hktech_cache['date'])
+        _hktech_cache = _hktech_cache.set_index('date').sort_index()['close']
+    return _hktech_cache
+def check_hktech_panic(dt, ma=PANIC_MA):
+    h = _get_hktech(); m = h.index <= dt; hist = h.loc[m]
+    return len(hist) >= ma and float(hist.iloc[-1]) < float(hist.iloc[-ma:].mean())
+def get_hktech_status():
+    h = _get_hktech()
+    if len(h) < 26: return None
+    cur = float(h.iloc[-1]); ma = float(h.iloc[-PANIC_MA:].mean())
+    return {'cur': cur, 'ma': ma, 'panic': cur < ma, 'date': str(h.index[-1].date()), 'ma_period': PANIC_MA}
+
+# ================================================================
 # 动量评分 (与七星美股版完全一致: exp(slope×250) × R², 仅用<date数据)
 # ================================================================
 def calc_score(closes):
@@ -230,6 +255,7 @@ def calc_score(closes):
     return (ann - 1) * r2
 
 def get_ranked(prices, date):
+    import math as _m
     ranked = []
     for code, df in all_data.items():
         if code not in prices: continue
@@ -241,8 +267,9 @@ def get_ranked(prices, date):
         if len(hist) >= 1:
             prev_close = hist['close'].iloc[-1]
             if prev_close > 0: chg_pct = (cp - prev_close) / prev_close * 100
-        score = calc_score(hist['close'].values[-25:])
-        ranked.append({'code': code, 'score': score, 'price': cp, 'chg_pct': round(chg_pct, 2)})
+        long_score = calc_score(hist['close'].values[-25:])
+        short_score = calc_score(hist['close'].values[-10:]) if len(hist) >= 11 else 0
+        ranked.append({'code': code, 'score': long_score, 'short_score': round(short_score,4), 'long_score': round(long_score,4), 'price': cp, 'chg_pct': round(chg_pct, 2)})
     ranked.sort(key=lambda x: x['score'], reverse=True)
     return ranked
 
@@ -312,6 +339,15 @@ for i, date in enumerate(trade_dates):
         m = all_data[code].index == date
         if m.any(): prices[code] = float(all_data[code].loc[date, 'close'])
     if len(prices) < hn: continue
+
+    # 恒生科技恐慌过滤
+    if ENABLE_HKTECH_PANIC and check_hktech_panic(pd.Timestamp(date)):
+        for code in list(pf.get_position_codes()):
+            p = prices.get(code)
+            if not p: continue
+            pf.sell(code, pf.positions[code]['shares'], p, d_str, reason="HSTECH恐慌空仓")
+        pf.cash *= (1 + MM_RATE / 252)  # 恐慌期现金自动买入货基日息
+        continue
 
     ranked = get_ranked(prices, date)
     last_backtest_ranked = ranked  # 始终保存最新一天的排名
@@ -425,6 +461,8 @@ for i, r in enumerate(final_ranked[:10]):
         <td style="padding:4px 8px;">{r['code']}</td>
         <td style="padding:4px 8px;">{name}</td>
         <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{sc};">{r['score']:.4f}</td>
+        <td style="padding:4px 8px;text-align:right;color:{'#28A745' if r.get('short_score',0)>0 else '#DC3545' if r.get('short_score',0)<0 else '#888'};">{r.get('short_score',0):.4f}</td>
+        <td style="padding:4px 8px;text-align:right;color:{'#28A745' if r.get('long_score',0)>0 else '#DC3545' if r.get('long_score',0)<0 else '#888'};">{r.get('long_score',0):.4f}</td>
         <td style="padding:4px 8px;text-align:right;">HK$ {r['price']:.2f}</td>
         <td style="padding:4px 8px;text-align:right;font-weight:bold;color:{cc};">{cs}</td></tr>"""
 
@@ -473,6 +511,19 @@ for t in recent:
         <td style="padding:3px 6px;text-align:right;font-weight:bold;color:{'#28A745' if (pnl and pnl>0) else ('#DC3545' if (pnl and pnl<0) else '#888')};">{ps}</td>
         <td style="padding:3px 6px;text-align:right;font-weight:bold;color:#1F4E79;">HK$ {t.get('total_value',0):,.0f}</td></tr>"""
 
+# 恒生科技行情判断卡片
+hktech_card = ""
+if ENABLE_HKTECH_PANIC:
+    ts = get_hktech_status()
+    if ts:
+        is_p = ts['panic']; pc = '#DC3545' if is_p else '#28A745'
+        pt = '🔴恐慌期(空仓防守)' if is_p else '🟢正常期'
+        hktech_card = f"""<div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">📊 行情判断 (恒生科技 · {PANIC_MA}日线) <br><span style="font-size:12px;color:#888;">(跌破则空仓防守 · 数据截止{ts['date']})</span></h2>
+<div style="background:#FFF8E1;padding:6px 10px;border-radius:6px;margin-bottom:10px;border-left:4px solid {pc};">
+<div style="font-size:11px;white-space:nowrap;"><b>恒生科技:</b> <span style="color:{pc};font-weight:bold;">{ts['cur']:,.0f}</span> {'<' if is_p else '>'} MA{PANIC_MA}=<b>{ts['ma']:,.0f}</b></div>
+<div style="font-size:14px;font-weight:bold;color:{pc};margin-top:4px;">{pt}</div>
+</div></div>"""
+
 html = f"""<!DOCTYPE html><html><head><meta charset="utf-8">
 <style>
 body{{font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:0 auto;padding:15px;background:#F0F2F5;}}
@@ -492,25 +543,16 @@ th{{background:#1F4E79;color:#fff;padding:6px 8px;text-align:left;}}
 <div class="subtitle">{NOW_STR} | 数据区间: {trade_dates[0].strftime('%Y-%m-%d')} ~ {trade_dates[-1].strftime('%Y-%m-%d')}</div>
 
 {warning_banner}
+{hktech_card}
 <div class="config-box">
     <b>策略:</b> 七星港股版 | <b>股票池:</b> 37只 | <b>持股:</b> {hn}只等权 | <b>周期:</b> 25日动量 | <b>得分阈值:</b> >=0.5<br>
     <b>佣金:</b> 0.1% | <b>印花税:</b> 0.13%(卖) | <b>滑点:</b> 0.1% | <b>评分:</b> (exp(slope×250)-1)×R² | <b>约束:</b> 得分<0.5禁止买入,已持强制卖出<br>
     <b>实时行情:</b> {rt_label}
 </div>
 
-<div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📈 回测绩效</h2>
-<div class="metrics-row">
-<div class="metric-card"><div class="metric-label">累计收益</div><div class="metric-value" style="color:#2E7D32;">{tr_total:+.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">年化收益</div><div class="metric-value" style="color:#2E7D32;">{ann_ret*100:.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">最大回撤</div><div class="metric-value" style="color:#C62828;">{max_dd:.1f}%</div></div>
-<div class="metric-card"><div class="metric-label">夏普比率</div><div class="metric-value" style="color:#1F4E79;">{sharpe:.2f}</div></div>
-<div class="metric-card"><div class="metric-label">交易次数</div><div class="metric-value" style="color:#1F4E79;">{len(trades)}</div></div>
-<div class="metric-card"><div class="metric-label">胜率</div><div class="metric-value" style="color:#2E7D32;">{wr:.0f}%</div></div>
-</div></div>
-
 <div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">🏆 动量排名 Top10</h2>
 <div style="overflow-x:auto;"><table>
-<tr><th>排名</th><th>代码</th><th>名称</th><th>综合得分</th><th>现价</th><th>涨跌</th></tr>
+<tr><th>排名</th><th>代码</th><th>名称</th><th>综合</th><th>短期</th><th>长期</th><th>现价</th><th>涨跌</th></tr>
 {rank_rows}</table></div></div>
 
 <div class="card"><h2 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">💼 当前持仓 ({len(current_holdings)}只) | 总市值 HK$ {total_val:,.0f}</h2>

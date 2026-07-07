@@ -517,6 +517,8 @@ class BacktestEngine172:
         self.results = {}
         self.commission_rate = 0.0002  # 七星172的佣金费率 (vs 拉普拉斯0.0001)
         self.min_commission = 5
+        self.panic_days = 0  # 成分股MA恐慌期触发天数 (QMT扩展统计)
+        self.panic_idx = []  # 恐慌日在trade_dates中的索引序列 (用于算触发次数/每段持续天数)
 
     def run(self, start_date, end_date, initial_cash=1000000):
         """
@@ -588,14 +590,26 @@ class BacktestEngine172:
             # ===== 09:40 行情判断 (QMT V3) =====
             self.engine.check_regime(td)
 
+            # ===== 成分股MA10恐慌期判定 (QMT扩展, 默认关闭, 不影响172) =====
+            panic = False
+            if self.engine.params.get('enable_panic_regime', False):
+                panic = self._check_panic_regime(all_etf_data, current_prices, td)
+                if panic:
+                    self.panic_days += 1
+                    self.panic_idx.append(i)
+
             # ===== 11:00 盈利保护检查 =====
             self._run_profit_protection(current_prices, all_etf_data, td)
 
-            # ===== 13:10 卖出操作 =====
-            self._run_sell(current_prices, all_etf_data, td)
+            if panic:
+                # 恐慌期: 清仓全部持仓, 空仓持币防守, 不执行买入
+                self._panic_liquidate(current_prices, td)
+            else:
+                # ===== 13:10 卖出操作 =====
+                self._run_sell(current_prices, all_etf_data, td)
 
-            # ===== 13:11 买入操作 =====
-            self._run_buy(current_prices, all_etf_data, td)
+                # ===== 13:11 买入操作 =====
+                self._run_buy(current_prices, all_etf_data, td)
 
             # 记录每日净值
             self.portfolio.record_daily_value(td)
@@ -619,6 +633,45 @@ class BacktestEngine172:
                 pnl = (pos['last_price'] - pos['cost_price']) / pos['cost_price'] * 100 if pos['cost_price'] > 0 else 0
                 print(f"  [{date}] 持仓: {code} {ETF_NAMES.get(code,'')} "
                       f"数量{pos['shares']} 成本{pos['cost_price']:.3f} 现价{pos['last_price']:.3f} PnL:{pnl:+.2f}%")
+
+    def _check_panic_regime(self, all_etf_data, current_prices, date):
+        """成分股MA10恐慌期判定 (QMT扩展, 默认关闭)
+        统计成分股池中"最新价跌破MA10"的比例, 超过阈值(默认80%)→恐慌期→空仓防守。
+        分母用实际加载的成分股池(all_etf_data), 不依赖全局ETF_POOL(避免monkey-patch绑定问题)。
+        MA10口径: 最近lb个交易日收盘价均值(含当日), 即标准10日线。
+        """
+        lb = self.engine.params.get('panic_ma_lookback', 10)
+        thr = self.engine.params.get('panic_threshold', 0.80)
+        td_ts = pd.Timestamp(date)
+        below = 0
+        total = 0
+        for code, df in all_etf_data.items():
+            hist = df.loc[df.index <= td_ts, 'close']
+            if len(hist) < lb:
+                continue
+            cur = current_prices.get(code, 0)
+            if cur <= 0:
+                cur = float(hist.iloc[-1])
+            if cur <= 0:
+                continue
+            ma = float(hist.iloc[-lb:].mean())
+            total += 1
+            if cur < ma:
+                below += 1
+        if total == 0:
+            return False
+        ratio = below / total
+        is_panic = ratio > thr
+        if is_panic:
+            print(f"  [{date}] 🔴 PANIC: {below}/{total}={ratio:.0%} 成分股跌破MA{lb} (>{thr:.0%}) → 空仓防守")
+        return is_panic
+
+    def _panic_liquidate(self, current_prices, date):
+        """恐慌期空仓防守: 清仓全部持仓, 持币 (QMT扩展)"""
+        for sec in list(self.portfolio.get_position_codes()):
+            if sec in current_prices and current_prices[sec] > 0:
+                if self.portfolio.sell_all(sec, current_prices[sec], date, reason='恐慌期空仓防守'):
+                    print(f"  [{date}] 🛡️ PANIC_LIQUIDATE: {sec} {ETF_NAMES.get(sec,'')} @{current_prices[sec]:.3f}")
 
     def _run_profit_protection(self, current_prices, all_etf_data, date):
         """执行盈利保护检查 (11:00)"""
@@ -806,6 +859,8 @@ class BacktestEngine172:
             'avg_win_pct': round(sum(t['pnl_pct'] for t in wins) / len(wins) * 100, 2) if wins else 0,
             'avg_loss_pct': round(sum(t['pnl_pct'] for t in losses) / len(losses) * 100, 2) if losses else 0,
             'final_holdings': self.portfolio.get_position_codes(),
+            'panic_days': self.panic_days,
+            'panic_idx': list(self.panic_idx),
             'daily_values': dv,
             'trade_log': trades,
             'engine_params': self.engine.params,

@@ -96,6 +96,13 @@ QMT_PARAMS = {
     'intraday_drawdown_threshold': 0.02,
     'weak_period_ma_lookback': 10,
     'weak_period_max_days': 20,
+
+    # 成分股MA恐慌期空仓 (克总2026-06-23拍板: 80%·15日全局最优, 回撤防御最佳)
+    # 每个调仓日统计成分股池跌破MA15的比例, >80%判恐慌期→清仓空仓防守
+    'enable_panic_regime': True,
+    'panic_ma_lookback': 15,
+    'panic_threshold': 0.80,
+    'panic_threshold': 0.80,
 }
 
 
@@ -110,6 +117,8 @@ def main():
     parser.add_argument('--short-momentum', action='store_true', help='开启短期动量过滤(逃顶: 剔除短期动量<阈值的ETF)')
     parser.add_argument('--short-lb', type=int, default=10, help='短期动量回看天数(默认10)')
     parser.add_argument('--short-thr', type=float, default=0.0, help='短期动量年化阈值(默认0, <此值过滤)')
+    parser.add_argument('--no-panic', action='store_true', help='关闭成分股MA10恐慌期空仓(默认启用)')
+    parser.add_argument('--panic-thr', type=float, default=0.80, help='恐慌期跌破比例阈值(默认0.80=80%%)')
     args = parser.parse_args()
 
     # 覆盖持仓数 + 盈利保护开关 + 阈值 + 短期动量过滤
@@ -119,6 +128,8 @@ def main():
     QMT_PARAMS['use_short_momentum_filter'] = args.short_momentum
     QMT_PARAMS['short_lookback_days'] = args.short_lb
     QMT_PARAMS['short_momentum_threshold'] = args.short_thr
+    QMT_PARAMS['enable_panic_regime'] = not args.no_panic
+    QMT_PARAMS['panic_threshold'] = args.panic_thr
 
     data_dir = str(PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'etf')
     ds = LocalDataSource(data_dir)

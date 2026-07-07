@@ -52,6 +52,7 @@ PARAMS = {
     'enable_profit_protection': False,
     'profit_protection_lookback': 1, 'profit_protection_threshold': 0.05,
 }
+MIN_HISTORY_DAYS = 126  # 最小历史天数(约半年), 过滤IPO初期噪声 (2026-07-01落地)
 
 print("=" * 60)
 print(f"  {STRATEGY_NAME} 回测")
@@ -235,7 +236,7 @@ def get_ranked(all_data, prices, date, params):
         # 修复: < date (排除当日收盘价) — 用前一日数据计算动量，当日收盘价交易
         mask = df.index < pd.Timestamp(date)
         hist = df[mask]
-        if len(hist) < lb + 10:
+        if len(hist) < max(lb + 10, MIN_HISTORY_DAYS):
             continue
         cp = prices[code]
         if cp <= 0:

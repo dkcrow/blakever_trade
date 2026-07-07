@@ -1,0 +1,192 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"></head>
+<body style="font-family:'Microsoft YaHei',sans-serif;max-width:900px;margin:0 auto;padding:15px;background:#F0F2F5;">
+<h1 style="font-size:18px;color:#1F4E79;margin:0;">📊 七星QMT · 80%·15日恐慌过滤 · 近3年回测</h1>
+<div style="font-size:11px;color:#888;margin-top:3px;">2026-06-23 21:52 | 区间: 2023-06-21 ~ 2026-06-02 | 712交易日 | 50只池 持仓1只</div>
+
+<div style="background:#1F4E79;color:#fff;padding:10px 15px;border-radius:6px;margin:12px 0;font-size:12px;line-height:1.6;">
+<b>策略规则:</b> 七星QMT(动量轮动) + <b>新增恐慌过滤</b>: 成分股池 &gt;80% 跌破15日线 → 判恐慌期 → <b>卖出全部持仓、空仓防守</b><br>
+<b>其余:</b> 盈利保护(5%回撤) | 溢价率(&gt;20%) | 佣金0.02% | 评分(exp(slope×250)-1)×R²线性加权
+</div>
+
+<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
+<h2 style="font-size:14px;color:#1F4E79;margin:0 0 8px 0;">📈 回测绩效</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px;">
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;"><div style="font-size:11px;color:#888;">累计收益</div><div style="font-size:18px;font-weight:bold;color:#C62828;">+617.0%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;"><div style="font-size:11px;color:#888;">年化(CAGR)</div><div style="font-size:18px;font-weight:bold;color:#C62828;">100.8%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;"><div style="font-size:11px;color:#888;">最大回撤</div><div style="font-size:18px;font-weight:bold;color:#2E7D32;">28.4%</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;"><div style="font-size:11px;color:#888;">夏普</div><div style="font-size:18px;font-weight:bold;color:#1F4E79;">1.79</div></div>
+<div style="flex:1;min-width:100px;background:#F8F9FA;padding:10px;border-radius:6px;text-align:center;"><div style="font-size:11px;color:#888;">交易/胜率</div><div style="font-size:18px;font-weight:bold;color:#1F4E79;">377/46%</div></div>
+</div>
+<div style="margin-top:10px;font-size:12px;color:#555;background:#FFF8E1;padding:8px 12px;border-radius:6px;border-left:4px solid #F9A825;">
+🛡️ <b>恐慌过滤效果:</b> 近3年触发空仓卖出 <b>23</b> 笔; 最大回撤由关闭时的 36.3% 降至 <b>28.4%</b> (改善约7.9pp), 夏普基本持平(1.79 vs 1.81)。
+</div>
+</div>
+
+<div style="background:#fff;padding:15px;border-radius:8px;">
+<h2 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">📋 最近20笔交易</h2>
+<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:12px;">
+<tr style="background:#1F4E79;color:#fff;"><th style="padding:6px 8px;text-align:left;">日期</th><th style="padding:6px 8px;">方向</th><th style="padding:6px 8px;text-align:left;">标的</th><th style="padding:6px 8px;">价格</th><th style="padding:6px 8px;">金额</th><th style="padding:6px 8px;">盈亏</th><th style="padding:6px 8px;">理由</th><th style="padding:6px 8px;">总资产</th></tr>
+<tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-06-02</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh513310 中韩半导体ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥5.942</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,157,139</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,170,509</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-06-02</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh513100 纳指ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.343</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,160,208</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-0.93%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,171,940</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-06-01</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh513100 纳指ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.365</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,227,440</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,240,604</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-06-01</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh512220 TMTETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥4.010</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,229,629</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-4.07%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">盈利保护</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,242,050</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-29</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh512220 TMTETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥4.180</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,536,122</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,549,989</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-29</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sz159995 芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.490</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,537,977</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-8.79%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">盈利保护</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,551,496</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-25</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sz159995 芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.730</td>
+        <td style="padding:4px 8px;text-align:right;">¥8,264,529</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥8,279,556</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-25</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh513310 中韩半导体ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥6.041</td>
+        <td style="padding:4px 8px;text-align:right;">¥8,269,525</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#C62828;">+12.24%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥8,281,208</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-20</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh513310 中韩半导体ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥5.382</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,367,420</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,380,757</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-20</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.770</td>
+        <td style="padding:4px 8px;text-align:right;">¥7,371,481</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#C62828;">+8.96%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥7,382,231</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-18</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.460</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,765,338</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,777,562</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-18</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sz159995 芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.340</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,767,982</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#C62828;">+0.86%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,778,915</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-15</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sz159995 芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥2.320</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,710,136</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,722,423</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-15</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.420</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,712,776</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-1.44%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">盈利保护</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,723,765</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-12</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.470</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,810,916</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,823,247</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-12</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh513310 中韩半导体ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥5.598</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,813,326</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-0.64%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,824,610</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-11</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh513310 中韩半导体ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥5.634</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,857,141</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,869,788</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-05-11</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.430</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,861,372</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#C62828;">+11.00%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,871,159</td></tr><tr style="background:#FCE9E9;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-30</td>
+        <td style="padding:4px 8px;font-weight:bold;">买入</td>
+        <td style="padding:4px 8px;">sh588200 科创芯片ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥3.090</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,181,236</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#888;">-</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">排名1</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,192,395</td></tr><tr style="background:#E9F3EC;white-space:nowrap;">
+        <td style="padding:4px 8px;">2026-04-30</td>
+        <td style="padding:4px 8px;font-weight:bold;">卖出</td>
+        <td style="padding:4px 8px;">sh515880 通信ETF</td>
+        <td style="padding:4px 8px;text-align:right;">¥1.320</td>
+        <td style="padding:4px 8px;text-align:right;">¥6,183,276</td>
+        <td style="padding:4px 8px;text-align:right;font-weight:bold;color:#2E7D32;">-2.94%</td>
+        <td style="padding:4px 8px;font-size:11px;color:#555;">调出目标</td>
+        <td style="padding:4px 8px;text-align:right;color:#1F4E79;">¥6,193,632</td></tr></table></div></div>
+
+<div style="text-align:center;font-size:10px;color:#999;margin-top:15px;">七星QMT · 80%·15日恐慌过滤 · Blakever Trade · 2026-06-23 21:52<br>本报告为回测结果，仅供研究参考，不构成投资建议。</div>
+</body></html>

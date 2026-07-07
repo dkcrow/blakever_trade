@@ -891,57 +891,51 @@ def fmt_score(val):
     return f'{val:.4f}'
 
 # ================================================================
-# 行情判断 (简化版, 用于报告中展示)
+# 行情判断 — 成分股恐慌期 (2026-06-23克总拍板: 80%·15日全局最优)
+# 替换旧的A股4宽基指数版(克总: A股大盘被高度控盘不具备参考性)
 # ================================================================
-def get_regime_status():
-    """简化版行情判断: 检查沪深300/创业板/上证/中证500与MA10关系"""
+def get_regime_status(realtime_prices=None):
+    """成分股恐慌期判定: QMT_POOL成分股中最新价跌破15日线比例 > 80% → 恐慌期 → 空仓防守。
+    返回 (regime_text, is_weak, status_lines, below_count, total)
+    现价优先用 realtime_prices(实时行情, {code:price}), 失败则降级CSV收盘价; MA15=近15个交易日收盘均值(不含当日)。
+    """
     import pandas as pd
-    index_dir = Path(__file__).parent.parent / 'data' / 'storage' / 'stock_data' / 'index'
-    index_map = {
-        '沪深300': 'sh000300.csv',
-        '创业板指': 'sz399006.csv',
-        '上证指数': 'sh000001.csv',
-        '中证500': 'sh000905.csv',
-    }
-    below_count = 0
-    total = 0
-    status_lines = []
-    for name, fn in index_map.items():
-        fp = index_dir / fn
-        if not fp.exists():
-            continue
-        try:
-            df = pd.read_csv(fp)
-            # normalize columns
-            for c in df.columns:
-                if c.lower().strip() == 'date' and c != 'date':
-                    df = df.rename(columns={c: 'date'})
-                elif c.lower().strip() == 'close' and c != 'close':
-                    df = df.rename(columns={c: 'close'})
-            df['date'] = pd.to_datetime(df['date'])
-            df = df.set_index('date').sort_index()
-            mask = df.index <= pd.Timestamp(LATEST_DATE)
-            hist = df[mask]
-            if len(hist) < 11:
-                continue
-            total += 1
-            cur = hist['close'].iloc[-1]
-            ma10 = hist['close'].iloc[-(10+1):-1].mean()
-            below = cur < ma10
-            if below: below_count += 1
-            status_lines.append(f"{name}: {cur:.0f} {'<' if below else '>'} MA10={ma10:.0f} {'⚠️' if below else '✅'}")
-        except Exception:
-            pass
-
-    threshold = max(2, int(total * 0.75))
-    is_weak = below_count >= threshold if total > 0 else False
-    regime_text = "走弱期" if is_weak else "正常期"
-    return regime_text, is_weak, status_lines, below_count, total
+    lb = 15; thr = 0.80
+    realtime_prices = realtime_prices or {}
+    ds = LocalDataSource()
+    try:
+        pool_data = ds.load_all_etfs('2025-01-01', LATEST_DATE)
+    except Exception:
+        pool_data = {}
+    below_count = 0; total = 0; status_lines = []
+    for code, df in sorted(pool_data.items()):
+        mask = df.index <= pd.Timestamp(LATEST_DATE)
+        hist = df.loc[mask, 'close']
+        if len(hist) < lb: continue
+        # 现价: 实时行情优先(与排名/持仓一致), CSV收盘兜底
+        rt_p = realtime_prices.get(code, 0)
+        cur = float(rt_p) if rt_p and rt_p > 0 else float(hist.iloc[-1])
+        # MA15 = 近15根K线收盘均值(不含当日，即倒数16~倒数2共15根)
+        if len(hist) >= lb + 1:
+            ma = float(hist.iloc[-(lb+1):-1].mean())
+        else:
+            ma = float(hist.iloc[-lb:].mean())
+        total += 1
+        below = cur < ma
+        if below: below_count += 1
+        name = QMT_NAMES.get(code, code)
+        status_lines.append(f"{code} {name}: {cur:.2f} {'<' if below else '>'} MA15={ma:.2f} {'⚠️' if below else '✅'}")
+    if total == 0:
+        return ("数据不足", False, [], 0, 0)
+    ratio = below_count / total
+    is_panic = ratio > thr
+    regime_text = "🔴恐慌期(空仓防守)" if is_panic else "🟢正常期"
+    return (regime_text, is_panic, status_lines, below_count, total)
 
 # ================================================================
 # 生成报告 (HTML)
 # ================================================================
-def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True, realtime_valid=True):
+def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True, realtime_valid=True, stale_banner='', etf_health_html=''):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
@@ -975,11 +969,25 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 
     holding_html = ""
     if current_holding:
+        # 从排名列表获取实时行情
+        rt_price = current_holding['price']
+        rt_chg = None
+        code_clean = current_holding['code'].replace('sh','').replace('sz','')
+        for r in ranked:
+            rcode = r['code'].replace('sh','').replace('sz','')
+            if rcode == code_clean:
+                rt_price = r['price']
+                rt_chg = r.get('change_pct', None)
+                break
+        chg_str = f"{rt_chg:+.2f}%" if rt_chg is not None else "—"
+        chg_color = '#28A745' if (rt_chg or 0) > 0 else ('#DC3545' if (rt_chg or 0) < 0 else '#888')
         holding_html = f"""
-        <div style="background:#FFF3CD;padding:10px 15px;border-radius:6px;margin:15px 0;font-size:13px;">
-            <b>当前持仓:</b> {current_holding['name']} ({current_holding['code']})
-            买入价: {current_holding['price']} | 买入日: {current_holding['date']}
-        </div>"""
+        <div style="background:#fff;padding:15px 20px;border-radius:8px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
+        <h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">💼 当前持仓 (1只)</h3>
+        <div style="overflow-x:auto;"><table style="font-size:8px;width:100%;border-collapse:collapse;">
+        <tr><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">代码</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">名称</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">成本</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">现价</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">涨跌</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">买入日</th></tr>
+        <tr><td style="padding:3px 8px;">{current_holding['code']}</td><td style="padding:3px 8px;white-space:nowrap;">{current_holding['name']}</td><td style="padding:3px 8px;text-align:right;">¥{current_holding['price']:.4f}</td><td style="padding:3px 8px;text-align:right;">¥{rt_price:.4f}</td><td style="padding:3px 8px;text-align:right;font-weight:bold;color:{chg_color};">{chg_str}</td><td style="padding:3px 8px;white-space:nowrap;">{current_holding['date']}</td></tr>
+        </table></div></div>"""
 
     trade_alert = ""
     if trade_info[0]:
@@ -991,15 +999,44 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
     # 行情判断
     regime_html = ""
     if regime_info:
-        regime_text, is_weak, status_lines, below_count, total = regime_info
-        regime_color = '#DC3545' if is_weak else '#28A745'
-        lines_html = '<br>'.join(status_lines)
+        regime_text, is_panic, status_lines, below_count, total = regime_info
+        regime_color = '#DC3545' if is_panic else '#28A745'
+        pct = below_count / total * 100 if total > 0 else 0
+        m5color = '#DC3545' if is_panic else '#F9A825' if pct > 30 else '#28A745'
+        # 构建逐只监控表格
+        import re
+        parsed_rows = []
+        for line in status_lines:
+            # 格式: "sh513100 纳指ETF国泰: 2.37 > MA15=2.31 ✅"
+            try:
+                header, detail = line.split(': ', 1)
+            except ValueError:
+                continue
+            parts = header.split(' ', 1)
+            code = parts[0]
+            name = parts[1] if len(parts) > 1 else code
+            m = re.match(r'([\d.]+)\s*([<>])\s*MA15=([\d.]+)\s*(.+)', detail)
+            if m:
+                cur_val, rel, ma_val = float(m.group(1)), m.group(2), float(m.group(3))
+                below = rel == '<'
+                parsed_rows.append((code, name, cur_val, ma_val, below))
+            else:
+                parsed_rows.append((code, name, 0.0, 0.0, False))
+        # 排序: 跌破优先, 跌破幅度大的靠前
+        parsed_rows.sort(key=lambda d: (-d[4], -(d[3]-d[2])/d[3] if d[3]>0 else 0))
+        table_rows = ""
+        for code, name, cur_val, ma_val, below in parsed_rows:
+            cc = '#DC3545' if below else '#28A745'
+            fstr = '⚠️跌破' if below else '✅站上'
+            table_rows += f'<tr style="white-space:nowrap;"><td style="padding:3px 8px;">{code}</td><td style="padding:3px 8px;">{name}</td><td style="text-align:right;padding:3px 8px;">{cur_val:.2f}</td><td style="text-align:right;padding:3px 8px;">{ma_val:.2f}</td><td style="text-align:right;font-weight:bold;color:{cc};padding:3px 8px;">{fstr}</td></tr>'
         regime_html = f"""
-        <div style="background:#fff;padding:10px 15px;border-radius:8px;margin:10px 0;font-size:12px;border-left:4px solid {regime_color};">
-            <b>行情判断:</b> <span style="color:{regime_color};font-weight:bold;">{regime_text}</span>
-            ({below_count}/{total}指数跌破MA10)
-            <div style="color:#666;margin-top:4px;">{lines_html}</div>
-        </div>"""
+        <div class="card"><h3 style="font-size:14px;color:#1F4E79;margin:0 0 10px;">📊 成分股15日线监控 <br><span style="font-size:12px;color:#888;">(>80%跌破触发恐慌空仓 · 共{total}只)</span></h3>
+        <div style="background:#FFF8E1;padding:6px 10px;border-radius:6px;margin-bottom:10px;font-size:11px;white-space:nowrap;border-left:4px solid {m5color};">
+        <b>恐慌状态:</b> <span style="color:{regime_color};font-weight:bold;">{regime_text}</span> — 跌破15日线: <b style="color:{m5color};">{below_count}/{total} ({pct:.0f}%)</b>
+        </div>
+        <div style="overflow-x:auto;"><table style="font-size:8px;width:100%;border-collapse:collapse;">
+        <tr><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">代码</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">名称</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">现价</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">MA15</th><th style="background:#1F4E79;color:#fff;padding:5px;text-align:left;">状态</th></tr>
+        {table_rows}</table></div></div>"""
 
     html = f"""<!DOCTYPE html>
 <html>
@@ -1011,11 +1048,8 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
     <p style="font-size:12px;color:#888;margin:0;">{now_str} (Asia/Shanghai) | 数据截止: {LATEST_DATE}</p>
 </div>
 
-<div style="background:#fff;padding:12px 18px;border-radius:8px;border-left:4px solid #1F4E79;margin-bottom:12px;font-size:13px;">
-    <b>策略:</b> 七星QMT原版 | <b>ETF池:</b> {len(QMT_POOL)}只 | <b>周期:</b> 25日 | <b>佣金:</b> 0.02%
-    | <b>过滤:</b> 盈利保护(开) 成交量(关) 短期动量(关)
-</div>
-{holding_html}
+{stale_banner}
+{etf_health_html}
 {trade_alert}
 {regime_html}
 
@@ -1089,9 +1123,11 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
             <td style="padding:4px 6px;text-align:center;color:{rc_c};font-weight:bold;">{rc}</td>
         </tr>"""
 
-    html += """
+    html += f"""
     </table>
 </div>
+
+{holding_html}
 
 <!-- 最近20条交易 -->
 <div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
@@ -1134,14 +1170,6 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 
     html += f"""
     </table>
-</div>
-
-<div style="font-size:11px;color:#888;line-height:1.6;margin-bottom:15px;">
-    <b>过滤规则 (QMT精简版):</b> 盈利保护(回撤>5%) → 溢价率(>20%)<br>
-    <b>溢价率:</b> (市价-单位净值)/单位净值 | 红色>20%触发过滤 | '-'=暂无净值数据<br>
-    <b>得分:</b> 综合=长期(25日动量xR2) | 短期=10日动量xR2<br>
-    <b>变动:</b> 与上次报告对比 ↑升 ↓降 -不变<br>
-    <b>回报:</b> 回测年化435.62% (2025.1-2026.5) | 聚宽验证总收益640% (2024.1-2026.5)
 </div>
 
 <div style="text-align:center;font-size:10px;color:#aaa;margin-top:25px;padding-top:15px;border-top:1px solid #eee;">
@@ -1199,7 +1227,7 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
 # ================================================================
 # 发送邮件
 # ================================================================
-def send_report_email(html_content, md_path, time_label):
+def send_report_email(html_content, md_path, time_label, data_stale=False):
     import smtplib
     from email.mime.multipart import MIMEMultipart
     from email.mime.text import MIMEText
@@ -1213,6 +1241,8 @@ def send_report_email(html_content, md_path, time_label):
     subj_prefix = time_label
     if not rt_ok:
         subj_prefix = f"{time_label} ⚠️实时行情缺失"
+    elif data_stale:
+        subj_prefix = f"{time_label} ⚠️ETF数据滞后"
 
     msg = MIMEMultipart("mixed")
     msg["Subject"] = f"[{subj_prefix}] 七星QMT原版 - {NOW_STR}"
@@ -1262,6 +1292,32 @@ def main():
     print(f"七星QMT原版 [{time_label}]")
     print("=" * 60)
 
+    # ETF数据新鲜度校验 (克总2026-06-24: 严禁静默用旧数据)
+    import sys as _sys_q, os as _os_q
+    _qmt_root = Path(__file__).resolve().parent.parent
+    _sys_q.path.insert(0, str(_qmt_root))
+    from backtest.data_freshness import check_freshness, build_stale_banner as _build_stale, sync_etf_data
+    _etf_dir = str(_qmt_root / 'data' / 'storage' / 'stock_data' / 'etf')
+    _etf_codes = [c.replace('sh','').replace('sz','') for c in QMT_POOL]
+    # 同步ETF数据
+    print('[数据同步] 尝试更新QMT ETF数据...')
+    try:
+        _eupd, _esrc = sync_etf_data(QMT_POOL, _etf_dir)  # 传入sh/sz格式, 内部自动去前缀写文件
+        print(f'[数据同步] 更新 {_eupd} 只 (源: {_esrc})')
+    except Exception as _e: print(f'[数据同步] 失败: {_e}')
+    # 新鲜度校验
+    try:
+        _stale, _gap, _dtls, __ = check_freshness(_etf_codes, _etf_dir, '{code}.csv', max_gap=3)
+        qmt_stale_banner = _build_stale(_stale, _gap, _dtls, 'QMT ETF')
+        qmt_stale = _stale
+        if _stale:
+            print(f'[数据告警] ⚠️ QMT ETF数据滞后 {_gap} 个交易日, {len(_dtls)} 只超阈值')
+        else:
+            print(f'[数据校验] QMT ETF数据新鲜 (最大滞后 {_gap} 交易日)')
+    except Exception as _e:
+        qmt_stale = False; qmt_stale_banner = ''
+        print(f'[数据校验] 跳过: {_e}')
+
     # 1. 排名
     print("\n[1/4] Computing ETF momentum rankings...")
     ranked, prices, nav_available, realtime_valid = get_current_rankings()
@@ -1270,10 +1326,11 @@ def main():
         flag = '[FILT]' if r['filtered'] else '[OK]'
         print(f"    {r['name']:16s} score={r['score']:.4f}  chg={fmt_change_pct(r['change_pct'])}  {flag}")
 
-    # 2. 行情判断
-    print("\n[2/4] Checking regime status...")
-    regime_info = get_regime_status()
-    print(f"  Regime: {regime_info[0]} ({regime_info[3]}/{regime_info[4]} indices below MA10)")
+    # 2. 行情判断 (成分股80%·15日恐慌过滤)
+    print("\n[2/4] Checking panic regime (成分股80%·15日)...")
+    regime_info = get_regime_status(prices)
+    _, is_panic, _, below_count, total = regime_info
+    print(f"  Regime: {regime_info[0]} ({below_count}/{total}成分股跌破MA15)")
 
     # 3. 交易检查
     print("\n[3/4] Checking trade signals...")
@@ -1281,9 +1338,27 @@ def main():
     is_eleven_am = NOW.hour == 11
     traded, trade_desc = False, ""
 
-    if not allow_trade:
-        traded, trade_desc = False, "仅排名模式（未触发交易）"
-    elif is_eleven_am:
+    if is_panic and allow_trade:
+        # 恐慌期 → 卖出一切持仓, 空仓防守, 不买入
+        print("  🔴 恐慌期: 卖出一切持仓 → 空仓防守")
+        holding = get_holding_from_xlsx()
+        if holding:
+            # 获取当前价格(优先实时行情)
+            sell_price = float(holding['price'])  # 默认持仓记录价
+            try:
+                rt = fetch_realtime_prices([holding['code']])
+                if holding['code'] in rt and rt[holding['code']]['price'] > 0:
+                    sell_price = rt[holding['code']]['price']
+            except Exception:
+                pass
+            append_trade_to_xlsx('卖出', holding['code'], holding['name'],
+                                sell_price, LATEST_DATE, 'N/A', '恐慌期空仓防守(>80%成分股跌破MA15)')
+            traded, trade_desc = True, f"恐慌期: 卖出 {holding['name']}({holding['code']})@{sell_price:.3f} → 空仓防守"
+        else:
+            traded, trade_desc = True, "恐慌期: 已空仓, 保持持币待复苏"
+    elif is_panic and not allow_trade:
+        traded, trade_desc = True, f"恐慌期(模拟): {regime_info[0]} — 若实盘则清仓空仓防守"
+    elif is_eleven_am and not no_trade:
         # 11:00 仅执行盈利保护检查（卖出），不执行排名轮动
         print("  [11:00] 盈利保护检查模式...")
         traded, trade_desc = check_profit_protection_sell(ranked)
@@ -1306,9 +1381,16 @@ def main():
                 else:
                     traded, trade_desc = False, "盈利保护已卖出，但无新买入标的"
             else:
-                traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+                if allow_trade and not no_trade:
+                    traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+                else:
+                    traded, trade_desc = False, "仅排名模式（未触发交易）"
         else:
-            traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+            if allow_trade and not no_trade:
+                traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+            else:
+                traded, trade_desc = False, "仅排名模式（未触发交易）"
+
     if traded:
         print(f"  [TRADE] {trade_desc}")
     else:
@@ -1317,7 +1399,26 @@ def main():
     # 4. 生成报告 + 发送
     print("\n[4/4] Generating report + sending email...")
     recent_trades = get_recent_trades(ranked)
-    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available, realtime_valid)
+
+    # ETF池健康检查 (仅在09:10开盘检查时运行)
+    etf_health_html = ''
+    if current_hour == '09':
+        print("  [ETF健康] 执行ETF池健康检查...")
+        try:
+            from reporting.etf_pool_health import run_health_check, generate_html as _gen_health_html
+            _health = run_health_check(QMT_POOL, QMT_NAMES)
+            etf_health_html = _gen_health_html(_health, QMT_POOL)
+            _w, _d = len(_health['warn']), len(_health['dead'])
+            print(f"  [ETF健康] 完成: OK={len(_health['ok'])} 预警={_w} 无数据={_d}")
+            # 若超阈值则单独发送告警邮件
+            from reporting.etf_pool_health import should_alert, send_health_alert
+            if should_alert(_health):
+                print(f"  [ETF健康] ⚠️ 触发告警阈值, 发送单独告警邮件...")
+                send_health_alert(_health)
+        except Exception as _he:
+            print(f"  [ETF健康] 失败: {_he}")
+
+    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available, realtime_valid, stale_banner=qmt_stale_banner, etf_health_html=etf_health_html)
 
     output_dir = Path(__file__).parent / 'template'
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1330,7 +1431,7 @@ def main():
     with open(html_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
-    success = send_report_email(html_content, str(md_path), time_label)
+    success = send_report_email(html_content, str(md_path), time_label, data_stale=qmt_stale)
     save_rankings(ranked)
 
     print("\n" + "=" * 60)
