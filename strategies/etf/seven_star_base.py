@@ -91,8 +91,8 @@ class LocalDataSource:
             return df
 
         possible_names = [
-            f"{etf_code}.csv",
-            f"{etf_code.replace('sh','').replace('sz','')}.csv",
+            f"{etf_code.replace('sh','').replace('sz','')}.csv",  # 优先无前缀(全量数据)
+            f"{etf_code}.csv",  # 兜底带前缀(sh/sz格式, WeStock同步可能创建)
         ]
         search_dirs = [self.data_dir]
 

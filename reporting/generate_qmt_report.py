@@ -80,6 +80,14 @@ QMT_NAMES = {
 
 HISTORY_FILE = Path(__file__).parent / 'qmt_ranking_history.json'
 TRADES_XLSX = Path(__file__).parent.parent / 'backtest' / 'results_qmt' / '七星QMT_交易记录_2026.xlsx'
+PENDING_FILE = Path(__file__).parent / 'qmt_pending_buy.json'
+
+# 日内趋势过滤 (2026-07-14 五福7.3思路: 买入前检查30分钟趋势, 下跌则延时重试)
+ENABLE_INTRODAY_TREND = True
+TREND_LOOKBACK_MINUTES = 30       # 检查最近N分钟趋势
+TREND_SLOPE_THRESHOLD = 0.001     # 归一化斜率阈值 (%/min), 高于此判定上涨
+TREND_RETRY_TIMES = ['13:40', '14:10', '14:40']  # 下跌趋势时的重试时间点
+TREND_FORCE_TIME = '14:55'        # 强制买入时间
 
 def get_latest_trading_date():
     today = datetime.now()
@@ -637,7 +645,132 @@ def pick_trade_target(ranked):
             return r
     return None
 
-def append_trade_to_xlsx(direction, code, name, price, date, score, reason):
+# ================================================================
+# 日内趋势过滤 (2026-07-14 五福7.3思路)
+# 买入前用WeStock minute数据判断30分钟趋势, 下跌则延时到13:40/14:10/14:40重试
+# ================================================================
+def check_intraday_trend(code):
+    """判断ETF当前日内趋势。返回 (is_uptrend, slope_pct, detail)"""
+    import subprocess
+    from datetime import datetime
+    try:
+        westock_script = r"C:\Users\blakehao\.workbuddy\plugins\marketplaces\experts\plugins\stock-partner-team\skills\westock-data\scripts\index.js"
+        result = subprocess.run(
+            ['node', westock_script, 'minute', code, '--days', '1'],
+            capture_output=True, text=True, timeout=30,
+            cwd=str(Path(__file__).parent.parent)
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            return (True, 0, f'WeStock无数据(默认买入)')
+        
+        # 解析markdown表格: | code | time | price | ...
+        lines = result.stdout.strip().split('\n')
+        prices = []
+        for line in lines:
+            if '---' in line or '|' not in line:
+                continue
+            parts = [p.strip() for p in line.split('|') if p.strip()]
+            if len(parts) < 4 or parts[0] == 'code':
+                continue
+            try:
+                prices.append(float(parts[3]))  # price column
+            except (ValueError, IndexError):
+                continue
+        
+        if len(prices) < 5:
+            return (True, 0, f'分钟线不足({len(prices)}根,默认买入)')
+        
+        # 取最近N根
+        recent = prices[-TREND_LOOKBACK_MINUTES:]
+        if len(recent) < 5:
+            recent = prices[-5:]
+        
+        x = np.arange(len(recent))
+        slope = np.polyfit(x, recent, 1)[0]
+        mean_price = np.mean(recent)
+        slope_pct = slope / mean_price * 100 if mean_price > 0 else 0
+        
+        is_uptrend = slope_pct > TREND_SLOPE_THRESHOLD
+        detail = f'{"📈上涨" if is_uptrend else "📉下跌"}(斜率{slope_pct:+.4f}%/min, 阈值{TREND_SLOPE_THRESHOLD})'
+        return (is_uptrend, slope_pct, detail)
+    except Exception as e:
+        return (True, 0, f'趋势异常({e})默认买入')
+
+def save_pending_buy(target):
+    """将买入目标暂存到pending文件"""
+    data = {}
+    if PENDING_FILE.exists():
+        with open(PENDING_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    data = {
+        'code': target['code'],
+        'name': target['name'],
+        'price': target['price'],
+        'score': target['score'],
+        'saved_at': datetime.now().strftime('%Y-%m-%d %H:%M'),
+        'retry_count': data.get('retry_count', 0),
+        'retry_history': data.get('retry_history', []),
+    }
+    with open(PENDING_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def load_pending_buy():
+    """读取pending买入目标"""
+    if not PENDING_FILE.exists():
+        return None
+    with open(PENDING_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def clear_pending_buy():
+    """清除pending文件"""
+    if PENDING_FILE.exists():
+        PENDING_FILE.unlink()
+
+def execute_pending_buy(pending, ranked, force=False):
+    """执行pending买入。force=True时跳过趋势判断, 强制买入。返回 (traded, desc)"""
+    target_code = pending['code']
+    # 找到该标的在最新排名中的信息
+    target = next((r for r in ranked if r['code'] == target_code), None)
+    if target is None:
+        clear_pending_buy()
+        return (False, f'待买标的{target_code}不在排名中, 已清除')
+    
+    if not force:
+        # 趋势判断
+        is_up, slope_pct, detail = check_intraday_trend(target_code)
+        if not is_up:
+            pending['retry_count'] = pending.get('retry_count', 0) + 1
+            pending['retry_history'] = pending.get('retry_history', [])
+            pending['retry_history'].append(f"{datetime.now().strftime('%H:%M')}: {detail}")
+            save_pending_buy(target)
+            return (False, f'趋势复检{detail}, 继续等待')
+    
+    # 执行买入
+    holding = get_holding_from_xlsx()
+    if holding and holding['code'] == target_code:
+        clear_pending_buy()
+        return (False, f'已持有{target_code}, 无需买入')
+    
+    # 检查今日是否已有买入(防重复)
+    if TRADES_XLSX.exists():
+        df_check = pd.read_excel(TRADES_XLSX)
+        today_buys = df_check[(df_check['交易日期'].astype(str).str.startswith(str(LATEST_DATE))) & (df_check['方向'] == '买入')]
+        if len(today_buys) > 0:
+            clear_pending_buy()
+            return (False, '今日已有买入操作, 跳过')
+    
+    mode = '强制买入' if force else '趋势确认买入'
+    reason = f"{mode}: 动量排名第1/{len(QMT_POOL)}"
+    if not force:
+        reason += f' (日内趋势上涨确认)'
+    append_trade_to_xlsx('买入', target['code'], target['name'],
+                         target['price'], LATEST_DATE, target['score'], reason)
+    clear_pending_buy()
+    return (True, f"{mode}: {target['name']}({target['code']})@{target['price']:.4f}")
+
+# ================================================================
+# 交易记录持久化
+# ================================================================
     if TRADES_XLSX.exists():
         df = pd.read_excel(TRADES_XLSX)
     else:
@@ -664,6 +797,7 @@ def append_trade_to_xlsx(direction, code, name, price, date, score, reason):
 ENABLE_PROFIT_PROTECTION = True    # 盈利保护 (11:00 回撤>5%卖出)
 ENABLE_VOLUME_CHECK = False        # 成交量放量过滤 (回测证实负向, 2026-06-03永久关闭)
 ENABLE_SHORT_MOMENTUM_FILTER = False  # 短期动量过滤 (回测证实负向, 2026-06-03永久关闭)
+ENABLE_PANIC_FILTER = False        # 成分股恐慌过滤 (2026-07-11克总拍板: 43段碎片化拖累全周期, 永久关闭)
 PROFIT_PROTECTION_LOOKBACK = 1
 PROFIT_PROTECTION_THRESHOLD = 0.05
 SHORT_MOMENTUM_LOOKBACK = 10
@@ -935,7 +1069,7 @@ def get_regime_status(realtime_prices=None):
 # ================================================================
 # 生成报告 (HTML)
 # ================================================================
-def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True, realtime_valid=True, stale_banner='', etf_health_html=''):
+def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=None, nav_available=True, realtime_valid=True, stale_banner='', etf_health_html='', trend_info=''):
     current_holding = get_holding_from_xlsx()
     holding_code = current_holding['code'] if current_holding else ''
 
@@ -995,19 +1129,24 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
         <div style="background:#D4EDDA;padding:10px 15px;border-radius:6px;margin:10px 0;font-size:13px;border-left:4px solid #28A745;">
             <b>交易信号:</b> {trade_info[1]}
         </div>"""
+    # 日内趋势信息
+    if trend_info:
+        trade_alert += f"""
+        <div style="background:#E8EAF6;padding:6px 10px;border-radius:4px;margin:5px 0;font-size:11px;border-left:4px solid #3F51B5;">
+            <b>📈 日内趋势:</b> {trend_info}
+        </div>"""
 
-    # 行情判断
+    # 行情判断 (2026-07-11: 成分股恐慌过滤已永久关闭, 回测证实43段碎片化拖累全周期)
     regime_html = ""
-    if regime_info:
+    if regime_info and ENABLE_PANIC_FILTER:
+        import re
         regime_text, is_panic, status_lines, below_count, total = regime_info
         regime_color = '#DC3545' if is_panic else '#28A745'
         pct = below_count / total * 100 if total > 0 else 0
         m5color = '#DC3545' if is_panic else '#F9A825' if pct > 30 else '#28A745'
         # 构建逐只监控表格
-        import re
         parsed_rows = []
         for line in status_lines:
-            # 格式: "sh513100 纳指ETF国泰: 2.37 > MA15=2.31 ✅"
             try:
                 header, detail = line.split(': ', 1)
             except ValueError:
@@ -1022,7 +1161,6 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
                 parsed_rows.append((code, name, cur_val, ma_val, below))
             else:
                 parsed_rows.append((code, name, 0.0, 0.0, False))
-        # 排序: 跌破优先, 跌破幅度大的靠前
         parsed_rows.sort(key=lambda d: (-d[4], -(d[3]-d[2])/d[3] if d[3]>0 else 0))
         table_rows = ""
         for code, name, cur_val, ma_val, below in parsed_rows:
@@ -1326,25 +1464,43 @@ def main():
         flag = '[FILT]' if r['filtered'] else '[OK]'
         print(f"    {r['name']:16s} score={r['score']:.4f}  chg={fmt_change_pct(r['change_pct'])}  {flag}")
 
-    # 2. 行情判断 (成分股80%·15日恐慌过滤)
-    print("\n[2/4] Checking panic regime (成分股80%·15日)...")
-    regime_info = get_regime_status(prices)
-    _, is_panic, _, below_count, total = regime_info
-    print(f"  Regime: {regime_info[0]} ({below_count}/{total}成分股跌破MA15)")
+    # 2. 行情判断 (成分股80%·15日恐慌过滤 — 2026-07-11已关闭)
+    if ENABLE_PANIC_FILTER:
+        print("\n[2/4] Checking panic regime (成分股80%·15日)...")
+        regime_info = get_regime_status(prices)
+        _, is_panic, _, below_count, total = regime_info
+        print(f"  Regime: {regime_info[0]} ({below_count}/{total}成分股跌破MA15)")
+    else:
+        is_panic = False
+        regime_info = ('🟢正常期(恐慌已关闭)', False, [], 0, 0)
+        print("\n[2/4] Panic filter DISABLED (成分股恐慌过滤已永久关闭)")
+
+    # 2.5 日内趋势 (始终展示Top1标的的30分钟趋势, 无论是否交易窗口)
+    trend_info = ""
+    if ENABLE_INTRODAY_TREND and len(ranked) > 0:
+        top_pick = pick_trade_target(ranked)
+        if top_pick:
+            is_up, slope_pct, trend_detail = check_intraday_trend(top_pick['code'])
+            trend_icon = '📈' if is_up else '📉'
+            trend_label = '上涨' if is_up else '下跌'
+            action_hint = '可立即买入' if is_up else '待趋势转涨买入(13:40/14:10/14:40复检, 14:55强制)'
+            trend_info = f'{trend_icon} #{1} {top_pick["name"]}({top_pick["code"]}): {trend_label}(斜率{slope_pct:+.4f}%/min) — {action_hint}'
+            print(f"  [趋势] {trend_info}")
 
     # 3. 交易检查
     print("\n[3/4] Checking trade signals...")
     allow_trade = not no_trade
     is_eleven_am = NOW.hour == 11
+    now_str = NOW.strftime('%H:%M')
     traded, trade_desc = False, ""
+    # trend_info 已在步骤2.5中设置(始终展示Top1趋势), 此处不重置
 
     if is_panic and allow_trade:
         # 恐慌期 → 卖出一切持仓, 空仓防守, 不买入
         print("  🔴 恐慌期: 卖出一切持仓 → 空仓防守")
         holding = get_holding_from_xlsx()
         if holding:
-            # 获取当前价格(优先实时行情)
-            sell_price = float(holding['price'])  # 默认持仓记录价
+            sell_price = float(holding['price'])
             try:
                 rt = fetch_realtime_prices([holding['code']])
                 if holding['code'] in rt and rt[holding['code']]['price'] > 0:
@@ -1356,6 +1512,7 @@ def main():
             traded, trade_desc = True, f"恐慌期: 卖出 {holding['name']}({holding['code']})@{sell_price:.3f} → 空仓防守"
         else:
             traded, trade_desc = True, "恐慌期: 已空仓, 保持持币待复苏"
+        clear_pending_buy()
     elif is_panic and not allow_trade:
         traded, trade_desc = True, f"恐慌期(模拟): {regime_info[0]} — 若实盘则清仓空仓防守"
     elif is_eleven_am and not no_trade:
@@ -1364,32 +1521,144 @@ def main():
         traded, trade_desc = check_profit_protection_sell(ranked)
         if not traded:
             trade_desc = f"盈利保护未触发: {trade_desc}"
-    else:
-        # 14:50 交易窗口: 若盈利保护已在11:00卖出 → 仅买入新#1；否则完整换仓
+    elif ENABLE_INTRODAY_TREND and allow_trade and now_str >= '13:05' and now_str < '14:50':
+        # ====== 日内趋势交易窗口 (13:05~14:50, 自动化提前5分钟执行) ======
+        target = pick_trade_target(ranked)
         holding = get_holding_from_xlsx()
-        if holding is None and TRADES_XLSX.exists():
-            # 今日可能已被盈利保护卖出(持仓为空)，需要买入
-            df_today = pd.read_excel(TRADES_XLSX)
-            today_sells = df_today[(df_today['交易日期'].astype(str).str.startswith(str(LATEST_DATE))) & (df_today['方向'] == '卖出')]
-            if len(today_sells) > 0:
-                target = pick_trade_target(ranked)
-                if target:
-                    append_trade_to_xlsx('买入', target['code'], target['name'],
-                                         target['price'], LATEST_DATE, target['score'],
-                                         f"盈利保护后补仓: 动量排名第1/{len(QMT_POOL)}")
-                    traded, trade_desc = True, f"盈利保护后补仓: 买入 {target['name']}({target['code']})@{target['price']:.4f}"
+
+        if now_str < '13:35':
+            # 13:10 核心窗口: 排名+卖出+趋势判断
+            print("  [13:10] 日内趋势交易窗口...")
+            # 先卖出(如果持仓不是目标)
+            if holding and target and holding['code'] != target['code']:
+                old_ranked = next((r for r in ranked if r['code'] == holding['code']), None)
+                old_score = old_ranked['score'] if old_ranked else 'N/A'
+                if old_ranked:
+                    sell_price = old_ranked['price']
                 else:
-                    traded, trade_desc = False, "盈利保护已卖出，但无新买入标的"
+                    rt = fetch_realtime_prices([holding['code']])
+                    sell_price = rt.get(holding['code'], {}).get('price', float(holding['price'])) if rt else float(holding['price'])
+                append_trade_to_xlsx('卖出', holding['code'], holding['name'],
+                                     sell_price, LATEST_DATE, old_score, '日内趋势: 换仓卖出')
+                print(f"  [卖出] {holding['name']}({holding['code']})@{sell_price:.4f}")
+                traded = True
+                holding = None
+
+            if target:
+                if holding and holding['code'] == target['code']:
+                    trade_desc = f"持仓不变: {holding['name']} 仍是排名第一"
+                    clear_pending_buy()
+                else:
+                    is_up, slope_pct, trend_detail = check_intraday_trend(target['code'])
+                    trend_info = trend_detail
+                    print(f"  [趋势] {target['name']}({target['code']}): {trend_detail}")
+                    if is_up:
+                        append_trade_to_xlsx('买入', target['code'], target['name'],
+                                             target['price'], LATEST_DATE, target['score'],
+                                             f'日内趋势上涨确认: 动量排名第1/{len(QMT_POOL)}')
+                        traded = True
+                        trade_desc = f"趋势上涨买入: {target['name']}({target['code']})@{target['price']:.4f}"
+                        clear_pending_buy()
+                    else:
+                        save_pending_buy(target)
+                        trade_desc = f"趋势下跌, 暂缓买入 {target['name']}({target['code']}), 等待{TREND_RETRY_TIMES}复检后{TREND_FORCE_TIME}强制买入"
+
+        elif now_str < '14:05':
+            retry_label = '13:40'
+            print(f"  [{retry_label}] 趋势复检窗口...")
+            pending = load_pending_buy()
+            if pending:
+                print(f"  [待买] {pending['name']}({pending['code']}), 第{pending.get('retry_count',0)+1}次复检")
+                traded, trade_desc = execute_pending_buy(pending, ranked, force=False)
+            else:
+                trade_desc = "无待买目标"
+
+        elif now_str < '14:35':
+            retry_label = '14:10'
+            print(f"  [{retry_label}] 趋势复检窗口...")
+            pending = load_pending_buy()
+            if pending:
+                print(f"  [待买] {pending['name']}({pending['code']}), 第{pending.get('retry_count',0)+1}次复检")
+                traded, trade_desc = execute_pending_buy(pending, ranked, force=False)
+            else:
+                trade_desc = "无待买目标"
+
+        else:
+            retry_label = '14:40'
+            print(f"  [{retry_label}] 趋势复检窗口...")
+            pending = load_pending_buy()
+            if pending:
+                print(f"  [待买] {pending['name']}({pending['code']}), 第{pending.get('retry_count',0)+1}次复检")
+                traded, trade_desc = execute_pending_buy(pending, ranked, force=False)
+            else:
+                trade_desc = "无待买目标"
+
+    elif ENABLE_INTRODAY_TREND and now_str >= '14:50':
+        # 14:55 强制买入 (自动化提前5分钟执行)
+        print("  [14:55] 强制买入窗口...")
+        pending = load_pending_buy()
+        if pending:
+            print(f"  [强制买入] {pending['name']}({pending['code']}) (日内趋势延时到期)")
+            traded, trade_desc = execute_pending_buy(pending, ranked, force=True)
+            trend_info = f"14:55强制买入(趋势延时到期, 经{pending.get('retry_count',0)}次复检)"
+        else:
+            # 无pending → 正常换仓(兜底: 当日未在趋势窗口执行过交易的场景)
+            holding = get_holding_from_xlsx()
+            if holding is None and TRADES_XLSX.exists():
+                df_today = pd.read_excel(TRADES_XLSX)
+                today_sells = df_today[(df_today['交易日期'].astype(str).str.startswith(str(LATEST_DATE))) & (df_today['方向'] == '卖出')]
+                if len(today_sells) > 0:
+                    target = pick_trade_target(ranked)
+                    if target:
+                        append_trade_to_xlsx('买入', target['code'], target['name'],
+                                             target['price'], LATEST_DATE, target['score'],
+                                             f"盈利保护后补仓: 动量排名第1/{len(QMT_POOL)}")
+                        traded, trade_desc = True, f"14:55补仓: 买入 {target['name']}({target['code']})@{target['price']:.4f}"
+                    else:
+                        traded, trade_desc = False, "14:55无合格标的"
+                else:
+                    if allow_trade:
+                        traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+                    else:
+                        traded, trade_desc = False, "仅排名模式"
+            else:
+                if allow_trade:
+                    traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+                elif holding is not None:
+                    trade_desc = f"仅排名: 持仓 {holding['name']} 不变"
+                else:
+                    trade_desc = "仅排名: 空仓"
+
+    else:
+        # 其他时间窗口 (09:10/09:40等) 或关闭日内趋势
+        if not ENABLE_INTRODAY_TREND:
+            holding = get_holding_from_xlsx()
+            if holding is None and TRADES_XLSX.exists():
+                df_today = pd.read_excel(TRADES_XLSX)
+                today_sells = df_today[(df_today['交易日期'].astype(str).str.startswith(str(LATEST_DATE))) & (df_today['方向'] == '卖出')]
+                if len(today_sells) > 0:
+                    target = pick_trade_target(ranked)
+                    if target:
+                        append_trade_to_xlsx('买入', target['code'], target['name'],
+                                             target['price'], LATEST_DATE, target['score'],
+                                             f"盈利保护后补仓: 动量排名第1/{len(QMT_POOL)}")
+                        traded, trade_desc = True, f"盈利保护后补仓: 买入 {target['name']}({target['code']})@{target['price']:.4f}"
+                    else:
+                        traded, trade_desc = False, "盈利保护已卖出，但无新买入标的"
+                else:
+                    if allow_trade and not no_trade:
+                        traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
+                    else:
+                        traded, trade_desc = False, "仅排名模式"
             else:
                 if allow_trade and not no_trade:
                     traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
                 else:
-                    traded, trade_desc = False, "仅排名模式（未触发交易）"
+                    traded, trade_desc = False, "仅排名模式"
         else:
-            if allow_trade and not no_trade:
-                traded, trade_desc = check_and_execute_trades(ranked, allow_trade=True)
-            else:
-                traded, trade_desc = False, "仅排名模式（未触发交易）"
+            # 非交易窗口(如09:10开盘检查), 仅排名不交易
+            clear_pending_buy()
+            trade_desc = f"仅排名模式 ({time_label})"
 
     if traded:
         print(f"  [TRADE] {trade_desc}")
@@ -1418,7 +1687,7 @@ def main():
         except Exception as _he:
             print(f"  [ETF健康] 失败: {_he}")
 
-    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available, realtime_valid, stale_banner=qmt_stale_banner, etf_health_html=etf_health_html)
+    md_content, html_content = generate_report(ranked, recent_trades, (traded, trade_desc), time_label, regime_info, nav_available, realtime_valid, stale_banner=qmt_stale_banner, etf_health_html=etf_health_html, trend_info=trend_info)
 
     output_dir = Path(__file__).parent / 'template'
     output_dir.mkdir(parents=True, exist_ok=True)

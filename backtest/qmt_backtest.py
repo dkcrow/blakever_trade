@@ -97,11 +97,9 @@ QMT_PARAMS = {
     'weak_period_ma_lookback': 10,
     'weak_period_max_days': 20,
 
-    # 成分股MA恐慌期空仓 (克总2026-06-23拍板: 80%·15日全局最优, 回撤防御最佳)
-    # 每个调仓日统计成分股池跌破MA15的比例, >80%判恐慌期→清仓空仓防守
-    'enable_panic_regime': True,
+    # 成分股MA恐慌期空仓 (2026-07-11克总拍板: 43段碎片化拖累全周期, 永久关闭)
+    'enable_panic_regime': False,
     'panic_ma_lookback': 15,
-    'panic_threshold': 0.80,
     'panic_threshold': 0.80,
 }
 

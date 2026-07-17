@@ -252,22 +252,70 @@ print(f'有效: {len(all_data)}只 | 交易日: {len(trade_dates)}天')
 # ================================================================
 # 纳指100·5日恐慌过滤 (克总2026-06-26落地)
 # ================================================================
-import akshare as ak
-_ndx_cache = None
+import subprocess as _sp, json as _json
+_WESTOCK_SCRIPT = r"C:\Users\blakehao\.workbuddy\plugins\marketplaces\experts\plugins\stock-partner-team\skills\westock-data\scripts\index.js"
+
+def _fetch_ndx_realtime():
+    """获取纳指100实时/最新价 (WeStock quote)"""
+    try:
+        result = _sp.run(
+            ['node', _WESTOCK_SCRIPT, 'quote', 'usNDX'],
+            capture_output=True, text=True, timeout=15,
+            cwd=str(PROJECT_ROOT)
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            return None, None
+        lines = result.stdout.strip().split('\n')
+        for line in lines:
+            if '---' in line or 'usNDX' not in line:
+                continue
+            parts = [p.strip() for p in line.split('|')]
+            # split('|'): [''(0), code(1), market(2), name(3), empty(4), symbol(5), price(6), prev_close(7), ...]
+            # price=idx6, time=idx14
+            if len(parts) >= 15:
+                try:
+                    price = float(parts[6])
+                    update_time = parts[14]
+                    if price > 0:
+                        return price, update_time
+                except (ValueError, IndexError):
+                    continue
+        return None, None
+    except Exception:
+        return None, None
+
 def _get_ndx_data():
-    global _ndx_cache
-    if _ndx_cache is None:
-        try:
-            df = ak.index_us_stock_sina(symbol='.NDX')
-            df['date'] = pd.to_datetime(df['date'])
-            df = df.set_index('date').sort_index()
-            _ndx_cache = df['close']
-        except Exception:
-            _ndx_cache = pd.Series(dtype=float)
-    return _ndx_cache
+    """获取纳指100日线 (WeStock kline, 用于MA5计算)"""
+    try:
+        result = _sp.run(
+            ['node', _WESTOCK_SCRIPT, 'kline', 'usNDX', 'daily'],
+            capture_output=True, text=True, timeout=30,
+            cwd=str(PROJECT_ROOT)
+        )
+        if result.returncode != 0 or not result.stdout.strip():
+            return pd.Series(dtype=float)
+        lines = result.stdout.strip().split('\n')
+        rows = []
+        for line in lines:
+            if '---' in line or '|' not in line:
+                continue
+            parts = [p.strip() for p in line.split('|') if p.strip()]
+            # kline列: date(0), open(1), last/close(2), high(3), low(4), ...
+            if len(parts) < 3 or parts[0] == 'date':
+                continue
+            try:
+                rows.append({'date': pd.Timestamp(parts[0]), 'close': float(parts[2])})
+            except (ValueError, IndexError):
+                continue
+        if not rows:
+            return pd.Series(dtype=float)
+        df = pd.DataFrame(rows).set_index('date').sort_index()
+        return df['close']
+    except Exception:
+        return pd.Series(dtype=float)
 
 def check_ndx5_panic(dt):
-    """纳指100当天收盘价 < MA5 → 恐慌空仓"""
+    """纳指100当天收盘价 < MA5 → 恐慌空仓 (回测用, 用日线收盘价)"""
     ndx = _get_ndx_data()
     if len(ndx) < 10: return False
     mask = ndx.index <= dt
@@ -276,12 +324,20 @@ def check_ndx5_panic(dt):
     return float(hist.iloc[-1]) < float(hist.iloc[-5:].mean())
 
 def get_ndx5_status():
-    """获取纳指100 5日线当前状态 (用于报告展示)"""
+    """获取纳指100 5日线当前状态 (报告/实盘用, 实时价对比MA5)"""
     ndx = _get_ndx_data()
     if len(ndx) < 6: return None
-    cur = float(ndx.iloc[-1])
+    # MA5: 最近5个交易日收盘价均值
     ma5 = float(ndx.iloc[-5:].mean())
-    return {'cur': cur, 'ma5': ma5, 'panic': cur < ma5, 'date': str(ndx.index[-1].date())}
+    # 实时/最新价: WeStock quote
+    rt_price, rt_time = _fetch_ndx_realtime()
+    if rt_price is not None and rt_price > 0:
+        cur = rt_price
+        date_label = f"实时 {rt_time}"
+    else:
+        cur = float(ndx.iloc[-1])
+        date_label = str(ndx.index[-1].date())
+    return {'cur': cur, 'ma5': ma5, 'panic': cur < ma5, 'date': date_label}
 
 def calc_score(close_full, lookback=25):
     recent = close_full[-(lookback+1):]
@@ -604,6 +660,7 @@ ret_bg = '#E8F5E9' if tr>0 else '#FFEBEE'
 
 # ================================================================
 # 行情判断: 纳指100·5日线 (克总2026-06-26: 跌破→空仓防守)
+# 数据源: WeStock kline usNDX (2026-07-14切换: 比akshare Sina更新更快)
 # ================================================================
 ndx5 = get_ndx5_status()
 ndx5_card = ""

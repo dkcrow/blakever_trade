@@ -241,14 +241,6 @@ def generate_html(results, qmt_pool):
 <td style="padding:2px 6px;font-size:10px;color:#C62828;">{'<br>'.join(e['issues'])}</td></tr>"""
         html += '</table></div></div>'
 
-    # Correlation warnings
-    if results['high_corr_pairs']:
-        html += '<div style="background:#E3F2FD;padding:6px 10px;border-radius:4px;margin-bottom:8px;font-size:11px;">'
-        html += '<b>🔗 同类别高相关对 (r > 0.75):</b>'
-        for p in results['high_corr_pairs']:
-            html += f'<br>  {p["a_code"]} {p["a_name"]} ↔ {p["b_code"]} {p["b_name"]} (r={p["corr"]:.2f})'
-        html += '</div>'
-
     # Category summary
     html += '<div style="font-size:11px;margin-top:6px;color:#666;">'
     cat_parts = []
