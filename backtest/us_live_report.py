@@ -11,6 +11,7 @@ from email.mime.text import MIMEText
 warnings.filterwarnings('ignore')
 
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 DATA_DIR = PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'us'
 OUTPUT_DIR = PROJECT_ROOT / 'backtest' / 'results_us100'
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -30,6 +31,11 @@ PARAMS = {'lookback_days': 25, 'holdings_num': 7, 'min_money': 500}
 SCORE_THRESHOLD = 0.5  # 得分<0.5禁止买入, 已持有强制卖出
 ENABLE_PANIC_NDX5 = True  # 纳指100跌破5日线→空仓防守 (克总2026-06-26落地)
 MIN_HISTORY_DAYS = 126  # 最小历史天数(约半年), 过滤IPO初期噪声 (2026-07-01落地, 屏蔽SPCX等新股爆分)
+
+# 持久化交易 (2026-07-21落地: 跨次运行持仓记录)
+from backtest.persistent_trades import US_TRADES_XLSX, get_holdings as _get_holdings, append_trade as _append_trade, has_traded_today
+ENABLE_PERSISTENT_TRADING = True  # 启用持久化交易
+TRADING_WINDOWS = ['23:00']  # 允许实际执行的交易窗口(北京时间) -- 23:00 美股盘中
 
 # ================================================================
 # 实时行情获取 — 三级兜底 (L1→L2→失败告警)
@@ -519,6 +525,52 @@ realtime, rt_source = fetch_realtime_prices(POOL)
 realtime_valid = rt_source != 'failed'
 final_ranked = get_ranked(last_prices, last_date)
 
+# ================================================================
+# 持久化交易: 在回测前执行 (2026-08-04: 前置到排名后, 避免回测超时导致交易永不执行)
+# ================================================================
+if '--trade' in sys.argv:
+    try:
+        print(f"\n{'='*60}")
+        print(f"  持久化交易执行 [{NOW.strftime('%Y-%m-%d %H:%M')}]")
+        print(f"{'='*60}")
+        hn = PARAMS['holdings_num']
+        today_targets = [r for r in final_ranked if r['score'] >= SCORE_THRESHOLD][:hn]
+        target_codes = set(r['code'] for r in today_targets)
+        already_traded = has_traded_today(US_TRADES_XLSX, END_DATE)
+        real_holdings = _get_holdings(US_TRADES_XLSX)
+        print(f"  当前持仓: {len(real_holdings)}只 | 目标: {len(today_targets)}只 | 今日已交易: {already_traded}")
+        for r in today_targets[:5]:
+            print(f"    {r.get('name', r['code'])} 得分={r['score']:.4f}")
+
+        if not already_traded:
+            # 卖出不在目标的持仓
+            for h in list(real_holdings):
+                if h['code'] not in target_codes:
+                    price = realtime.get(h['code'], {}).get('price', 0) if realtime_valid else 0
+                    if price <= 0: price = last_prices.get(h['code'], h['price'])
+                    _append_trade(US_TRADES_XLSX, '卖出', h['code'], h['name'], price, h['shares'],
+                                END_DATE, h.get('score','N/A'), '不在今日目标')
+                    print(f"    [卖出] {h['name']} @${price:.2f} x{h['shares']}股")
+                    real_holdings = [x for x in real_holdings if x['code'] != h['code']]
+            # 买入新目标
+            new = [r for r in today_targets if r['code'] not in set(h['code'] for h in real_holdings)][:hn - len(real_holdings)]
+            for r in new:
+                price = realtime.get(r['code'], {}).get('price', 0) if realtime_valid else r['price']
+                if price <= 0: price = r['price']
+                # 每只约1万美元等权
+                shares = max(1, int(7000 / price))
+                name = r.get('name', r['code'])
+                _append_trade(US_TRADES_XLSX, '买入', r['code'], name, price, shares,
+                            END_DATE, r['score'], f'持久化: 排名{final_ranked.index(r)+1}')
+                score_val = r['score']
+                print(f"    [买入] {name} @${price:.2f} x{shares}股 (得分{score_val:.4f})")
+                real_holdings.append({'code': r['code'], 'name': name, 'price': price, 'shares': shares, 'buy_date': END_DATE, 'score': r['score']})
+        print(f"  交易完成: 持仓 {len(real_holdings)}只")
+    except Exception as _e:
+        import traceback
+        print(f"  ⚠️ 持久化交易异常: {_e}")
+        traceback.print_exc()
+
 # 实时行情失败时立即发送告警邮件
 if not realtime_valid:
     send_monitor_failure_alert(['WeStock Data', '新浪财经'])
@@ -540,39 +592,58 @@ if realtime_valid:
             r['price'] = rt['price']
             r['chg_pct'] = rt.get('change_pct', r.get('chg_pct', 0))
 
-# 当前目标: 取前hn只
-current_targets = [r for r in final_ranked if r['score'] > -999][:hn]
-
-# Current portfolio holdings
-current_holdings = []
-for code in pf.get_position_codes():
-    pos = pf.positions[code]
-    rt = realtime.get(code, {})
-    rt_price = rt.get('price', 0)
-    rt_chg = rt.get('change_pct', 0)
-    close_price = last_prices.get(code, 0)
-    # 仅当实时行情有效时才使用实时价格，否则用日线收盘价
-    cur_price = rt_price if (realtime_valid and rt_price > 0) else close_price
-    # 当日涨跌幅: 实时有效才用; 失败时=None(显示"—"), 严禁用历史收盘冒充实时
-    if realtime_valid and rt_chg != 0:
-        day_chg = rt_chg
-    elif realtime_valid and code in all_data:
-        h = all_data[code]
-        if len(h) >= 2:
-            prev = h['close'].iloc[-2]
-            day_chg = (close_price - prev) / prev * 100 if prev > 0 else 0
+# ================================================================
+# 持久化持仓展示 (交易已在回测前执行)
+# ================================================================
+if ENABLE_PERSISTENT_TRADING:
+    real_holdings = _get_holdings(US_TRADES_XLSX)
+    current_holdings = []
+    for h in real_holdings:
+        code = h['code']
+        rt = realtime.get(code, {})
+        rt_price = rt.get('price', 0)
+        rt_chg = rt.get('change_pct', 0)
+        close_price = last_prices.get(code, 0)
+        cur_price = rt_price if (realtime_valid and rt_price > 0) else close_price
+        day_chg = rt_chg if (realtime_valid and rt_chg != 0) else None
+        cost = h['price']
+        pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
+        current_holdings.append({
+            'code': code, 'shares': h['shares'],
+            'cost': cost, 'price': cur_price,
+            'pnl_pct': pnl, 'day_chg': (round(day_chg, 2) if day_chg is not None else None),
+            'buy_date': h.get('buy_date', ''),
+        })
+else:
+    # 旧逻辑: 使用回测模拟持仓 (向后兼容)
+    current_targets = [r for r in final_ranked if r['score'] > -999][:hn]
+    current_holdings = []
+    for code in pf.get_position_codes():
+        pos = pf.positions[code]
+        rt = realtime.get(code, {})
+        rt_price = rt.get('price', 0)
+        rt_chg = rt.get('change_pct', 0)
+        close_price = last_prices.get(code, 0)
+        cur_price = rt_price if (realtime_valid and rt_price > 0) else close_price
+        if realtime_valid and rt_chg != 0:
+            day_chg = rt_chg
+        elif realtime_valid and code in all_data:
+            h = all_data[code]
+            if len(h) >= 2:
+                prev = h['close'].iloc[-2]
+                day_chg = (close_price - prev) / prev * 100 if prev > 0 else 0
+            else:
+                day_chg = 0
         else:
-            day_chg = 0
-    else:
-        day_chg = None
-    cost = pos.get('cost_price', cur_price)
-    pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
-    current_holdings.append({
-        'code': code, 'shares': pos['shares'],
-        'cost': cost, 'price': cur_price,
-        'pnl_pct': pnl, 'day_chg': (round(day_chg, 2) if day_chg is not None else None),
-        'buy_date': pos.get('buy_date', ''),
-    })
+            day_chg = None
+        cost = pos.get('cost_price', cur_price)
+        pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
+        current_holdings.append({
+            'code': code, 'shares': pos['shares'],
+            'cost': cost, 'price': cur_price,
+            'pnl_pct': pnl, 'day_chg': (round(day_chg, 2) if day_chg is not None else None),
+            'buy_date': pos.get('buy_date', ''),
+        })
 
 print(f'\n{"="*60}')
 print(f'  绩效: +{tr*100:.2f}% | 年化{ann_ret:.1f}% | 回撤{mdd*100:.1f}% | 夏普{sh_val:.4f}')

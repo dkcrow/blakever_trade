@@ -97,6 +97,17 @@ DEFAULT_PARAMS = {
     'enable_regime_switch': False,     # 原版无, 默认关闭
     'enable_avoid_a_share': False,     # 原版无, 默认关闭
     'enable_intraday_drawdown': False, # 原版无, 默认关闭
+
+    # ---- V4 行业轮动状态机 (2026-07-30移植) ----
+    'enable_hs300_state_machine': False,   # 沪深300 MA60状态机 ON/OFF
+    'hs300_ma_period': 60,                 # MA周期
+    'hs300_buffer_pct': 0.005,            # ±0.5%缓冲带
+    'hs300_confirm_days': 2,              # 连续确认天数
+    'hs300_slope_lookback': 5,            # MA60斜率确认(恢复ON时MA60>5日前)
+    'hs300_cooling_days': 2,              # 状态切换冷静期
+    'hs300_combo_dd_threshold': 0.08,     # 组合回撤阈值(-8%清仓)
+    'hs300_combo_dd_cooling': 5,          # 组合止损后冷静期
+    'hs300_defensive_etf': 'sh511010',    # OFF/冷静期切换到国债ETF
     'intraday_drawdown_threshold': 0.02,
     'weak_period_ma_lookback': 10,
     'weak_period_max_days': 20,
@@ -165,6 +176,15 @@ class SevenStar172Engine:
         self.weak_period_counter = 0
         self.regime_indexes_data = None  # 监测指数数据缓存
 
+        # ---- V4 沪深300 MA60 状态机 (2026-07-30) ----
+        self.hs300_data = None          # 沪深300日线close Series
+        self.hs300_state = None         # None=未初始化, 'ON', 'OFF'
+        self.hs300_consecutive_on = 0   # 连续在MA60以上的天数
+        self.hs300_consecutive_off = 0  # 连续在MA60以下的天数
+        self.hs300_cooling_remaining = 0 # 冷静期剩余天数
+        self.hs300_nav_high = 0         # 组合净值高水位
+        self.hs300_combo_cooling = 0    # 组合止损冷静期
+
     def reset_state(self):
         """重置所有运行时状态"""
         self.rankings_cache = {'date': None, 'data': None}
@@ -172,6 +192,14 @@ class SevenStar172Engine:
         self.is_a_share_weak = False
         self.weak_period_counter = 0
         self.regime_indexes_data = None
+        # V4状态机重置
+        self.hs300_data = None
+        self.hs300_state = None
+        self.hs300_consecutive_on = 0
+        self.hs300_consecutive_off = 0
+        self.hs300_cooling_remaining = 0
+        self.hs300_nav_high = 0
+        self.hs300_combo_cooling = 0
 
     # ---------- 行情判断 (QMT V3) ----------
 
@@ -404,6 +432,153 @@ class SevenStar172Engine:
 
     # ---------- 核心排名计算 ----------
 
+    # ---------- V4 行业轮动: 沪深300 MA60 状态机 (2026-07-30移植) ----------
+
+    def init_hs300_state_machine(self, data_source, start_date):
+        """加载沪深300数据并初始化状态机。回测启动时通过回放历史数据建立状态记忆。"""
+        from pathlib import Path
+        data_dir = data_source.data_dir
+        hs300_paths = [
+            data_dir.parent / 'index' / 'sh000300.csv',
+            data_dir / '000300.csv',
+            data_dir / 'sh000300.csv',
+        ]
+        for fp in hs300_paths:
+            if fp.exists():
+                df = pd.read_csv(fp)
+                rename_map = {}
+                for c in df.columns:
+                    lc = c.lower().strip()
+                    if lc == 'date' and c != 'date': rename_map[c] = 'date'
+                    elif lc in ('open','high','low','close','volume') and lc != c: rename_map[c] = lc
+                if rename_map: df = df.rename(columns=rename_map)
+                df['date'] = pd.to_datetime(df['date'])
+                df = df.set_index('date').sort_index()
+                if 'close' in df.columns:
+                    self.hs300_data = df['close']
+                    break
+
+        if self.hs300_data is None or len(self.hs300_data) < self.params['hs300_ma_period']:
+            print("  [V4状态机] ⚠️ 未找到沪深300数据，跳过")
+            return
+
+        # 回放历史数据: 从数据起始日到 start_date 前一天
+        start_ts = pd.Timestamp(start_date)
+        mask = self.hs300_data.index < start_ts
+        hist_dates = self.hs300_data[mask].index
+        print(f"  [V4状态机] 沪深300 历史回放: {len(hist_dates)} 天 → {start_date} 启动")
+
+        for dt in hist_dates:
+            self._step_hs300_state(dt, portfolio_value=None)
+
+    def _step_hs300_state(self, date, portfolio_value=None):
+        """单步推进状态机。portfolio_value 用于组合回撤检查（仅回测启动后传入）"""
+        p = self.params
+        ma_period = p['hs300_ma_period']
+        buf = p['hs300_buffer_pct']
+        confirm = p['hs300_confirm_days']
+        slope_lb = p['hs300_slope_lookback']
+
+        # 获取沪深300当前收盘价和MA60
+        mask = self.hs300_data.index <= pd.Timestamp(date)
+        hist = self.hs300_data[mask]
+        if len(hist) < ma_period + slope_lb:
+            return
+        close = float(hist.iloc[-1])
+        ma60 = float(hist.iloc[-ma_period:].mean())
+        ma60_slope_ok = float(hist.iloc[-slope_lb:].mean()) > float(hist.iloc[-(ma_period):-(ma_period-slope_lb)].mean())
+
+        # 组合回撤检查 (仅当有实际净值时)
+        if portfolio_value is not None and self.hs300_nav_high > 0 and self.hs300_combo_cooling == 0:
+            dd = 1 - portfolio_value / self.hs300_nav_high
+            if dd >= p['hs300_combo_dd_threshold']:
+                self.hs300_state = 'OFF'
+                self.hs300_consecutive_on = 0
+                self.hs300_consecutive_off = confirm
+                self.hs300_combo_cooling = p['hs300_combo_dd_cooling']
+                self.hs300_nav_high = portfolio_value  # 就地重置高水位
+                print('  [%s] COMBO_STOP: DD %.1f%% >= %.0f%% → OFF + %d日冷静' % (
+                    date, dd*100, p['hs300_combo_dd_threshold']*100, p['hs300_combo_dd_cooling']))
+                return
+
+        # 更新高水位
+        if portfolio_value is not None:
+            if portfolio_value > self.hs300_nav_high:
+                self.hs300_nav_high = portfolio_value
+
+        # 状态机主逻辑
+        if self.hs300_state is None:
+            # 初始状态: 根据当前MA60位置设定
+            self.hs300_state = 'ON' if close > ma60 * (1 + buf) else 'OFF'
+            self.hs300_consecutive_on = 1 if self.hs300_state == 'ON' else 0
+            self.hs300_consecutive_off = 1 if self.hs300_state == 'OFF' else 0
+            if close > 0:
+                self.hs300_nav_high = portfolio_value or 1000000
+            return
+
+        # 冷却期倒计时
+        if self.hs300_cooling_remaining > 0:
+            self.hs300_cooling_remaining -= 1
+            return
+        if self.hs300_combo_cooling > 0:
+            self.hs300_combo_cooling -= 1
+            if self.hs300_combo_cooling == 0:
+                # 冷静期结束 → 重新初始化状态
+                self.hs300_state = 'ON' if close > ma60 * (1 + buf) else 'OFF'
+                self.hs300_consecutive_on = 1 if self.hs300_state == 'ON' else 0
+                self.hs300_consecutive_off = 1 if self.hs300_state == 'OFF' else 0
+                self.hs300_nav_high = portfolio_value or self.hs300_nav_high
+                print('  [%s] COOLING END → %s' % (date, self.hs300_state))
+            return
+
+        # ON/OFF 判定
+        if self.hs300_state == 'OFF':
+            if close > ma60 * (1 + buf):
+                self.hs300_consecutive_on += 1
+                self.hs300_consecutive_off = 0
+            else:
+                self.hs300_consecutive_on = 0
+                self.hs300_consecutive_off += 1
+
+            if self.hs300_consecutive_on >= confirm and ma60_slope_ok:
+                self.hs300_state = 'ON'
+                self.hs300_cooling_remaining = p['hs300_cooling_days']
+                print('  [%s] STATE: OFF→ON (close=%.0f MA60=%.0f %+.1f%%)' % (
+                    date, close, ma60, (close/ma60-1)*100))
+        else:
+            if close < ma60 * (1 - buf):
+                self.hs300_consecutive_off += 1
+                self.hs300_consecutive_on = 0
+            else:
+                self.hs300_consecutive_off = 0
+                self.hs300_consecutive_on += 1
+
+            if self.hs300_consecutive_off >= confirm:
+                self.hs300_state = 'OFF'
+                self.hs300_cooling_remaining = p['hs300_cooling_days']
+                print('  [%s] STATE: ON→OFF (close=%.0f MA60=%.0f %+.1f%%)' % (
+                    date, close, ma60, (close/ma60-1)*100))
+
+    def get_hs300_can_trade(self):
+        """查询当前状态机是否允许交易"""
+        if not self.params.get('enable_hs300_state_machine', False):
+            return True
+        if self.hs300_state is None:
+            return True  # 未初始化 → 默认允许
+        return self.hs300_state == 'ON' and self.hs300_cooling_remaining == 0 and self.hs300_combo_cooling == 0
+
+    def get_hs300_state_display(self):
+        """当前状态机显示文本"""
+        if not self.params.get('enable_hs300_state_machine', False):
+            return 'OFF(未启用)'
+        state = self.hs300_state or 'INIT'
+        extras = []
+        if self.hs300_cooling_remaining > 0: extras.append('cool%d' % self.hs300_cooling_remaining)
+        if self.hs300_combo_cooling > 0: extras.append('combo%d' % self.hs300_combo_cooling)
+        return state + ('(' + ','.join(extras) + ')' if extras else '')
+
+    # ---------- 排名计算 ----------
+
     def get_ranked_etfs(self, all_etf_data, current_prices, check_date):
         """
         计算所有ETF的动量得分，应用全部过滤条件，返回按得分降序的列表
@@ -566,6 +741,10 @@ class BacktestEngine172:
             min_commission=self.min_commission
         )
 
+        # V4状态机: 加载沪深300 + 回放历史 (必须在 reset_state 之后)
+        if self.engine.params.get('enable_hs300_state_machine', False):
+            self.engine.init_hs300_state_machine(self.data_source, start_date)
+
         # [3] 逐日回测
         print(f"\n[2/4] 开始逐日回测...")
         print("-" * 70)
@@ -590,6 +769,12 @@ class BacktestEngine172:
             # ===== 09:40 行情判断 (QMT V3) =====
             self.engine.check_regime(td)
 
+            # ===== V4状态机: 沪深300 MA60 (2026-07-30移植) =====
+            if self.engine.params.get('enable_hs300_state_machine', False):
+                pv = self.portfolio.cash + self.portfolio.total_value
+                self.engine._step_hs300_state(td, portfolio_value=pv)
+            hs300_ok = self.engine.get_hs300_can_trade()
+
             # ===== 成分股MA10恐慌期判定 (QMT扩展, 默认关闭, 不影响172) =====
             panic = False
             if self.engine.params.get('enable_panic_regime', False):
@@ -601,8 +786,8 @@ class BacktestEngine172:
             # ===== 11:00 盈利保护检查 =====
             self._run_profit_protection(current_prices, all_etf_data, td)
 
-            if panic:
-                # 恐慌期: 清仓全部持仓, 空仓持币防守, 不执行买入
+            if panic or not hs300_ok:
+                # 恐慌期或状态机OFF: 清仓空仓防守, 不执行买入
                 self._panic_liquidate(current_prices, td)
             else:
                 # ===== 13:10 卖出操作 =====

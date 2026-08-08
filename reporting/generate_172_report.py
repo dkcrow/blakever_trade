@@ -267,7 +267,7 @@ def _fetch_navs_tier1_neodata(raw_codes):
     batch_size = 15
     for batch_idx in range(0, len(raw_codes), batch_size):
         batch = raw_codes[batch_idx:batch_idx + batch_size]
-        query = 'ETF ' + ' '.join(batch) + ' 最新行情 单位净值'
+        query = 'ETF ' + ' '.join(batch) + ' 单位净值'
         try:
             result = subprocess.run(
                 [PYTHON, NEODATA_SCRIPT, '--query', query, '--data-type', 'api'],
@@ -287,39 +287,25 @@ def _fetch_navs_tier1_neodata(raw_codes):
             continue
         api = data.get('data', {}).get('apiData', {})
         for r in api.get('apiRecall', []):
-            content = r.get('content', '')
             rtype = r.get('type', '')
-            if '实时行情' in rtype:
-                for line in content.strip().split('\n')[2:]:
-                    parts = [p.strip() for p in line.split('|') if p.strip()]
-                    if len(parts) < 4:
-                        continue
-                    code = None
-                    for p in parts:
-                        if re.match(r'^\d{5,6}$', p):
-                            code = p
-                            break
-                    if not code:
-                        continue
-                    try:
-                        nav = float(parts[-1])
-                        if 0.01 < nav < 10000:
-                            navs[code] = nav
-                    except ValueError:
-                        pass
-            elif '净值' in rtype or '净值' in r.get('desc', ''):
-                for line in content.strip().split('\n')[2:]:
-                    parts = [p.strip() for p in line.split('|') if p.strip()]
-                    if len(parts) >= 4:
-                        code = parts[0] if re.match(r'^\d{6}$', parts[0]) else None
-                        if code:
-                            try:
-                                nav = float(parts[3])
-                                if 0.01 < nav < 10000:
-                                    if code not in navs:
-                                        navs[code] = nav
-                            except ValueError:
-                                pass
+            # 仅解析"基金净值和区间回报率"section
+            if '净值' not in rtype and '回报率' not in rtype:
+                continue
+            content = r.get('content', '')
+            for line in content.strip().split('\n')[2:]:
+                parts = [p.strip() for p in line.split('|') if p.strip()]
+                if len(parts) < 4:
+                    continue
+                raw_code = parts[0].split('.')[0] if '.' in parts[0] else parts[0]
+                if not re.match(r'^\d{6}$', raw_code):
+                    continue
+                try:
+                    nav = float(parts[3])
+                    if 0.01 < nav < 10000:
+                        if raw_code not in navs:
+                            navs[raw_code] = nav
+                except ValueError:
+                    pass
     return navs
 
 
@@ -404,46 +390,92 @@ def _fetch_navs_tier3_westock(raw_codes):
 
 
 def fetch_all_navs(etf_codes):
-    """三级兜底获取ETF净值。返回 (navs_dict, source_name)
-    source: 'neodata' | 'akshare' | 'westock' | None(失败)
-    失败时 navs_dict 为空, 应放弃交易
-    """
+    """四级兜底获取ETF净值: neodata → akshare → westock → eastmoney。累计补缺。"""
     raw_codes = [c[2:] if (c.startswith('sh') or c.startswith('sz')) and len(c) > 2 else c
                  for c in etf_codes if c.startswith('sh') or c.startswith('sz')]
     if not raw_codes:
         return {}, None
 
-    # ---- Tier 1: neodata ----
+    all_navs = {}
+    primary_source = None
+
+    # Tier 1: neodata
     print("  [NAV] Tier1: neodata...")
     raw_navs = _fetch_navs_tier1_neodata(raw_codes)
-    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
+    if raw_navs:
         navs = _map_raw_navs(raw_navs, etf_codes)
-        print(f"  [NAV] neodata OK: {len(navs)} ETFs")
-        return navs, 'neodata'
-    print(f"  [NAV] neodata gave {len(raw_navs)} navs, trying next tier...")
+        all_navs.update(navs)
+        if not primary_source:
+            primary_source = 'neodata'
+        print(f"  [NAV] neodata OK: {len(navs)} ETFs (累计 {len(all_navs)}/{len(raw_codes)})")
+    else:
+        print(f"  [NAV] neodata gave 0 navs")
 
-    # ---- Tier 2: akshare ----
-    print("  [NAV] Tier2: akshare...")
-    date_fmt = LATEST_DATE.replace('-', '')
-    raw_navs = _fetch_navs_tier2_akshare(raw_codes, date_fmt)
-    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
-        navs = _map_raw_navs(raw_navs, etf_codes)
-        print(f"  [NAV] akshare OK: {len(navs)} ETFs")
-        return navs, 'akshare'
-    print(f"  [NAV] akshare gave {len(raw_navs)} navs, trying next tier...")
+    # Tier 2: akshare (补缺)
+    missing = [c for c in raw_codes if not any(prefix + c in all_navs for prefix in ('sh','sz','bj'))]
+    if missing and len(all_navs) < len(raw_codes) // 2:
+        print(f"  [NAV] Tier2: akshare (补缺 {len(missing)}只)...")
+        raw_navs = _fetch_navs_tier2_akshare(missing, LATEST_DATE.replace('-', ''))
+        if raw_navs:
+            navs = _map_raw_navs(raw_navs, etf_codes)
+            all_navs.update(navs)
+            if not primary_source:
+                primary_source = 'akshare'
+            print(f"  [NAV] akshare OK: +{len(navs)} ETFs (累计 {len(all_navs)}/{len(raw_codes)})")
 
-    # ---- Tier 3: westock-data ----
-    print("  [NAV] Tier3: westock-data...")
-    raw_navs = _fetch_navs_tier3_westock(raw_codes)
-    if raw_navs and len(raw_navs) >= max(3, len(raw_codes) // 3):
-        navs = _map_raw_navs(raw_navs, etf_codes)
-        print(f"  [NAV] westock-data OK: {len(navs)} ETFs")
-        return navs, 'westock'
-    print(f"  [NAV] westock-data gave {len(raw_navs)} navs")
+    # Tier 3: westock (补缺)
+    missing = [c for c in raw_codes if not any(prefix + c in all_navs for prefix in ('sh','sz','bj'))]
+    if missing and len(all_navs) < len(raw_codes) // 2:
+        print(f"  [NAV] Tier3: westock (补缺 {len(missing)}只)...")
+        raw_navs = _fetch_navs_tier3_westock(missing)
+        if raw_navs:
+            navs = _map_raw_navs(raw_navs, etf_codes)
+            all_navs.update(navs)
+            if not primary_source:
+                primary_source = 'westock'
+            print(f"  [NAV] westock OK: +{len(navs)} ETFs (累计 {len(all_navs)}/{len(raw_codes)})")
 
-    # ---- ALL FAILED ----
-    print("  [NAV] ⚠️ ALL TIERS FAILED — 溢价率获取失败, 放弃本次交易")
+    # Tier 4: eastmoney (补缺, 无需认证)
+    missing = [c for c in raw_codes if not any(prefix + c in all_navs for prefix in ('sh','sz','bj'))]
+    if missing:
+        print(f"  [NAV] Tier4: eastmoney (补缺 {len(missing)}只)...")
+        raw_navs = _fetch_navs_tier4_eastmoney(missing)
+        if raw_navs:
+            navs = _map_raw_navs(raw_navs, etf_codes)
+            all_navs.update(navs)
+            if not primary_source:
+                primary_source = 'eastmoney'
+            print(f"  [NAV] eastmoney OK: +{len(navs)} ETFs (累计 {len(all_navs)}/{len(raw_codes)})")
+
+    if len(all_navs) >= 3:
+        print(f"  [NAV] 最终: {len(all_navs)}/{len(raw_codes)} ETFs, 来源={primary_source}")
+        return all_navs, primary_source
+
+    print("  [NAV] ⚠️ ALL TIERS FAILED — 溢价率获取失败")
     return {}, None
+
+
+def _fetch_navs_tier4_eastmoney(raw_codes):
+    """Tier 4: 东方财富基金净值API (无需认证)"""
+    import requests
+    navs = {}
+    for code in raw_codes:
+        try:
+            url = 'https://api.fund.eastmoney.com/f10/lsjz'
+            params = {'fundCode': code, 'pageIndex': 1, 'pageSize': 1}
+            headers = {'User-Agent': 'Mozilla/5.0', 'Referer': 'https://fundf10.eastmoney.com/'}
+            r = requests.get(url, params=params, headers=headers, timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                items = data.get('Data', {}).get('LSJZList', [])
+                if items:
+                    nav = float(items[0].get('DWJZ', 0))
+                    if 0.01 < nav < 10000:
+                        navs[code] = nav
+            time.sleep(0.15)
+        except Exception:
+            pass
+    return navs
 
 
 def _map_raw_navs(raw_navs, etf_codes):

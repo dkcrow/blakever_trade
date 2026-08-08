@@ -114,6 +114,11 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 START_DATE = '2023-06-18'
 END_DATE = NOW.strftime('%Y-%m-%d')
 
+# 持久化交易 (2026-07-21落地: 跨次运行持仓记录)
+from backtest.persistent_trades import HK_TRADES_XLSX, get_holdings as _hk_get_holdings, append_trade as _hk_append_trade, has_traded_today as _hk_has_traded
+ENABLE_PERSISTENT_TRADING = True
+TRADING_WINDOWS = ['15:10']  # 港股收盘后交易窗口
+
 # ================================================================
 # 实时行情 (WeStock Data)
 # ================================================================
@@ -415,21 +420,121 @@ if realtime_valid:
         rt = realtime.get(r['code'], {})
         if rt.get('price', 0) > 0: r['price'] = rt['price']; r['chg_pct'] = rt.get('change_pct', r['chg_pct'])
 
-current_holdings = []
-for code in pf.get_position_codes():
-    pos = pf.positions[code]
-    rt = realtime.get(code, {})
-    rt_price = rt.get('price', 0)
-    cur_price = rt_price if (realtime_valid and rt_price > 0) else prices.get(code, pos['cost_price'])
-    cost = pos['cost_price']
-    pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
-    # 2026-06-22: 实时失败时day_chg=None(显示"—"), 严禁用历史涨跌冒充实时
-    if realtime_valid and rt.get('change_pct') is not None and rt.get('price', 0) > 0:
-        chg = rt.get('change_pct', 0)
-    else:
-        chg = None
-    current_holdings.append({'code': code, 'shares': pos['shares'], 'cost': cost, 'price': cur_price,
-                              'pnl_pct': pnl, 'day_chg': chg, 'buy_date': pos.get('buy_date','')})
+# ================================================================
+# 持久化交易: 用 real holdings 覆盖回测模拟持仓
+# ================================================================
+today_str = END_DATE
+now_hhmm = NOW.strftime('%H:%M')
+is_trading_window = any(now_hhmm.startswith(tw[:2]) for tw in TRADING_WINDOWS)
+trade_executed_today = _hk_has_traded(HK_TRADES_XLSX, today_str)
+hn = PARAMS['holdings_num']
+
+# 当日排名目标
+today_targets = [r for r in final_ranked if r['score'] >= SCORE_THRESHOLD][:hn]
+target_codes = set(r['code'] for r in today_targets)
+
+if ENABLE_PERSISTENT_TRADING:
+    real_holdings = _hk_get_holdings(HK_TRADES_XLSX)
+    real_codes = set(h['code'] for h in real_holdings)
+
+    # 恐慌检查
+    hktech_panic = False
+    if ENABLE_HKTECH_PANIC:
+        try:
+            hktech_panic = check_hktech_panic(pd.Timestamp(today_str), PANIC_MA)
+        except Exception:
+            pass
+
+    # 在交易窗口且未恐慌时执行交易
+    if is_trading_window and not hktech_panic and not trade_executed_today and '--trade' in sys.argv:
+        print(f"\n  [持久化交易] 交易窗口 {now_hhmm}, 执行持仓同步...")
+
+        # 卖出: 不在今日目标中 + 得分跌破阈值的持仓
+        for h in list(real_holdings):
+            code = h['code']
+            sell_reason = None
+            if code not in target_codes:
+                sell_reason = '不在今日目标中'
+            else:
+                r = next((x for x in final_ranked if x['code'] == code), None)
+                if r:
+                    rsc = r['score']
+                    if rsc < SCORE_THRESHOLD:
+                        sell_reason = '得分%.4f<阈值%s' % (rsc, SCORE_THRESHOLD)
+            if sell_reason:
+                sell_price = prices.get(code, h['price'])
+                _hk_append_trade(HK_TRADES_XLSX, '卖出', code, HK_NAME.get(code, code),
+                               sell_price, h['shares'], today_str, h.get('score', 'N/A'),
+                               '持久化交易: %s' % sell_reason)
+                print("    [卖出] %s(%s) @HK$%.2f x%d股 (%s)" % (HK_NAME.get(code, code), code, sell_price, h['shares'], sell_reason))
+                real_holdings = [x for x in real_holdings if x['code'] != code]
+
+        # 买入: 今日目标中尚未持有的
+        new_targets = [r for r in today_targets if r['code'] not in set(h['code'] for h in real_holdings)]
+        if new_targets and len(real_holdings) < hn:
+            per_stock = 200000  # 每只20万港币估算
+            for r in new_targets[:hn - len(real_holdings)]:
+                buy_price = prices.get(r['code'], r['price'])
+                lots = 100  # 港股整手
+                shares = int(per_stock / buy_price / lots) * lots
+                if shares < lots:
+                    shares = lots
+                name = HK_NAME.get(r['code'], r['code'])
+                _hk_append_trade(HK_TRADES_XLSX, '买入', r['code'], name,
+                               buy_price, shares, today_str, r['score'],
+                               '持久化交易: 动量排名%d' % (final_ranked.index(r) + 1))
+                print("    [买入] %s(%s) @HK$%.2f x%d股" % (name, r['code'], buy_price, shares))
+                real_holdings.append({
+                    'code': r['code'], 'name': name,
+                    'price': buy_price, 'shares': shares,
+                    'buy_date': today_str, 'score': r['score'],
+                })
+
+    # 恐慌期: 强制清仓
+    if is_trading_window and hktech_panic and not trade_executed_today and '--trade' in sys.argv:
+        print("\n  [持久化交易]  HSTECH恐慌期, 清仓全部持仓...")
+        for h in real_holdings:
+            sell_price = prices.get(h['code'], h['price'])
+            _hk_append_trade(HK_TRADES_XLSX, '卖出', h['code'], h['name'],
+                           sell_price, h['shares'], today_str, h.get('score', 'N/A'),
+                           'HSTECH恐慌期强制清仓')
+            print("    [卖出] %s(%s) @HK$%.2f x%d股 (恐慌清仓)" % (h['name'], h['code'], sell_price, h['shares']))
+        real_holdings = []
+
+    # 用持久化持仓替换回测模拟持仓
+    current_holdings = []
+    for h in real_holdings:
+        code = h['code']
+        rt = realtime.get(code, {})
+        rt_price = rt.get('price', 0)
+        cur_price = rt_price if (realtime_valid and rt_price > 0) else prices.get(code, h['price'])
+        cost = h['price']
+        pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
+        if realtime_valid and rt.get('change_pct') is not None and rt.get('price', 0) > 0:
+            chg = rt.get('change_pct', 0)
+        else:
+            chg = None
+        current_holdings.append({
+            'code': code, 'shares': h['shares'], 'cost': cost, 'price': cur_price,
+            'pnl_pct': pnl, 'day_chg': chg, 'buy_date': h.get('buy_date', ''),
+        })
+
+else:
+    # 旧逻辑: 使用回测模拟持仓
+    current_holdings = []
+    for code in pf.get_position_codes():
+        pos = pf.positions[code]
+        rt = realtime.get(code, {})
+        rt_price = rt.get('price', 0)
+        cur_price = rt_price if (realtime_valid and rt_price > 0) else prices.get(code, pos['cost_price'])
+        cost = pos['cost_price']
+        pnl = (cur_price - cost) / cost * 100 if cost > 0 else 0
+        if realtime_valid and rt.get('change_pct') is not None and rt.get('price', 0) > 0:
+            chg = rt.get('change_pct', 0)
+        else:
+            chg = None
+        current_holdings.append({'code': code, 'shares': pos['shares'], 'cost': cost, 'price': cur_price,
+                                  'pnl_pct': pnl, 'day_chg': chg, 'buy_date': pos.get('buy_date','')})
 
 # ================================================================
 # HTML报告

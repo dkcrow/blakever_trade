@@ -97,6 +97,17 @@ QMT_PARAMS = {
     'weak_period_ma_lookback': 10,
     'weak_period_max_days': 20,
 
+    # V4 沪深300 MA60 状态机 (2026-07-30移植)
+    'enable_hs300_state_machine': False,   # 默认关闭 (5年回测证实V4状态机不适用于日频QMT)
+    'hs300_ma_period': 60,
+    'hs300_buffer_pct': 0.015,    # 放宽到±1.5%缓冲 (原±0.5%在A股太紧)
+    'hs300_confirm_days': 3,      # 3日确认 (原2日)
+    'hs300_slope_lookback': 10,   # 10日斜率确认 (原5日)
+    'hs300_cooling_days': 1,      # 1日冷静期 (原2日)
+    'hs300_combo_dd_threshold': 0.10,  # 组合止损-10% (原-8%)
+    'hs300_combo_dd_cooling': 3,      # 组合止损冷静3日 (原5日)
+    'hs300_defensive_etf': 'sh511010',
+
     # 成分股MA恐慌期空仓 (2026-07-11克总拍板: 43段碎片化拖累全周期, 永久关闭)
     'enable_panic_regime': False,
     'panic_ma_lookback': 15,
