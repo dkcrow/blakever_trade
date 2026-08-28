@@ -82,7 +82,7 @@ def _sync_hk_westock_sub(codes, data_dir):
                     start = (last + timedelta(days=1)).strftime('%Y-%m-%d')
         except Exception:
             pass
-        if start >= end:
+        if start > end:
             continue
         try:
             result = subprocess.run(
@@ -180,7 +180,7 @@ def _sync_westock_generic(codes, data_dir, code_prefix, fname_fmt):
                     last = pd.to_datetime(df0[dcol]).max()
                     start = (last + timedelta(days=1)).strftime('%Y-%m-%d')
         except Exception: pass
-        if start >= end: continue
+        if start > end: continue
         try:
             result = subprocess.run(
                 ['node', westock_js, 'kline', f'{code_prefix}{code}', 'daily', start, end],
@@ -260,7 +260,7 @@ def sync_etf_data(codes_prefixed, data_dir):
                     last = pd.to_datetime(df0[dcol]).max()
                     start = (last + timedelta(days=1)).strftime('%Y-%m-%d')
         except Exception: pass
-        if start >= end: continue
+        if start > end: continue
         try:
             result = subprocess.run(
                 ['node', westock_js, 'kline', pref, 'daily', start, end],
