@@ -102,6 +102,106 @@ NOW = datetime.now()
 NOW_STR = NOW.strftime('%Y-%m-%d %H:%M')
 
 # ================================================================
+# 📊 低波ETF排行榜 (2026-08-31克总: 加入低波ETF策略排行榜)
+# 来源: 聚宽"低波etf.py"策略池, 60日年化波动率从低到高
+# ================================================================
+LOWVOL_ETF_POOL = {
+    'sz159915': '创业板ETF',
+    'sh510880': '红利ETF',
+    'sh518880': '黄金ETF',
+    'sh513100': '纳指ETF',
+    'sz159985': '豆粕ETF',
+    'sh510050': '50ETF',
+    'sh512100': '1000ETF',
+    'sz159768': '房地产ETF银华',
+    'sh515220': '煤炭ETF',
+    'sz159928': '消费ETF',
+    'sh512800': '银行ETF',
+    'sz159995': '芯片ETF',
+    'sz159870': '化工ETF',
+    'sh513090': '香港证券ETF',
+}
+LOWVOL_LOOKBACK = 60  # 波动率回看天数
+
+
+def get_lowvol_ranking_html():
+    """计算14只低波ETF的60日年化波动率排名, 返回HTML表格 (从低到高)"""
+    try:
+        ds = LocalDataSource()
+        pool = list(LOWVOL_ETF_POOL.keys())
+        all_data = ds.load_all_etfs('2025-01-01', LATEST_DATE, pool=pool)
+        realtime = {}
+        try:
+            realtime = fetch_realtime_prices(pool)
+        except Exception:
+            pass
+
+        rows = []
+        for code, name in LOWVOL_ETF_POOL.items():
+            df = all_data.get(code)
+            if df is None or len(df) < LOWVOL_LOOKBACK + 1:
+                continue
+            mask = df.index <= pd.Timestamp(LATEST_DATE)
+            hist = df.loc[mask, 'close']
+            if len(hist) < LOWVOL_LOOKBACK + 1:
+                continue
+            closes = hist.tail(LOWVOL_LOOKBACK + 1).values
+            log_ret = np.diff(np.log(np.maximum(closes, 1e-10)))
+            if len(log_ret) < 2:
+                continue
+            # ddof=1 样本标准差, 与回测脚本(lowvol_backtest.py)保持一致
+            vol = float(np.std(log_ret, ddof=1) * np.sqrt(252))
+            price = float(hist.iloc[-1])
+            # 涨跌幅 (优先实时, 否则用前收)
+            chg = None
+            if code in realtime and realtime[code].get('price', 0) > 0:
+                price = realtime[code]['price']
+            if code in realtime and 'change_pct' in realtime[code]:
+                chg = realtime[code]['change_pct']
+            else:
+                prev = float(hist.iloc[-2]) if len(hist) >= 2 else price
+                chg = (price - prev) / prev * 100 if prev > 0 else 0
+            rows.append({'code': code, 'name': name, 'vol': vol, 'price': price, 'chg': chg})
+
+        if not rows:
+            return ""
+
+        rows.sort(key=lambda x: x['vol'])
+
+        html = f"""
+<div style="background:#fff;padding:15px;border-radius:8px;margin-bottom:12px;">
+    <h3 style="font-size:15px;color:#1F4E79;margin:0 0 4px 0;">📊 低波ETF排行榜 (60日年化波动率 从低到高)</h3>
+    <div style="font-size:11px;color:#888;margin:0 0 8px 0;">波动率越低 → 越稳健 | 数据截止 {LATEST_DATE}</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="background:#1F4E79;color:#fff;">
+            <th style="padding:6px;text-align:center;">排名</th>
+            <th style="padding:6px;text-align:left;">名称</th>
+            <th style="padding:6px;text-align:center;">代码</th>
+            <th style="padding:6px;text-align:right;">年化波动率</th>
+            <th style="padding:6px;text-align:right;">价格</th>
+            <th style="padding:6px;text-align:right;">涨跌幅</th>
+        </tr>"""
+        for i, r in enumerate(rows):
+            vol_pct = r['vol'] * 100
+            vol_c = '#28A745' if vol_pct < 15 else ('#F9A825' if vol_pct < 25 else '#DC3545')
+            chg_str = f"{r['chg']:+.2f}%" if r['chg'] is not None else '—'
+            chg_c = '#28A745' if (r['chg'] or 0) > 0 else ('#DC3545' if (r['chg'] or 0) < 0 else '#888')
+            bg = '#FFF' if i % 2 == 0 else '#F8F9FA'
+            html += f"""
+        <tr style="background:{bg};">
+            <td style="padding:4px 6px;text-align:center;font-weight:bold;">{i+1}</td>
+            <td style="padding:4px 6px;">{r['name']}</td>
+            <td style="padding:4px 6px;text-align:center;color:#888;font-size:11px;">{r['code']}</td>
+            <td style="padding:4px 6px;text-align:right;font-weight:bold;color:{vol_c};">{vol_pct:.2f}%</td>
+            <td style="padding:4px 6px;text-align:right;">{r['price']:.3f}</td>
+            <td style="padding:4px 6px;text-align:right;color:{chg_c};">{chg_str}</td>
+        </tr>"""
+        html += """</table></div>"""
+        return html
+    except Exception as e:
+        return f'<div style="background:#FFF3CD;padding:8px;border-radius:6px;margin-bottom:12px;font-size:12px;color:#856404;">⚠️ 低波排行榜生成失败: {e}</div>'
+
+# ================================================================
 # 实时行情获取 — 三级兜底 (L1→L2→降级CSV)
 # L1: WeStock Data (腾讯自选股)  L2: 新浪财经 API  L3: 降级到CSV收盘价 + 邮件告警
 # 规则: 全部失败时立即发送告警邮件，严禁静默使用过时数据
@@ -1327,6 +1427,8 @@ def generate_report(ranked, recent_trades, trade_info, time_label, regime_info=N
     html += f"""
     </table>
 </div>
+
+{get_lowvol_ranking_html()}
 
 {holding_html}
 

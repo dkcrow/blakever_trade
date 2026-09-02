@@ -941,6 +941,17 @@ class BacktestEngine172:
                 print(f"  [{date}] 🚫 BLACKLIST: {etf} {ETF_NAMES.get(etf,'')} 今日已盈利保护卖出，禁止买回")
                 continue
 
+            # 【新思路验证 2026-08-17】当天收盘下跌则不买入
+            if self.engine.params.get('enable_no_down_day_buy', False):
+                if hist_df is not None:
+                    hist_cut = hist_df[hist_df.index <= pd.Timestamp(date)]
+                    if len(hist_cut) >= 2:
+                        today_close = hist_cut['close'].iloc[-1]
+                        prev_close = hist_cut['close'].iloc[-2]
+                        if today_close < prev_close:
+                            print(f"  [{date}] 📉 SKIP_DOWN: {etf} {ETF_NAMES.get(etf,'')} 当日收盘{today_close:.3f}<前收{prev_close:.3f}，不买入")
+                            continue
+
             target_etfs.append(etf)
 
         # 防御模式

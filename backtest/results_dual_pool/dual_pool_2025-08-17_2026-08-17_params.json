@@ -1,0 +1,22 @@
+{
+  "lookback_days": 25,
+  "holdings_num": 1,
+  "min_money": 500,
+  "enable_ma_filter": true,
+  "ma_short": 20,
+  "ma_long": 60,
+  "enable_volume_check": true,
+  "volume_lookback": 5,
+  "volume_threshold": 2.5,
+  "stop_loss_ratio": 0.92,
+  "min_score_threshold": -999999,
+  "max_score_threshold": 999999,
+  "enable_profit_protection": false,
+  "use_short_momentum_filter": false,
+  "short_lookback_days": 10,
+  "enable_premium_filter": false,
+  "enable_regime_switch": false,
+  "enable_avoid_a_share": false,
+  "enable_intraday_drawdown": false,
+  "loss": 0.01
+}

@@ -112,6 +112,9 @@ QMT_PARAMS = {
     'enable_panic_regime': False,
     'panic_ma_lookback': 15,
     'panic_threshold': 0.80,
+
+    # 当天收盘下跌则不买入 (2026-08-17 新思路验证, 默认关闭)
+    'enable_no_down_day_buy': False,
 }
 
 
@@ -128,6 +131,7 @@ def main():
     parser.add_argument('--short-thr', type=float, default=0.0, help='短期动量年化阈值(默认0, <此值过滤)')
     parser.add_argument('--no-panic', action='store_true', help='关闭成分股MA10恐慌期空仓(默认启用)')
     parser.add_argument('--panic-thr', type=float, default=0.80, help='恐慌期跌破比例阈值(默认0.80=80%%)')
+    parser.add_argument('--no-down-day-buy', action='store_true', help='当天收盘下跌则不买入(新思路验证)')
     args = parser.parse_args()
 
     # 覆盖持仓数 + 盈利保护开关 + 阈值 + 短期动量过滤
@@ -139,6 +143,7 @@ def main():
     QMT_PARAMS['short_momentum_threshold'] = args.short_thr
     QMT_PARAMS['enable_panic_regime'] = not args.no_panic
     QMT_PARAMS['panic_threshold'] = args.panic_thr
+    QMT_PARAMS['enable_no_down_day_buy'] = args.no_down_day_buy
 
     data_dir = str(PROJECT_ROOT / 'data' / 'storage' / 'stock_data' / 'etf')
     ds = LocalDataSource(data_dir)

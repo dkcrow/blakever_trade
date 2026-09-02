@@ -299,21 +299,26 @@ def send_health_alert(results):
         body += "</ul>"
     body += "<p><i>— ETF池自动维护系统</i></p></body></html>"
 
-    try:
-        msg = MIMEMultipart()
-        msg['Subject'] = subject
-        msg['From'] = '848786642@qq.com'
-        msg['To'] = '848786642@qq.com'
-        msg.attach(MIMEText(body, 'html', 'utf-8'))
+    msg = MIMEMultipart()
+    msg['Subject'] = subject
+    msg['From'] = '848786642@qq.com'
+    msg['To'] = '848786642@qq.com'
+    msg.attach(MIMEText(body, 'html', 'utf-8'))
 
-        with smtplib.SMTP_SSL('smtp.qq.com', 465, timeout=15) as s:
-            s.login('848786642@qq.com', 'lwiaaojxqjqebdjf')
-            s.send_message(msg)
-        print(f'[ETF健康] 告警邮件已发送: {subject}')
-        return True
-    except Exception as e:
-        print(f'[ETF健康] 告警邮件发送失败: {e}')
-        return False
+    # 3次重试 (与 etf_health_email.py 一致); 2026-09-02修复: 原授权码错误导致QQ SMTP断开
+    for attempt in range(3):
+        try:
+            with smtplib.SMTP_SSL('smtp.qq.com', 465, timeout=15) as s:
+                s.login('848786642@qq.com', 'ljbtvacrctjobfed')
+                s.send_message(msg)
+            print(f'[ETF健康] 告警邮件已发送: {subject}')
+            return True
+        except Exception as e:
+            print(f'[ETF健康] 告警邮件发送失败 (attempt {attempt+1}/3): {e}')
+            if attempt < 2:
+                import time
+                time.sleep(2)
+    return False
 
 
 # ====== 全市场ETF发掘 (每季度运行一次) ======

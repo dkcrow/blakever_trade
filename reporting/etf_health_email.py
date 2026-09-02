@@ -49,7 +49,7 @@ from email.mime.text import MIMEText
 # 从 generate_qmt_report 复用 SMTP 配置
 SENDER = '848786642@qq.com'
 RECEIVER = '848786642@qq.com'
-PASSWORD = 'bajwkqhygxfabfeg'
+PASSWORD = 'ljbtvacrctjobfed'
 SMTP_SERVER, SMTP_PORT = 'smtp.qq.com', 465
 
 for attempt in range(3):

@@ -535,14 +535,29 @@ if '--trade' in sys.argv:
         print(f"{'='*60}")
         hn = PARAMS['holdings_num']
         today_targets = [r for r in final_ranked if r['score'] >= SCORE_THRESHOLD][:hn]
-        target_codes = set(r['code'] for r in today_targets)
         already_traded = has_traded_today(US_TRADES_XLSX, END_DATE)
         real_holdings = _get_holdings(US_TRADES_XLSX)
+        # 恐慌状态检查 (2026-09-02修复: 实盘持久化交易此前遗漏恐慌清仓, 恐慌过滤仅回测引擎实现)
+        _ndx5 = get_ndx5_status()
+        _panic = bool(_ndx5 and _ndx5.get('panic'))
+        if _panic:
+            today_targets = []  # 恐慌期禁止买入, 目标清空
+            print(f"  🔴 恐慌期: 纳指{_ndx5['cur']:,.0f} < MA5 {_ndx5['ma5']:,.0f} → 空仓防守, 禁止买入")
+        target_codes = set(r['code'] for r in today_targets)
         print(f"  当前持仓: {len(real_holdings)}只 | 目标: {len(today_targets)}只 | 今日已交易: {already_traded}")
         for r in today_targets[:5]:
             print(f"    {r.get('name', r['code'])} 得分={r['score']:.4f}")
 
-        if not already_traded:
+        # 恐慌清仓: 风控最高优先级, 无条件全仓卖出 (不受 already_traded 限制)
+        if _panic:
+            for h in list(real_holdings):
+                price = realtime.get(h['code'], {}).get('price', 0) if realtime_valid else 0
+                if price <= 0: price = last_prices.get(h['code'], h['price'])
+                _append_trade(US_TRADES_XLSX, '卖出', h['code'], h['name'], price, h['shares'],
+                            END_DATE, h.get('score','N/A'), 'NDX5恐慌空仓')
+                print(f"    [恐慌卖出] {h['name']} @${price:.2f} x{h['shares']}股 (NDX5恐慌空仓)")
+                real_holdings = [x for x in real_holdings if x['code'] != h['code']]
+        elif not already_traded:
             # 卖出不在目标的持仓
             for h in list(real_holdings):
                 if h['code'] not in target_codes:
