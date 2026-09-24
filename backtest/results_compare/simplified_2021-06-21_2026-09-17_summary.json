@@ -1,0 +1,28 @@
+{
+  "mode": "simplified",
+  "tag": "简化版",
+  "period": "2021-06-21 ~ 2026-09-17",
+  "pool_size": 18,
+  "holdings_num": 2,
+  "lookback_days": 20,
+  "trading_days": 1275,
+  "final_value": 3781588.04,
+  "total_return_pct": 278.16,
+  "cagr_pct": 30.07,
+  "max_drawdown_pct": 11.96,
+  "sharpe_ratio": 1.5033,
+  "calmar_ratio": 4.5958,
+  "total_trades": 575,
+  "win_rate_pct": 54.01,
+  "final_holdings": [
+    "sz159981"
+  ],
+  "yearly_returns_pct": {
+    "2021": 21.98,
+    "2022": 20.12,
+    "2023": 25.8,
+    "2024": 36.32,
+    "2025": 20.6,
+    "2026": 24.79
+  }
+}
