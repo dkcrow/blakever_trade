@@ -68,8 +68,21 @@ HOLDING_PROFIT_SKIP_PREV_CLOSE_PCT = 0.10
 OVERSEAS_ROTATION_COOLDOWN_DAYS = 1
 
 # ============ 实时行情 ============
-# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧专家插件index.js路径失效, 新版为westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+
+def _westock_cmd(*args, timeout=30):
+    """统一WeStock调用: 优先新westock CLI, 回退旧node index.js"""
+    if _WESTOCK_CLI.exists():
+        try:
+            return subprocess.run([str(_WESTOCK_CLI), *args],
+                                  capture_output=True, text=True, timeout=timeout)
+        except Exception:
+            pass
+    return subprocess.run(['node', WESTOCK_SCRIPT, *args],
+                          capture_output=True, text=True, timeout=timeout,
+                          cwd=os.path.dirname(WESTOCK_SCRIPT))
 
 def _fetch_westock(codes):
     prices = {}
@@ -78,9 +91,8 @@ def _fetch_westock(codes):
     all_wc = sh_codes + sz_codes
     if not all_wc: return prices
     try:
-        result = subprocess.run(['node', WESTOCK_SCRIPT, 'quote', ','.join(all_wc)],
-            capture_output=True, text=True, timeout=30, cwd=os.path.dirname(WESTOCK_SCRIPT))
-        if result.returncode != 0: return prices
+        result = _westock_cmd('quote', ','.join(all_wc), timeout=30)
+        if result is None or result.returncode != 0: return prices
         in_table, col_idx = False, {}
         for line in result.stdout.split('\n'):
             line = line.strip()
@@ -564,9 +576,8 @@ msg["To"] = "848786642@qq.com"
 msg.attach(MIMEText(html, "html", "utf-8"))
 
 try:
-    with smtplib.SMTP_SSL("smtp.qq.com", 465) as s:
-        s.login("848786642@qq.com", "ljbtvacrctjobfed")
-        s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
+    from reporting.smtp_helper import send_message
+    send_message(msg, sender="848786642@qq.com", receiver="848786642@qq.com", password="ljbtvacrctjobfed")
     print(f'[邮件] ✅ 已发送到 848786642@qq.com')
 except Exception as e:
     print(f'[邮件] ❌ 发送失败: {e}')

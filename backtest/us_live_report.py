@@ -42,8 +42,24 @@ TRADING_WINDOWS = ['23:00']  # 允许实际执行的交易窗口(北京时间) -
 # L1: WeStock Data (腾讯自选股)  L2: 新浪财经 API  L3: 全部失败→邮件告警
 # 规则: 严禁在实时行情获取失败时使用过时数据，必须告警通知
 # ================================================================
-# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧专家插件index.js路径失效(插件skills被裁剪),
+# 新版为westock Go CLI → C:\Users\blakehao\.local\bin\westock.exe
+# ================================================================
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(
+    Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+
+def _westock_cmd(*args, timeout=30):
+    """统一WeStock调用: 优先新CLI直接执行, 回退旧node脚本。"""
+    if _WESTOCK_CLI.exists():
+        try:
+            return subprocess.run([str(_WESTOCK_CLI), *args],
+                                  capture_output=True, text=True, timeout=timeout)
+        except Exception:
+            pass
+    return subprocess.run(['node', WESTOCK_SCRIPT, *args],
+                          capture_output=True, text=True, timeout=timeout,
+                          cwd=os.path.dirname(WESTOCK_SCRIPT))
 
 def _fetch_realtime_westock(symbols):
     """L1: 通过 westock-data quote 获取美股实时行情"""
@@ -52,12 +68,8 @@ def _fetch_realtime_westock(symbols):
         return prices
     try:
         us_codes = ','.join([f'us{s}' for s in symbols])
-        result = subprocess.run(
-            ['node', WESTOCK_SCRIPT, 'quote', us_codes],
-            capture_output=True, text=True, timeout=30,
-            cwd=os.path.dirname(WESTOCK_SCRIPT)
-        )
-        if result.returncode != 0:
+        result = _westock_cmd('quote', us_codes, timeout=30)
+        if result is None or result.returncode != 0:
             return prices
         output = result.stdout
         in_table = False
@@ -198,14 +210,25 @@ def send_monitor_failure_alert(failed_sources):
     msg.attach(MIMEText(body, "html", "utf-8"))
 
     try:
-        with smtplib.SMTP_SSL("smtp.qq.com", 465) as s:
+        with smtplib.SMTP_SSL("smtp.qq.com", 465, timeout=30) as s:
             s.login("848786642@qq.com", "ljbtvacrctjobfed")
             s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
         print(f'[告警] 实时行情获取失败告警邮件已发送到 848786642@qq.com')
         return True
     except Exception as e:
-        print(f'[告警] 告警邮件发送也失败: {e}')
-        return False
+        print(f'[告警] 465端口失败({e}), 尝试587 STARTTLS降级...')
+        try:
+            with smtplib.SMTP("smtp.qq.com", 587, timeout=30) as s:
+                s.ehlo()
+                s.starttls()
+                s.ehlo()
+                s.login("848786642@qq.com", "ljbtvacrctjobfed")
+                s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
+            print(f'[告警] 告警邮件已通过587 STARTTLS发送')
+            return True
+        except Exception as e2:
+            print(f'[告警] 告警邮件发送也失败: {e2}')
+            return False
 
 # ================================================================
 # 数据同步 + 新鲜度校验 (克总2026-06-24: 严禁静默用旧数据)
@@ -259,70 +282,83 @@ print(f'有效: {len(all_data)}只 | 交易日: {len(trade_dates)}天')
 # 纳指100·5日恐慌过滤 (克总2026-06-26落地)
 # ================================================================
 import subprocess as _sp, json as _json
-_WESTOCK_SCRIPT = r"C:\Users\blakehao\.workbuddy\plugins\marketplaces\experts\plugins\stock-partner-team\skills\westock-data\scripts\index.js"
+_WESTOCK_SCRIPT = WESTOCK_SCRIPT  # 2026-10-16: 指向新westock CLI (见文件头部)
 
-def _fetch_ndx_realtime():
-    """获取纳指100实时/最新价 (WeStock quote)"""
+def _fetch_ndx_realtime(quote_code='usNDX'):
+    """获取纳指100实时/最新价 (WeStock quote)。kline降级usQQQ时必须同源, 否则量纲不匹配"""
     try:
-        result = _sp.run(
-            ['node', _WESTOCK_SCRIPT, 'quote', 'usNDX'],
-            capture_output=True, text=True, timeout=15,
-            cwd=str(PROJECT_ROOT)
-        )
-        if result.returncode != 0 or not result.stdout.strip():
+        result = _westock_cmd('quote', quote_code, timeout=15)
+        if result is None or result.returncode != 0 or not result.stdout.strip():
             return None, None
         lines = result.stdout.strip().split('\n')
+        col_idx = {}
         for line in lines:
-            if '---' in line or 'usNDX' not in line:
+            if '---' in line or '|' not in line:
                 continue
             parts = [p.strip() for p in line.split('|')]
-            # split('|'): [''(0), code(1), market(2), name(3), empty(4), symbol(5), price(6), prev_close(7), ...]
-            # price=idx6, time=idx14
-            if len(parts) >= 15:
-                try:
-                    price = float(parts[6])
-                    update_time = parts[14]
-                    if price > 0:
-                        return price, update_time
-                except (ValueError, IndexError):
-                    continue
+            # 表头驱动: 动态定位price/time列 (2026-10-16新CLI列序与旧版不同)
+            if not col_idx:
+                if 'price' in parts and 'code' in parts:
+                    col_idx = {'price': parts.index('price'), 'code': parts.index('code')}
+                    if 'time' in parts:
+                        col_idx['time'] = parts.index('time')
+                continue
+            if quote_code not in line:
+                continue
+            try:
+                price = float(parts[col_idx['price']])
+                update_time = parts[col_idx['time']] if 'time' in col_idx else ''
+                if price > 0:
+                    return price, update_time
+            except (ValueError, IndexError):
+                continue
         return None, None
     except Exception:
         return None, None
 
 def _get_ndx_data():
-    """获取纳指100日线 (WeStock kline, 用于MA5计算)"""
-    try:
-        result = _sp.run(
-            ['node', _WESTOCK_SCRIPT, 'kline', 'usNDX', 'daily'],
-            capture_output=True, text=True, timeout=30,
-            cwd=str(PROJECT_ROOT)
-        )
-        if result.returncode != 0 or not result.stdout.strip():
-            return pd.Series(dtype=float)
-        lines = result.stdout.strip().split('\n')
-        rows = []
-        for line in lines:
-            if '---' in line or '|' not in line:
+    """获取纳指100日线 (WeStock kline, 用于MA5计算)
+    2026-10-16: 新westock CLI对usNDX(美股指数)kline仅返回1行(数据截断至2026-05-13),
+    降级用usQQQ(QQQ纳指100ETF, 与NDX日涨跌相关性>0.999)。
+    返回 (close_series, source): source='usNDX'|'usQQQ'|'' (空=失败)
+    """
+    for code in ('usNDX', 'usQQQ'):
+        try:
+            result = _westock_cmd('kline', code, 'daily', '--limit', '30', timeout=30)
+            if result is None or result.returncode != 0 or not result.stdout.strip():
                 continue
-            parts = [p.strip() for p in line.split('|') if p.strip()]
-            # kline列: date(0), open(1), last/close(2), high(3), low(4), ...
-            if len(parts) < 3 or parts[0] == 'date':
-                continue
-            try:
-                rows.append({'date': pd.Timestamp(parts[0]), 'close': float(parts[2])})
-            except (ValueError, IndexError):
-                continue
-        if not rows:
-            return pd.Series(dtype=float)
-        df = pd.DataFrame(rows).set_index('date').sort_index()
-        return df['close']
-    except Exception:
-        return pd.Series(dtype=float)
+            lines = result.stdout.strip().split('\n')
+            rows = []
+            for line in lines:
+                if '---' in line or '|' not in line:
+                    continue
+                parts = [p.strip() for p in line.split('|') if p.strip()]
+                # kline列: date(0), open(1), last/close(2), high(3), low(4), ...
+                if len(parts) < 3 or parts[0] == 'date':
+                    continue
+                try:
+                    rows.append({'date': pd.Timestamp(parts[0]), 'close': float(parts[2])})
+                except (ValueError, IndexError):
+                    continue
+            if len(rows) >= 6:
+                df = pd.DataFrame(rows).set_index('date').sort_index()
+                return df['close'], code
+        except Exception:
+            continue
+    return pd.Series(dtype=float), ''
+
+_NDX_CACHE = None  # (series, source) 模块级缓存: 回测+渲染共用, 避免上百次CLI调用触发限流
+
+def _get_ndx_data_cached():
+    global _NDX_CACHE
+    # 成功结果永久缓存; 失败结果(空source)下次再重试
+    if _NDX_CACHE is None or (isinstance(_NDX_CACHE, tuple) and not _NDX_CACHE[1]):
+        _NDX_CACHE = _get_ndx_data()
+    return _NDX_CACHE
 
 def check_ndx5_panic(dt):
     """纳指100当天收盘价 < MA5 → 恐慌空仓 (回测用, 用日线收盘价)"""
-    ndx = _get_ndx_data()
+    ndx, _src = _get_ndx_data_cached()
     if len(ndx) < 10: return False
     mask = ndx.index <= dt
     hist = ndx.loc[mask]
@@ -330,19 +366,21 @@ def check_ndx5_panic(dt):
     return float(hist.iloc[-1]) < float(hist.iloc[-5:].mean())
 
 def get_ndx5_status():
-    """获取纳指100 5日线当前状态 (报告/实盘用, 实时价对比MA5)"""
-    ndx = _get_ndx_data()
+    """获取纳指100 5日线当前状态 (报告/实盘用, 实时价对比MA5)
+    2026-10-16: kline与实时价同源同量纲 (usNDX不可用时整体降级usQQQ)
+    """
+    ndx, src = _get_ndx_data_cached()
     if len(ndx) < 6: return None
     # MA5: 最近5个交易日收盘价均值
     ma5 = float(ndx.iloc[-5:].mean())
-    # 实时/最新价: WeStock quote
-    rt_price, rt_time = _fetch_ndx_realtime()
+    # 实时/最新价: WeStock quote (与kline同代码, 保证量纲一致)
+    rt_price, rt_time = _fetch_ndx_realtime(quote_code=(src or 'usNDX'))
     if rt_price is not None and rt_price > 0:
         cur = rt_price
-        date_label = f"实时 {rt_time}"
+        date_label = f"实时 {rt_time}" + (' (QQQ代理)' if src == 'usQQQ' else '')
     else:
         cur = float(ndx.iloc[-1])
-        date_label = str(ndx.index[-1].date())
+        date_label = str(ndx.index[-1].date()) + (' (QQQ代理)' if src == 'usQQQ' else '')
     return {'cur': cur, 'ma5': ma5, 'panic': cur < ma5, 'date': date_label}
 
 def calc_score(close_full, lookback=25):
@@ -851,12 +889,22 @@ msg["To"] = "848786642@qq.com"
 msg.attach(MIMEText(html, "html", "utf-8"))
 
 try:
-    with smtplib.SMTP_SSL("smtp.qq.com", 465) as s:
+    with smtplib.SMTP_SSL("smtp.qq.com", 465, timeout=30) as s:
         s.login("848786642@qq.com", "ljbtvacrctjobfed")
         s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
     print(f'\n[OK] 邮件已发送')
 except Exception as e:
-    print(f'\n[WARN] 邮件发送失败: {e}')
+    print(f'\n[WARN] 465端口发送失败({e}), 尝试587 STARTTLS降级...')
+    try:
+        with smtplib.SMTP("smtp.qq.com", 587, timeout=30) as s:
+            s.ehlo()
+            s.starttls()
+            s.ehlo()
+            s.login("848786642@qq.com", "ljbtvacrctjobfed")
+            s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
+        print(f'\n[OK] 邮件已通过587 STARTTLS发送')
+    except Exception as e2:
+        print(f'\n[WARN] 邮件发送失败: {e2}')
 
 print(f'\n报告: {html_path}')
 print(f'交易: {trades_path}')

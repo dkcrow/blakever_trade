@@ -4,7 +4,9 @@ from pathlib import Path
 from datetime import datetime
 import pandas as pd
 
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧index.js路径失效, 改用westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
 WS_DIR = os.path.dirname(WESTOCK_SCRIPT)
 DATA_DIR = Path('data/storage/stock_data/us')
 
@@ -41,9 +43,14 @@ for i, fp in enumerate(files):
     # Fetch fresh data
     code = f'us{sym}'
     try:
-        result = subprocess.run(
-            ['node', WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
-            capture_output=True, text=True, timeout=40, cwd=WS_DIR)
+        if _WESTOCK_CLI.exists():
+            result = subprocess.run(
+                [WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
+                capture_output=True, text=True, timeout=40)
+        else:
+            result = subprocess.run(
+                ['node', WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
+                capture_output=True, text=True, timeout=40, cwd=WS_DIR)
         if result.returncode != 0:
             errors += 1
             continue

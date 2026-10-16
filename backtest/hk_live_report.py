@@ -122,8 +122,21 @@ TRADING_WINDOWS = ['15:10']  # 港股收盘后交易窗口
 # ================================================================
 # 实时行情 (WeStock Data)
 # ================================================================
-# 2026-06-22修复: 插件迁移, 旧cb_teams_marketplace路径失效→实时行情失败→涨跌回退历史值(不是最新)
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧专家插件index.js路径失效, 新版为westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+
+def _westock_cmd(*args, timeout=30):
+    """统一WeStock调用: 优先新westock CLI, 回退旧node index.js"""
+    if _WESTOCK_CLI.exists():
+        try:
+            return subprocess.run([str(_WESTOCK_CLI), *args],
+                                  capture_output=True, text=True, timeout=timeout)
+        except Exception:
+            pass
+    return subprocess.run(['node', WESTOCK_SCRIPT, *args],
+                          capture_output=True, text=True, timeout=timeout,
+                          cwd=os.path.dirname(WESTOCK_SCRIPT))
 
 def _fetch_realtime_hk_westock(codes_list):
     """L1: WeStock Data (腾讯自选股) 港股实时行情 → {code: {price, change_pct}}"""
@@ -131,11 +144,8 @@ def _fetch_realtime_hk_westock(codes_list):
     if not codes_list: return prices
     codes = ','.join([f'hk{c}' for c in codes_list])
     try:
-        result = subprocess.run(
-            ['node', WESTOCK_SCRIPT, 'quote', codes],
-            capture_output=True, text=True, timeout=30,
-            cwd=os.path.dirname(WESTOCK_SCRIPT))
-        if result.returncode != 0: return prices
+        result = _westock_cmd('quote', codes, timeout=30)
+        if result is None or result.returncode != 0: return prices
         in_table = False; col_idx = {}
         for line in result.stdout.split('\n'):
             line = line.strip()

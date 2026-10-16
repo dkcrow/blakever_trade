@@ -9,6 +9,34 @@ import numpy as np
 import pandas as pd
 warnings.filterwarnings('ignore')
 
+# ================================================================
+# WeStock 调用入口 (2026-10-16修复: 旧专家插件index.js路径失效,
+# 新版为westock CLI → C:\Users\blakehao\.local\bin\westock.exe)
+# ================================================================
+import subprocess as _sp
+
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+_WESTOCK_JS = Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' / \
+    'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js'
+
+
+def westock_run(*args, timeout=30, cwd=None):
+    """统一WeStock调用: 优先新westock CLI, 回退旧node index.js。返回CompletedProcess或None。"""
+    if _WESTOCK_CLI.exists():
+        try:
+            return _sp.run([str(_WESTOCK_CLI), *args],
+                           capture_output=True, text=True, timeout=timeout)
+        except Exception:
+            pass
+    if _WESTOCK_JS.exists():
+        try:
+            return _sp.run(['node', str(_WESTOCK_JS), *args],
+                           capture_output=True, text=True, timeout=timeout,
+                           cwd=str(_WESTOCK_JS.parent))
+        except Exception:
+            pass
+    return None
+
 
 def today_trading():
     """今天(周末回退到周五)"""
@@ -63,10 +91,8 @@ def _merge_save(fp, new_df):
 
 def _sync_hk_westock_sub(codes, data_dir):
     """用WeStock kline更新港股CSV (单只循环, 解析markdown table). 返回更新数量"""
-    import subprocess, re
-    westock_js = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' /
-                     'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
-    if not Path(westock_js).exists():
+    import re
+    if not _WESTOCK_CLI.exists() and not _WESTOCK_JS.exists():
         return 0
     end = today_trading().strftime('%Y-%m-%d')
     updated = 0
@@ -85,11 +111,8 @@ def _sync_hk_westock_sub(codes, data_dir):
         if start > end:
             continue
         try:
-            result = subprocess.run(
-                ['node', westock_js, 'kline', f'hk{code}', 'daily', start, end],
-                capture_output=True, text=True, timeout=30,
-                cwd=str(Path(westock_js).parent))
-            if result.returncode != 0:
+            result = westock_run('kline', f'hk{code}', 'daily', start, end, timeout=30)
+            if result is None or result.returncode != 0:
                 continue
             rows = []
             in_table = False
@@ -162,10 +185,7 @@ def sync_hk_data(codes, data_dir):
 
 def _sync_westock_generic(codes, data_dir, code_prefix, fname_fmt):
     """通用WeStock kline同步: code_prefix 'hk'/'us'/'' ; fname_fmt 文件路径模板"""
-    import subprocess
-    westock_js = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' /
-                     'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
-    if not Path(westock_js).exists():
+    if not _WESTOCK_CLI.exists() and not _WESTOCK_JS.exists():
         return 0
     end = today_trading().strftime('%Y-%m-%d')
     updated = 0
@@ -182,11 +202,9 @@ def _sync_westock_generic(codes, data_dir, code_prefix, fname_fmt):
         except Exception: pass
         if start > end: continue
         try:
-            result = subprocess.run(
-                ['node', westock_js, 'kline', f'{code_prefix}{code}', 'daily', start, end],
-                capture_output=True, text=True, timeout=30,
-                cwd=str(Path(westock_js).parent))
-            if result.returncode != 0: continue
+            result = westock_run('kline', f'{code_prefix}{code}', 'daily', start, end, timeout=30)
+            if result is None or result.returncode != 0:
+                continue
             rows = []; in_table = False
             for line in result.stdout.split('\n'):
                 line = line.strip()
@@ -241,10 +259,7 @@ def sync_us_data(symbols, data_dir):
 
 def sync_etf_data(codes_prefixed, data_dir):
     """更新A股ETF CSV: codes_prefixed=sh/sz格式(如sh513100), WeStock kline用原码, 文件名去前缀(513100.csv). 返回 (updated_count, source)"""
-    import subprocess
-    westock_js = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' /
-                     'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
-    if not Path(westock_js).exists():
+    if not _WESTOCK_CLI.exists() and not _WESTOCK_JS.exists():
         return 0, 'no_westock'
     end = today_trading().strftime('%Y-%m-%d')
     updated = 0
@@ -262,11 +277,9 @@ def sync_etf_data(codes_prefixed, data_dir):
         except Exception: pass
         if start > end: continue
         try:
-            result = subprocess.run(
-                ['node', westock_js, 'kline', pref, 'daily', start, end],
-                capture_output=True, text=True, timeout=30,
-                cwd=str(Path(westock_js).parent))
-            if result.returncode != 0: continue
+            result = westock_run('kline', pref, 'daily', start, end, timeout=30)
+            if result is None or result.returncode != 0:
+                continue
             rows = []; in_table = False
             for line in result.stdout.split('\n'):
                 line = line.strip()

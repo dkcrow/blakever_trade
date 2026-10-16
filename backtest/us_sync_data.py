@@ -4,7 +4,9 @@ from pathlib import Path
 from datetime import datetime
 import pandas as pd
 
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧index.js路径失效, 改用westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy/plugins/marketplaces/cb_teams_marketplace/plugins/finance-data/skills/westock-data/scripts/index.js')
 DATA_DIR = Path('data/storage/stock_data/us')
 
 POOL = 'NVDA,AVGO,AMD,MU,LRCX,LITE,NFLX,GOOGL,NOW,ORCL,SNPS,EOG,NEM,CAT,GE,AMT,PANW,ZS,NET,IONQ,RKLB,SPCX,COHR,CSCO,HOOD'.split(',')
@@ -13,14 +15,19 @@ for sym in POOL:
     code = f'us{sym}'
     print(f'刷新 {sym}...', end=' ', flush=True)
     try:
-        result = subprocess.run(
-            ['node', WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
-            capture_output=True, text=True, timeout=40,
-            cwd=os.path.dirname(WESTOCK_SCRIPT))
+        if _WESTOCK_CLI.exists():
+            result = subprocess.run(
+                [WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
+                capture_output=True, text=True, timeout=40)
+        else:
+            result = subprocess.run(
+                ['node', WESTOCK_SCRIPT, 'kline', code, '--period', 'day', '--limit', '600'],
+                capture_output=True, text=True, timeout=40,
+                cwd=os.path.dirname(WESTOCK_SCRIPT))
         if result.returncode != 0:
             print(f'ERROR: {result.stderr[:100]}')
             continue
-        
+
         # Parse markdown table
         lines = result.stdout.strip().split('\n')
         rows = []
@@ -37,7 +44,7 @@ for sym in POOL:
                 if len(parts) >= 5:
                     try:
                         date = parts[0]
-                        close = parts[3]  # 'last' column is the 4th
+                        close = parts[2]  # 2026-10-16: 新CLI列序 date|open|last|high|low, last在第3列
                         rows.append({'Date': date, 'Close': float(close)})
                     except: pass
         

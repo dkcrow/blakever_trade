@@ -63,12 +63,8 @@ def _fetch_realtime_westock(codes):
         return prices
     try:
         code_str = ','.join(a_codes)
-        result = subprocess.run(
-            ['node', WESTOCK_SCRIPT, 'quote', code_str],
-            capture_output=True, text=True, timeout=30,
-            cwd=os.path.dirname(WESTOCK_SCRIPT)
-        )
-        if result.returncode != 0:
+        result = _westock_cmd('quote', code_str, timeout=30)
+        if result is None or result.returncode != 0:
             return prices
         output = result.stdout
         in_table = False
@@ -209,9 +205,8 @@ def send_realtime_failure_alert(mode_label):
     msg.attach(MIMEText(body, "html", "utf-8"))
 
     try:
-        with smtplib.SMTP_SSL("smtp.qq.com", 465) as s:
-            s.login("848786642@qq.com", "ljbtvacrctjobfed")
-            s.sendmail("848786642@qq.com", "848786642@qq.com", msg.as_string())
+        from reporting.smtp_helper import send_message
+        send_message(msg, sender="848786642@qq.com", receiver="848786642@qq.com", password="ljbtvacrctjobfed")
         print(f"  [ALERT] 实时行情失败告警邮件已发送")
         return True
     except Exception as e:
@@ -257,7 +252,23 @@ def check_profit_protection(code, cur_price, hist_df, date, lookback=1, threshol
 PYTHON = str(Path.home() / '.workbuddy' / 'binaries' / 'python' / 'envs' / 'default' / 'Scripts' / 'python.exe')
 # 2026-06-22修复: 插件已迁移, 旧cb_teams_marketplace路径失效
 NEODATA_SCRIPT = str(Path.home() / '.workbuddy' / 'skills-marketplace' / 'skills' / 'neodata-financial-search' / 'scripts' / 'query.py')
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' / 'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
+# 2026-10-16修复: 旧专家插件index.js路径失效, 新版为westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy' / 'plugins' / 'marketplaces' / 'experts' / 'plugins' / 'stock-partner-team' / 'skills' / 'westock-data' / 'scripts' / 'index.js')
+
+
+def _westock_cmd(*args, timeout=30):
+    """统一WeStock调用: 优先新westock CLI, 回退旧node index.js"""
+    import subprocess
+    if _WESTOCK_CLI.exists():
+        try:
+            return subprocess.run([str(_WESTOCK_CLI), *args],
+                                  capture_output=True, text=True, timeout=timeout)
+        except Exception:
+            pass
+    return subprocess.run(['node', WESTOCK_SCRIPT, *args],
+                          capture_output=True, text=True, timeout=timeout,
+                          cwd=str(Path(WESTOCK_SCRIPT).parent))
 
 
 def _fetch_navs_tier1_neodata(raw_codes):
@@ -358,11 +369,9 @@ def _fetch_navs_tier3_westock(raw_codes):
         batch = raw_codes[batch_idx:batch_idx + batch_size]
         codes_str = ','.join(batch)
         try:
-            result = subprocess.run(
-                ['node', WESTOCK_SCRIPT, 'etf', codes_str],
-                capture_output=True, text=True, timeout=60,
-                encoding='utf-8', errors='replace'
-            )
+            result = _westock_cmd('etf', codes_str, timeout=60)
+            if result is None:
+                continue
             output = result.stdout
         except Exception:
             continue
@@ -1260,9 +1269,8 @@ def send_report_email(html_content, md_path, mode_label="仅排名"):
             msg.attach(att)
 
     try:
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as srv:
-            srv.login(SENDER, PASSWORD)
-            srv.sendmail(SENDER, RECEIVER, msg.as_string())
+        from reporting.smtp_helper import send_message
+        send_message(msg, sender=SENDER, receiver=RECEIVER, password=PASSWORD)
         print(f"✅ 邮件已发送至 {RECEIVER}")
         return True
     except Exception as e:

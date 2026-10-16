@@ -43,7 +43,9 @@ LOOKBACK = PARAMS['lookback_days']
 HN = PARAMS['holdings_num']
 SHORT_LB = 10                # 短期动量窗口 (报告 short_score 同款)
 
-WESTOCK_SCRIPT = str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
+# 2026-10-16修复: 旧index.js路径失效, 改用westock CLI
+_WESTOCK_CLI = Path.home() / '.local' / 'bin' / 'westock.exe'
+WESTOCK_SCRIPT = str(_WESTOCK_CLI) if _WESTOCK_CLI.exists() else str(Path.home() / '.workbuddy/plugins/marketplaces/experts/plugins/stock-partner-team/skills/westock-data/scripts/index.js')
 
 
 # ============ 数据加载 (与权威一致, 含 close>0/去重, 不裁剪起始) ============
@@ -74,28 +76,34 @@ print(f'有效: {len(all_data)}只 | 全量交易日: {len(trade_dates_all)}天 
 
 # ============ NDX100 日线 (预取一次, 与权威每次查询返回相同数据) ============
 def fetch_ndx_daily():
-    """等价 us_live_report._get_ndx_data(): westock kline usNDX daily"""
-    try:
-        r = subprocess.run(['node', WESTOCK_SCRIPT, 'kline', 'usNDX', 'daily'],
-                           capture_output=True, text=True, timeout=30,
-                           cwd=str(PROJECT_ROOT))
-        rows = []
-        for line in r.stdout.split('\n'):
-            if '---' in line or '|' not in line:
-                continue
-            parts = [p.strip() for p in line.split('|') if p.strip()]
-            if len(parts) < 3 or parts[0] == 'date':
-                continue
-            try:
-                rows.append({'date': pd.Timestamp(parts[0]), 'close': float(parts[2])})
-            except (ValueError, IndexError):
-                continue
-        if not rows:
-            return pd.Series(dtype=float)
-        d = pd.DataFrame(rows).set_index('date').sort_index()
-        return d['close']
-    except Exception:
-        return pd.Series(dtype=float)
+    """等价 us_live_report._get_ndx_data(): westock kline usNDX daily
+    2026-10-16: usNDX在新CLI下kline仅1行, 降级usQQQ (与NDX相关性>0.999)"""
+    for code in ('usNDX', 'usQQQ'):
+        try:
+            if _WESTOCK_CLI.exists():
+                r = subprocess.run([WESTOCK_SCRIPT, 'kline', code, 'daily', '--limit', '30'],
+                                   capture_output=True, text=True, timeout=30)
+            else:
+                r = subprocess.run(['node', WESTOCK_SCRIPT, 'kline', code, 'daily'],
+                                   capture_output=True, text=True, timeout=30,
+                                   cwd=str(PROJECT_ROOT))
+            rows = []
+            for line in r.stdout.split('\n'):
+                if '---' in line or '|' not in line:
+                    continue
+                parts = [p.strip() for p in line.split('|') if p.strip()]
+                if len(parts) < 3 or parts[0] == 'date':
+                    continue
+                try:
+                    rows.append({'date': pd.Timestamp(parts[0]), 'close': float(parts[2])})
+                except (ValueError, IndexError):
+                    continue
+            if len(rows) >= 6:
+                d = pd.DataFrame(rows).set_index('date').sort_index()
+                return d['close']
+        except Exception:
+            continue
+    return pd.Series(dtype=float)
 
 
 NDX = fetch_ndx_daily()
