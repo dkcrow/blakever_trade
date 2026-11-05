@@ -36,9 +36,8 @@ def send_email(subject, html_file=None, md_file=None, body_text=None):
         att.add_header("Content-Disposition", "attachment", filename=os.path.basename(md_file))
         msg.attach(att)
 
-    with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-        server.login(SENDER, PASSWORD)
-        server.sendmail(SENDER, RECEIVER, msg.as_string())
+    from reporting.smtp_helper import send_message
+    send_message(msg, sender=SENDER, receiver=RECEIVER, password=PASSWORD)
     print(f"✅ 邮件已发送至 {RECEIVER}")
 
 if __name__ == "__main__":

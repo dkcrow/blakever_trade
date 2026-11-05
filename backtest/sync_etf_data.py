@@ -22,8 +22,16 @@ def get_all_pools(pool_name='all'):
         pools['qmt'] = PQMT
     return pools
 
-def check_gaps(target_date='2026-06-02'):
+# 2026-10-15修复: 默认目标日期由硬编码'2026-06-02'改为动态今天。
+# 硬编码导致默认运行时"数据完整"假阳性, 引发172盈利保护用陈旧K线误触发卖出。
+def _default_target_date():
+    from datetime import date as _date
+    return _date.today().strftime('%Y-%m-%d')
+
+def check_gaps(target_date=None):
     """检查所有ETF数据缺口，返回 {code: (last_date, gap_days)}"""
+    if target_date is None:
+        target_date = _default_target_date()
     target = pd.Timestamp(target_date)
     gaps = {}
     all_codes = set()
@@ -118,10 +126,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--check-only', action='store_true')
     parser.add_argument('--pool', default='all', choices=['172','qmt','all'])
-    parser.add_argument('--target-date', default='2026-06-02')
+    parser.add_argument('--target-date', default=None,
+                        help='默认=今天(动态)')
     args = parser.parse_args()
     
-    print(f'=== ETF数据同步检查 (目标日期: {args.target_date}) ===')
+    print(f'=== ETF数据同步检查 (目标日期: {args.target_date or _default_target_date()}) ===')
     gaps = check_gaps(args.target_date)
     
     if not gaps:

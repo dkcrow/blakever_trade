@@ -151,10 +151,8 @@ msg.attach(html_part)
 
 # 发送邮件
 try:
-    server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
-    server.login(SENDER, PASSWORD)
-    server.sendmail(SENDER, RECEIVER, msg.as_string())
-    server.quit()
+    from reporting.smtp_helper import send_message
+    send_message(msg, sender=SENDER, receiver=RECEIVER, password=PASSWORD)
     print("✅ 风控警报邮件发送成功！")
     print(f"   收件人: {RECEIVER}")
     print(f"   主题: {msg['Subject']}")

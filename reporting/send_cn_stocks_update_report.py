@@ -130,10 +130,9 @@ def send_email_report():
         msg.attach(MIMEText(html_content, 'html', 'utf-8'))
         
         # 发送邮件
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-            server.login(SMTP_USER, SMTP_PASS)
-            server.sendmail(SMTP_USER, RECIPIENT, msg.as_string())
-        
+        from reporting.smtp_helper import send_message
+        send_message(msg, sender=SMTP_USER, receiver=RECIPIENT, password=SMTP_PASS)
+
         print("✅ A股数据更新报告邮件发送成功！")
         return True
         

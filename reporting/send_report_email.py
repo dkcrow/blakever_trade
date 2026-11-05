@@ -143,9 +143,8 @@ msg['To'] = '848786642@qq.com'
 msg.attach(MIMEText(html, 'html', 'utf-8'))
 
 try:
-    with smtplib.SMTP_SSL('smtp.qq.com', 465) as s:
-        s.login('848786642@qq.com', 'ljbtvacrctjobfed')
-        s.sendmail('848786642@qq.com', '848786642@qq.com', msg.as_string())
+    from reporting.smtp_helper import send_message
+    send_message(msg, sender='848786642@qq.com', receiver='848786642@qq.com', password='ljbtvacrctjobfed')
     print('✅ 邮件发送成功')
 except Exception as e:
     print(f'❌ 邮件发送失败: {e}')

@@ -247,10 +247,9 @@ def send_a_stock_update_email():
         
         msg.attach(MIMEText(html_content, 'html', 'utf-8'))
         
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-            server.login(SMTP_USER, SMTP_PASS)
-            server.send_message(msg)
-        
+        from reporting.smtp_helper import send_message
+        send_message(msg, sender=SMTP_USER, receiver=RECIPIENT, password=SMTP_PASS)
+
         print("✅ A股数据更新报告邮件发送成功！")
         return True
     except Exception as e:

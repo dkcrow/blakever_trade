@@ -52,6 +52,18 @@ RECEIVER = '848786642@qq.com'
 PASSWORD = 'ljbtvacrctjobfed'
 SMTP_SERVER, SMTP_PORT = 'smtp.qq.com', 465
 
+def _send_via_ssl():
+    with smtplib.SMTP_SSL(SMTP_SERVER, 465, timeout=15) as srv:
+        srv.login(SENDER, PASSWORD)
+        srv.sendmail(SENDER, RECEIVER, msg.as_string())
+
+def _send_via_starttls():
+    with smtplib.SMTP(SMTP_SERVER, 587, timeout=15) as srv:
+        srv.ehlo()
+        srv.starttls()
+        srv.login(SENDER, PASSWORD)
+        srv.sendmail(SENDER, RECEIVER, msg.as_string())
+
 for attempt in range(3):
     try:
         msg = MIMEMultipart('alternative')
@@ -59,9 +71,12 @@ for attempt in range(3):
         msg['From'] = SENDER
         msg['To'] = RECEIVER
         msg.attach(MIMEText(html, 'html', 'utf-8'))
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=15) as srv:
-            srv.login(SENDER, PASSWORD)
-            srv.sendmail(SENDER, RECEIVER, msg.as_string())
+        try:
+            _send_via_ssl()
+        except Exception as ssl_err:
+            # 465隐式TLS失败时兜底587 STARTTLS
+            print(f"465 SSL failed ({ssl_err}), fallback to 587 STARTTLS")
+            _send_via_starttls()
         print(f"邮件已发送 (attempt {attempt+1})")
         break
     except Exception as e:

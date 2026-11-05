@@ -308,9 +308,8 @@ def send_health_alert(results):
     # 3次重试 (与 etf_health_email.py 一致); 2026-09-02修复: 原授权码错误导致QQ SMTP断开
     for attempt in range(3):
         try:
-            with smtplib.SMTP_SSL('smtp.qq.com', 465, timeout=15) as s:
-                s.login('848786642@qq.com', 'ljbtvacrctjobfed')
-                s.send_message(msg)
+            from reporting.smtp_helper import send_message
+            send_message(msg, sender='848786642@qq.com', receiver='848786642@qq.com', password='ljbtvacrctjobfed')
             print(f'[ETF健康] 告警邮件已发送: {subject}')
             return True
         except Exception as e:
