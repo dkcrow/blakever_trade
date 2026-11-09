@@ -997,9 +997,9 @@ def check_profit_protection_sell(ranked):
     code = holding['code']
     buy_price = float(holding['price'])
 
-    # 获取持仓ETF的历史数据
+    # 获取持仓ETF的历史数据 (pool=QMT_POOL: 持仓可能为QMT池专属ETF, 默认172池会漏加载导致盈利保护静默跳过)
     ds = LocalDataSource()
-    pool_data = ds.load_all_etfs('2026-01-01', LATEST_DATE)
+    pool_data = ds.load_all_etfs('2026-01-01', LATEST_DATE, pool=[code])
     df = pool_data.get(code)
     if df is None:
         return False, f"无法获取 {code} 历史数据"
