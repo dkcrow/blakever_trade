@@ -1,121 +1,121 @@
 {
-  "date": "2026-11-09",
-  "generated": "2026-11-09T13:05:03.552612",
+  "date": "2026-11-10",
+  "generated": "2026-11-10T13:05:12.958516",
   "rankings": [
     {
-      "code": "sz159529",
+      "code": "sh513290",
       "rank": 1,
-      "score": 0.4121
+      "score": 0.5176
     },
     {
-      "code": "sh513290",
+      "code": "sz159529",
       "rank": 2,
-      "score": 0.1412
+      "score": 0.4722
     },
     {
       "code": "sh512890",
       "rank": 3,
-      "score": 0.1242
-    },
-    {
-      "code": "sh511010",
-      "rank": 4,
-      "score": 0.0485
+      "score": 0.1129
     },
     {
       "code": "sh513690",
-      "rank": 5,
-      "score": 0.0315
+      "rank": 4,
+      "score": 0.0883
     },
     {
       "code": "sh513030",
+      "rank": 5,
+      "score": 0.059
+    },
+    {
+      "code": "sh511010",
       "rank": 6,
-      "score": 0.0244
+      "score": 0.0478
     },
     {
       "code": "sh512040",
       "rank": 7,
-      "score": 0.0155
-    },
-    {
-      "code": "sh501018",
-      "rank": 8,
-      "score": 0.0009
-    },
-    {
-      "code": "sz159981",
-      "rank": 9,
-      "score": 0.0004
-    },
-    {
-      "code": "sz511220",
-      "rank": 10,
-      "score": -0.0002
-    },
-    {
-      "code": "sh510050",
-      "rank": 11,
-      "score": -0.0005
-    },
-    {
-      "code": "sz159920",
-      "rank": 12,
-      "score": -0.0014
+      "score": 0.0214
     },
     {
       "code": "sz159792",
+      "rank": 8,
+      "score": 0.007
+    },
+    {
+      "code": "sh513400",
+      "rank": 9,
+      "score": -0.0
+    },
+    {
+      "code": "sh510050",
+      "rank": 10,
+      "score": -0.0012
+    },
+    {
+      "code": "sz511220",
+      "rank": 11,
+      "score": -0.0015
+    },
+    {
+      "code": "sh511380",
+      "rank": 12,
+      "score": -0.0019
+    },
+    {
+      "code": "sh513080",
       "rank": 13,
-      "score": -0.0016
+      "score": -0.0031
     },
     {
       "code": "sh513050",
       "rank": 14,
-      "score": -0.0023
+      "score": -0.0032
     },
     {
-      "code": "sz159201",
+      "code": "sz159920",
       "rank": 15,
-      "score": -0.0024
-    },
-    {
-      "code": "sh513400",
-      "rank": 16,
-      "score": -0.0027
-    },
-    {
-      "code": "sh513080",
-      "rank": 17,
-      "score": -0.0036
-    },
-    {
-      "code": "sh511380",
-      "rank": 18,
-      "score": -0.0211
+      "score": -0.0037
     },
     {
       "code": "sh513130",
-      "rank": 19,
-      "score": -0.0544
+      "rank": 16,
+      "score": -0.019
+    },
+    {
+      "code": "sz159201",
+      "rank": 17,
+      "score": -0.0328
+    },
+    {
+      "code": "sz159981",
+      "rank": 18,
+      "score": -0.0434
     },
     {
       "code": "sh518880",
-      "rank": 20,
-      "score": -0.123
+      "rank": 19,
+      "score": -0.0837
     },
     {
       "code": "sh510210",
-      "rank": 21,
-      "score": -0.1843
+      "rank": 20,
+      "score": -0.1389
     },
     {
       "code": "sh513500",
-      "rank": 22,
-      "score": -0.2167
+      "rank": 21,
+      "score": -0.1648
     },
     {
       "code": "sz159980",
+      "rank": 22,
+      "score": -0.257
+    },
+    {
+      "code": "sh510300",
       "rank": 23,
-      "score": -0.2554
+      "score": -0.2616
     },
     {
       "code": "sh513730",
@@ -123,74 +123,74 @@
       "score": -0.2908
     },
     {
-      "code": "sh510300",
+      "code": "sh512100",
       "rank": 25,
-      "score": -0.3119
+      "score": -0.2973
     },
     {
       "code": "sh563360",
       "rank": 26,
-      "score": -0.3667
-    },
-    {
-      "code": "sh512100",
-      "rank": 27,
-      "score": -0.3896
+      "score": -0.3077
     },
     {
       "code": "sh510500",
-      "rank": 28,
-      "score": -0.3936
-    },
-    {
-      "code": "sz159985",
-      "rank": 29,
-      "score": -0.5056
+      "rank": 27,
+      "score": -0.3104
     },
     {
       "code": "sh563300",
-      "rank": 30,
-      "score": -0.5391
+      "rank": 28,
+      "score": -0.416
     },
     {
       "code": "sh588080",
+      "rank": 29,
+      "score": -0.4879
+    },
+    {
+      "code": "sz159985",
+      "rank": 30,
+      "score": -0.5056
+    },
+    {
+      "code": "sh513310",
       "rank": 31,
-      "score": -0.5969
+      "score": -0.552
     },
     {
       "code": "sh513520",
       "rank": 32,
-      "score": -0.6464
+      "score": -0.6592
     },
     {
       "code": "sz161226",
       "rank": 33,
-      "score": -0.727
+      "score": -0.6942
     },
     {
       "code": "sz159915",
       "rank": 34,
-      "score": -0.7714
+      "score": -0.7212
     },
     {
       "code": "sz159967",
       "rank": 35,
-      "score": -0.9112
+      "score": -0.8782
+    },
+    {
+      "code": "sh501018",
+      "rank": 36,
+      "score": 0.007
     },
     {
       "code": "sz159509",
-      "rank": 36,
-      "score": -0.5003
+      "rank": 37,
+      "score": -0.4812
     },
     {
       "code": "sh513100",
-      "rank": 37,
-      "score": -0.5332
-    },
-    {
-      "code": "sh513310",
       "rank": 38,
-      "score": -0.5995
+      "score": -0.5535
     }
   ]
 }
